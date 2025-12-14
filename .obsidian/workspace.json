@@ -189,7 +189,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -207,6 +208,7 @@
   "active": "6d1723d1a69eb321",
   "lastOpenFiles": [
     "5.Types of Shells/2. Upgrading TTY.md",
+    "`Reverse Shell.md",
     "5.Types of Shells/1. Shell types.md",
     "0. Prep.md",
     "README.md",
