@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "dc2011c432f60d19",
@@ -205,7 +205,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "6d1723d1a69eb321",
+  "active": "e2ded69b05a05f30",
   "lastOpenFiles": [
     "Pasted image 20251216093516.png",
     "5.Types of Shells/2. Upgrading TTY.md",
