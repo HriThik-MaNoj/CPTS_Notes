@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "7. Transferring Files/1. Transferring Files.md",
+                "file": "8. Nibble Walkthrough/1. Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Transferring Files"
+              "title": "1. Walkthrough"
             }
           }
         ]
@@ -207,21 +207,34 @@
   },
   "active": "d03b860ac038ab78",
   "lastOpenFiles": [
-    "6. Privilege Escalation/Untitled.md",
-    "7. Transferring Files/1. Transferring Files.md",
-    "7. Transferring Files",
-    "6. Privilege Escalation/1. Privilege Escalation.md",
-    "Pasted image 20251216093516.png",
+    "Pasted image 20251217084009.png",
     "5.Types of Shells/2. Upgrading TTY.md",
+    "6. Privilege Escalation/1. Privilege Escalation.md",
+    "8. Nibble Walkthrough/1. Walkthrough.md",
+    "Pasted image 20251217083409.png",
+    "Pasted image 20251217083100.png",
+    "Pasted image 20251217082642.png",
+    "Pasted image 20251217082052.png",
+    "Pasted image 20251217080415.png",
+    "Pasted image 20251217075730.png",
+    "Pasted image 20251217075619.png",
+    "Pasted image 20251217074758.png",
+    "Pasted image 20251217074500.png",
+    "Pasted image 20251217073047.png",
+    "3. Web Enumeration/1. Web Enumeration.md",
+    "8. Nibble Walkthrough",
+    "7. Transferring Files/1. Transferring Files.md",
+    "8. Nibbles Walkthrough/1.Walkthrough.md",
+    "8. Nibbles Walkthrough",
+    "6. Privilege Escalation/Untitled.md",
+    "7. Transferring Files",
     "6. Privilege Escalation/2. Kernel Exploits.md",
     "5.Types of Shells/1. Shell types.md",
     "4. Public Exploits/1.Public Exploits.md",
-    "3. Web Enumeration/1. Web Enumeration.md",
     "2. Service Scanning/2. Attacking Network Services.md",
     "2. Service Scanning/1. Nmap.md",
     "1. Basic Tools/2. Netcat.md",
     "1. Basic Tools/1. SSH.md",
-    "Pasted image 20251216085004.png",
     "6. Privilege Escalation",
     "5.Types of Shells/Untitled",
     "Untitled.canvas",
@@ -236,7 +249,6 @@
     "3. Web Enumeration",
     "2. Service Scanning/3. SNMP.md",
     "2. Service Scanning/2. SMB.md",
-    "2. Service Scanning",
-    "1. Basic Tools"
+    "2. Service Scanning"
   ]
 }
