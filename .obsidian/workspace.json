@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2. Network Enumeration with Nmap/5. Nmap Scripting Engine.md",
+                "file": "2. Network Enumeration with Nmap/6. Perfomance.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5. Nmap Scripting Engine"
+              "title": "6. Perfomance"
             }
           }
         ]
@@ -207,9 +207,10 @@
   },
   "active": "d03b860ac038ab78",
   "lastOpenFiles": [
-    "2. Network Enumeration with Nmap/1. Enumeration.md",
     "2. Network Enumeration with Nmap/5. Nmap Scripting Engine.md",
+    "2. Network Enumeration with Nmap/6. Perfomance.md",
     "2. Network Enumeration with Nmap/4. Saving the Results.md",
+    "2. Network Enumeration with Nmap/1. Enumeration.md",
     "2. Network Enumeration with Nmap/3. Host and Port Scanning.md",
     "2. Network Enumeration with Nmap/2. Host Discovery.md",
     "Pasted image 20251218081044.png",
@@ -252,7 +253,6 @@
     "README.md",
     "Untitled.base",
     "1. Getting Started/5.Types of Shells",
-    "4.md",
-    "1. Getting Started/1. Basic Tools/3. Tmux.md"
+    "4.md"
   ]
 }
