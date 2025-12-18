@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "xml",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -205,7 +206,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d03b860ac038ab78",
+  "active": "db25b4e49b5eabe4",
   "lastOpenFiles": [
     "Pasted image 20251218081044.png",
     "1. Getting Started/2. Service Scanning/1. Nmap.md",
