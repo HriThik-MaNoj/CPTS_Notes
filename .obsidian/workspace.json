@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "8. Nibble Walkthrough/1. Walkthrough.md",
+                "file": "9. Knowledge check machine walkthrough/1. Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
@@ -207,20 +207,22 @@
   },
   "active": "d03b860ac038ab78",
   "lastOpenFiles": [
-    "Pasted image 20251217084009.png",
+    "Pasted image 20251218054317.png",
+    "Pasted image 20251218054142.png",
+    "Pasted image 20251218054057.png",
+    "Pasted image 20251218053523.png",
+    "Pasted image 20251218053319.png",
+    "Pasted image 20251218052527.png",
+    "Pasted image 20251218052517.png",
     "5.Types of Shells/2. Upgrading TTY.md",
-    "6. Privilege Escalation/1. Privilege Escalation.md",
+    "9. Knowledge check machine walkthrough/1. Walkthrough.md",
+    "Pasted image 20251218052407.png",
+    "Pasted image 20251218052318.png",
+    "Pasted image 20251217094130.png",
+    "Pasted image 20251217094002.png",
     "8. Nibble Walkthrough/1. Walkthrough.md",
-    "Pasted image 20251217083409.png",
-    "Pasted image 20251217083100.png",
-    "Pasted image 20251217082642.png",
-    "Pasted image 20251217082052.png",
-    "Pasted image 20251217080415.png",
-    "Pasted image 20251217075730.png",
-    "Pasted image 20251217075619.png",
-    "Pasted image 20251217074758.png",
-    "Pasted image 20251217074500.png",
-    "Pasted image 20251217073047.png",
+    "9. Knowledge check machine walkthrough",
+    "6. Privilege Escalation/1. Privilege Escalation.md",
     "3. Web Enumeration/1. Web Enumeration.md",
     "8. Nibble Walkthrough",
     "7. Transferring Files/1. Transferring Files.md",
@@ -248,7 +250,6 @@
     "1. Basic Tools/3. Tmux.md",
     "3. Web Enumeration",
     "2. Service Scanning/3. SNMP.md",
-    "2. Service Scanning/2. SMB.md",
-    "2. Service Scanning"
+    "2. Service Scanning/2. SMB.md"
   ]
 }
