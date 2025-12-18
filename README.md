@@ -6,16 +6,16 @@ A structured, interconnected set of notes for CPTS prep. Start with the prep pla
 
 Topic areas
 - Basic Tools
-  - [[1. Basic Tools/1. SSH]]
-  - [[1. Basic Tools/2. Netcat]]
-  - [[1. Basic Tools/3. Tmux]]
+  - [[1. SSH]]
+  - [[2. Netcat]]
+  - [[3. Tmux]]
 - Service Scanning
-  - [[2. Service Scanning/1. Nmap]]
-  - [[2. Service Scanning/2. Attacking Network Services]]
+  - [[1. Nmap]]
+  - [[2. Attacking Network Services]]
 - Web Enumeration
-  - [[3. Web Enumeration/1. Web Enumeration]]
+  - [[1. Web Enumeration]]
 - Public Exploits
-  - [[4. Public Exploits/1.Public Exploits]]
+  - [[1.Public Exploits]]
 - Shells
-  - [[5.Types of Shells/1. Shell types]]
-  - [[5.Types of Shells/2. Upgrading TTY]]
+  - [[1. Shell types]]
+  - [[2. Upgrading TTY]]
