@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2. Network Enumeration with Nmap/7. Firewall and IDS or IPS Evasion.md",
+                "file": "3. Footprinting/1. Enumeration Principles.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7. Firewall and IDS or IPS Evasion"
+              "title": "1. Enumeration Principles"
             }
           }
         ]
@@ -207,11 +207,17 @@
   },
   "active": "d03b860ac038ab78",
   "lastOpenFiles": [
-    "2. Network Enumeration with Nmap/6. Perfomance.md",
+    "Pasted image 20251221071452.png",
+    "1..md",
+    "3. Footprinting/1. Enumeration Principles.md",
+    "3. Footprinting/1..md",
     "2. Network Enumeration with Nmap/7. Firewall and IDS or IPS Evasion.md",
-    "2. Network Enumeration with Nmap/5. Nmap Scripting Engine.md",
+    "3. Footprinting",
     "2. Network Enumeration with Nmap/4. Saving the Results.md",
+    "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
     "2. Network Enumeration with Nmap/1. Enumeration.md",
+    "2. Network Enumeration with Nmap/6. Perfomance.md",
+    "2. Network Enumeration with Nmap/5. Nmap Scripting Engine.md",
     "2. Network Enumeration with Nmap/3. Host and Port Scanning.md",
     "2. Network Enumeration with Nmap/2. Host Discovery.md",
     "Pasted image 20251218081044.png",
@@ -220,7 +226,6 @@
     "2. Network Enumeration with Nmap",
     "1. Getting Started/9. Knowledge check machine walkthrough/1. Walkthrough.md",
     "1. Getting Started",
-    "1..md",
     "Pasted image 20251218054317.png",
     "Pasted image 20251218054142.png",
     "Pasted image 20251218054057.png",
@@ -231,7 +236,6 @@
     "1. Getting Started/5.Types of Shells/2. Upgrading TTY.md",
     "Pasted image 20251218052407.png",
     "Pasted image 20251218052318.png",
-    "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
     "1. Getting Started/9. Knowledge check machine walkthrough",
     "1. Getting Started/6. Privilege Escalation/1. Privilege Escalation.md",
     "1. Getting Started/3. Web Enumeration/1. Web Enumeration.md",
@@ -246,13 +250,9 @@
     "1. Getting Started/4. Public Exploits/1.Public Exploits.md",
     "1. Getting Started/2. Service Scanning/2. Attacking Network Services.md",
     "1. Getting Started/1. Basic Tools/2. Netcat.md",
-    "1. Getting Started/1. Basic Tools/1. SSH.md",
     "1. Getting Started/6. Privilege Escalation",
     "5.Types of Shells/Untitled",
     "Untitled.canvas",
-    "`Reverse Shell.md",
-    "README.md",
-    "Untitled.base",
-    "1. Getting Started/5.Types of Shells"
+    "Untitled.base"
   ]
 }
