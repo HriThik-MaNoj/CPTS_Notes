@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/3. Cloud Resources.md",
+                "file": "3. Footprinting/5. FTP.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Cloud Resources"
+              "title": "5. FTP"
             }
           }
         ]
@@ -207,10 +207,12 @@
   },
   "active": "d03b860ac038ab78",
   "lastOpenFiles": [
+    "3. Footprinting/4. Staff.md",
+    "3. Footprinting/5. FTP.md",
+    "3. Footprinting/3. Cloud Resources.md",
     "Pasted image 20251221172216.png",
     "Pasted image 20251221172138.png",
     "3. Footprinting/2. Domain Information.md",
-    "3. Footprinting/3. Cloud Resources.md",
     "2. Network Enumeration with Nmap/2. Host Discovery.md",
     "2. Network Enumeration with Nmap/1. Enumeration.md",
     "0. Prep.md",
@@ -237,7 +239,6 @@
     "Pasted image 20251218053523.png",
     "Pasted image 20251218053319.png",
     "Pasted image 20251218052527.png",
-    "Pasted image 20251218052517.png",
     "1. Getting Started/5.Types of Shells/2. Upgrading TTY.md",
     "1. Getting Started/9. Knowledge check machine walkthrough",
     "1. Getting Started/3. Web Enumeration/1. Web Enumeration.md",
@@ -249,7 +250,6 @@
     "1. Getting Started/7. Transferring Files",
     "6. Privilege Escalation/2. Kernel Exploits.md",
     "1. Getting Started/5.Types of Shells/1. Shell types.md",
-    "1. Getting Started/4. Public Exploits/1.Public Exploits.md",
     "1. Getting Started/6. Privilege Escalation",
     "5.Types of Shells/Untitled",
     "Untitled.canvas",
