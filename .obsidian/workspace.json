@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/1. Enumeration Principles.md",
+                "file": "3. Footprinting/3. Cloud Resources.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Enumeration Principles"
+              "title": "3. Cloud Resources"
             }
           }
         ]
@@ -207,22 +207,27 @@
   },
   "active": "d03b860ac038ab78",
   "lastOpenFiles": [
-    "Pasted image 20251221071452.png",
-    "1..md",
+    "Pasted image 20251221172216.png",
+    "Pasted image 20251221172138.png",
+    "3. Footprinting/2. Domain Information.md",
+    "3. Footprinting/3. Cloud Resources.md",
+    "2. Network Enumeration with Nmap/2. Host Discovery.md",
+    "2. Network Enumeration with Nmap/1. Enumeration.md",
+    "0. Prep.md",
+    "1. Getting Started/6. Privilege Escalation/1. Privilege Escalation.md",
     "3. Footprinting/1. Enumeration Principles.md",
     "3. Footprinting/1..md",
+    "Pasted image 20251221071452.png",
+    "1..md",
     "2. Network Enumeration with Nmap/7. Firewall and IDS or IPS Evasion.md",
     "3. Footprinting",
     "2. Network Enumeration with Nmap/4. Saving the Results.md",
     "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
-    "2. Network Enumeration with Nmap/1. Enumeration.md",
     "2. Network Enumeration with Nmap/6. Perfomance.md",
     "2. Network Enumeration with Nmap/5. Nmap Scripting Engine.md",
     "2. Network Enumeration with Nmap/3. Host and Port Scanning.md",
-    "2. Network Enumeration with Nmap/2. Host Discovery.md",
     "Pasted image 20251218081044.png",
     "1. Getting Started/2. Service Scanning/1. Nmap.md",
-    "0. Prep.md",
     "2. Network Enumeration with Nmap",
     "1. Getting Started/9. Knowledge check machine walkthrough/1. Walkthrough.md",
     "1. Getting Started",
@@ -234,10 +239,7 @@
     "Pasted image 20251218052527.png",
     "Pasted image 20251218052517.png",
     "1. Getting Started/5.Types of Shells/2. Upgrading TTY.md",
-    "Pasted image 20251218052407.png",
-    "Pasted image 20251218052318.png",
     "1. Getting Started/9. Knowledge check machine walkthrough",
-    "1. Getting Started/6. Privilege Escalation/1. Privilege Escalation.md",
     "1. Getting Started/3. Web Enumeration/1. Web Enumeration.md",
     "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough",
     "1. Getting Started/7. Transferring Files/1. Transferring Files.md",
@@ -248,8 +250,6 @@
     "6. Privilege Escalation/2. Kernel Exploits.md",
     "1. Getting Started/5.Types of Shells/1. Shell types.md",
     "1. Getting Started/4. Public Exploits/1.Public Exploits.md",
-    "1. Getting Started/2. Service Scanning/2. Attacking Network Services.md",
-    "1. Getting Started/1. Basic Tools/2. Netcat.md",
     "1. Getting Started/6. Privilege Escalation",
     "5.Types of Shells/Untitled",
     "Untitled.canvas",
