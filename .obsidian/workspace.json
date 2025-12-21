@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cpts-quick-references/module/Attack Common Services.md",
+                "file": "3. Footprinting/6. SMB.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Attack Common Services"
+              "title": "6. SMB"
             }
           }
         ]
@@ -207,6 +207,8 @@
   },
   "active": "d03b860ac038ab78",
   "lastOpenFiles": [
+    "cpts-quick-references/module/command injection.md",
+    "cpts-quick-references/module/Attack Common Services.md",
     "cpts-quick-references/module/Active Directory Tools.md",
     "cpts-quick-references/module/Active Directory Enumeration and Attacks.md",
     "3. Footprinting/6. SMB.md",
@@ -216,7 +218,6 @@
     "cpts-quick-references/wordlists/custom.rule",
     "cpts-quick-references/wordlists",
     "cpts-quick-references/module/sqlmap Essentials.md",
-    "cpts-quick-references/module/command injection.md",
     "cpts-quick-references/module/Web-Attacks.md",
     "cpts-quick-references/module/Using WEB Proxies.md",
     "cpts-quick-references/module/Shells and Payloads.md",
@@ -234,7 +235,6 @@
     "cpts-quick-references/module/File Inclusions.md",
     "cpts-quick-references/module/FFUF-Web-Fuzzing.md",
     "cpts-quick-references/module/Cross-site-scripting-xss.md",
-    "cpts-quick-references/module/Attack Common Services.md",
     "cpts-quick-references/module",
     "cpts-quick-references/images/zip2john-Password-Attacks-Lab-Medium.png",
     "cpts-quick-references/images/xxe-svg-upload-base64.png",
