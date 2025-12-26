@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "92dcb5b62f239866",
+        "id": "0603726bce60250a",
         "type": "tabs",
         "children": [
           {
-            "id": "d03b860ac038ab78",
+            "id": "f089ab029b7b053c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/10. IMAP  POP3.md",
+                "file": "3. Footprinting/12. MySQL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10. IMAP  POP3"
+              "title": "12. MySQL"
             }
           }
         ]
@@ -205,12 +205,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d03b860ac038ab78",
+  "active": "f089ab029b7b053c",
   "lastOpenFiles": [
-    "3. Footprinting/9. SMTP.md",
+    "Related Note 2.md",
+    "3. Footprinting/12. MySQL.md",
+    "3. Footprinting/11.SNMP.md",
     "3. Footprinting/10. IMAP  POP3.md",
+    "3. Footprinting/9. SMTP.md",
     "2. Network Enumeration with Nmap/4. Saving the Results.md",
-    "3. Footprinting/Untitled.md",
     "templates/Tool Template.md",
     "templates/Service-Protocol Template.md",
     "templates/Machine Walkthrough Template.md",
@@ -239,8 +241,6 @@
     "cpts-quick-references/module/sqlmap Essentials.md",
     "cpts-quick-references/module/Web-Attacks.md",
     "cpts-quick-references/module/Using WEB Proxies.md",
-    "cpts-quick-references/module/Shells and Payloads.md",
-    "cpts-quick-references/module/SQL Injection Fundamentals.md",
     "cpts-quick-references/module",
     "cpts-quick-references/images/zip2john-Password-Attacks-Lab-Medium.png",
     "cpts-quick-references/images/xxe-svg-upload-base64.png",
