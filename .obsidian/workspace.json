@@ -209,6 +209,7 @@
   "lastOpenFiles": [
     "3. Footprinting/9. SMTP.md",
     "3. Footprinting/10. IMAP  POP3.md",
+    "2. Network Enumeration with Nmap/4. Saving the Results.md",
     "3. Footprinting/Untitled.md",
     "templates/Tool Template.md",
     "templates/Service-Protocol Template.md",
@@ -240,7 +241,6 @@
     "cpts-quick-references/module/Using WEB Proxies.md",
     "cpts-quick-references/module/Shells and Payloads.md",
     "cpts-quick-references/module/SQL Injection Fundamentals.md",
-    "cpts-quick-references/module/Pivoting Tunneling Port Forwarding.md",
     "cpts-quick-references/module",
     "cpts-quick-references/images/zip2john-Password-Attacks-Lab-Medium.png",
     "cpts-quick-references/images/xxe-svg-upload-base64.png",
