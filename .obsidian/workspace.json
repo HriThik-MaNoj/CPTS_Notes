@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "3. Footprinting/10. IMAP  POP3.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
@@ -189,7 +189,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -204,8 +205,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e2ded69b05a05f30",
+  "active": "d03b860ac038ab78",
   "lastOpenFiles": [
+    "3. Footprinting/9. SMTP.md",
     "3. Footprinting/10. IMAP  POP3.md",
     "3. Footprinting/Untitled.md",
     "templates/Tool Template.md",
@@ -220,7 +222,6 @@
     "2. Network Enumeration with Nmap/3. Host and Port Scanning.md",
     "2. Network Enumeration with Nmap/2. Host Discovery.md",
     "2. Network Enumeration with Nmap/1. Enumeration.md",
-    "3. Footprinting/9. SMTP.md",
     "Pasted image 20251222090927.png",
     "3. Footprinting/7. NFS.md",
     "3. Footprinting/8. DNS.md",
