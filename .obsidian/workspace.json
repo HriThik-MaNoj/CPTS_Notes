@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/12. MySQL.md",
+                "file": "3. Footprinting/13. MSSQL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "12. MySQL"
+              "title": "13. MSSQL"
             }
           }
         ]
@@ -207,8 +207,9 @@
   },
   "active": "f089ab029b7b053c",
   "lastOpenFiles": [
-    "Related Note 2.md",
     "3. Footprinting/12. MySQL.md",
+    "3. Footprinting/13. MSSQL.md",
+    "Related Note 2.md",
     "3. Footprinting/11.SNMP.md",
     "3. Footprinting/10. IMAP  POP3.md",
     "3. Footprinting/9. SMTP.md",
@@ -240,7 +241,6 @@
     "cpts-quick-references/wordlists",
     "cpts-quick-references/module/sqlmap Essentials.md",
     "cpts-quick-references/module/Web-Attacks.md",
-    "cpts-quick-references/module/Using WEB Proxies.md",
     "cpts-quick-references/module",
     "cpts-quick-references/images/zip2john-Password-Attacks-Lab-Medium.png",
     "cpts-quick-references/images/xxe-svg-upload-base64.png",
