@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/11.SNMP.md",
+                "file": "3. Footprinting/17. Windows Remote Management Protocols.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11.SNMP"
+              "title": "17. Windows Remote Management Protocols"
             }
           }
         ]
@@ -207,6 +207,7 @@
   },
   "active": "f089ab029b7b053c",
   "lastOpenFiles": [
+    "3. Footprinting/11.SNMP.md",
     "3. Footprinting/17. Windows Remote Management Protocols.md",
     "3. Footprinting/16. Linux Remote Management Protocols.md",
     "3. Footprinting/15. IPMI.md",
@@ -215,7 +216,6 @@
     "Related Note 2.md",
     "3. Footprinting/13. MSSQL.md",
     "3. Footprinting/12. MySQL.md",
-    "3. Footprinting/11.SNMP.md",
     "3. Footprinting/10. IMAP  POP3.md",
     "3. Footprinting/9. SMTP.md",
     "2. Network Enumeration with Nmap/4. Saving the Results.md",
