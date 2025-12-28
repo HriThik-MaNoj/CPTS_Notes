@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/17. Windows Remote Management Protocols.md",
+                "file": "3. Footprinting/11.SNMP.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "17. Windows Remote Management Protocols"
+              "title": "11.SNMP"
             }
           }
         ]
@@ -207,8 +207,8 @@
   },
   "active": "f089ab029b7b053c",
   "lastOpenFiles": [
-    "3. Footprinting/16. Linux Remote Management Protocols.md",
     "3. Footprinting/17. Windows Remote Management Protocols.md",
+    "3. Footprinting/16. Linux Remote Management Protocols.md",
     "3. Footprinting/15. IPMI.md",
     "cpts-quick-references/module/Footprinting.md",
     "3. Footprinting/14. Oracle TNS.md",
