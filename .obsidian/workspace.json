@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4. Information Gathering - Web Edition/2. DNS.md",
+                "file": "4. Information Gathering - Web Edition/4. DNS Zone Transfer.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. DNS"
+              "title": "4. DNS Zone Transfer"
             }
           }
         ]
@@ -207,8 +207,10 @@
   },
   "active": "8b00b612739840dd",
   "lastOpenFiles": [
-    "4. Information Gathering - Web Edition/1.WHOIS.md",
+    "4. Information Gathering - Web Edition/3. Subdomains.md",
+    "4. Information Gathering - Web Edition/4. DNS Zone Transfer.md",
     "4. Information Gathering - Web Edition/2. DNS.md",
+    "4. Information Gathering - Web Edition/1.WHOIS.md",
     "3. Footprinting/20. Footprinting Lab - Hard.md",
     "Untitled.md",
     "4. Information Gathering - Web Edition",
@@ -242,8 +244,6 @@
     "cpts-quick-references/module/Footprinting.md",
     "3. Footprinting/14. Oracle TNS.md",
     "Related Note 2.md",
-    "3. Footprinting/13. MSSQL.md",
-    "3. Footprinting/12. MySQL.md",
     "templates",
     "cpts-quick-references/wordlists/username.list",
     "cpts-quick-references/wordlists/password.list",
