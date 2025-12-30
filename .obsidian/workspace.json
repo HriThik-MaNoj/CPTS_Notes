@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/11.SNMP.md",
+                "file": "3. Footprinting/20. Footprinting Lab - Hard.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11.SNMP"
+              "title": "20. Footprinting Lab - Hard"
             }
           }
         ]
@@ -207,10 +207,11 @@
   },
   "active": "8b00b612739840dd",
   "lastOpenFiles": [
+    "attachments/Pasted image 20251230100657.png",
+    "3. Footprinting/11.SNMP.md",
     "3. Footprinting/20. Footprinting Lab - Hard.md",
     "attachments/Pasted image 20251230100332.png",
     "attachments/Pasted image 20251230100142.png",
-    "3. Footprinting/11.SNMP.md",
     "3. Footprinting/10. IMAP  POP3.md",
     "3. Footprinting/9. SMTP.md",
     "3. Footprinting/19. Footprinting Lab - Medium.md",
