@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4. Information Gathering - Web Edition/5. Virtual Hosts.md",
+                "file": "4. Information Gathering - Web Edition/8. Automating Recon.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5. Virtual Hosts"
+              "title": "8. Automating Recon"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "ssh",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -207,13 +207,16 @@
   },
   "active": "8b00b612739840dd",
   "lastOpenFiles": [
+    "4. Information Gathering - Web Edition/3. Subdomains.md",
+    "4. Information Gathering - Web Edition/8. Automating Recon.md",
     "4. Information Gathering - Web Edition/7. Fingerprinting.md",
     "4. Information Gathering - Web Edition/6. Certificate Transparency Logs.md",
-    "4. Information Gathering - Web Edition/5. Virtual Hosts.md",
-    "4. Information Gathering - Web Edition/4. DNS Zone Transfer.md",
-    "4. Information Gathering - Web Edition/3. Subdomains.md",
     "4. Information Gathering - Web Edition/2. DNS.md",
     "4. Information Gathering - Web Edition/1.WHOIS.md",
+    "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
+    "1. Getting Started/9. Knowledge check machine walkthrough/1. Walkthrough.md",
+    "4. Information Gathering - Web Edition/5. Virtual Hosts.md",
+    "4. Information Gathering - Web Edition/4. DNS Zone Transfer.md",
     "3. Footprinting/20. Footprinting Lab - Hard.md",
     "Untitled.md",
     "4. Information Gathering - Web Edition",
@@ -241,9 +244,6 @@
     "3. Footprinting/8. DNS.md",
     "3. Footprinting/4. Staff.md",
     "3. Footprinting/2. Domain Information.md",
-    "3. Footprinting/3. Cloud Resources.md",
-    "3. Footprinting/1. Enumeration Principles.md",
-    "3. Footprinting/15. IPMI.md",
     "templates",
     "cpts-quick-references/wordlists/username.list",
     "cpts-quick-references/wordlists/password.list",
