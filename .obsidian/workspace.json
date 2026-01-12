@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5. File Transfers/2. Linux File Transfer Methods.md",
+                "file": "5. File Transfers/3. With Code.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. Linux File Transfer Methods"
+              "title": "3. With Code"
             }
           }
         ]
@@ -207,8 +207,9 @@
   },
   "active": "8b00b612739840dd",
   "lastOpenFiles": [
-    "5. File Transfers/1. Windows File Transfer Methods.md",
     "5. File Transfers/2. Linux File Transfer Methods.md",
+    "5. File Transfers/3. With Code.md",
+    "5. File Transfers/1. Windows File Transfer Methods.md",
     "Untitled.md",
     "3. Footprinting/17. Windows Remote Management Protocols.md",
     "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
@@ -244,7 +245,6 @@
     "3. Footprinting/18. Footprinting Lab - Easy.md",
     "1. Getting Started/6. Privilege Escalation/1. Privilege Escalation.md",
     "3. Footprinting/5. FTP.md",
-    "3. Footprinting/8. DNS.md",
     "templates",
     "cpts-quick-references/wordlists/username.list",
     "cpts-quick-references/wordlists/password.list",
