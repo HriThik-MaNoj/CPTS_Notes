@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Shells and Payloads/2. Reverse Shells.md",
+                "file": "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. Reverse Shells"
+              "title": "3. Automating Payloads & Delivery with Metasploit"
             }
           }
         ],
@@ -222,8 +222,9 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
-    "Untitled.md",
     "6. Shells and Payloads/2. Reverse Shells.md",
+    "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
+    "Untitled.md",
     "3. Footprinting/17. Windows Remote Management Protocols.md",
     "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
     "6. Shells and Payloads/1. Bind Shells.md",
@@ -255,7 +256,6 @@
     "attachments/Pasted image 20251230103255.png",
     "attachments/Pasted image 20251230103157.png",
     "attachments/Pasted image 20251230103103.png",
-    "3. Footprinting/10. IMAP  POP3.md",
     "attachments/Pasted image 20251230101050.png",
     "attachments/Pasted image 20251230100922.png",
     "attachments/Pasted image 20251230100754.png",
