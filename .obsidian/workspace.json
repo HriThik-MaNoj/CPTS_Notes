@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
+                "file": "6. Shells and Payloads/4. Crafting Payloads with MSFvenom.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Automating Payloads & Delivery with Metasploit"
+              "title": "4. Crafting Payloads with MSFvenom"
             }
           }
         ],
@@ -222,12 +222,13 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
+    "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
+    "6. Shells and Payloads/4. Crafting Payloads with MSFvenom.md",
     "3. Footprinting/6. SMB.md",
     "cpts-quick-references/assessments/Password Attacks Lab - Hard.md",
     "cpts-quick-references/assessments/Footprinting Lab - Medium.md",
     "cpts-quick-references/assessments/AD Enumeration & Attacks - Skills Assessment Part II.md",
     "3. Footprinting/19. Footprinting Lab - Medium.md",
-    "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
     "6. Shells and Payloads/2. Reverse Shells.md",
     "Untitled.md",
     "3. Footprinting/17. Windows Remote Management Protocols.md",
@@ -249,7 +250,6 @@
     "4. Information Gathering - Web Edition/7. Fingerprinting.md",
     "4. Information Gathering - Web Edition/6. Certificate Transparency Logs.md",
     "4. Information Gathering - Web Edition/2. DNS.md",
-    "4. Information Gathering - Web Edition/1.WHOIS.md",
     "4. Information Gathering - Web Edition",
     "attachments/Pasted image 20251230103742.png",
     "attachments/Pasted image 20251230103456.png",
