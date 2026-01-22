@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Shells and Payloads/7. Spawning Interactive Shells.md",
+                "file": "6. Shells and Payloads/8. Introduction to Web Shells.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7. Spawning Interactive Shells"
+              "title": "8. Introduction to Web Shells"
             }
           }
         ],
@@ -222,8 +222,9 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
-    "6. Shells and Payloads/6. Infiltrating Unix or Linux.md",
     "6. Shells and Payloads/7. Spawning Interactive Shells.md",
+    "6. Shells and Payloads/8. Introduction to Web Shells.md",
+    "6. Shells and Payloads/6. Infiltrating Unix or Linux.md",
     "6. Shells and Payloads/5. Infiltrating windows.md",
     "6. Shells and Payloads/4. Crafting Payloads with MSFvenom.md",
     "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
@@ -249,7 +250,6 @@
     "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
     "4. Information Gathering - Web Edition/8. Automating Recon.md",
     "5. File Transfers",
-    "4. Information Gathering - Web Edition/3. Subdomains.md",
     "4. Information Gathering - Web Edition",
     "attachments/Pasted image 20251230103742.png",
     "attachments/Pasted image 20251230103456.png",
