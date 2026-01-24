@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Shells and Payloads/8. Introduction to Web Shells.md",
+                "file": "3. Footprinting/17. Windows Remote Management Protocols.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "8. Introduction to Web Shells"
+              "title": "17. Windows Remote Management Protocols"
             }
           }
         ],
@@ -68,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "smbclient",
+                "query": "xfreerdp",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -89,7 +89,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -222,21 +223,25 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
-    "6. Shells and Payloads/7. Spawning Interactive Shells.md",
-    "6. Shells and Payloads/8. Introduction to Web Shells.md",
-    "6. Shells and Payloads/6. Infiltrating Unix or Linux.md",
-    "6. Shells and Payloads/5. Infiltrating windows.md",
-    "6. Shells and Payloads/4. Crafting Payloads with MSFvenom.md",
+    "3. Footprinting/19. Footprinting Lab - Medium.md",
     "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
+    "6. Shells and Payloads/2. Reverse Shells.md",
+    "6. Shells and Payloads/5. Infiltrating windows.md",
+    "Comprehensive_Methodology.md",
+    "3. Footprinting/17. Windows Remote Management Protocols.md",
+    "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
+    "6. Shells and Payloads/9. The Live Engagement.md",
+    "6. Shells and Payloads/8. Web Shells.md",
+    "attachments/Pasted image 20260124054911.png",
+    "attachments/Pasted image 20260124054820.png",
+    "6. Shells and Payloads/7. Spawning Interactive Shells.md",
+    "6. Shells and Payloads/6. Infiltrating Unix or Linux.md",
+    "6. Shells and Payloads/4. Crafting Payloads with MSFvenom.md",
     "3. Footprinting/6. SMB.md",
     "cpts-quick-references/assessments/Password Attacks Lab - Hard.md",
     "cpts-quick-references/assessments/Footprinting Lab - Medium.md",
     "cpts-quick-references/assessments/AD Enumeration & Attacks - Skills Assessment Part II.md",
-    "3. Footprinting/19. Footprinting Lab - Medium.md",
-    "6. Shells and Payloads/2. Reverse Shells.md",
     "Untitled.md",
-    "3. Footprinting/17. Windows Remote Management Protocols.md",
-    "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
     "6. Shells and Payloads/1. Bind Shells.md",
     "5. File Transfers/9. Evading Detection.md",
     "6. Shells and Payloads",
@@ -247,8 +252,6 @@
     "5. File Transfers/3. With Code.md",
     "5. File Transfers/2. Linux File Transfer Methods.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
-    "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
-    "4. Information Gathering - Web Edition/8. Automating Recon.md",
     "5. File Transfers",
     "4. Information Gathering - Web Edition",
     "attachments/Pasted image 20251230103742.png",
@@ -259,8 +262,6 @@
     "attachments/Pasted image 20251230101050.png",
     "attachments/Pasted image 20251230100922.png",
     "attachments/Pasted image 20251230100754.png",
-    "attachments/Pasted image 20251230100657.png",
-    "attachments/Pasted image 20251230100332.png",
     "templates",
     "cpts-quick-references/wordlists/username.list",
     "cpts-quick-references/wordlists/password.list",
