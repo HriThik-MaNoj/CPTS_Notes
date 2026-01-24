@@ -1,0 +1,1 @@
+        xfreerdp /u:htb-student /p:HTB_@cademy_stdnt! /v:10.129.204.126 /cert-ignore /bpp:8 /network:modem /compression -themes -wallpaper /clipboard /audio-mode:1 /auto-reconnect -glyph-cache /dynamic-resolution
