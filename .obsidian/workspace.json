@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/17. Windows Remote Management Protocols.md",
+                "file": "7. Metasploit/1. Metasploit.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "17. Windows Remote Management Protocols"
+              "title": "1. Metasploit"
             }
           }
         ],
@@ -68,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "xfreerdp",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -89,8 +89,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -223,8 +222,14 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
-    "3. Footprinting/19. Footprinting Lab - Medium.md",
+    "6. Shells and Payloads/9. Detection and prevention.md",
+    "7. Metasploit/1. Metasploit.md",
+    "Untitled 1.md",
+    "Untitled 1",
+    "7. Metasploit",
     "Untitled.md",
+    "3. Footprinting/17. Windows Remote Management Protocols.md",
+    "3. Footprinting/19. Footprinting Lab - Medium.md",
     "6. Shells and Payloads/8. Web Shells.md",
     "6. Shells and Payloads/9. The Live Engagement.md",
     "2. Network Enumeration with Nmap/3. Host and Port Scanning.md",
@@ -232,7 +237,6 @@
     "2. Network Enumeration with Nmap/2. Host Discovery.md",
     "2. Network Enumeration with Nmap/1. Enumeration.md",
     "6. Shells and Payloads/7. Spawning Interactive Shells.md",
-    "3. Footprinting/17. Windows Remote Management Protocols.md",
     "6. Shells and Payloads/2. Reverse Shells.md",
     "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
     "1. Getting Started/9. Knowledge check machine walkthrough/1. Walkthrough.md",
@@ -248,10 +252,7 @@
     "cpts-quick-references/assessments/Password Attacks Lab - Hard.md",
     "cpts-quick-references/assessments/Footprinting Lab - Medium.md",
     "cpts-quick-references/assessments/AD Enumeration & Attacks - Skills Assessment Part II.md",
-    "6. Shells and Payloads/1. Bind Shells.md",
-    "5. File Transfers/9. Evading Detection.md",
     "6. Shells and Payloads",
-    "5. File Transfers/8. Detection.md",
     "5. File Transfers",
     "4. Information Gathering - Web Edition",
     "attachments/Pasted image 20251230103742.png",
@@ -267,8 +268,6 @@
     "cpts-quick-references/wordlists/password.list",
     "cpts-quick-references/wordlists/mut_password.list",
     "cpts-quick-references/wordlists/custom.rule",
-    "cpts-quick-references/wordlists",
-    "cpts-quick-references/module",
     "Untitled.canvas"
   ]
 }
