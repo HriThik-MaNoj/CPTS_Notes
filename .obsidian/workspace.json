@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "8. Password Attacks/9. Attacking LSASS.md",
+                "file": "5. File Transfers/1. Windows File Transfer Methods.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "9. Attacking LSASS"
+              "title": "1. Windows File Transfer Methods"
             }
           }
         ],
@@ -222,8 +222,8 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
-    "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
     "8. Password Attacks/9. Attacking LSASS.md",
+    "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
     "3. Footprinting/17. Windows Remote Management Protocols.md",
     "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
     "cpts-quick-references/module/Information Gathering.md",
