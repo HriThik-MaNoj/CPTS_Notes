@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
+                "file": "8. Password Attacks/12. Credential Hunting in Windows.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11. Attacking Active Directory and NTDS.dit"
+              "title": "12. Credential Hunting in Windows"
             }
           }
         ],
@@ -222,8 +222,9 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
-    "8. Password Attacks/10. Attacking Windows Credential Manager.md",
     "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
+    "8. Password Attacks/12. Credential Hunting in Windows.md",
+    "8. Password Attacks/10. Attacking Windows Credential Manager.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
     "8. Password Attacks/9. Attacking LSASS.md",
     "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
@@ -247,7 +248,6 @@
     "Improved Notes/02-Enumeration/Service-Specific/Complete-Service-Enumeration-Guide.md",
     "Improved Notes/02-Enumeration/Service-Specific/SMB-Enumeration.md",
     "Improved Notes/00-Methodology/Penetration-Testing-Workflow.md",
-    "7. Metasploit/2. Firewall and IDS or IPS Evation.md",
     "8. Password Attacks",
     "module",
     "attachments/Pasted image 20260126135958.png",
