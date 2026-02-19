@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "8. Password Attacks/13. Linux Authentication Process.md",
+                "file": "8. Password Attacks/1. John The Ripper.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "13. Linux Authentication Process"
+              "title": "1. John The Ripper"
             }
           }
         ],
@@ -68,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "john",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -89,7 +89,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -222,8 +223,8 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
-    "8. Password Attacks/12. Credential Hunting in Windows.md",
     "8. Password Attacks/13. Linux Authentication Process.md",
+    "8. Password Attacks/12. Credential Hunting in Windows.md",
     "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
     "8. Password Attacks/10. Attacking Windows Credential Manager.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
