@@ -16,3 +16,11 @@ rustscan -a $IP -- -A
 
 ![[Pasted image 20260222210907.png]]
 
+![[Pasted image 20260222210948.png]]
+
+- Hmm.. this one also seems to be running AD stuff.. Interesting..
+- Both of these machines are domain controllers, One is the child and One is the parent.
+
+- We'll find the domain names of both the machines through Nmap scan, make sure to add those domain names and their associated IP addresses in the /etc/hosts file : 
+![[Pasted image 20260222211926.png]]
+
