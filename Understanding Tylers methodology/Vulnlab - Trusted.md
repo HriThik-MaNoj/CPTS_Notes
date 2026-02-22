@@ -34,6 +34,15 @@ Anytime I see a webserver, there's always a bunch of things that I would like to
 - Version Enumeration ( In exams like the OSCP, always check for version numbers because there's a high chance that particular version is vulnerable to a CVE)
 - App functionality (using the website as a normal user)
 
-- Used the application like a normal user would and foud that phpmyinfo.php is accessible:
+- Used the application like a normal user would and foud that phpmyinfo.php is accessible (it's not a major information disclosure vulnerability, but you can get some useful information here):
 ![[Pasted image 20260222213739.png]]
+
+#### Dirsearch
+
+```
+dirsearch -u http://$IP
+```
+
+- He excluded 403 requests because we were seeing a lot of 403's which means no access, so we just filtered out 403:
+![[Pasted image 20260222214017.png]]
 
