@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/17. Windows Remote Management Protocols.md",
+                "file": "8. Password Attacks/18. Pass the Ticket (PtT) from Windows.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "17. Windows Remote Management Protocols"
+              "title": "18. Pass the Ticket (PtT) from Windows"
             }
           }
         ],
@@ -68,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "xfreerdp",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -89,8 +89,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -223,6 +222,7 @@
   },
   "active": "97e95e9b8024bdb8",
   "lastOpenFiles": [
+    "3. Footprinting/17. Windows Remote Management Protocols.md",
     "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
     "8. Password Attacks/18. Pass the Ticket (PtT) from Windows.md",
     "7. Metasploit/2. Firewall and IDS or IPS Evation.md",
@@ -259,7 +259,6 @@
     "3. Footprinting/12. MySQL.md",
     "8. Password Attacks/5. Network Services.md",
     "1. Getting Started/1. Basic Tools/3. Tmux.md",
-    "1. Getting Started/1. Basic Tools/2. Netcat.md",
     "8. Password Attacks",
     "module",
     "Untitled 1",
