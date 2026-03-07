@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "8. Password Attacks/21. htb-password-attacks-writeup.md",
-                "mode": "preview",
+                "file": "9. Attacking common Services/1. Theory.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "21. htb-password-attacks-writeup"
+              "title": "1. Theory"
             }
           }
         ],
@@ -250,8 +250,11 @@
   },
   "active": "f36ae27b4d1b2f83",
   "lastOpenFiles": [
-    "8. Password Attacks/21. Skill  Assesment.md",
+    "attachments/Pasted image 20260307104446.png",
     "8. Password Attacks/21. htb-password-attacks-writeup.md",
+    "9. Attacking common Services/1. Theory.md",
+    "9. Attacking common Services",
+    "8. Password Attacks/21. Skill  Assesment.md",
     "Untitled 1.md",
     "Untitled.md",
     "8. Password Attacks/Unconfirmed 646204.crdownload",
@@ -285,8 +288,6 @@
     "attachments/Pasted image 20260301114221.png",
     "8. Password Attacks/19. Pass the Ticket (PtT) from Linux.md",
     "8. Password Attacks/19. Pass the Ticket (PtT) from Linux - Comprehensive.md",
-    "8. Password Attacks/7. Windows Authentication Process.md",
-    "8. Password Attacks/18. Pass the Ticket (PtT) from Windows.md",
     "Understanding Tylers methodology",
     "8. Password Attacks",
     "module",
@@ -295,7 +296,6 @@
     "6. Shells and Payloads",
     "5. File Transfers",
     "4. Information Gathering - Web Edition",
-    "templates",
     "Untitled.canvas"
   ]
 }
