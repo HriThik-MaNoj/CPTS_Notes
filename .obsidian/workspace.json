@@ -4,67 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "f9d53bcb1f709b26",
+        "id": "41d9e3dd4df07392",
         "type": "tabs",
         "children": [
           {
-            "id": "8b00b612739840dd",
+            "id": "a6615708700acef4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Shells and Payloads/2. Reverse Shells.md",
+                "file": "9. Attacking common Services/3. Attacking SMB.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. Reverse Shells"
-            }
-          },
-          {
-            "id": "97e95e9b8024bdb8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "8. Password Attacks/19. Pass the Ticket (PtT) from Linux.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "19. Pass the Ticket (PtT) from Linux"
-            }
-          },
-          {
-            "id": "7a859613342a991b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Ligolo-ng.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Ligolo-ng"
-            }
-          },
-          {
-            "id": "f36ae27b4d1b2f83",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "9. Attacking common Services/2. Attack.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2. Attack"
+              "title": "3. Attacking SMB"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -248,11 +205,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "f36ae27b4d1b2f83",
+  "active": "a6615708700acef4",
   "lastOpenFiles": [
+    "9. Attacking common Services/2. Attacking FTP.md",
+    "9. Attacking common Services/3. Attacking SMB.md",
+    "3. Footprinting/5. FTP.md",
+    "Rust scan Installation.md",
+    "attachments/Pasted image 20260308094400.png",
     "attachments/Pasted image 20260307122031.png",
     "9. Attacking common Services/1. Theory.md",
-    "9. Attacking common Services/2. Attack.md",
     "attachments/Pasted image 20260307104446.png",
     "8. Password Attacks/21. htb-password-attacks-writeup.md",
     "9. Attacking common Services",
@@ -264,7 +225,6 @@
     "attachments/Pasted image 20260307101417.png",
     "attachments/Pasted image 20260307085746.png",
     "attachments/Pasted image 20260307085142.png",
-    "Rust scan Installation.md",
     "cpts-quick-references/assessments/Password Attacks Lab - Hard.md",
     "Ligolo-ng.md",
     "cpts-quick-references/assessments/Pivoting Tunneling and Port Forwarding Skills Assessment.md",
@@ -279,15 +239,12 @@
     "attachments/Pasted image 20260301201117.png",
     "attachments/Pasted image 20260301200923.png",
     "attachments/Pasted image 20260301200731.png",
-    "attachments/Pasted image 20260301200510.png",
     "8. Password Attacks/3. Custom wordlists.md",
     "8. Password Attacks/4. Protected files cracking.md",
     "8. Password Attacks/5. Network Services.md",
     "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
     "8. Password Attacks/20. Pass the Certificate.md",
     "8. Password Attacks/20.1 Passs the certificate Claude.md",
-    "attachments/Pasted image 20260301114424.png",
-    "8. Password Attacks/19. Pass the Ticket (PtT) from Linux.md",
     "Understanding Tylers methodology",
     "8. Password Attacks",
     "module",
