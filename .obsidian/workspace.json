@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "9. Attacking common Services/3. Attacking SMB.md",
+                "file": "9. Attacking common Services/4. Attacking SQL Databases..md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Attacking SMB"
+              "title": "4. Attacking SQL Databases."
             }
           }
         ]
@@ -207,10 +207,11 @@
   },
   "active": "a6615708700acef4",
   "lastOpenFiles": [
+    "9. Attacking common Services/3. Attacking SMB.md",
+    "9. Attacking common Services/4. Attacking SQL Databases..md",
     "attachments/Pasted image 20260310091239.png",
     "attachments/Pasted image 20260310075801.png",
     "9. Attacking common Services/2. Attacking FTP.md",
-    "9. Attacking common Services/3. Attacking SMB.md",
     "3. Footprinting/5. FTP.md",
     "Rust scan Installation.md",
     "attachments/Pasted image 20260308094400.png",
@@ -239,7 +240,6 @@
     "8. Password Attacks/1. John The Ripper.md",
     "Comprehensive_Methodology.md",
     "attachments/Pasted image 20260301201117.png",
-    "attachments/Pasted image 20260301200923.png",
     "8. Password Attacks/3. Custom wordlists.md",
     "8. Password Attacks/4. Protected files cracking.md",
     "8. Password Attacks/5. Network Services.md",
