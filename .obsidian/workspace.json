@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "9. Attacking common Services/4. Attacking SQL Databases..md",
+                "file": "9. Attacking common Services/6. Attacking DNS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4. Attacking SQL Databases."
+              "title": "6. Attacking DNS"
             }
           }
         ]
@@ -207,22 +207,23 @@
   },
   "active": "a6615708700acef4",
   "lastOpenFiles": [
-    "attachments/Pasted image 20260312102941.png",
-    "attachments/Pasted image 20260312101556.png",
-    "attachments/Pasted image 20260312101520.png",
-    "attachments/Pasted image 20260312094743.png",
-    "attachments/Pasted image 20260312094149.png",
-    "attachments/Pasted image 20260311201445.png",
-    "attachments/Pasted image 20260311200437.png",
-    "9. Attacking common Services/3. Attacking SMB.md",
+    "9. Attacking common Services/5. Attacking RDP.md",
+    "9. Attacking common Services/6. Attacking DNS.md",
+    "attachments/Pasted image 20260312122845.png",
+    "attachments/Pasted image 20260312121501.png",
+    "attachments/Pasted image 20260312121429.png",
+    "attachments/Pasted image 20260312121245.png",
+    "attachments/Pasted image 20260312120616.png",
+    "attachments/Pasted image 20260312120537.png",
+    "attachments/Pasted image 20260312120431.png",
+    "attachments/Pasted image 20260312120314.png",
     "9. Attacking common Services/4. Attacking SQL Databases..md",
-    "attachments/Pasted image 20260310091239.png",
-    "attachments/Pasted image 20260310075801.png",
+    "attachments/Pasted image 20260312111353.png",
+    "attachments/Pasted image 20260312103435.png",
+    "9. Attacking common Services/3. Attacking SMB.md",
     "9. Attacking common Services/2. Attacking FTP.md",
     "3. Footprinting/5. FTP.md",
     "Rust scan Installation.md",
-    "attachments/Pasted image 20260308094400.png",
-    "attachments/Pasted image 20260307122031.png",
     "9. Attacking common Services/1. Theory.md",
     "8. Password Attacks/21. htb-password-attacks-writeup.md",
     "9. Attacking common Services",
@@ -244,7 +245,6 @@
     "8. Password Attacks/3. Custom wordlists.md",
     "8. Password Attacks/4. Protected files cracking.md",
     "8. Password Attacks/5. Network Services.md",
-    "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
     "Understanding Tylers methodology",
     "8. Password Attacks",
     "module",
