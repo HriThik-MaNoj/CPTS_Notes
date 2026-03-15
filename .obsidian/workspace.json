@@ -205,8 +205,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "c6ce60e897209046",
+  "active": "e2ded69b05a05f30",
   "lastOpenFiles": [
+    "10. Pivoting, Tunneling and Port Forwarding",
     "9. Attacking common Services/10. Lab Hard.md",
     "9. Attacking common Services/10. Lab Hard Claude.md",
     "attachments/Pasted image 20260315132351.png",
@@ -242,7 +243,6 @@
     "8. Password Attacks/1. John The Ripper.md",
     "9. Attacking common Services/3. Attacking SMB.md",
     "8. Password Attacks/12. Credential Hunting in Windows.md",
-    "8. Password Attacks/2. Hashcat.md",
     "9. Attacking common Services",
     "8. Password Attacks/Unconfirmed 646204.crdownload",
     "Understanding Tylers methodology",
