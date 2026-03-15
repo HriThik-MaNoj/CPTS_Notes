@@ -1,6 +1,7 @@
 {
   "theme": "obsidian",
-  "cssTheme": "Hackthebox",
+  "cssTheme": "Brainhack",
   "baseFontSize": 20,
-  "accentColor": "#a000eb"
+  "accentColor": "#a000eb",
+  "nativeMenus": false
 }

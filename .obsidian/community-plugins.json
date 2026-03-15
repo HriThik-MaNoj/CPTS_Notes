@@ -3,5 +3,6 @@
   "templater-obsidian",
   "obsidian-tasks-plugin",
   "calendar",
-  "obsidian-icon-folder"
+  "obsidian-icon-folder",
+  "code-styler"
 ]
