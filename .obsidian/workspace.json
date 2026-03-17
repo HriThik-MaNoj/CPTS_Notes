@@ -207,6 +207,7 @@
   },
   "active": "c6ce60e897209046",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260317155708.png",
     "10. Pivoting, Tunneling and Port Forwarding/2.Dynamic Port Forwarding with SSH and SOCKS Tunneling.md",
     "10. Pivoting, Tunneling and Port Forwarding/3. Remote or Reverse Port Forwarding with SSH.md",
     "1. Getting Started/1. Basic Tools/3. Tmux.md",
@@ -243,7 +244,6 @@
     "6. Shells and Payloads/5. Infiltrating windows.md",
     "6. Shells and Payloads/4. Crafting Payloads with MSFvenom.md",
     "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
-    "6. Shells and Payloads/2. Reverse Shells.md",
     "9. Attacking common Services",
     "8. Password Attacks/Unconfirmed 646204.crdownload",
     "Understanding Tylers methodology",
