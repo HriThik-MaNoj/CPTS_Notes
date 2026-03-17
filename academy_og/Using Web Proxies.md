@@ -86,17 +86,17 @@ java -jar </path/to/burpsuite.jar>
 
 Once we start up Burp, we are prompted to create a new project. If we are running the community version, we would only be able to use temporary projects without the ability to save our progress and carry on later:
 
-![Burp Suite Community Edition project setup screen. Options for temporary project, new project on disk, or open existing project. Note: Disk-based projects supported only in Professional version. Buttons for "Cancel" and "Next."](https://academy.hackthebox.com/storage/modules/110/burp_project_community.jpg)
+![Burp Suite Community Edition project setup screen. Options for temporary project, new project on disk, or open existing project. Note: Disk-based projects supported only in Professional version. Buttons for "Cancel" and "Next."](images/module-110-004.jpg)
 
 If we are using the pro/enterprise version, we will have the option to either start a new project or open an existing project.
 
-![Burp Suite Professional project setup screen. Options for temporary project, new project on disk, or open existing project. Fields for name and file selection. Buttons for "Cancel" and "Next."](https://academy.hackthebox.com/storage/modules/110/burp_project_prof.jpg)
+![Burp Suite Professional project setup screen. Options for temporary project, new project on disk, or open existing project. Fields for name and file selection. Buttons for "Cancel" and "Next."](images/module-110-003.jpg)
 
 We may need to save our progress if we were pentesting huge web applications or running an `Active Web Scan`. However, we may not need to save our progress and, in many cases, can start a `temporary` project every time.
 
 So, let's select `temporary project`, and click continue. Once we do, we will be prompted to either use `Burp Default Configurations`, or to `Load a Configuration File`, and we'll choose the first option:
 
-![Burp Suite Community Edition configuration screen. Options to use Burp defaults, use project options, or load from configuration file. File selection available. Checkboxes for default settings and disabling extensions. Buttons for "Cancel," "Back," and "Start Burp."](https://academy.hackthebox.com/storage/modules/110/burp_project_config.jpg)
+![Burp Suite Community Edition configuration screen. Options to use Burp defaults, use project options, or load from configuration file. File selection available. Checkboxes for default settings and disabling extensions. Buttons for "Cancel," "Back," and "Start Burp."](images/module-110-002.jpg)
 
 Once we start heavily utilizing Burp's features, we may want to customize our configurations and load them when starting Burp. For now, we can keep `Use Burp Defaults`, and `Start Burp`.  Once all of this is done, we should be ready to start using Burp.
 
@@ -108,7 +108,7 @@ We can download ZAP from its [download page](https://www.zaproxy.org/download/),
 
 To get started with ZAP, we can launch it from the terminal with the `zaproxy` command or access it from the application menu like Burp. Once ZAP starts up, unlike the free version of Burp, we will be prompted to either create a new project or a temporary project. Let's use a temporary project by choosing `no`, as we will not be working on a big project that we will need to persist for several days:
 
-![ZAP Session persistence options. Choices: persist with timestamp, specify name and location, or not persist. Checkbox to remember choice. Buttons for "Help" and "Start."](https://academy.hackthebox.com/storage/modules/110/zap_new_project.jpg)
+![ZAP Session persistence options. Choices: persist with timestamp, specify name and location, or not persist. Checkbox to remember choice. Buttons for "Help" and "Start."](images/module-110-001.jpg)
 
 After that, we will have ZAP running, and we can continue the proxy setup process, as we will discuss in the next section.
 
@@ -133,11 +133,11 @@ We can set up these tools as a proxy for any application, such that all web requ
 To use the tools as web proxies, we must configure our browser proxy settings to use them as the proxy or use the pre-configured browser. Both tools have a pre-configured browser that comes with pre-configured proxy settings and the CA certificates pre-installed, making starting a web penetration test very quick and easy.
 
 In Burp's (`Proxy>Intercept`), we can click on `Open Browser`, which will open Burp's pre-configured browser, and automatically route all web traffic through Burp:
-![Burp Suite Proxy tab with Intercept off. Option to use Burp's embedded browser. Button to "Open browser." Navigation includes Dashboard, Target, Proxy, and more.](https://academy.hackthebox.com/storage/modules/110/burp_preconfigured_browser.png)
+![Burp Suite Proxy tab with Intercept off. Option to use Burp's embedded browser. Button to "Open browser." Navigation includes Dashboard, Target, Proxy, and more.](images/module-110-013.png)
 
 In ZAP, we can click on the Firefox browser icon at the end of the top bar, and it will open the pre-configured browser:
 
-![Toolbar with various icons. Tooltip: "Open the browser you've chosen in the Quick Start tab pre-configured to proxy through ZAP."](https://academy.hackthebox.com/storage/modules/110/zap_preconfigured_browser.jpg)
+![Toolbar with various icons. Tooltip: "Open the browser you've chosen in the Quick Start tab pre-configured to proxy through ZAP."](images/module-110-012.jpg)
 
 For our uses in this module, using the pre-configured browser should be enough.
 
@@ -157,11 +157,11 @@ Instead of manually switching the proxy, we can utilize the Firefox extension [F
 
 Once we have the extension added, we can configure the web proxy on it by clicking on its icon in Firefox's top bar and then choosing `Options`:
 
-![FoxyProxy menu with options for "Options," "What's My IP?" and "Log."](https://academy.hackthebox.com/storage/modules/110/foxyproxy_options.png)
+![FoxyProxy menu with options for "Options," "What's My IP?" and "Log."](images/module-110-011.png)
 
 Once we're on the `Options` page, we can click on `Add` on the left pane, and then use `127.0.0.1` as the IP, `8080` as the port, name it `Burp` or `ZAP`, and click `Save`:
 
-![Edit Proxy Burp/ZAP settings. Fields for title, color, proxy type, IP address, port, username, and password. Buttons for "Cancel," "Save & Add Another," "Save & Edit Patterns," and "Save."](https://academy.hackthebox.com/storage/modules/110/foxyproxy_add.png)
+![Edit Proxy Burp/ZAP settings. Fields for title, color, proxy type, IP address, port, username, and password. Buttons for "Cancel," "Save & Add Another," "Save & Edit Patterns," and "Save."](images/module-110-010.png)
 
 <div class="card bg-light">
     <div class="card-body">
@@ -170,7 +170,7 @@ Once we're on the `Options` page, we can click on `Add` on the left pane, and th
 </div>
 
 Finally, we can click on the `FoxyProxy` icon and select `Burp`/`ZAP`.
-![FoxyProxy menu with Burp/ZAP enabled. Options for "Options," "What's My IP?" and "Log."](https://academy.hackthebox.com/storage/modules/110/foxyproxy_use.png)
+![FoxyProxy menu with Burp/ZAP enabled. Options for "Options," "What's My IP?" and "Log."](images/module-110-009.png)
 
 -----------------
 
@@ -180,24 +180,24 @@ Another important step when using Burp Proxy/ZAP with our browser is installing 
 
 We can install Burp's certificate once we select Burp as our proxy in `Foxy Proxy`, by browsing to `http://burp`, and downloading the certificate from there by clicking on `CA Certificate`:
 
-![Burp Suite Community Edition header with 'CA Certificate' button.](https://academy.hackthebox.com/storage/modules/110/burp_cert.jpg)
+![Burp Suite Community Edition header with 'CA Certificate' button.](images/module-110-014.jpg)
 
 To get ZAP's certificate, we can go to (`Tools>Options>Network>Server Certificates`), then click on `Save`:
 
-![Dynamic SSL Certificates window with options list, certificate text, and 'Generate', 'Import', 'View', 'Save' buttons.](https://academy.hackthebox.com/storage/modules/110/zap_cert.png)
+![Dynamic SSL Certificates window with options list, certificate text, and 'Generate', 'Import', 'View', 'Save' buttons.](images/module-110-008.png)
 
 We can also change our certificate by generating a new one with the `Generate` button.
 
 Once we have our certificates, we can install them within Firefox by browsing to <about:preferences#privacy>, scrolling to the bottom, and clicking `View Certificates`:
 
-![Certificate settings with options for automatic selection, asking every time, OCSP query, and buttons for 'View Certificates' and 'Security Devices'.](https://academy.hackthebox.com/storage/modules/110/firefox_cert.png)
+![Certificate settings with options for automatic selection, asking every time, OCSP query, and buttons for 'View Certificates' and 'Security Devices'.](images/module-110-007.png)
 
 After that, we can select the `Authorities` tab, and then click on `import`, and select the downloaded CA certificate:
 
-![Certificate Manager window showing Authorities tab with certificate list and options to View, Edit Trust, Import, Export, and Delete.](https://academy.hackthebox.com/storage/modules/110/firefox_import_cert.png)
+![Certificate Manager window showing Authorities tab with certificate list and options to View, Edit Trust, Import, Export, and Delete.](images/module-110-006.png)
 
 Finally, we must select `Trust this CA to identify websites` and `Trust this CA to identify email users`, and then click OK:
-![Downloading Certificate dialog asking to trust 'PortSwigger CA' for websites and email, with options to View, Examine, Cancel, and OK.](https://academy.hackthebox.com/storage/modules/110/firefox_trust_cert.jpg)
+![Downloading Certificate dialog asking to trust 'PortSwigger CA' for websites and email, with options to View, Examine, Cancel, and OK.](images/module-110-005.jpg)
 
 Once we install the certificate and configure the Firefox proxy, all Firefox web traffic will start routing through our web proxy.
 
@@ -215,11 +215,11 @@ Now that we have set up our proxy, we can use it to intercept and manipulate var
 
 In Burp, we can navigate to the `Proxy` tab, and request interception should be on by default. If we want to turn request interception on or off, we may go to the `Intercept` sub-tab and click on `Intercept is on/off` button to do so:
 
-![Proxy tab with Intercept, HTTP history, WebSockets history, and Options. Buttons: Forward, Drop, Intercept is on, Action, Open Browser.](https://academy.hackthebox.com/storage/modules/110/burp_intercept_htb_on.png)
+![Proxy tab with Intercept, HTTP history, WebSockets history, and Options. Buttons: Forward, Drop, Intercept is on, Action, Open Browser.](images/module-110-019.png)
 
 Once we turn request interception on, we can start up the pre-configured browser and then visit our target website after spawning it from the exercise at the end of this section. Then, once we go back to Burp, we will see the intercepted request awaiting our action, and we can click on `forward` to forward the request:
 
-![Proxy tab showing HTTP request details with buttons: Forward, Drop, Intercept is on, Action, Open Browser.](https://academy.hackthebox.com/storage/modules/110/burp_intercept_page.png)
+![Proxy tab showing HTTP request details with buttons: Forward, Drop, Intercept is on, Action, Open Browser.](images/module-110-018.png)
 
 <div class="card bg-light">
     <div class="card-body">
@@ -231,19 +231,19 @@ Once we turn request interception on, we can start up the pre-configured browser
 
 In ZAP, interception is off by default, as shown by the green button on the top bar (green indicates that requests can pass and not be intercepted). We can click on this button to turn the Request Interception on or off, or we can use the shortcut [`CTRL+B`] to toggle it on or off:
 
-![Toolbar with various icons and 'Standard Mode' dropdown, 'Sites' section with a plus icon.](https://academy.hackthebox.com/storage/modules/110/zap_intercept_htb_on.jpg)
+![Toolbar with various icons and 'Standard Mode' dropdown, 'Sites' section with a plus icon.](images/module-110-017.jpg)
 
 Then, we can start the pre-configured browser and revisit the exercise webpage. We will see the intercepted request in the top-right pane, and we can click on the step (right to the red `break` button) to forward the request:
 
-![HTTP request details with 'Request' and 'Break' buttons, method, header, and body dropdowns.](https://academy.hackthebox.com/storage/modules/110/zap_intercept_page.png)
+![HTTP request details with 'Request' and 'Break' buttons, method, header, and body dropdowns.](images/module-110-016.png)
 
 ZAP also has a powerful feature called `Heads Up Display (HUD)`, which allows us to control most of the main ZAP features from right within the pre-configured browser. We can enable the `HUD` by clicking its button at the end of the top menu bar:
 
-![Toolbar with icons, 'Standard Mode' dropdown, and 'Sites' section with a plus icon.](https://academy.hackthebox.com/storage/modules/110/zap_enable_HUD.jpg)
+![Toolbar with icons, 'Standard Mode' dropdown, and 'Sites' section with a plus icon.](images/module-110-015.jpg)
 
 The HUD has many features that we will cover as we go through the module. For intercepting requests, we can click on the second button from the top on the left pane to turn request interception on:
 
-![Ping interface with IP input '127.0.0.0', Ping button, and side controls for sites, start, and status indicators.](https://academy.hackthebox.com/storage/modules/110/zap_hud_break.jpg)
+![Ping interface with IP input '127.0.0.0', Ping button, and side controls for sites, start, and status indicators.](images/module-110-023.jpg)
 
 <div class="card bg-light">
     <div class="card-body">
@@ -253,7 +253,7 @@ The HUD has many features that we will cover as we go through the module. For in
 
 Now, once we refresh the page or send another request, the HUD will intercept the request and  present it to us for action:
 
-![HTTP Message dialog showing request details with buttons: Step, Continue, Drop.](https://academy.hackthebox.com/storage/modules/110/zap_hud_break_request.png)
+![HTTP Message dialog showing request details with buttons: Step, Continue, Drop.](images/module-110-022.png)
 
 We can choose to `step` to send the request and examine its response and break any further requests, or we can choose to `continue` and let the page send the remaining requests. The `step` button is helpful when we want to examine every step of the page's functionality, while `continue` is useful when we are only interested in a single request and can forward the remaining requests once we reach our target request.
 
@@ -306,11 +306,11 @@ Typically, we can only specify numbers in the `IP` field using the browser, as t
 
 So, let us change the `ip` parameter's value from `1` to `;ls;` and see how the web application handles our input:
 
-![HTTP Message dialog showing POST request details with buttons: Step, Continue, Drop.](https://academy.hackthebox.com/storage/modules/110/ping_manipulate_request.png)
+![HTTP Message dialog showing POST request details with buttons: Step, Continue, Drop.](images/module-110-021.png)
 
 Once we click continue/forward, we will see that the response changed from the default ping output to the `ls` output, meaning that we successfully manipulated the request to inject our command:
 
-![List of files: flag.txt, index.html, node_modules, package-lock.json, public, server.js.](https://academy.hackthebox.com/storage/modules/110/ping_inject.jpg)
+![List of files: flag.txt, index.html, node_modules, package-lock.json, public, server.js.](images/module-110-020.jpg)
 
 This demonstrates a basic example of how request interception and manipulation can help with testing web applications for various vulnerabilities, which is considered an essential tool to be able to test different web applications effectively.
 
@@ -336,11 +336,11 @@ In our previous exercise, the `IP` field only allowed us to input numeric values
 
 In Burp, we can enable response interception by going to (`Proxy>Proxy settings`) and enabling `Intercept Response` under `Response interception rules`:
 
-![Intercept Server Responses settings with rules table and buttons: Add, Edit, Remove, Up, Down. Options to intercept responses and update Content-Length header.](https://academy.hackthebox.com/storage/modules/110/response_interception_enable.png)
+![Intercept Server Responses settings with rules table and buttons: Add, Edit, Remove, Up, Down. Options to intercept responses and update Content-Length header.](images/module-110-026.png)
 
 After that, we can enable request interception once more and refresh the page with [`CTRL+SHIFT+R`] in our browser (to force a full refresh). When we go back to Burp, we should see the intercepted request, and we can click on `forward`. Once we forward the request, we'll see our intercepted response:
 
-![HTML form code for 'Ping Your IP' with input field for IP address, type number, min 1, max 255, maxlength 3.](https://academy.hackthebox.com/storage/modules/110/response_intercept_response_1_1.jpg)
+![HTML form code for 'Ping Your IP' with input field for IP address, type number, min 1, max 255, maxlength 3.](images/module-110-025.jpg)
 
 Let's try changing the `type="number"` on line 27 to `type="text"`, which should enable us to write any value we want. We will also change the `maxlength="3"` to `maxlength="100"` so we can enter longer input:
 
@@ -352,7 +352,7 @@ Let's try changing the `type="number"` on line 27 to `type="text"`, which should
 
 Now, once we click on `forward` again, we can go back to Firefox to examine the edited response:
 
-![Ping interface with IP input '127.0.0.0' and 'Ping' button.](https://academy.hackthebox.com/storage/modules/110/response_intercept_response_2.jpg)
+![Ping interface with IP input '127.0.0.0' and 'Ping' button.](images/module-110-031.jpg)
 
 As we can see, we could change the way the page is rendered by the browser and can now input any value we want. We may use the same technique to persistently enable any disabled HTML buttons by modifying their HTML code.
 
@@ -368,27 +368,27 @@ As we can see, we could change the way the page is rendered by the browser and c
 
 Let's try to see how we can do the same with ZAP. As we saw in the previous section, when our requests are intercepted by ZAP, we can click on `Step`, and it will send the request and automatically intercept the response:
 
-![HTTP Message dialog showing response headers and HTML form code with buttons: Step, Continue, Drop.](https://academy.hackthebox.com/storage/modules/110/zap_response_intercept_response.jpg)
+![HTTP Message dialog showing response headers and HTML form code with buttons: Step, Continue, Drop.](images/module-110-024.jpg)
 
 Once we make the same changes we previously did and click on `Continue`, we will see that we can also use any input value:
 
-![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites and status.](https://academy.hackthebox.com/storage/modules/110/ZAP_edit_response.jpg)
+![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites and status.](images/module-110-030.jpg)
 
 However, ZAP HUD also has another powerful feature that can help us in cases like this. While in many instances we may need to intercept the response to make custom changes, if all we wanted was to enable disabled input fields or show hidden input fields, then we can click on the third button on the left (the light bulb icon), and it will enable/show these fields without us having to intercept the response or refresh the page.
 
 For example, the below web application has the `IP` input field disabled:
 
-![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites and status.](https://academy.hackthebox.com/storage/modules/110/ZAP_disabled_field.jpg)
+![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites and status.](images/module-110-029.jpg)
 
 In these cases, we can click on the `Show/Enable` button, and it will enable the button for us, and we can interact with it to add our input:
 
-![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites and status.](https://academy.hackthebox.com/storage/modules/110/ZAP_enable_field.jpg)
+![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites and status.](images/module-110-028.jpg)
 
 We can similarly use this feature to show all hidden fields or buttons. `Burp` also has a similar feature, which we can enable under `Proxy>Proxy settings>Response modification rules`, then select one of the options, like `Unhide hidden form fields`.
 
 Another similar feature is the `Comments` button, which will indicate the positions where there are HTML comments that are usually only visible in the source code. We can click on the `+` button on the left pane and select `Comments` to add the `Comments` button, and once we click on it, the `Comments` indicators should be shown. For example, the below screenshot shows an indicator for a position that has a comment, and hovering over it with our cursor shows the comment's content:
 
-![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites, status, and comments.](https://academy.hackthebox.com/storage/modules/110/ZAP_show_comments.jpg)
+![Ping interface with IP input '127.0.0.0' and 'Ping' button, side controls for sites, status, and comments.](images/module-110-027.jpg)
 
 Being able to modify how the web page looks makes it much easier for us to perform web application penetration testing in certain scenarios instead of having to send our input through an intercepted request. Next, we will see how we can automate this process to modify our changes in the response automatically so we don't have to keep intercepting and manually changing the responses.
 
@@ -408,7 +408,7 @@ Let us start with an example of automatic request modification. We can choose to
 
 We can go to (`Proxy>Proxy settings>HTTP match and replace rules`) and click on `Add` in Burp. As the screenshot below shows, we will set the following options:
 
-![Match/replace rule dialog for request header, matching '^User-Agent.\*$', replacing with 'User-Agent: HackTheBox Agent 1.0', regex enabled, OK and Cancel buttons.](https://academy.hackthebox.com/storage/modules/110/burp_match_replace_user_agent_1.png)
+![Match/replace rule dialog for request header, matching '^User-Agent.\*$', replacing with 'User-Agent: HackTheBox Agent 1.0', regex enabled, OK and Cancel buttons.](images/module-110-037.png)
 
 |||
 |-|-|
@@ -419,13 +419,13 @@ We can go to (`Proxy>Proxy settings>HTTP match and replace rules`) and click on�
 
 Once we enter the above options and click `Ok`, our new Match and Replace option will be added and enabled and will start automatically replacing the `User-Agent` header in our requests with our new User-Agent. We can verify that by visiting any website using the pre-configured Burp browser and reviewing the intercepted request. We will see that our User-Agent has indeed been automatically replaced:
 
-![HTTP request details with 'User-Agent: HackTheBox Agent 1.0', buttons: Forward, Drop, Intercept is on, Action, Open Browser.](https://academy.hackthebox.com/storage/modules/110/burp_match_replace_user_agent_2.png)
+![HTTP request details with 'User-Agent: HackTheBox Agent 1.0', buttons: Forward, Drop, Intercept is on, Action, Open Browser.](images/module-110-036.png)
 
 #### ZAP Replacer
 
 ZAP has a similar feature called `Replacer`, which we can access by pressing [`CTRL+R`] or clicking on `Replacer` in ZAP's options menu. It is fairly similar to what we did above, so we can click on `Add` and add the same options we used earlier:
 
-![Rule settings for 'HTB User-Agent', matching 'User-Agent' in request header, replacing with 'HackTheBox Agent 1.0', enabled, Save and Cancel buttons.](https://academy.hackthebox.com/storage/modules/110/zap_match_replace_user_agent_1.png)
+![Rule settings for 'HTB User-Agent', matching 'User-Agent' in request header, replacing with 'HackTheBox Agent 1.0', enabled, Save and Cancel buttons.](images/module-110-035.png)
 - `Description`: `HTB User-Agent`.
 - `Match Type`: `Request Header (will add if not present)`.
 - `Match String`: `User-Agent`. We can select the header we want from the drop-down menu, and ZAP will replace its value.
@@ -438,7 +438,7 @@ ZAP also provides the option to set the `Initiators`, which we can access by cli
 
 We can now enable request interception by pressing [`CTRL+B`], then can visit any page in the pre-configured ZAP browser:
 
-![HTTP request details with 'User-Agent: HackTheBox Agent 1.0' highlighted.](https://academy.hackthebox.com/storage/modules/110/zap_match_replace_user_agent_2.png)
+![HTTP request details with 'User-Agent: HackTheBox Agent 1.0' highlighted.](images/module-110-034.png)
 
 -----------------
 
@@ -448,7 +448,7 @@ The same concept can be used with HTTP responses as well. In the previous sectio
 
 Let us go back to (`Proxy>Options>Match and Replace`) in Burp to add another rule. This time we will use the type of `Response body` since the change we want to make exists in the response's body and not in its headers. In this case, we do not have to use regex as we know the exact string we want to replace, though it is possible to use regex to do the same thing if we prefer.
 
-![Match/replace rule dialog for response body, matching 'type="number"', replacing with 'type="text"', OK and Cancel buttons.](https://academy.hackthebox.com/storage/modules/110/burp_match_replace_response_1.png)
+![Match/replace rule dialog for response body, matching 'type="number"', replacing with 'type="text"', OK and Cancel buttons.](images/module-110-033.png)
 - `Type`: `Response body`.
 - `Match`: `type="number"`.
 - `Replace`: `type="text"`.
@@ -458,7 +458,7 @@ Try adding another rule to change `maxlength="3"` to `maxlength="100"`.
 
 Now, once we refresh the page with [`CTRL+SHIFT+R`], we'll see that we can add any input to the input field, and this should persist between page refreshes as well:
 
-![Ping interface with IP input '127.0.0.0' and 'Ping' button.](https://academy.hackthebox.com/storage/modules/110/burp_match_replace_response_2.jpg)
+![Ping interface with IP input '127.0.0.0' and 'Ping' button.](images/module-110-032.jpg)
 
 We can now click on `Ping`, and our command injection should work without intercepting and modifying the request.
 
@@ -507,11 +507,11 @@ Request repeating allows us to resend any web request that has previously gone t
 
 To start, we can view the HTTP requests history in `Burp` at (`Proxy>HTTP History`):
 
-![Proxy HTTP history showing requests with methods POST and GET, status codes, and details like URL, MIME type, and IP address.](https://academy.hackthebox.com/storage/modules/110/burp_history_tab.png)
+![Proxy HTTP history showing requests with methods POST and GET, status codes, and details like URL, MIME type, and IP address.](images/module-110-045.png)
 
 In `ZAP` HUD, we can find it in the bottom History pane or ZAP's main UI at the bottom `History` tab as well:
 
-![WebSockets history showing requests with methods POST and GET, status 200, and URLs, with filter option.](https://academy.hackthebox.com/storage/modules/110/zap_history_tab.jpg)
+![WebSockets history showing requests with methods POST and GET, status 200, and URLs, with filter option.](images/module-110-044.jpg)
 
 Both tools also provide filtering and sorting options for requests history, which may be helpful if we deal with a huge number of requests and want to locate a specific request. `Try to see how filters work on both tools.`
 
@@ -524,10 +524,10 @@ Both tools also provide filtering and sorting options for requests history, whic
 If we click on any request in the history in either tool, its details will be shown:
 
 `Burp`:
-![Request and response details: POST to /ping with headers and IP, response 200 OK with ping statistics.](https://academy.hackthebox.com/storage/modules/110/burp_history_details.png)
+![Request and response details: POST to /ping with headers and IP, response 200 OK with ping statistics.](images/module-110-043.png)
 
 `ZAP`:
-![Request and response details: POST to /ping with headers and IP, response 200 OK with ping statistics.](https://academy.hackthebox.com/storage/modules/110/zap_history_details.png)
+![Request and response details: POST to /ping with headers and IP, response 200 OK with ping statistics.](images/module-110-042.png)
 
 <div class="card bg-light">
     <div class="card-body">
@@ -543,7 +543,7 @@ If we click on any request in the history in either tool, its details will be sh
 
 Once we locate the request we want to repeat, we can click [`CTRL+R`] in Burp to send it to the `Repeater` tab, and then we can either navigate to the `Repeater` tab or click [`CTRL+SHIFT+R`] to go to it directly. Once in `Repeater`, we can click on `Send` to send the request:
 
-![Repeater tab showing request and response: POST to /ping with headers and IP, response 200 OK with ping statistics.](https://academy.hackthebox.com/storage/modules/110/burp_repeater_request.png)
+![Repeater tab showing request and response: POST to /ping with headers and IP, response 200 OK with ping statistics.](images/module-110-041.png)
 
 <div class="card bg-light">
     <div class="card-body">
@@ -554,7 +554,7 @@ Once we locate the request we want to repeat, we can click [`CTRL+R`] in Burp to
 #### ZAP
 
 In ZAP, once we locate our request, we can right-click on it and select `Open/Resend with Request Editor`, which would open the request editor window, and allow us to resend the request with the `Send` button to send our request:
-![Request and response details: POST to /ping with headers and IP, response 200 OK with ping statistics, time and length info.](https://academy.hackthebox.com/storage/modules/110/zap_repeater_request.png)
+![Request and response details: POST to /ping with headers and IP, response 200 OK with ping statistics, time and length info.](images/module-110-040.png)
 
 We can also see the `Method` drop-down menu, allowing us to quickly switch the request method to any other HTTP method.
 
@@ -566,11 +566,11 @@ We can also see the `Method` drop-down menu, allowing us to quickly switch the r
 
 We can achieve the same result within the pre-configured browser with `ZAP HUD`. We can locate the request in the bottom History pane, and once we click on it, the `Request Editor` window will show, allowing us to resend it. We can select `Replay in Console` to get the response in the same `HUD` window, or select `Replay in Browser` to see the response rendered in the browser:
 
-![HTTP Message dialog showing POST request details with options to Active Scan, Replay in Console, and Replay in Browser.](https://academy.hackthebox.com/storage/modules/110/zap_hud_resend.png)
+![HTTP Message dialog showing POST request details with options to Active Scan, Replay in Console, and Replay in Browser.](images/module-110-039.png)
 
 So, let us try to modify our request and send it. In all three options (`Burp Repeater`, `ZAP Request Editor`, and `ZAP HUD`), we see that the requests are modifiable, and we can select the text we want to change and replace it with whatever we want, and then click the `Send` button to send it again:
 
-![Repeater tab showing POST request to /ping with headers and command injection, response 200 OK with ping statistics and file list.](https://academy.hackthebox.com/storage/modules/110/burp_repeat_modify.png)
+![Repeater tab showing POST request to /ping with headers and command injection, response 200 OK with ping statistics and file list.](images/module-110-038.png)
 
 As we can see, we could easily modify the command and instantly get its output by using Burp `Repeater`. Try doing the same in `ZAP Request Editor` and `ZAP HUD` to see how they work.
 

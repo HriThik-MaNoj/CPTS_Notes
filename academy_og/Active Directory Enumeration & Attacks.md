@@ -187,7 +187,7 @@ Many of the module sections require tools such as open-source scripts or precomp
 We are Penetration Testers working for `CAT-5 Security`. After a few successful engagements shadowing with the team, the more senior members want to see how well we can do starting an assessment on our own. The team lead sent us the following email detailing what we need to accomplish.
   
 #### Tasking Email 
-![Email from Jack Smith to Pentesting Interns about an assessment on Inlanefreight. Tasks include domain enumeration, credential discovery, lateral movement, privilege escalation, and acquiring Domain Admin credentials. The findings will guide further actions. Signed by J. Smith, Red Team Lead at Cat5 Security LLC. Includes a leadership quote.](https://academy.hackthebox.com/storage/modules/143/scenario-email.png)
+![Email from Jack Smith to Pentesting Interns about an assessment on Inlanefreight. Tasks include domain enumeration, credential discovery, lateral movement, privilege escalation, and acquiring Domain Admin credentials. The findings will guide further actions. Signed by J. Smith, Red Team Lead at Cat5 Security LLC. Includes a leadership quote.](images/module-143-001.png)
   
 
 This module will allow us to practice our skills (both prior and newly minted) with these tasks. The final assessment for this module is the execution of `two` internal penetration tests against the company Inlanefreight. During these assessments, we will work through an internal penetration test simulating starting from an external breach position and a second one beginning with an attack box inside the internal network as clients often request. Completing the skills assessments signifies the successful completion of the tasks mentioned in the scoping document and tasking email above. In doing so, we will demonstrate a firm grasp of many automated and manual AD attack and enumeration concepts, knowledge of and experience with a wide array of tools, and the ability to interpret data gathered from an AD environment to make critical decisions to advance the assessment. The content in this module is meant to cover core enumeration concepts necessary for anyone to be successful in performing internal penetration tests in Active Directory environments. We will also cover many of the most common attack techniques in great depth while working through some more advanced concepts as a primer for AD-focused material that will be covered in more advanced modules.
@@ -296,7 +296,7 @@ Our list of data points above can be gathered in many different ways. There are 
 
 ### Finding Address Spaces
 
-![Welcome to Hurricane Electric BGP Toolkit. Displays visitor IP 72.185.168.230, announced as 72.184.0.0/14, ISP AS33363 (Charter Communications).](https://academy.hackthebox.com/storage/modules/143/bgp-toolkit.png)
+![Welcome to Hurricane Electric BGP Toolkit. Displays visitor IP 72.185.168.230, announced as 72.184.0.0/14, ISP AS33363 (Charter Communications).](images/module-143-009.png)
 
 The `BGP-Toolkit` hosted by [Hurricane Electric](http://he.net/) is a fantastic resource for researching what address blocks are assigned to an organization and what ASN they reside within. Just punch in a domain or IP address, and the toolkit will search for any results it can. We can glean a lot from this info. Many large corporations will often self-host their infrastructure, and since they have such a large footprint, they will have their own ASN. This will typically not be the case for smaller organizations or fledgling companies. As you research, keep this in mind since smaller organizations will often host their websites and other infrastructure in someone else's space (Cloudflare, Google Cloud, AWS, or Azure, for example). Understanding where that infrastructure resides is extremely important for our testing. We have to ensure we are not interacting with infrastructure out of our scope. If we are not careful while pentesting against a smaller organization, we could end up inadvertently causing harm to another organization sharing that infrastructure. You have an agreement to test with the customer, not with others on the same server or with the provider. Questions around self-hosted or 3rd party managed infrastructure should be handled during the scoping process and be clearly listed in any scoping documents you receive.
 
@@ -307,7 +307,7 @@ In some cases, your client may need to get written approval from a third-party h
 DNS is a great way to validate our scope and find out about reachable hosts the customer did not disclose in their scoping document. Sites like [domaintools](https://whois.domaintools.com/), and [viewdns.info](https://viewdns.info/) are great spots to start. We can get back many records and other data ranging from DNS resolution to testing for DNSSEC and if the site is accessible in more restricted countries. Sometimes we may find additional hosts out of scope, but look interesting. In that case, we could bring this list to our client to see if any of them should indeed be included in the scope. We may also find interesting subdomains that were not listed in the scoping documents, but reside on in-scope IP addresses and therefore are fair game. 
 
 #### Viewdns.info
-![ViewDNS.info tools page with options for Reverse IP Lookup, Reverse Whois Lookup, IP History, DNS Report, Reverse MX Lookup, Reverse NS Lookup, IP Location Finder, Chinese Firewall Test, DNS Propagation Checker, Is My Site Down, Iran Firewall Test, and Domain/IP Whois.](https://academy.hackthebox.com/storage/modules/143/viewdnsinfo.png)
+![ViewDNS.info tools page with options for Reverse IP Lookup, Reverse Whois Lookup, IP History, DNS Report, Reverse MX Lookup, Reverse NS Lookup, IP Location Finder, Chinese Firewall Test, DNS Propagation Checker, Is My Site Down, Iran Firewall Test, and Domain/IP Whois.](images/module-143-008.png)
 
 This is also a great way to validate some of the data found from our IP/ASN searches. Not all information about the domain found will be current, and running checks that can validate what we see is always good practice. 
 
@@ -316,7 +316,7 @@ This is also a great way to validate some of the data found from our IP/ASN sear
 Social media can be a treasure trove of interesting data that can clue us in to how the organization is structured, what kind of equipment they operate, potential software and security implementations, their schema, and more. On top of that list are job-related sites like LinkedIn, Indeed.com, and Glassdoor. Simple job postings often reveal a lot about a company. For example, take a look at the job listing below. It's for a `SharePoint Administrator` and can key us in on many things. We can tell from the listing that the company has been using SharePoint for a while and has a mature program since they are talking about security programs, backup & disaster recovery, and more. What is interesting to us in this posting is that we can see the company likely uses SharePoint 2013 and SharePoint 2016. That means they may have upgraded in place, potentially leaving vulnerabilities in play that may not exist in newer versions. This also means we may run into different versions of SharePoint during our engagements.
   
 ### Sharepoint Admin Job Listing  
-![Job description for a remote SharePoint Administrator with 8+ years experience, requiring skills in application deployment, SharePoint, Azure, PHP, teamwork, and enterprise applications.](https://academy.hackthebox.com/storage/modules/143/spjob2.png)  
+![Job description for a remote SharePoint Administrator with 8+ years experience, requiring skills in application deployment, SharePoint, Azure, PHP, teamwork, and enterprise applications.](images/module-143-007.png)  
   
 Don't discount public information such as job postings or social media. You can learn a lot about an organization just from what they post, and a well-intentioned post could disclose data relevant to us as penetration testers.
 
@@ -339,7 +339,7 @@ Keeping in mind that our goal is to understand our target better, we are looking
 We have already covered quite a few concepts pertaining to enumeration. Let's start putting it all together. We will practice our enumeration tactics on the `inlanefreight.com` domain without performing any heavy scans (such as Nmap or vulnerability scans which are out of scope). We will start first by checking our Netblocks data and seeing what we can find.
 
 #### Check for ASN/IP & Domain Data
-![DNS info for inlanefreight.com: Start of Authority with AWS DNS, nameservers ns1 and ns2.inlanefreight.com, mail exchanger mail1.inlanefreight.com, A record 134.209.24.248, and AAAA record 2A03:B0C0:1:E0::32C:B001.](https://academy.hackthebox.com/storage/modules/143/BGPhe-inlane.png)
+![DNS info for inlanefreight.com: Start of Authority with AWS DNS, nameservers ns1 and ns2.inlanefreight.com, mail exchanger mail1.inlanefreight.com, A record 134.209.24.248, and AAAA record 2A03:B0C0:1:E0::32C:B001.](images/module-143-006.png)
 
 From this first look, we have already gleaned some interesting info. BGP.he is reporting:
 - IP Address: 134.209.24.248  
@@ -349,7 +349,7 @@ From this first look, we have already gleaned some interesting info. BGP.he is r
 For now, this is what we care about from its output. Inlanefreight is not a large corporation, so we didn't expect to find that it had its own ASN. Now let's validate some of this information.
 
 #### Viewdns Results
-![Reverse IP results for inlanefreight.com showing two domains: inlanefreight.com and lycjg.us, with last resolved dates.](https://academy.hackthebox.com/storage/modules/143/viewdns-results.png)
+![Reverse IP results for inlanefreight.com showing two domains: inlanefreight.com and lycjg.us, with last resolved dates.](images/module-143-005.png)
 
 In the request above, we utilized `viewdns.info` to validate the IP address of our target. Both results match, which is a good sign. Now let's try another route to validate the two nameservers in our results. 
 
@@ -379,12 +379,12 @@ Inlanefreight is a fictitious company that we are using for this module, so ther
 The first check we ran was looking for any documents. Using `filetype:pdf inurl:inlanefreight.com` as a search, we are looking for PDFs. 
 
 #### Hunting For Files
-![Google search result for 'filetype:pdf inurl:inlanefreight.com' showing a PDF titled 'corporate goals and strategy - Inlanefreight' from inlanefreight.com.](https://academy.hackthebox.com/storage/modules/143/google-dorks.png)  
+![Google search result for 'filetype:pdf inurl:inlanefreight.com' showing a PDF titled 'corporate goals and strategy - Inlanefreight' from inlanefreight.com.](images/module-143-004.png)  
 
 One document popped up, so we need to ensure we note the document and its location and download a copy locally to dig through. It is always best to save files, screenshots, scan output, tool output, etc., as soon as we come across them or generate them. This helps us keep as comprehensive a record as possible and not risk forgetting where we saw something or losing critical data. Next, let's look for any email addresses we can find.
 
 #### Hunting E-mail Addresses
-![Google search for 'intext:"@inlanefreight.com" inurl:inlanefreight.com' showing results for Inlanefreight's homepage and contact page.](https://academy.hackthebox.com/storage/modules/143/intext-dork.png)
+![Google search for 'intext:"@inlanefreight.com" inurl:inlanefreight.com' showing results for Inlanefreight's homepage and contact page.](images/module-143-003.png)
 
 Using the dork `intext:"@inlanefreight.com" inurl:inlanefreight.com`, we are looking for any instance that appears similar to the end of an email address on the website. One promising result came up with a contact page. When we look at the page (pictured below), we can see a large list of employees and contact info for them. This information can be helpful since we can determine that these people are at least most likely active and still working with the company.
 
@@ -393,7 +393,7 @@ Using the dork `intext:"@inlanefreight.com" inurl:inlanefreight.com`, we are loo
 Browsing the [contact page](https://www.inlanefreight.com/index.php/contact/), we can see several emails for staff in different offices around the globe. We now have an idea of their email naming convention (first.last) and where some people work in the organization. This could be handy in later password spraying attacks or if social engineering/phishing were part of our engagement scope.
 
 
-![Contact information for Inlanefreight sales executives in the United States: Emma Williams, John Smith, and David Jones with their respective email addresses.](https://academy.hackthebox.com/storage/modules/143/ilfreightemails.png)
+![Contact information for Inlanefreight sales executives in the United States: Emma Williams, John Smith, and David Jones with their respective email addresses.](images/module-143-002.png)
 
 
 
@@ -525,12 +525,12 @@ Scroll to the bottom, spawn the target, connect to the Linux attack host using `
 ```
 
 #### Wireshark Output
-![Wireshark capture showing ARP requests from VMware sources to broadcast, querying IP addresses in the 172.16.5.x range.](https://academy.hackthebox.com/storage/modules/143/ea-wireshark.png)
+![Wireshark capture showing ARP requests from VMware sources to broadcast, querying IP addresses in the 172.16.5.x range.](images/module-143-013.png)
 - ARP packets make us aware of the hosts: 172.16.5.5, 172.16.5.25 172.16.5.50, 172.16.5.100, and 172.16.5.125.  
 
 <br>
 
-![Wireshark window showing MDNS queries from source IP 172.16.5.125 to destination 224.0.0.251, protocol MDNS, querying 'AAAA ACADEMY-EA-WEB0.local'.](https://academy.hackthebox.com/storage/modules/143/ea-wireshark-mdns.png)
+![Wireshark window showing MDNS queries from source IP 172.16.5.125 to destination 224.0.0.251, protocol MDNS, querying 'AAAA ACADEMY-EA-WEB0.local'.](images/module-143-012.png)
 
 - MDNS makes us aware of the ACADEMY-EA-WEB01 host.  
 
@@ -545,7 +545,7 @@ sudo tcpdump -i ens224
 ```
 
 
-![GIF showcasing the traffic seen by tcpdump on the ens224 interface.](https://academy.hackthebox.com/storage/modules/143/tcpdump-example.png)
+![GIF showcasing the traffic seen by tcpdump on the ens224 interface.](images/module-143-011.png)
 
 There is no one right way to listen and capture network traffic. There are plenty of tools that can process network data. Wireshark and tcpdump are just a few of the easiest to use and most widely known. Depending on the host you are on, you may already have a network monitoring tool built-in, such as `pktmon.exe`, which was added to all editions of Windows 10. As a note for testing, it's always a good idea to save the PCAP traffic you capture. You can review it again later to look for more hints, and it makes for great additional information to include while writing your reports.  
 
@@ -561,7 +561,7 @@ sudo responder -I ens224 -A
 ```
 
 #### Responder Results
-![GIF showcasing and analyzing the traffic captured by responder on the ens224 interface.](https://academy.hackthebox.com/storage/modules/143/responder-example.gif)  
+![GIF showcasing and analyzing the traffic captured by responder on the ens224 interface.](images/module-143-010.gif)  
 
 As we start Responder with passive analysis mode enabled, we will see requests flow in our session. Notice below that we found a few unique hosts not previously mentioned in our Wireshark captures. It's worth noting these down as we are starting to build a nice target list of IPs and DNS hostnames. 
 
@@ -1072,7 +1072,7 @@ sudo responder -I ens224
 
 #### Capturing with Responder
 
-![GIF showcasing the capture of an authentication requests in responder on the ens224 interface.](https://academy.hackthebox.com/storage/modules/143/responder_hashes.png)
+![GIF showcasing the capture of an authentication requests in responder on the ens224 interface.](images/module-143-014.png)
 
 
 Typically we should start Responder and let it run for a while in a tmux window while we perform other enumeration tasks to maximize the number of hashes that we can obtain. Once we are ready, we can pass these hashes to Hashcat using hash mode `5600` for NTLMv2 hashes that we typically obtain with Responder. We may at times obtain NTLMv1 hashes and other types of hashes and can consult the [Hashcat example hashes](https://hashcat.net/wiki/doku.php?id=example_hashes) page to identify them and find the proper hash mode. If we ever obtain a strange or unknown hash, this site is a great reference to help identify it. Check out the [Cracking Passwords With Hashcat](https://academy.hackthebox.com/course/preview/cracking-passwords-with-hashcat) module for an in-depth study of Hashcat's various modes and how to attack a wide variety of hash types. 
@@ -1228,7 +1228,7 @@ socket in a way forbidden by its access permissions" $HTTP_listener.Start()
 ```
 We can see that we immediately begin getting LLMNR and mDNS requests. The below animation shows the tool in action. 
 
-![GIF showcasing the usage of the Inveigh PowerShell module in a PowerShell terminal.](https://academy.hackthebox.com/storage/modules/143/inveigh_pwsh.png) 
+![GIF showcasing the usage of the Inveigh PowerShell module in a PowerShell terminal.](images/module-143-020.png) 
 
 ---
 
@@ -1366,7 +1366,7 @@ IP Address                        Host                              Username    
 
 Let's start Inveigh and then interact with the output a bit to put it all together.
 
-![GIF showcasing the usage of the Inveigh executable file.](https://academy.hackthebox.com/storage/modules/143/inveigh_csharp.png)
+![GIF showcasing the usage of the Inveigh executable file.](images/module-143-019.png)
 
 
 ---
@@ -1380,12 +1380,12 @@ There are a few ways to mitigate this attack. To ensure that these spoofing atta
 
 We can disable LLMNR in Group Policy by going to Computer Configuration --> Administrative Templates --> Network --> DNS Client and enabling "Turn OFF Multicast Name Resolution."
  
-![Group Policy Management Editor showing DNS Client settings, 'Turn off multicast name resolution' not configured.](https://academy.hackthebox.com/storage/modules/143/llmnr_disable.png)
+![Group Policy Management Editor showing DNS Client settings, 'Turn off multicast name resolution' not configured.](images/module-143-018.png)
 
 NBT-NS cannot be disabled via Group Policy but must be disabled locally on each host. We can do this by opening `Network and Sharing Center` under `Control Panel`, clicking on `Change adapter settings`, right-clicking on the adapter to view its properties, selecting `Internet Protocol Version 4 (TCP/IPv4)`, and clicking the `Properties` button, then clicking on `Advanced` and selecting the `WINS` tab and finally selecting `Disable NetBIOS over TCP/IP`.
 
 
-![Advanced TCP/IP Settings window showing WINS addresses, LMHOSTS lookup enabled, and NetBIOS settings options.](https://academy.hackthebox.com/storage/modules/143/disable_nbtns.png)
+![Advanced TCP/IP Settings window showing WINS addresses, LMHOSTS lookup enabled, and NetBIOS settings options.](images/module-143-017.png)
 
 While it is not possible to disable NBT-NS directly via GPO, we can create a PowerShell script under Computer Configuration --> Windows Settings --> Script (Startup/Shutdown) --> Startup with something like the following:
 
@@ -1398,7 +1398,7 @@ Get-ChildItem $regkey |foreach { Set-ItemProperty -Path "$regkey\$($_.pschildnam
 In the Local Group Policy Editor, we will need to double click on `Startup`, choose the `PowerShell Scripts` tab, and select "For this GPO, run scripts in the following order" to `Run Windows PowerShell scripts first`, and then click on `Add` and choose the script. For these changes to occur, we would have to either reboot the target system or restart the network adapter. 
 
 
-![Local Group Policy Editor showing startup scripts with a PowerShell script path 'C:\Users\ab_adm...' configured.](https://academy.hackthebox.com/storage/modules/143/nbtns_gpo.png)
+![Local Group Policy Editor showing startup scripts with a PowerShell script path 'C:\Users\ab_adm...' configured.](images/module-143-016.png)
 
 To push this out to all hosts in a domain, we could create a GPO using `Group Policy Management` on the Domain Controller and host the script on the SYSVOL share in the scripts folder and then call it via its UNC path such as:
 
@@ -1406,7 +1406,7 @@ To push this out to all hosts in a domain, we could create a GPO using `Group Po
 
 Once the GPO is applied to specific OUs and those hosts are restarted, the script will run at the next reboot and disable NBT-NS, provided that the script still exists on the SYSVOL share and is accessible by the host over the network. 
 
-![Group Policy Management Editor showing startup script 'disable-lbtbns.ps1' configured for PowerShell.](https://academy.hackthebox.com/storage/modules/143/nbtns_gpo_dc.png)
+![Group Policy Management Editor showing startup script 'disable-lbtbns.ps1' configured for PowerShell.](images/module-143-015.png)
 
 Other mitigations include filtering network traffic to block LLMNR/NetBIOS traffic and enabling SMB Signing to prevent NTLM relay attacks. Network intrusion detection and prevention systems can also be used to mitigate this activity, while network segmentation can be used to isolate hosts that require LLMNR or NetBIOS enabled to operate correctly. 
 
@@ -2860,7 +2860,7 @@ The above will provide us with a bound connection, and we should be greeted with
 
 #### SMB NULL Session with rpcclient
 
-![GIF showcasing the usage of rpcclient with SMB NULL session.](https://academy.hackthebox.com/storage/modules/143/rpcclient.png)
+![GIF showcasing the usage of rpcclient with SMB NULL session.](images/module-143-025.png)
 
 From here, we can begin to enumerate any number of different things. Let's start with domain users.  
 
@@ -2955,7 +2955,7 @@ To connect to a host with psexec.py, we need credentials for a user with local a
 psexec.py inlanefreight.local/wley:'transporter@4'@172.16.5.125  
 ```
 
-![GIF showcasing the usage of psexec.py, authenticating as the user wley.](https://academy.hackthebox.com/storage/modules/143/psexec-action.png)
+![GIF showcasing the usage of psexec.py, authenticating as the user wley.](images/module-143-024.png)
 
 Once we execute the psexec module, it drops us into the `system32` directory on the target host. We ran the `whoami` command to verify, and it confirmed that we landed on the host as `SYSTEM`. From here, we can perform almost any task on this host; anything from further enumeration to persistence and lateral movement. Let's give another Impacket module a try: `wmiexec.py`.
 
@@ -2971,7 +2971,7 @@ Wmiexec.py utilizes a semi-interactive shell where commands are executed through
 wmiexec.py inlanefreight.local/wley:'transporter@4'@172.16.5.5  
 ```
 
-![GIF showcasing the usage of wmiexec.py, authenticating as the user wley.](https://academy.hackthebox.com/storage/modules/143/wmiexec-action.png)
+![GIF showcasing the usage of wmiexec.py, authenticating as the user wley.](images/module-143-023.png)
 
 Note that this shell environment is not fully interactive, so each command issued will execute a new cmd.exe from WMI and execute your command. The downside of this is that if a vigilant defender checks event logs and looks at event ID [4688: A new process has been created](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4688), they will see a new process created to spawn cmd.exe and issue a command. This isn't always malicious activity since many organizations utilize WMI to administer computers, but it can be a tip-off in an investigation. In the image above, it's also apparent that the process is running under the context of user `wley` on the host, not as SYSTEM. Impacket is an immensely valuable tool that has plenty of use cases. We will see many other tools in the Impacket toolkit throughout the remainder of this module. As a pentester working with Windows hosts, this tool should always be in our arsenal. Let's move on to the next tool, `Windapsearch`. 
 
@@ -3196,13 +3196,13 @@ Next, we can type `bloodhound` from our Linux attack host when logged in using `
 Once all of the above is done, we should have the BloodHound GUI tool loaded with a blank slate. Now we need to upload the data. We can either upload each JSON file one by one or zip them first with a command such as `zip -r ilfreight_bh.zip *.json` and upload the Zip file. We do this by clicking the `Upload Data` button on the right side of the window (green arrow). When the file browser window pops up to select a file, choose the zip file (or each JSON file) (red arrow) and hit `Open`.
 
 #### Uploading the Zip File
-![BloodHound interface showing database info and file selection for 'BloodHound.zip' in Downloads folder.](https://academy.hackthebox.com/storage/modules/143/bh-injest.png)  
+![BloodHound interface showing database info and file selection for 'BloodHound.zip' in Downloads folder.](images/module-143-022.png)  
 
 Now that the data is loaded, we can use the Analysis tab to run queries against the database. These queries can be custom and specific to what you decide using [custom Cypher queries](https://hausec.com/2019/09/09/bloodhound-cypher-cheatsheet/). There are many great cheat sheets to help us here. We will discuss custom Cypher queries more in a later section. As seen below, we can use the built-in `Path Finding` queries on the `Analysis tab` on the `Left` side of the window.
 
 #### Searching for Relationships
 
-![BloodHound interface displaying pre-built analytics queries and a graph of Active Directory relationships.](https://academy.hackthebox.com/storage/modules/143/bh-analysis.png) 
+![BloodHound interface displaying pre-built analytics queries and a graph of Active Directory relationships.](images/module-143-021.png) 
 
 The query chosen to produce the map above was `Find Shortest Paths To Domain Admins`. It will give us any logical paths it finds through users/groups/hosts/ACLs/GPOs, etc., relationships that will likely allow us to escalate to Domain Administrator privileges or equivalent. This will be extremely helpful when planning our next steps for lateral movement through the network. Take some time to experiment with the various features: look at the `Database Info` tab after uploading data, search for a node such as `Domain Users` and, scroll through all of the options under the `Node Info` tab, check out the pre-built queries under the `Analysis` tab, many which are powerful and can quickly find various ways to domain takeover. Finally, experiment with some custom Cypher queries by selecting some interesting ones from the Cypher cheatsheet linked above, pasting them into the `Raw Query` box at the bottom, and hitting enter. You can also play with the `Settings` menu by clicking the gear icon on the right side of the screen and adjusting how nodes and edges are displayed, enable query debug mode, and enable dark mode. Throughout the remainder of this module, we will use BloodHound in various ways, but for a dedicated study on the BloodHound tool, check out the [Active Directory BloodHound](https://academy.hackthebox.com/course/preview/active-directory-bloodhound) module.
 
@@ -3826,13 +3826,13 @@ Now, let's check out a few pre-built queries in the `Analysis` tab. The query `F
 This query shows two hosts, one running Windows 7 and one running Windows Server 2008 (both of which are not "live" in our lab). Sometimes we will see hosts that are no longer powered on but still appear as records in AD. We should always validate whether they are "live" or not before making recommendations in our reports. We may write up a high-risk finding for Legacy Operating Systems or a best practice recommendation for cleaning up old records in AD. 
 
 #### Unsupported Operating Systems  
-![BloodHound interface showing node info for ACADEMY-EA-WS01.INLANEFREIGHT.LOCAL with details like sessions, reachable targets, and node properties.](https://academy.hackthebox.com/storage/modules/143/unsupported.png)
+![BloodHound interface showing node info for ACADEMY-EA-WS01.INLANEFREIGHT.LOCAL with details like sessions, reachable targets, and node properties.](images/module-143-027.png)
 
 We will often see users with local admin rights on their host (perhaps temporarily to install a piece of software, and the rights were never removed), or they occupy a high enough role in the organization to demand these rights (whether they require them or not). Other times we'll see excessive local admin rights handed out across the organization, such as multiple groups in the IT department with local admin over groups of servers or even the entire Domain Users group with local admin over one or more hosts. This can benefit us if we take over a user account with these rights over one or more machines. We can run the query `Find Computers where Domain Users are Local Admin` to quickly see if there are any hosts where all users have local admin rights. If this is the case, then any account we control can typically be used to access the host(s) in question, and we may be able to retrieve credentials from memory or find other sensitive data. 
 
 #### Local Admins  
 
-![BloodHound interface showing node info for DOMAIN USERS@INLANEFREIGHT.LOCAL with sessions, node properties, and connection to ACADEMY-EA-MS01.INLANEFREIGHT.LOCAL.](https://academy.hackthebox.com/storage/modules/143/local-admin.png)
+![BloodHound interface showing node info for DOMAIN USERS@INLANEFREIGHT.LOCAL with sessions, node properties, and connection to ACADEMY-EA-MS01.INLANEFREIGHT.LOCAL.](images/module-143-026.png)
 
 This is just a snapshot of the useful queries we can run. As we continue through this module, you will see several more that can be helpful in finding other weaknesses in the domain. For a more in-depth study on BloodHound, check out the module [Active Directory Bloodhound](https://academy.hackthebox.com/course/preview/active-directory-bloodhound). Take some time and try out each of the queries in the `Analysis` tab to become more familiar with the tool. It's also worth experimenting with [custom Cypher queries](https://hausec.com/2019/09/09/bloodhound-cypher-cheatsheet/) by pasting them into the `Raw Query` box at the bottom of the screen.
 
@@ -3878,12 +3878,12 @@ First, we'll cover a few basic environmental commands that can be used to give u
 |`echo %logonserver%` | Prints out the name of the Domain controller the host checks in with (ran from CMD-prompt) |  
 
 #### Basic Enumeration
-![GIF showcasing the commands in a PowerShell terminal from the table above.](https://academy.hackthebox.com/storage/modules/143/basic-enum.png)  
+![GIF showcasing the commands in a PowerShell terminal from the table above.](images/module-143-033.png)  
 
 The commands above will give us a quick initial picture of the state the host is in, as well as some basic networking and domain information. We can cover the information above with one command [systeminfo](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/systeminfo).
 
 #### Systeminfo
-![GIF showcasing the systeminfo command in a PowerShell terminal.](https://academy.hackthebox.com/storage/modules/143/systeminfo.png)  
+![GIF showcasing the systeminfo command in a PowerShell terminal.](images/module-143-032.png)  
 
 The `systeminfo` command, as seen above, will print a summary of the host's information for us in one tidy output. Running one command will generate fewer logs, meaning less of a chance we are noticed on the host by a defender. 
 
@@ -4023,12 +4023,12 @@ Script     2.0.0      PSReadline                          {Get-PSReadLineKeyHand
 We can now see that we are running an older version of PowerShell from the output above. Notice the difference in the version reported. It validates we have successfully downgraded the shell. Let's check and see if we are still writing logs. The primary place to look is in the `PowerShell Operational Log` found under `Applications and Services Logs > Microsoft > Windows > PowerShell > Operational`. All commands executed in our session will log to this file. The `Windows PowerShell` log located at `Applications and Services Logs > Windows PowerShell` is also a good place to check. An entry will be made here when we start an instance of PowerShell. In the image below, we can see the red entries made to the log from the current PowerShell session and the output of the last entry made at 2:12 pm when the downgrade is performed. It was the last entry since our session moved into a version of PowerShell no longer capable of logging. Notice that, that event corresponds with the last event in the `Windows PowerShell` log entries.
 
 #### Examining the Powershell Event Log
-![Event Viewer showing PowerShell operational logs with Event 4104 details, including script block creation and execution time.](https://academy.hackthebox.com/storage/modules/143/downgrade.png)
+![Event Viewer showing PowerShell operational logs with Event 4104 details, including script block creation and execution time.](images/module-143-031.png)
 
 With [Script Block Logging](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows?view=powershell-7.2) enabled, we can see that whatever we type into the terminal gets sent to this log. If we downgrade to PowerShell V2, this will no longer function correctly. Our actions after will be masked since Script Block Logging does not work below PowerShell 3.0. Notice above in the logs that we can see the commands we issued during a normal shell session, but it stopped after starting a new PowerShell instance in version 2. Be aware that the action of issuing the command `powershell.exe -version 2` within the PowerShell session will be logged. So evidence will be left behind showing that the downgrade happened, and a suspicious or vigilant defender may start an investigation after seeing this happen and the logs no longer filling up for that instance. We can see an example of this in the image below. Items in the red box are the log entries before starting the new instance, and the info in green is the text showing a new PowerShell session was started in HostVersion 2.0.  
 
 #### Starting V2 Logs
-![Event Viewer showing Windows PowerShell logs with Event 400 details, including ConsoleHost information and execution time.](https://academy.hackthebox.com/storage/modules/143/start-event.png)  
+![Event Viewer showing Windows PowerShell logs with Event 400 details, including ConsoleHost information and execution time.](images/module-143-030.png)  
      
 ----    
 ### Checking Defenses
@@ -4400,7 +4400,7 @@ The command completed successfully.
 If you believe the network defenders are actively logging/looking for any commands out of the normal, you can try this workaround to using net commands. Typing `net1` instead of `net` will execute the same functions without the potential trigger from the net string.
 
 #### Running Net1 Command
-![GIF showcasing the net1 command in a PowerShell terminal.](https://academy.hackthebox.com/storage/modules/143/net1userreal.png) 
+![GIF showcasing the net1 command in a PowerShell terminal.](images/module-143-029.png) 
 
 -----
 
@@ -4537,7 +4537,7 @@ You will notice in the queries above that we are using strings such as `userAcco
 `=8192` represents the decimal bitmask we want to match in this search. This decimal number corresponds to a corresponding UAC Attribute flag that determines if an attribute like `password is not required` or `account is locked` is set. These values can compound and make multiple different bit entries. Below is a quick list of potential values.   
 
 #### UAC Values
-![Diagram of User Account Control Bit Values showing bit positions for various account settings like 'Login Script Will Execute' and 'Account Is Disabled'.](https://academy.hackthebox.com/storage/modules/143/UAC-values.png)  
+![Diagram of User Account Control Bit Values showing bit positions for various account settings like 'Login Script Will Execute' and 'Account Is Disabled'.](images/module-143-028.png)  
   
 #### OID match strings
 
@@ -4792,7 +4792,7 @@ Started: Tue Feb 15 17:44:49 2022
 Stopped: Tue Feb 15 17:45:41 2022
 ```
 
-![GIF showcasing the usage of hashcat to crack the obtained hash.](https://academy.hackthebox.com/storage/modules/143/hashcat_tgs.png)
+![GIF showcasing the usage of hashcat to crack the obtained hash.](images/module-143-034.png)
 
 We've successfully cracked the user's password as `database!`. As the last step, we can confirm our access and see that we indeed have Domain Admin rights as we can authenticate to the target DC in the INLANEFREIGHT.LOCAL domain. From here, we could perform post-exploitation and continue to enumerate the domain for other paths to compromise and other notable flaws and misconfigurations. 
 
@@ -5194,7 +5194,7 @@ As we can see from scrolling the Rubeus help menu, the tool has a vast number of
 - Performing AES Kerberoasting 
 
 #### Viewing Rubeus's Capabilities
-![GIF showcasing the commands supported by Rubeus in a PowerShell terminal.](https://academy.hackthebox.com/storage/modules/143/rubeus_help.png)
+![GIF showcasing the commands supported by Rubeus in a PowerShell terminal.](images/module-143-040.png)
 
 
 We can first use Rubeus to gather some stats. From the output below, we can see that there are nine Kerberoastable users, seven of which support RC4 encryption for ticket requests and two of which support AES 128/256. More on encryption types later. We also see that all nine accounts had their password set this year (2022 at the time of writing). If we saw any SPN accounts with their passwords set 5 or more years ago, they could be promising targets as they could have a weak password that was set and never changed when the organization was less mature. 
@@ -5353,7 +5353,7 @@ Stopped: Sun Feb 27 15:37:04 2022
 Let's assume that our client has set SPN accounts to support AES 128/256 encryption. 
 
 
-![Active Directory Users and Computers window showing properties for user 'testspn' with account options and logon settings.](https://academy.hackthebox.com/storage/modules/143/aes_kerberoast.png)
+![Active Directory Users and Computers window showing properties for user 'testspn' with account options and logon settings.](images/module-143-039.png)
 
 
 If we check this with PowerView, we'll see that the `msDS-SupportedEncryptionTypes attribute` is set to `24`, meaning that AES 128/256 encryption types are the only ones supported. 
@@ -5447,7 +5447,7 @@ Candidates.#1....: wenses28 -> wejustare
 We can use Rubeus with the `/tgtdeleg` flag to specify that we want only RC4 encryption when requesting a new service ticket. The tool does this by specifying RC4 encryption as the only algorithm we support in the body of the TGS request. This may be a failsafe built-in to Active Directory for backward compatibility. By using this flag, we can request an RC4 (type 23) encrypted ticket that can be cracked much faster. 
 
 #### Using the /tgtdeleg Flag
-![Rubeus tool output showing kerberoasting action for user 'testspn' with RC4_HMAC and AES encryption types, displaying hash details.](https://academy.hackthebox.com/storage/modules/143/kerb_tgs_18.png)
+![Rubeus tool output showing kerberoasting action for user 'testspn' with RC4_HMAC and AES encryption types, displaying hash details.](images/module-143-038.png)
 
 In the above image, we can see that when supplying the `/tgtdeleg` flag, the tool requested an RC4 ticket even though the supported encryption types are listed as AES 128/256. This simple example shows the importance of detailed enumeration and digging deeper when performing attacks such as Kerberoasting. Here we could downgrade from AES to RC4 and cut cracking time down by over 4 minutes and 30 seconds. In a real-world engagement where we have a strong GPU password cracking rig at our disposal, this type of downgrade could result in a hash cracking in a few hours instead of a few days and could make or break our assessment. 
 
@@ -5461,7 +5461,7 @@ In the above image, we can see that when supplying the `/tgtdeleg` flag, the too
 
 It is possible to edit the encryption types used by Kerberos. This can be done by opening Group Policy, editing the Default Domain Policy, and choosing: `Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options`, then double-clicking on `Network security: Configure encryption types allowed for Kerberos` and selecting the desired encryption type allowed for Kerberos. Removing all other encryption types except for `RC4_HMAC_MD5` would allow for the above downgrade example to occur in 2019. Removing support for AES would introduce a security flaw into AD and should likely never be done. Furthermore, removing support for RC4 regardless of the Domain Controller Windows Server version or domain functional level could have operational impacts and should be thoroughly tested before implementation.
 
-![Group Policy Management Editor showing security settings for Kerberos encryption types, including DES, RC4, and AES options.](https://academy.hackthebox.com/storage/modules/143/kerb_encrypt_types.png)
+![Group Policy Management Editor showing security settings for Kerberos encryption types, including DES, RC4, and AES options.](images/module-143-037.png)
 
 
 
@@ -5474,14 +5474,14 @@ An important mitigation for non-managed service accounts is to set a long and co
 
 Kerberoasting requests Kerberos TGS tickets with RC4 encryption, which should not be the majority of Kerberos activity within a domain. When Kerberoasting is occurring in the environment, we will see an abnormal number of `TGS-REQ` and `TGS-REP` requests and responses, signaling the use of automated Kerberoasting tools. Domain controllers can be configured to log Kerberos TGS ticket requests by selecting [Audit Kerberos Service Ticket Operations](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/audit-kerberos-service-ticket-operations) within Group Policy. 
 
-![Group Policy Management Editor showing audit settings for Kerberos Authentication Service with success and failure events configured.](https://academy.hackthebox.com/storage/modules/143/kerb_audit.png)
+![Group Policy Management Editor showing audit settings for Kerberos Authentication Service with success and failure events configured.](images/module-143-036.png)
 
 
 Doing so will generate two separate event IDs: [4769](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4769): A Kerberos service ticket was requested, and [4770](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4770): A Kerberos service ticket was renewed. 10-20 Kerberos TGS requests for a given account can be considered normal in a given environment. A large amount of 4769 event IDs from one account within a short period may indicate an attack.
 
 Below we can see an example of a Kerberoasting attack being logged. We see many event ID 4769 being logged in succession, which appears to be anomalous behavior. Clicking into one, we can see that a Kerberos service ticket was requested by the `htb-student` user (attacker) for the `sqldev` account (target). We can also see that the ticket encryption type is `0x17`, which is the hex value for 23 (`DES_CBC_CRC, DES_CBC_MD5, RC4, AES 256`), meaning that the requested ticket was RC4, so if the password was weak, there is a good chance that the attacker would be able to crack it and gain control of the `sqldev` account. 
 
-![Event Viewer showing Security logs with Event ID 4769 for Kerberos Service Ticket Operations, detailing account and service information for htb-student@INLANEFREIGHT.LOCAL.](https://academy.hackthebox.com/storage/modules/143/4769.png)
+![Event Viewer showing Security logs with Event ID 4769 for Kerberos Service Ticket Operations, detailing account and service information for htb-student@INLANEFREIGHT.LOCAL.](images/module-143-035.png)
 
 
 Some other remediation steps include restricting the use of the RC4 algorithm, particularly for Kerberos requests by service accounts. This must be tested to make sure nothing breaks within the environment. Furthermore, Domain Admins and other highly privileged accounts should not be used as SPN accounts (if SPN accounts must exist in the environment). 
@@ -5526,13 +5526,13 @@ We see the ACL for the user account `forend` in the image below. Each item under
  
 
 #### Viewing forend's ACL 
-![Active Directory Users and Computers window showing Advanced Security Settings for 'forend' with permission entries for various principals, including 'Authenticated Users' and 'Angela Dunn'.](https://academy.hackthebox.com/storage/modules/143/DACL_example.png)
+![Active Directory Users and Computers window showing Advanced Security Settings for 'forend' with permission entries for various principals, including 'Authenticated Users' and 'Angela Dunn'.](images/module-143-044.png)
 
 
 The SACLs can be seen within the `Auditing` tab. 
 
 #### Viewing the SACLs through the Auditing Tab
-![Active Directory Users and Computers window showing Advanced Security Settings for 'forend' with auditing entries for 'Everyone' on descendant organizational units.](https://academy.hackthebox.com/storage/modules/143/SACL_example.png)
+![Active Directory Users and Computers window showing Advanced Security Settings for 'forend' with auditing entries for 'Everyone' on descendant organizational units.](images/module-143-043.png)
 
 ---
 
@@ -5556,7 +5556,7 @@ Each ACE is made up of the following `four` components:
 We can view this graphically in `Active Directory Users and Computers` (`ADUC`). In the example image below, we can see the following for the ACE entry for the user `forend`:
 
 #### Viewing Permissions through Active Directory Users & Computers
-![Active Directory Users and Computers window showing permission entry for Angela Dunn with various permissions like 'Read all properties' and 'Write all properties' for this object and all descendant objects.](https://academy.hackthebox.com/storage/modules/143/ACE_example.png)
+![Active Directory Users and Computers window showing permission entry for Angela Dunn with various permissions like 'Read all properties' and 'Write all properties' for this object and all descendant objects.](images/module-143-042.png)
 
 1. The security principal is Angela Dunn (adunn@inlanefreight.local)
 2. The ACE type is `Allow`
@@ -5595,7 +5595,7 @@ In this module, we will cover enumerating and leveraging four specific ACEs to h
 
 This graphic, adapted from a graphic created by [Charlie Bromberg (Shutdown)](https://twitter.com/_nwodtuhs), shows an excellent breakdown of the varying possible ACE attacks and the tools to perform these attacks from both Windows and Linux (if applicable). In the following few sections, we will mainly cover enumerating and performing these attacks from a Windows attack host with mentions of how these attacks could be performed from Linux. A later module specifically on ACL Attacks will go much further in-depth on each of the attacks listed in this graphic and how to perform them from Windows and Linux. 
 
-![Flowchart showing WriteDacl and WriteOwner permissions with associated actions like Grant Rights, GenericWrite, and AddMember, including Linux and Windows tools for each action.](https://academy.hackthebox.com/storage/modules/143/ACL_attacks_graphic.png)
+![Flowchart showing WriteDacl and WriteOwner permissions with associated actions like Grant Rights, GenericWrite, and AddMember, including Linux and Windows tools for each action.](images/module-143-041.png)
 
 We will run into many other interesting ACEs (privileges) in Active Directory from time to time. The methodology for enumerating possible ACL attacks using tools such as BloodHound and PowerView and even built-in AD management tools should be adaptable enough to assist us whenever we encounter new privileges in the wild that we may not yet be familiar with. For example, we may import data into BloodHound and see that a user we have control over (or can potentially take over) has the rights to read the password for a Group Managed Service Account (gMSA) through the [ReadGMSAPassword](https://bloodhound.specterops.io/resources/edges/read-gmsa-password) edge. In this case, there are tools such as [GMSAPasswordReader](https://github.com/rvazarkar/GMSAPasswordReader) that we could use, along with other methods, to obtain the password for the service account in question. Other times we may come across extended rights such as [Unexpire-Password](https://learn.microsoft.com/en-us/windows/win32/adschema/r-unexpire-password) or [Reanimate-Tombstones](https://learn.microsoft.com/en-us/windows/win32/adschema/r-reanimate-tombstones) using PowerView and have to do a bit of research to figure out how to exploit these for our benefit. It's worth familiarizing yourself with all of the [BloodHound edges](https://bloodhound.specterops.io/resources/edges/overview) and as many Active Directory [Extended Rights](https://learn.microsoft.com/en-us/windows/win32/adschema/extended-rights) as possible as you never know when you may encounter a less common one during an assessment. 
 
@@ -5926,7 +5926,7 @@ The output above shows that our `adunn` user has `DS-Replication-Get-Changes` an
 Now that we've enumerated the attack path using more manual methods like PowerView and built-in PowerShell cmdlets, let's look at how much easier this would have been to identify using the extremely powerful BloodHound tool. Let's take the data we gathered earlier with the SharpHound ingestor and upload it to BloodHound. Next, we can set the `wley` user as our starting node, select the `Node Info` tab and scroll down to `Outbound Control Rights`. This option will show us objects we have control over directly, via group membership, and the number of objects that our user could lead to us controlling via ACL attack paths under `Transitive Object Control`. If we click on the `1` next to `First Degree Object Control`, we see the first set of rights that we enumerated, `ForceChangePassword` over the `damundsen` user.
 
 #### Viewing Node Info through BloodHound
-![BloodHound interface showing node info for WLEY@INLANEFREIGHT.LOCALl with execution and control rights, connected to DAMUNDSEN@INLANEFREIGHT.LOCAL via ForceChangePassword.](https://academy.hackthebox.com/storage/modules/143/wley_damundsen.png)
+![BloodHound interface showing node info for WLEY@INLANEFREIGHT.LOCALl with execution and control rights, connected to DAMUNDSEN@INLANEFREIGHT.LOCAL via ForceChangePassword.](images/module-143-048.png)
 
 
 If we right-click on the line between the two objects, a menu will pop up. If we select `Help`, we will be presented with help around abusing this ACE, including:
@@ -5938,19 +5938,19 @@ If we right-click on the line between the two objects, a menu will pop up. If we
 We'll dig into this menu more later on.
 
 #### Investigating ForceChangePassword Further
-![Popup window in BloodHound showing ForceChangePassword capability for WLEY@INLANEFREIGHT.LOCAL to change DAMUNDSEN@INLANEFREIGHT.LOCAL's password without knowing the current password.](https://academy.hackthebox.com/storage/modules/143/help_edge.png)
+![Popup window in BloodHound showing ForceChangePassword capability for WLEY@INLANEFREIGHT.LOCAL to change DAMUNDSEN@INLANEFREIGHT.LOCAL's password without knowing the current password.](images/module-143-047.png)
 
 
 If we click on the `16` next to `Transitive Object Control`, we will see the entire path that we painstakingly enumerated above. From here, we could leverage the help menus for each edge to find ways to best pull off each attack.
 
 #### Viewing Potential Attack Paths through BloodHound
-![BloodHound graph showing WLEY@INLANEFREIGHT.LOCAL's connections to various groups and users, including CONTRACTORS, FILE SHARE, and DOMAIN USERS, with relationships like MemberOf and ForceChangePassword.](https://academy.hackthebox.com/storage/modules/143/wley_path.png)
+![BloodHound graph showing WLEY@INLANEFREIGHT.LOCAL's connections to various groups and users, including CONTRACTORS, FILE SHARE, and DOMAIN USERS, with relationships like MemberOf and ForceChangePassword.](images/module-143-046.png)
 
 
 Finally, we can use the pre-built queries in BloodHound to confirm that the `adunn` user has DCSync rights.  
 
 #### Viewing Pre-Build queries through BloodHound
-![BloodHound graph showing ADUNN@INLANEFREIGHT.LOCAL's connections to various groups and users, including DOMAIN ADMINS and ENTERPRISE DOMAIN CONTROLLERS, with relationships like MemberOf and GetChangesAll.](https://academy.hackthebox.com/storage/modules/143/adunn_dcsync.png)
+![BloodHound graph showing ADUNN@INLANEFREIGHT.LOCAL's connections to various groups and users, including DOMAIN ADMINS and ENTERPRISE DOMAIN CONTROLLERS, with relationships like MemberOf and GetChangesAll.](images/module-143-045.png)
 
 We've now enumerated these attack paths in multiple ways. The next step will be performing this attack chain from start to finish. Let's dig in!
 
@@ -6196,13 +6196,13 @@ Enabling the [Advanced Security Audit Policy](https://docs.microsoft.com/en-us/a
 
 
 #### Viewing Event ID 5136
-![Windows Event Viewer showing Security log entry for Event ID 5136, indicating a Directory Service change by administrator on 3/24/2022 at 10:53 AM. Audit Success for INLANEFREIGHT.LOCAL domain.](https://academy.hackthebox.com/storage/modules/143/event5136.png)
+![Windows Event Viewer showing Security log entry for Event ID 5136, indicating a Directory Service change by administrator on 3/24/2022 at 10:53 AM. Audit Success for INLANEFREIGHT.LOCAL domain.](images/module-143-050.png)
 
 
 If we check out the `Details` tab, we can see that the pertinent information is written in [Security Descriptor Definition Language (SDDL)](https://docs.microsoft.com/en-us/windows/win32/secauthz/security-descriptor-definition-language) which is not human readable. 
 
 #### Viewing Associated SDDL
-![Windows Event Viewer displaying Security log entry for Event ID 5136, showing Directory Service change details with audit success on 3/24/2022 at 10:53 AM.](https://academy.hackthebox.com/storage/modules/143/event5136_sddl.png)
+![Windows Event Viewer displaying Security log entry for Event ID 5136, showing Directory Service change details with audit success on 3/24/2022 at 10:53 AM.](images/module-143-049.png)
 
 
 We can use the [ConvertFrom-SddlString cmdlet](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/convertfrom-sddlstring?view=powershell-7.2) to convert this to a readable format. 
@@ -6276,7 +6276,7 @@ The crux of the attack is requesting a Domain Controller to replicate passwords 
 To perform this attack, you must have control over an account that has the rights to perform domain replication (a user with the Replicating Directory Changes and Replicating Directory Changes All permissions set). Domain/Enterprise Admins and default domain administrators have this right by default.
 
 #### Viewing adunn's Replication Privileges through ADSI Edit
-![ADSI Edit window showing DC=INLANEFREIGHT,DC=LOCAL properties with user Angela Dunn selected, displaying permissions for directory changes.](https://academy.hackthebox.com/storage/modules/143/adnunn_right_dcsync.png)
+![ADSI Edit window showing DC=INLANEFREIGHT,DC=LOCAL properties with user Angela Dunn selected, displaying permissions for directory changes.](images/module-143-052.png)
 
 
 It is common during an assessment to find other accounts that have these rights, and once compromised, their access can be utilized to retrieve the current NTLM password hash for any domain user and the hashes corresponding to their previous passwords. Here we have a standard domain user that has been granted the replicating permissions:
@@ -6396,7 +6396,7 @@ inlanefreight_hashes.ntds  inlanefreight_hashes.ntds.cleartext  inlanefreight_ha
 While rare, we see accounts with these settings from time to time. It would typically be set to provide support for applications that use certain protocols that require a user's password to be used for authentication purposes. 
 
 #### Viewing an Account with Reversible Encryption Password Storage Set
-![Active Directory Users and Computers showing PROXYAGENT properties with account options and expiration settings.](https://academy.hackthebox.com/storage/modules/143/reverse_encrypt.png)
+![Active Directory Users and Computers showing PROXYAGENT properties with account options and expiration settings.](images/module-143-051.png)
 
 When this option is set on a user account, it does not mean that the passwords are stored in cleartext. Instead, they are stored using RC4 encryption. The trick here is that the key needed to decrypt them is stored in the registry (the [Syskey](https://docs.microsoft.com/en-us/windows-server/security/kerberos/system-key-utility-technical-overview)) and can be extracted by a Domain Admin or equivalent. Tools such as `secretsdump.py` will decrypt any passwords stored using reversible encryption while dumping the NTDS file either as a Domain Admin or using an attack such as DCSync. If this setting is disabled on an account, a user will need to change their password for it to be stored using one-way encryption. Any passwords set on accounts with this setting enabled will be stored using reversible encryption until they are changed. We can enumerate this using the `Get-ADUser` cmdlet:
 
@@ -6567,12 +6567,12 @@ From the information above, we can see that all Domain Users (meaning `all` user
 Does the Domain Users group have local admin rights or execution rights (such as RDP or WinRM) over one or more hosts?
 
 #### Checking the Domain Users Group's Local Admin & Execution Rights using BloodHound
-![Graph showing DOMAIN USERS@INLANEFREIGHT.LOCAL with local admin and execution rights, connected to ACADEMY-EA-MS01.INLANEFREIGHT.LOCAL via CanRDP.](https://academy.hackthebox.com/storage/modules/143/bh_RDP_domain_users.png)
+![Graph showing DOMAIN USERS@INLANEFREIGHT.LOCAL with local admin and execution rights, connected to ACADEMY-EA-MS01.INLANEFREIGHT.LOCAL via CanRDP.](images/module-143-057.png)
 
 If we gain control over a user through an attack such as LLMNR/NBT-NS Response Spoofing or Kerberoasting, we can search for the username in BloodHound to check what type of remote access rights they have either directly or inherited via group membership under `Execution Rights` on the `Node Info` tab. 
 
 #### Checking Remote Access Rights using BloodHound
-![Node info for WLEY@INLANEFREIGHT.LOCAL showing execution rights, including Group Delegated RDP Privileges set to 1.](https://academy.hackthebox.com/storage/modules/143/execution_rights.png)
+![Node info for WLEY@INLANEFREIGHT.LOCAL showing execution rights, including Group Delegated RDP Privileges set to 1.](images/module-143-056.png)
 
 
 We could also check the `Analysis` tab and run the pre-built queries `Find Workstations where Domain Users can RDP` or `Find Servers where Domain Users can RDP`. There are other ways to enumerate this information, but BloodHound is a powerful tool that can help us narrow down these types of access rights quickly and accurately, which is hugely beneficial to us as penetration testers under time constraints for the assessment period. This can also be helpful for the blue team to periodically audit remote access rights across the environment and catch large-scale issues such as all Domain Users having unintended access to a host or audit rights for specific users/groups. 
@@ -6604,12 +6604,12 @@ We can also utilize this custom `Cypher query` in BloodHound to hunt for users w
 MATCH p1=shortestPath((u1:User)-[r1:MemberOf*1..]->(g1:Group)) MATCH p2=(u1)-[:CanPSRemote*1..]->(c:Computer) RETURN p2
 ```
 #### Using the Cypher Query in BloodHound
-![BloodHound graph showing connection from FOREND@INLANEFREIGHT.LOCAL to ACADEMY-EA-MS01.INLANEFREIGHT.LOCAL via CanPSRemote.](https://academy.hackthebox.com/storage/modules/143/canpsremote_bh_cypherq.png)
+![BloodHound graph showing connection from FOREND@INLANEFREIGHT.LOCAL to ACADEMY-EA-MS01.INLANEFREIGHT.LOCAL via CanPSRemote.](images/module-143-055.png)
 
 We could also add this as a custom query to our BloodHound installation, so it's always available to us.
 
 #### Adding the Cypher Query as a Custom Query in BloodHound
-![Interface for creating a custom query to find WinRM users with dangerous rights.](https://academy.hackthebox.com/storage/modules/143/user_defined_query.png)
+![Interface for creating a custom query to find WinRM users with dangerous rights.](images/module-143-054.png)
 
 
 We can use the [Enter-PSSession](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/enter-pssession?view=powershell-7.2) cmdlet using PowerShell from a Windows host. 
@@ -6705,7 +6705,7 @@ MATCH p1=shortestPath((u1:User)-[r1:MemberOf*1..]->(g1:Group)) MATCH p2=(u1)-[:S
 Here we see one user, `damundsen` has `SQLAdmin` rights over the host `ACADEMY-EA-DB01`. 
 
 #### Using a Custom Cypher Query to Check for SQL Admin Rights in BloodHound
-![Graph showing SQLAdmin connection from ACADEMY-EA-DB01.INLANEFREIGHT.LOCAL to DAMUNDSEN@INLANEFREIGHT.LOCAL.](https://academy.hackthebox.com/storage/modules/143/sqladmins_bh.png)
+![Graph showing SQLAdmin connection from ACADEMY-EA-DB01.INLANEFREIGHT.LOCAL to DAMUNDSEN@INLANEFREIGHT.LOCAL.](images/module-143-053.png)
 
 We can use our ACL rights to authenticate with the `wley` user, change the password for the `damundsen` user and then authenticate with the target using a tool such as `PowerUpSQL`, which has a handy [command cheat sheet](https://github.com/NetSPI/PowerUpSQL/wiki/PowerUpSQL-Cheat-Sheet). Let's assume we changed the account password to `SQL1234!` using our ACL rights. We can now authenticate and run operating system commands.  
 
@@ -7142,7 +7142,7 @@ In the simplest terms, in this situation, when we try to issue a multi-server co
 Let's say we have three hosts:  `Attack host` --> `DEV01` --> `DC01`. Our Attack Host is a Parrot box within the corporate network but not joined to the domain. We obtain a set of credentials for a domain user and find that they are part of the `Remote Management Users` group on DEV01. We want to use `PowerView` to enumerate the domain, which requires communication with the Domain Controller, DC01. 
 
 
-![Diagram showing attack path: Attack Host to Dev01 (First Hop), then to DC01 (Second Hop).](https://academy.hackthebox.com/storage/modules/143/double_hop.png)
+![Diagram showing attack path: Attack Host to Dev01 (First Hop), then to DC01 (Second Hop).](images/module-143-058.png)
 
 When we connect to `DEV01` using a tool such as `evil-winrm`, we connect with network authentication, so our credentials are not stored in memory and, therefore, will not be present on the system to authenticate to other resources on behalf of our user. When we load a tool such as `PowerView` and attempt to query Active Directory, Kerberos has no way of telling the DC that our user can access resources in the domain. This happens because the user's Kerberos TGT (Ticket Granting Ticket) ticket is not sent to the remote session; therefore, the user has no way to prove their identity, and commands will no longer be run in this user's context. In other words, when authenticating to the target host, the user's ticket-granting service (TGS) ticket is sent to the remote service, which allows command execution, but the user's TGT ticket is not sent. When the user attempts to access subsequent resources in the domain, their TGT will not be present in the request, so the remote service will have no way to prove that the authentication attempt is valid, and we will be denied access to the remote service. 
 
@@ -7591,7 +7591,7 @@ If Windows Defender (or another AV or EDR product) is enabled on a target, our s
 
 
 #### Windows Defender Quarantine Log
-![Windows Security alert for VirTool:Win32/MSPSEexecCommand, alert level severe, status removed, dated 3/25/2022.](https://academy.hackthebox.com/storage/modules/143/defenderLog.png)
+![Windows Security alert for VirTool:Win32/MSPSEexecCommand, alert level severe, status removed, dated 3/25/2022.](images/module-143-059.png)
 
 If opsec or being "quiet" is a consideration during an assessment, we would most likely want to avoid a tool like smbexec.py. The focus of this module is on tactics and techniques. We will refine our methodology as we progress in more advanced modules, but we first must obtain a solid base in enumerating and attacking Active Directory. 
 
@@ -8162,7 +8162,7 @@ A default installation of Microsoft Exchange within an AD environment (with no s
 The Exchange group `Organization Management` is another extremely powerful group (effectively the "Domain Admins" of Exchange) and can access the mailboxes of all domain users. It is not uncommon for sysadmins to be members of this group. This group also has full control of the OU called `Microsoft Exchange Security Groups`, which contains the group `Exchange Windows Permissions`.
 
 #### Viewing Organization Management's Permissions
-![Advanced Security Settings for Organization Management showing permissions for Exchange Trusted Subsystem.](https://academy.hackthebox.com/storage/modules/143/org_mgmt_perms.png)
+![Advanced Security Settings for Organization Management showing permissions for Exchange Trusted Subsystem.](images/module-143-064.png)
 
 If we can compromise an Exchange server, this will often lead to Domain Admin privileges. Additionally, dumping credentials in memory from an Exchange server will produce 10s if not 100s of cleartext credentials or NTLM hashes. This is often due to users logging in to Outlook Web Access (OWA) and Exchange caching their credentials in memory after a successful login.
 
@@ -8395,7 +8395,7 @@ This was patched in 2014 [MS14-025 Vulnerability in GPP could allow elevation of
 The XML looks like the following:
 
 #### Viewing Groups.xml
-![XML code showing user properties for Administrator with account not disabled and password never expires.](https://academy.hackthebox.com/storage/modules/143/GPP.png)
+![XML code showing user properties for Administrator with account not disabled and password never expires.](images/module-143-063.png)
 
 If you retrieve the cpassword value more manually, the `gpp-decrypt` utility can be used to decrypt the password as follows:
 
@@ -8449,7 +8449,7 @@ With pre-authentication, a user enters their password, which encrypts a time sta
 
 #### Viewing an Account with the Do not Require Kerberos Preauthentication Option
 
-![Active Directory Users and Computers showing Matthew Morgan's account properties with Kerberos encryption options.](https://academy.hackthebox.com/storage/modules/143/preauth_not_reqd_mmorgan.png)
+![Active Directory Users and Computers showing Matthew Morgan's account properties with Kerberos encryption options.](images/module-143-062.png)
 
 ASREPRoasting is similar to Kerberoasting, but it involves attacking the AS-REP instead of the TGS-REP. An SPN is not required. This setting can be enumerated with PowerView or built-in tools such as the PowerShell AD module.
 
@@ -8700,11 +8700,11 @@ WmiFilter        :
 
 Checking in BloodHound, we can see that the `Domain Users` group has several rights over the `Disconnect Idle RDP` GPO, which could be leveraged for full control of the object. 
 
-![Graph showing DOMAIN USERS@INLANEFREIGHT.LOCAL with GenericWrite, WriteOwner, and WriteDacl permissions to DISCONNECT IDLE RDP@INLANEFREIGHT.LOCAL.](https://academy.hackthebox.com/storage/modules/143/gporights.png)
+![Graph showing DOMAIN USERS@INLANEFREIGHT.LOCAL with GenericWrite, WriteOwner, and WriteDacl permissions to DISCONNECT IDLE RDP@INLANEFREIGHT.LOCAL.](images/module-143-061.png)
 
 If we select the GPO in BloodHound and scroll down to `Affected Objects` on the `Node Info` tab, we can see that this GPO is applied to one OU, which contains four computer objects.
 
-![Graph showing GpLink from DISCONNECT IDLE RDP@INLANEFREIGHT.LOCAL to APPLICATION@INLANEFREIGHT.LOCAL, which contains multiple ACADEMY-EA-APP nodes.](https://academy.hackthebox.com/storage/modules/143/gpoaffected.png)
+![Graph showing GpLink from DISCONNECT IDLE RDP@INLANEFREIGHT.LOCAL to APPLICATION@INLANEFREIGHT.LOCAL, which contains multiple ACADEMY-EA-APP nodes.](images/module-143-060.png)
 
 We could use a tool such as [SharpGPOAbuse](https://github.com/FSecureLABS/SharpGPOAbuse) to take advantage of this GPO misconfiguration by performing actions such as adding a user that we control to the local admins group on one of the affected hosts, creating an immediate scheduled task on one of the hosts to give us a reverse shell, or configure a malicious computer startup script to provide us with a reverse shell or similar. When using a tool like this, we need to be careful because commands can be run that affect every computer within the OU that the GPO is linked to. If we found an editable GPO that applies to an OU with 1,000 computers, we would not want to make the mistake of adding ourselves as a local admin to that many hosts. Some of the attack options available with this tool allow us to specify a target user or host. The hosts shown in the above image are not exploitable, and GPO attacks will be covered in-depth in a later module. 
 
@@ -8755,7 +8755,7 @@ Trusts can be transitive or non-transitive.
 - In a `non-transitive trust`, the child domain itself is the only one trusted.
 
 
-![Diagram of servers A, B, C representing domains a.com, b.com, c.com, illustrating A=B, B=C, thus A=C.](https://academy.hackthebox.com/storage/modules/143/transitive-trusts.png)
+![Diagram of servers A, B, C representing domains a.com, b.com, c.com, illustrating A=B, B=C, thus A=C.](images/module-143-067.png)
 
 Adapted from [here](https://zindagitech.com/wp-content/uploads/2021/09/Picture2-Deepak-4.png.webp)
 
@@ -8783,7 +8783,7 @@ Domain trusts are often set up incorrectly and can provide us with critical unin
 Below is a graphical representation of the various trust types.
 
 
-![Diagram of Inlanefreight Forest showing trust types: Parent-child, Cross-link, External, Tree-root, and Forest between domains.](https://academy.hackthebox.com/storage/modules/143/trusts-diagram.png)
+![Diagram of Inlanefreight Forest showing trust types: Parent-child, Cross-link, External, Tree-root, and Forest between domains.](images/module-143-066.png)
 
 ---
 
@@ -8969,7 +8969,7 @@ INDEX-DEV-LON      ( Workstation or Server )
 We can also use BloodHound to visualize these trust relationships by using the `Map Domain Trusts` pre-built query. Here we can easily see that two bidirectional trusts exist.
 
 #### Visualizing Trust Relationships in BloodHound
-![Graph showing domain relationships: INLANEFREIGHT.LOCAL connected to LOGISTICS.INLANEFREIGHT.LOCAL and FREIGHT.LOGISTICS.LOCAL. Sidebar with pre-built analytics queries.](https://academy.hackthebox.com/storage/modules/143/BH_trusts.png)
+![Graph showing domain relationships: INLANEFREIGHT.LOCAL connected to LOGISTICS.INLANEFREIGHT.LOCAL and FREIGHT.LOGISTICS.LOCAL. Sidebar with pre-built analytics queries.](images/module-143-065.png)
 
 ---
 
@@ -9743,7 +9743,7 @@ From the command output above, we can see that we successfully authenticated to 
 
 SID History can also be abused across a forest trust. If a user is migrated from one forest to another and SID Filtering is not enabled, it becomes possible to add a SID from the other forest, and this SID will be added to the user's token when authenticating across the trust. If the SID of an account with administrative privileges in Forest A is added to the SID history attribute of an account in Forest B, assuming they can authenticate across the forest, then this account will have administrative privileges when accessing resources in the partner forest. In the below diagram, we can see an example of the `jjones` user being migrated from the `INLANEFREIGHT.LOCAL` domain to the `CORP.LOCAL` domain in a different forest. If SID filtering is not enabled when this migration is made and the user has administrative privileges (or any type of interesting rights such as ACE entries, access to shares, etc.) in the `INLANEFREIGHT.LOCAL` domain, then they will retain their administrative rights/access in `INLANEFREIGHT.LOCAL` while being a member of the new domain, `CORP.LOCAL` in the second forest. 
 
-![Diagram showing trust relationship between INLANEFREIGHT.LOCAL and CORP.LOCAL domains, with user migration due to merger. Includes user SIDs and resources.](https://academy.hackthebox.com/storage/modules/143/sid-history.png)
+![Diagram showing trust relationship between INLANEFREIGHT.LOCAL and CORP.LOCAL domains, with user migration due to merger. Includes user SIDs and resources.](images/module-143-068.png)
 
 This attack will be covered in-depth in a later module focusing more heavily on attacking AD trusts. 
 
@@ -9897,7 +9897,7 @@ INFO: Starting computer enumeration with 10 workers
 After uploading the second set of data (either each JSON file or as one zip file), we can click on `Users with Foreign Domain Group Membership` under the `Analysis` tab and select the source domain as `INLANEFREIGHT.LOCAL`. Here, we will see the built-in Administrator account for the INLANEFREIGHT.LOCAL domain is a member of the built-in Administrators group in the FREIGHTLOGISTICS.LOCAL domain as we saw previously. 
 
 #### Viewing Dangerous Rights through BloodHound
-![Diagram showing 'Users with Foreign Domain Group Membership' query, linking ADMINISTRATOR@INLANEFREIGHT.LOCAL to ADMINISTRATORS@FREIGHTLOGISTICS.LOCAL.](https://academy.hackthebox.com/storage/modules/143/foreign_membership.png)
+![Diagram showing 'Users with Foreign Domain Group Membership' query, linking ADMINISTRATOR@INLANEFREIGHT.LOCAL to ADMINISTRATORS@FREIGHTLOGISTICS.LOCAL.](images/module-143-069.png)
 
 ---
 
@@ -10045,7 +10045,7 @@ As a different look at this, we have broken out the significant actions by secti
 
 
 #### MITRE ATT&CK Breakdown
-![GIF showcasing the Credential Access tactics in the MITRE ATT&CK framework.](https://academy.hackthebox.com/storage/modules/143/mitre.gif)
+![GIF showcasing the Credential Access tactics in the MITRE ATT&CK framework.](images/module-143-070.gif)
 
 I wanted to take a second to show everyone how it appears when exploring the ATT&CK framework. We will use the example above of `Kerberoasting` to look at it through the lens of the framework. Kerberoasting is a part of the larger `Tactic tag TA0006 Credential Access` (Green square in the image above). Tactics encompass the overall goal of the actor and will contain various techniques which map to that goal. Within this scope, you will see all manner of credential-stealing techniques. We can scroll down and look for `Steal or Forge Kerberos Tickets`, which is `Technique Tag T1558` (blue square in the image above). This technique contains four sub-techniques (indicated by the `.00#` beside the technique name) Golden Ticket, Silver Ticket, Kerberoasting, and AS-REP Roasting. Since we care about Kerberoasting, we would select the sub-technique `T1558.003` (orange box in the image above), and it will take us to a new page. Here, we can see a general explanation of the technique, the information referencing the ATT&CK platform classification on the top right, examples of its use in the real world, ways to mitigate and detect the tactic, and finally, references for more information at the bottom of the page. 
 
@@ -10075,17 +10075,17 @@ AD Explorer can also be used to save snapshots of an AD database for offline vie
 When we first load the tool, we are prompted for login credentials or to load a previous snapshot. We can log in with any valid domain user.
 
 #### Logging in with AD Explorer
-![Active Directory Explorer connection window with fields for Connect to, User, Password, and Path, plus options to save the connection.](https://academy.hackthebox.com/storage/modules/47/AD_explorer1.png)
+![Active Directory Explorer connection window with fields for Connect to, User, Password, and Path, plus options to save the connection.](images/module-143-076.png)
 
 Once logged in, we can freely browse AD and view information about all objects.
 
 #### Browsing AD with AD Explorer
-![Active Directory Explorer window showing directory structure and attributes for DC=INLANEFREIGHT,DC=LOCAL.](https://academy.hackthebox.com/storage/modules/47/AD_explorer_logged_in.png)
+![Active Directory Explorer window showing directory structure and attributes for DC=INLANEFREIGHT,DC=LOCAL.](images/module-143-075.png)
 
 To take a snapshot of AD, go to File --> `Create Snapshot` and enter a name for the snapshot. Once it is complete, we can move it offline for further analysis.
 
 #### Creating a Snapshot of AD with AD Explorer
-![Active Directory Explorer window with snapshot dialog open, showing fields for description, path, and server utilization settings.](https://academy.hackthebox.com/storage/modules/47/AD_explorer_snapshot.png)
+![Active Directory Explorer window with snapshot dialog open, showing fields for description, path, and server utilization settings.](images/module-143-074.png)
 
 
 ----  
@@ -10184,7 +10184,7 @@ Now that we understand how it works and how to start scans, let's view the repor
 
 Throughout the report, there are sections such as domain, user, group, and trust information and a specific table calling out "anomalies" or issues that may require immediate attention. We will also be presented with the domain's overall risk score. 
 
-![GIF showcasing the report generated by PingCastle.](https://academy.hackthebox.com/storage/modules/143/report-example.png)
+![GIF showcasing the report generated by PingCastle.](images/module-143-073.png)
 
 Aside from being helpful in performing very thorough domain enumeration when combined with other tools, PingCastle can be helpful to give clients a quick analysis of their domain security posture, or can be used by internal teams to self-assess and find areas of concern or opportunities for further hardening. Take some time to explore the reports and maps PingCastle can generate on the Inlanefreight domain.
 
@@ -10207,12 +10207,12 @@ When running Group3r, we must specify the `-s` or the `-f` flag. These will spec
 Below is an example of starting Group3r. 
 
 #### Reading Output  
-![Screenshot of GPO settings showing 'Disallow LM Hash' and 'Default Domain Controllers Policy' with details on creation, modification, and registry settings.](https://academy.hackthebox.com/storage/modules/143/grouper-output.png)  
+![Screenshot of GPO settings showing 'Disallow LM Hash' and 'Default Domain Controllers Policy' with details on creation, modification, and registry settings.](images/module-143-072.png)  
 
 When reading the output from Group3r, each indentation is a different level, so no indent will be the GPO, one indent will be policy settings, and another will be findings in those settings. Below we will take a look at the output shown from a finding.  
 
 #### Group3r Finding
-![Command prompt showing registry updates for LDAPServerIntegrity, RequireSignOrSeal, RequireSecuritySignature, and EnableSecuritySignature, with user rights assignment details.](https://academy.hackthebox.com/storage/modules/143/grouper-finding.png)  
+![Command prompt showing registry updates for LDAPServerIntegrity, RequireSignOrSeal, RequireSecuritySignature, and EnableSecuritySignature, with user rights assignment details.](images/module-143-071.png)  
 
 In the image above, you will see an example of a finding from Group3r. It will present it as a linked box to the policy setting, define the interesting portion and give us a reason for the finding. It is worth the effort to run Group3r if you have the opportunity. It will often find interesting paths or objects that other tools will overlook.
 
@@ -10355,7 +10355,7 @@ Head [HERE](https://app.hackthebox.com/prolabs) to look at all the Pro Labs that
 #### Endgames
 For an extreme challenge that may take you a while to get through, check out the [Ascension](https://app.hackthebox.com/endgames/ascension) Endgames. This endgame features two different AD domains and has plenty of chances to practice our AD enumeration and attacking skills.
 
-![Hack The Box Ascension page showing entry point IP, progress tracker, introduction, and list of machines.](https://academy.hackthebox.com/storage/modules/143/endgame.png)
+![Hack The Box Ascension page showing entry point IP, progress tracker, introduction, and list of machines.](images/module-143-077.png)
 
 #### Great Videos to Check Out
 

