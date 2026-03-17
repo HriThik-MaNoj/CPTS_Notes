@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10. Pivoting, Tunneling and Port Forwarding/Meterpreter Tunneling & Port Forwarding.md",
+                "file": "10. Pivoting, Tunneling and Port Forwarding/3. Meterpreter Tunneling & Port Forwarding.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Meterpreter Tunneling & Port Forwarding"
+              "title": "3. Meterpreter Tunneling & Port Forwarding"
             }
           }
         ],
@@ -222,6 +222,8 @@
   },
   "active": "70d76e218a9dad82",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260317194444.png",
+    "attachments/Pasted image 20260317193558.png",
     "attachments/Pasted image 20260317191443.png",
     "attachments/Pasted image 20260317191159.png",
     "attachments/Pasted image 20260317190643.png",
@@ -230,11 +232,9 @@
     "attachments/Pasted image 20260317185213.png",
     "attachments/Pasted image 20260317184917.png",
     "10. Pivoting, Tunneling and Port Forwarding/3. Remote or Reverse Port Forwarding with SSH.md",
-    "10. Pivoting, Tunneling and Port Forwarding/Meterpreter Tunneling & Port Forwarding.md",
+    "10. Pivoting, Tunneling and Port Forwarding/3. Meterpreter Tunneling & Port Forwarding.md",
     "academy_og/images/module-90-044.png",
     "academy_og/images/module-90-043.png",
-    "academy_og/images/module-90-042.png",
-    "academy_og/images/module-90-041.png",
     "academy_og/Attacking Web Applications with Ffuf.md",
     "academy_og/images/module-115-001.txt",
     "academy_og/images/module-144-006",
