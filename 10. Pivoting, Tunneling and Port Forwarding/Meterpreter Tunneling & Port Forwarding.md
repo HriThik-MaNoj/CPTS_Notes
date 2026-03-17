@@ -81,3 +81,10 @@ meterpreter > run autoroute -s 172.16.5.0/23
 ```
 
 ![[Pasted image 20260317191443.png]]
+
+#### Listing Active Routes with AutoRoute
+```bash
+meterpreter > run autoroute -p
+```
+
+
