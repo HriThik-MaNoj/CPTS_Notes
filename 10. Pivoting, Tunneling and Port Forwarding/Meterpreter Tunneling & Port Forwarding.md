@@ -74,3 +74,10 @@ run
 ```
 ![[Pasted image 20260317191159.png]]
 
+It is also possible to add routes with autoroute by running autoroute from the Meterpreter session.
+
+```
+meterpreter > run autoroute -s 172.16.5.0/23
+```
+
+![[Pasted image 20260317191443.png]]
