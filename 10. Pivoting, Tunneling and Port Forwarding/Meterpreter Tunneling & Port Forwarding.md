@@ -60,3 +60,17 @@ run
 
 **Make sure that the proxychains.conf file has the below line**
 ![[Pasted image 20260317190643.png]]
+
+> Note: Depending on the version the SOCKS server is running, we may occasionally need to changes socks4 to socks5 in proxychains.conf.
+
+Finally, we need to tell our socks_proxy module to route all the traffic via our Meterpreter session. We can use the `post/multi/manage/autoroute` module from Metasploit to add routes for the 172.16.5.0 subnet and then route all our proxychains traffic.
+
+#### Creating Routes with AutoRoute
+```
+use post/multi/manage/autoroute
+set SESSION 1
+set SUBNET 172.16.5.0
+run
+```
+![[Pasted image 20260317191159.png]]
+
