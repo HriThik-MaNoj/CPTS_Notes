@@ -24,3 +24,6 @@ https://academy.hackthebox.com/app/module/51
 https://academy.hackthebox.com/app/module/67
 https://academy.hackthebox.com/app/module/162
 https://academy.hackthebox.com/app/module/163
+https://academy.hackthebox.com/app/module/158
+https://academy.hackthebox.com/app/module/90
+

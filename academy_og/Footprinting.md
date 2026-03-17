@@ -47,7 +47,7 @@ We know that penetration testing, and therefore enumeration, is a dynamic proces
 | `Infrastructure-based enumeration`| `Host-based enumeration` | `OS-based enumeration` |
 |-|-|-|
 
-![Flowchart illustrating enumeration processes: OS-based, host-based, and infrastructure-based. It includes OS setup, privileges, processes, accessible services, gateway, and internet presence, with detailed subcategories like OS type, network config, users, tasks, service type, firewalls, and domains.](https://academy.hackthebox.com/storage/modules/112/enum-method33.png)
+![Flowchart illustrating enumeration processes: OS-based, host-based, and infrastructure-based. It includes OS setup, privileges, processes, accessible services, gateway, and internet presence, with detailed subcategories like OS type, network config, users, tasks, service type, firewalls, and domains.](images/module-112-002.png)
 
 <div class="card bg-light">
     <div class="card-body">
@@ -78,7 +78,7 @@ These layers are designed as follows:
 
 We can finally imagine the entire penetration test in the form of a labyrinth where we have to identify the gaps and find the way to get us inside as quickly and effectively as possible. This type of labyrinth may look something like this:
 
-![Color-coded concentric circles with connecting lines and squares, labeled 'Starting Point,' representing a flowchart or process diagram.](https://academy.hackthebox.com/storage/modules/112/pentest-labyrinth.png)
+![Color-coded concentric circles with connecting lines and squares, labeled 'Starting Point,' representing a flowchart or process diagram.](images/module-112-001.png)
 <div class="card bg-light">
     <div class="card-body">
 				 <p class="mb-0">The squares represent the gaps/vulnerabilities.</p>
@@ -169,11 +169,11 @@ Once we have a basic understanding of the company and its services, we can get a
 
 The first point of presence on the Internet may be the `SSL certificate` from the company's main website that we can examine. Often, such a certificate includes more than just a subdomain, and this means that the certificate is used for several domains, and these are most likely still active. 
 
-![Certificate validity from May 18, 2021, to April 6, 2022, with DNS names: inlanefreight.htb, www.inlanefreight.htb, support.inlanefreight.htb.](https://academy.hackthebox.com/storage/modules/112/DomInfo-1.png)
+![Certificate validity from May 18, 2021, to April 6, 2022, with DNS names: inlanefreight.htb, www.inlanefreight.htb, support.inlanefreight.htb.](images/module-112-003.png)
 
 Another source to find more subdomains is [crt.sh](https://crt.sh/). This source is [Certificate Transparency](https://en.wikipedia.org/wiki/Certificate_Transparency) logs. Certificate Transparency is a process that is intended to enable the verification of issued digital certificates for encrypted Internet connections. The standard ([RFC 6962](https://tools.ietf.org/html/rfc6962)) provides for the logging of all digital certificates issued by a certificate authority in audit-proof logs. This is intended to enable the detection of false or maliciously issued certificates for a domain. SSL certificate providers like [Let's Encrypt](https://letsencrypt.org/) share this with the web interface [crt.sh](https://crt.sh/), which stores the new entries in the database to be accessed later. 
 
-![crt.sh search results for 'inlanefreight.com' showing certificates with common names like matomo.inlanefreight.com, smartfactory.inlanefreight.com, and issuer names including Let's Encrypt and Cloudflare.](https://academy.hackthebox.com/storage/modules/112/DomInfo-2.png)
+![crt.sh search results for 'inlanefreight.com' showing certificates with common names like matomo.inlanefreight.com, smartfactory.inlanefreight.com, and issuer names including Let's Encrypt and Cloudflare.](images/module-112-004.png)
 
 We can also output the results in JSON format. 
 
@@ -451,38 +451,38 @@ Often cloud storage is added to the DNS list when used for administrative purpos
 However, there are many different ways to find such cloud storage. One of the easiest and most used is Google search combined with Google Dorks. For example, we can use the Google Dorks `inurl:` and `intext:` to narrow our search to specific terms. In the following example, we see red censored areas containing the company name. 
 
 #### Google Search for AWS
-![Google search results for 'intext: [redacted] inurl:amazonaws.com' showing links to Amazon S3 PDFs.](https://academy.hackthebox.com/storage/modules/112/gsearch1.png)
+![Google search results for 'intext: [redacted] inurl:amazonaws.com' showing links to Amazon S3 PDFs.](images/module-112-011.png)
 
 #### Google Search for Azure
-![Google search results for 'intext: [redacted] inurl:blob.core.windows.net' showing links to PDF files on Azure Blob Storage.](https://academy.hackthebox.com/storage/modules/112/gsearch2.png)
+![Google search results for 'intext: [redacted] inurl:blob.core.windows.net' showing links to PDF files on Azure Blob Storage.](images/module-112-010.png)
 
 Here we can already see that the links presented by Google contain PDFs. When we search for a company that we may already know or want to know, we will also come across other files such as text documents, presentations, codes, and many others. 
 
 Such content is also often included in the source code of the web pages, from where the images, JavaScript codes, or CSS are loaded. This procedure often relieves the web server and does not store unnecessary content. 
 
 #### Target Website - Source Code
-![HTML code snippet showing DNS prefetch and preconnect links to [redacted] blob.core.windows.net with crossorigin attributes.](https://academy.hackthebox.com/storage/modules/112/cloud3.png)
+![HTML code snippet showing DNS prefetch and preconnect links to [redacted] blob.core.windows.net with crossorigin attributes.](images/module-112-009.png)
 
 Third-party providers such as [domain.glass](https://domain.glass) can also tell us a lot about the company's infrastructure. As a positive side effect, we can also see that Cloudflare's security assessment status has been classified as "Safe". This means we have already found a security measure that can be noted for the second layer (gateway). 
 
 #### Domain.Glass Results
-![Domain status page showing Cloudflare security assessment as safe for [redacted]. Includes social media links, external tools, IP information, and SSL certificate details with issuer and DNS names.](https://academy.hackthebox.com/storage/modules/112/cloud1.png)
+![Domain status page showing Cloudflare security assessment as safe for [redacted]. Includes social media links, external tools, IP information, and SSL certificate details with issuer and DNS names.](images/module-112-008.png)
 
 Another very useful provider is [GrayHatWarfare](https://buckets.grayhatwarfare.com). We can do many different searches, discover AWS, Azure, and GCP cloud storage, and even sort and filter by file format. Therefore, once we have found them through Google, we can also search for them on GrayHatWarefare and passively discover what files are stored on the given cloud storage. 
 
 #### GrayHatWarfare Results
-![Dashboard showing filter options and a list of three AWS S3 buckets with file counts: 1, 73, and 0.](https://academy.hackthebox.com/storage/modules/112/cloud2.png)
+![Dashboard showing filter options and a list of three AWS S3 buckets with file counts: 1, 73, and 0.](images/module-112-007.png)
 
 
 Many companies also use abbreviations of the company name, which are then used accordingly within the IT infrastructure. Such terms are also part of an excellent approach to discovering new cloud storage from the company. We can also search for files simultaneously to see the files that can be accessed at the same time. 
 
 #### Private and Public SSH Keys Leaked
-![Dashboard showing AWS S3 file listings with two entries: 'id_rsa' and 'id_rsa.pub' from [redacted] bucket, dated August 2021.](https://academy.hackthebox.com/storage/modules/112/ghw1.png)
+![Dashboard showing AWS S3 file listings with two entries: 'id_rsa' and 'id_rsa.pub' from [redacted] bucket, dated August 2021.](images/module-112-006.png)
 
 Sometimes when employees are overworked or under high pressure, mistakes can be fatal for the entire company. These errors can even lead to SSH private keys being leaked, which anyone can download and log onto one or even more machines in the company without using a password.  
 
 #### SSH Private Key
-![Image of an RSA private key block, starting with 'BEGIN RSA PRIVATE KEY' and ending with 'END RSA PRIVATE KEY'.](https://academy.hackthebox.com/storage/modules/112/ghw2.png)
+![Image of an RSA private key block, starting with 'BEGIN RSA PRIVATE KEY' and ending with 'END RSA PRIVATE KEY'.](images/module-112-005.png)
 
 
 # Staff
@@ -528,7 +528,7 @@ From a job post like this, we can see, for example, which programming languages 
 Furthermore, we use `REST APIs, Github, SVN, and Perforce`. The job offer also results that the company works with Atlassian Suite, and therefore there may be resources that we could potentially access. We can see some skills and projects from the career history that give us a reasonable estimate of the employee's knowledge.
 
 #### LinkedIn - Employee #1 About
-![Profile section mentioning W3C specs, web components, React, Svelte, AngularJS, and a GitHub link to open source projects.](https://academy.hackthebox.com/storage/modules/112/linkedin-pers2.png)
+![Profile section mentioning W3C specs, web components, React, Svelte, AngularJS, and a GitHub link to open source projects.](images/module-112-015.png)
 
 We try to make business contacts on social media sites and prove to visitors what skills we bring to the table, which inevitably leads to us sharing with the public what we know and what we have learned so far. Companies always hire employees whose skills they can use and apply to the business. For example, we know that Flask and Django are web frameworks for the Python programming language. 
 
@@ -536,14 +536,14 @@ If we do a little search for Django security misconfigurations, we will eventual
 
 
 #### Github 
-![Code snippet showing JSON with fields for name, author, email, and a GitHub URL.](https://academy.hackthebox.com/storage/modules/112/github.png)
+![Code snippet showing JSON with fields for name, author, email, and a GitHub URL.](images/module-112-014.png)
 
-![Code snippet defining a function to decode a JWT with a payload, secret, and redacted JWT string.](https://academy.hackthebox.com/storage/modules/112/github2.png)
+![Code snippet defining a function to decode a JWT with a payload, secret, and redacted JWT string.](images/module-112-013.png)
 
 Showing our projects can, of course, be of great advantage to make new business contacts and possibly even get a new job, but on the other hand, it can lead to mistakes that will be very difficult to fix. For example, in one of the files, we can discover the employee's personal email address, and upon deeper investigation, the web application has a hardcoded [JWT token](https://jwt.io/). 
 
 #### LinkedIn - Employee #2 Career
-![Profile showing roles: Vice President Software Engineer and Associate Software Engineer. Responsibilities include leading CRM mobile app development and delivering the BrokerVotes system. Skills listed: Java, React, Slang, Elastic, Kafka.](https://academy.hackthebox.com/storage/modules/112/linkedin-pers1.png)
+![Profile showing roles: Vice President Software Engineer and Associate Software Engineer. Responsibilities include leading CRM mobile app development and delivering the BrokerVotes system. Skills listed: Java, React, Slang, Elastic, Kafka.](images/module-112-012.png)
 
 [LinkedIn](https://www.linkedin.com) offers a comprehensive search for employed, sorted by connections, locations, companies, school, industry, profile language, services, names, titles, and more. Understandably, the more detailed information we provide there, the fewer results we get. Therefore, we should think carefully about the purpose of performing the search. 
 
@@ -2121,7 +2121,7 @@ DNS is mainly unencrypted. Devices on the local WLAN and Internet providers can 
 
 However, the DNS does not only link computer names and IP addresses. It also stores and outputs additional information about the services associated with a domain. A DNS query can therefore also be used, for example, to determine which computer serves as the e-mail server for the domain in question or what the domain's name servers are called. 
 
-![Diagram showing domain hierarchy: Root, Top Level Domains (TLD) like net, org, com, dev, io; Second Level Domain inlanefreight.com; Sub-Domains dev.inlanefreight.com, www.inlanefreight.com, mail.inlanefreight.com; Host WS01.dev.inlanefreight.com.](https://academy.hackthebox.com/storage/modules/27/tooldev-dns.png)
+![Diagram showing domain hierarchy: Root, Top Level Domains (TLD) like net, org, com, dev, io; Second Level Domain inlanefreight.com; Sub-Domains dev.inlanefreight.com, www.inlanefreight.com, mail.inlanefreight.com; Host WS01.dev.inlanefreight.com.](images/module-112-016.png)
 
 Different `DNS records` are used for the DNS queries, which all have various tasks. Moreover, separate entries exist for different functions since we can set up mail servers and other servers for a domain.
 
@@ -3535,7 +3535,7 @@ We must know how to interact with different databases. Therefore, we recommend i
 
 [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15) (`SSMS`) comes as a feature that can be installed with the MSSQL install package or can be downloaded & installed separately. It is commonly installed on the server for initial configuration and long-term management of databases by admins. Keep in mind that since SSMS is a client-side application, it can be installed and used on any system an admin or developer is planning to manage the database from. It doesn't only exist on the server hosting the database. This means we could come across a vulnerable system with SSMS with saved credentials that allow us to connect to the database. The image below shows SSMS in action.
 
-![SQL Server Management Studio showing Object Explorer with 'Employees' database expanded, displaying tables, views, and other database objects.](https://academy.hackthebox.com/storage/modules/112/ssms.png)
+![SQL Server Management Studio showing Object Explorer with 'Employees' database expanded, displaying tables, views, and other database objects.](images/module-112-018.png)
 
 Many other clients can be used to access a database running on MSSQL. Including but not limited to: 
 
@@ -3571,7 +3571,7 @@ Table source: [System Databases Microsoft Doc](https://docs.microsoft.com/en-us/
 
 When an admin initially installs and configures MSSQL to be network accessible, the SQL service will likely run as `NT SERVICE\MSSQLSERVER`. Connecting from the client-side is possible through Windows Authentication, and by default, encryption is not enforced when attempting to connect. 
 
-![SQL Server connection window showing options for server type, server name 'ILF-SQL-01', and Windows Authentication.](https://academy.hackthebox.com/storage/modules/112/auth.png)
+![SQL Server connection window showing options for server type, server name 'ILF-SQL-01', and Windows Authentication.](images/module-112-017.png)
 
 Authentication being set to `Windows Authentication` means that the underlying Windows OS will process the login request and use either the local SAM database or the domain controller (hosting Active Directory) before allowing connectivity to the database management system. Using Active Directory can be ideal for auditing activity and controlling access in a Windows environment, but if an account is compromised, it could lead to privilege escalation and lateral movement across a Windows domain environment. Like with any OS, service, server role, or application, it can be beneficial to set it up in a VM from installation to configuration to understand all the default configurations and potential mistakes that the administrator could make.
 

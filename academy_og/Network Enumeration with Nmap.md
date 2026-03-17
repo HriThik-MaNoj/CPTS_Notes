@@ -830,7 +830,7 @@ xsltproc target.xml -o target.html
 If we now open the HTML file in our browser, we see a clear and structured presentation of our results.
 
 #### Nmap Report
-![Nmap scan report for IP 10.10.10.28 shows open ports: 22 (SSH), 25 (SMTP), 80 (HTTP). Scanned on June 16, 2020.](https://academy.hackthebox.com/storage/modules/19/nmap-report.png)
+![Nmap scan report for IP 10.10.10.28 shows open ports: 22 (SSH), 25 (SMTP), 80 (HTTP). Scanned on June 16, 2020.](images/module-19-001.png)
 
 More information about the output formats can be found at: [https://nmap.org/book/output.html](https://nmap.org/book/output.html)
 

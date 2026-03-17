@@ -71,7 +71,7 @@ The choice of a distro is individual, and, as mentioned, we can even choose to c
 
 This section will cover setting up and working with [Parrot OS](https://www.parrotsec.org/). This distro is used for the Pwnbox that we will see throughout Academy, customized to practice and solve exercises throughout the various modules we will encounter.
 
-![Parrot OS desktop with a stylized parrot logo on a black background, top panel showing system icons, open apps, workspaces, time, and date.](https://www.parrotsec.org/docs/assets/images/25-f5ca6d2c6f82c9ce8e2cf43026646cfe.png)
+![Parrot OS desktop with a stylized parrot logo on a black background, top panel showing system icons, open apps, workspaces, time, and date.](images/module-77-002.png)
 
 It is important to note that each penetration test or security assessment must be performed from a freshly installed VM to avoid including security-relevant details from another client environment in our reports by accident or retaining client-sensitive data for significant lengths of time. For this reason, we must have the ability to quickly stand up a new pentest machine and have processes in place (automation, scripts, detailed procedures, etc.) for quickly setting up our distro(s) of choice for each assessment we perform.
 
@@ -90,7 +90,7 @@ Depending on the amount of resources our host system has (i.e., RAM), we can usu
 
 To be successful, we must continuously work to hone our craft. A great way is by setting up a home lab to attempt to reproduce vulnerabilities, set up vulnerable applications and services, see the effects of remediation recommendations, and have a safe place to practice new attack techniques/exploits. We can build our lab on an old laptop or desktop but preferably using a server to install a bare-metal hypervisor. 
 
-![Laptop screen showing Parrot OS desktop with icons for Parrot, Wireshark, OWASP ZAP, Metasploit, and more, alongside a 'Parrot 4.10 Released' announcement.](https://academy.hackthebox.com/storage/modules/77/notebook.png)
+![Laptop screen showing Parrot OS desktop with icons for Parrot, Wireshark, OWASP ZAP, Metasploit, and more, alongside a 'Parrot 4.10 Released' announcement.](images/module-77-001.png)
 
 For our purposes, we will be using a modified version of Parrot Security (Pwnbox), available [here](https://www.parrotsec.org/download/) to build a local virtual machine.  We can choose two formats: 
 
@@ -203,7 +203,7 @@ Try out various note-taking tools and develop the folder structure that works fo
 
 A [virtual private network (VPN)](https://en.wikipedia.org/wiki/Virtual_private_network) allows us to connect to a private (internal) network and access hosts and resources as if we were directly connected to the target private network. It is a secured communications channel over shared public networks to connect to a private network (i.e., an employee remotely connecting to their company's corporate network from their home). VPNs provide a degree of privacy and security by encrypting communications over the channel to prevent eavesdropping and access to data traversing the channel. 
 
-![Network diagram showing Internet, Firewall, VPN Server, Corporate LAN, Corporate Servers, Desktops, and Remote Use.](https://academy.hackthebox.com/storage/modules/77/GettingStarted.png)
+![Network diagram showing Internet, Firewall, VPN Server, Corporate LAN, Corporate Servers, Desktops, and Remote Use.](images/module-77-003.png)
 
 At a high-level, VPN works by routing our connecting device's internet connection through the target VPN's private server instead of our internet service provider (ISP). When connected to a VPN, data originates from the VPN server rather than our computer and will appear to originate from a public IP address other than our own. 
 
@@ -334,7 +334,7 @@ Guides such as [this](https://www.stationx.net/common-ports-cheat-sheet/) and [t
 ## What is a Web Server
 
 A web server is an application that runs on the back-end server, which handles all of the `HTTP` traffic from the client-side browser, routes it to the requests destination pages, and finally responds to the client-side browser. Web servers usually run on TCP ports `80` or `443`, and are responsible for connecting end-users to various parts of the web application, in addition to handling their various responses:
-![Dashboard showing 914 online players, 1020 machine owns, 618 challenge owns, and recent activity with targets Active, Lame, and Beep.](https://academy.hackthebox.com/storage/modules/77/htb_main_2.jpg)
+![Dashboard showing 914 online players, 1020 machine owns, 618 challenge owns, and recent activity with targets Active, Lame, and Beep.](images/module-77-004.jpg)
 
 As web applications tend to be open for public interaction and facing the internet, they may lead to the back-end server being compromised if they suffer from any vulnerabilities. Web applications can provide a vast attack surface, making them a high-value target for attackers and pentesters.
 
@@ -405,16 +405,16 @@ sudo apt install tmux -y
 ```
 
 Once we have `tmux`, we can start it by entering `tmux` as our command:
-![Parrot Terminal with user prompt showing command 'tmux'.](https://academy.hackthebox.com/storage/modules/77/getting_started_tmux_1.jpg)
+![Parrot Terminal with user prompt showing command 'tmux'.](images/module-77-011.jpg)
 
 The default key to input `tmux` commands prefix is `[CTRL + B]`. In order to open a new window in `tmux`, we can hit the prefix 'i.e. `[CTRL + B]`' and then hit `C`:
-![Parrot Terminal with user prompt ready for input.](https://academy.hackthebox.com/storage/modules/77/getting_started_tmux_2.jpg)
+![Parrot Terminal with user prompt ready for input.](images/module-77-010.jpg)
 
 We see the numbered windows at the bottom. We can switch to each window by hitting the prefix and then inputting the window number, like `0` or `1`. We can also split a window vertically into panes by hitting the prefix and then `[SHIFT + %]`:
-![Parrot Terminal with two panes, each showing user prompts ready for input.](https://academy.hackthebox.com/storage/modules/77/getting_started_tmux_3.jpg)
+![Parrot Terminal with two panes, each showing user prompts ready for input.](images/module-77-009.jpg)
 
 We can also split into horizontal panes by hitting the prefix and then `[SHIFT + "]`:
-![Parrot Terminal with two panes, each showing user prompts ready for input.](https://academy.hackthebox.com/storage/modules/77/getting_started_tmux_4.jpg)
+![Parrot Terminal with two panes, each showing user prompts ready for input.](images/module-77-008.jpg)
 
 We can switch between panes by hitting the prefix and then the `left` or `right` arrows for horizontal switching or the `up` or `down` arrows for vertical switching. The commands above cover some basic `tmux` usage. It is a powerful tool and can be used for many things, including logging, which is very important during any technical engagement. This [cheatsheet](https://tmuxcheatsheet.com) is a very handy reference. Also, this [Introduction to tmux](https://www.youtube.com/watch?v=Lqehvpe_djs) video by `ippsec` is worth your time.
 
@@ -428,11 +428,11 @@ We can switch between panes by hitting the prefix and then the `left` or `right`
 vim /etc/hosts
 ```
 
-![Parrot Terminal displaying a configuration file with network settings and comments.](https://academy.hackthebox.com/storage/modules/77/getting_started_vim_1.jpg)
+![Parrot Terminal displaying a configuration file with network settings and comments.](images/module-77-007.jpg)
 
 If we want to create a new file, input the new file name, and `Vim` will open a new window with that file. Once we open a file, we are in read-only `normal mode`, which allows us to navigate and read the file. To edit the file, we hit `i` to enter `insert mode`, shown by the "`-- INSERT --`" at the bottom of `Vim`. Afterward, we can move the text cursor and edit the file:
 
-![Parrot Terminal displaying a configuration file with network settings and comments.](https://academy.hackthebox.com/storage/modules/77/getting_started_vim_2.jpg)
+![Parrot Terminal displaying a configuration file with network settings and comments.](images/module-77-006.jpg)
 
 Once we are finished editing a file, we can hit the escape key `esc` to get out of `insert mode`, back into `normal mode`. When we are in `normal mode`, we can use the following keys to perform some useful shortcuts:
 
@@ -452,7 +452,7 @@ Once we are finished editing a file, we can hit the escape key `esc` to get out 
 </div>
 
 If we want to save a file or quit `Vim`, we have to press`:` to go into `command mode`. Once we do, we will see any commands we type at the bottom of the vim window:
-![Parrot Terminal displaying a configuration file with network settings and comments.](https://academy.hackthebox.com/storage/modules/77/getting_started_vim_3.jpg)
+![Parrot Terminal displaying a configuration file with network settings and comments.](images/module-77-005.jpg)
 
 There are many commands available to us. The following are some of them:
 
@@ -556,15 +556,15 @@ This returns a lot more information. We see that it took a lot longer to scan 65
 
 So far, we know that the operating system is Ubuntu Linux. Application versions can also help reveal the target OS version. Take OpenSSH, for example. We see the reported version is `OpenSSH 8.2p1 Ubuntu 4ubuntu0.1`. From inspection of other Ubuntu SSH package [changelogs](https://launchpad.net/ubuntu/yakkety/+source/openssh/+changelog), we see the release version takes the format `1:7.3p1-1ubuntu0.1`. Updating our version to fit this format, we get `1:8.2p1-4ubuntu0.1`. A quick search for this version online reveals that it is included in Ubuntu Linux Focal Fossa 20.04.
 
-![Google search results for '1:8.2p1-4ubuntu0.1 release' showing links to OpenSSH package on Launchpad.](https://academy.hackthebox.com/storage/modules/77/google1.png)
+![Google search results for '1:8.2p1-4ubuntu0.1 release' showing links to OpenSSH package on Launchpad.](images/module-77-013.png)
 
 Another quick search reveals that the release date of this OS is April 23rd, 2020.
 
-![Google search results for 'Ubuntu focal 20.04 release date' showing April 23, 2020, as the release date.](https://academy.hackthebox.com/storage/modules/77/google2.png)
+![Google search results for 'Ubuntu focal 20.04 release date' showing April 23, 2020, as the release date.](images/module-77-012.png)
 
 However, it is worth noting that this cross-referencing technique is not entirely reliable, as it is possible to install more recent application packages on an older OS version. The script scan `-sC` flag causes `Nmap` to report the server headers `http-server-header` page and the page title `http-title` for any web page hosted on the webserver. The web page title `PHP 7.4.3 - phpinfo()` indicates that this is a PHPInfo file, which is often manually created to confirm that PHP has been successfully installed. The title (and PHPInfo page) also reveals the PHP version, which is worth noting if it is vulnerable.
 
-![PHP Version 7.4.3 information table showing system details, build date, server API, and configuration paths.](https://academy.hackthebox.com/storage/modules/77/phpinfo.png)
+![PHP Version 7.4.3 information table showing system details, build date, server API, and configuration paths.](images/module-77-014.png)
 
 #### Nmap Scripts
 
@@ -887,7 +887,7 @@ An HTTP status code of `200` reveals that the resource's request was successful,
 
 The scan was completed successfully, and it identifies a WordPress installation at `/wordpress`. WordPress is the most commonly used CMS (Content Management System) and has an enormous potential attack surface. In this case, visiting `http://10.10.10.121/wordpress` in a browser reveals that WordPress is still in setup mode, which will allow us to gain remote code execution (RCE) on the server.
 
-![WordPress language selection screen with a list of languages and a 'Continue' button.](https://academy.hackthebox.com/storage/modules/77/wordpress.png)
+![WordPress language selection screen with a list of languages and a 'Continue' button.](images/module-77-019.png)
 
 
 #### DNS Subdomain Enumeration
@@ -983,24 +983,24 @@ http://10.10.10.247 [200 OK] Bootstrap, Country[RESERVED][ZZ], Email[contact@cro
 
 SSL/TLS certificates are another potentially valuable source of information if HTTPS is in use. Browsing to `https://10.10.10.121/` and viewing the certificate reveals the details below, including the email address and company name. These could potentially be used to conduct a phishing attack if this is within the scope of an assessment. 
 
-![Certificate details for Megabank Limited, including subject and issuer information with country, state, locality, organization, and email address.](https://academy.hackthebox.com/storage/modules/77/cert.png)
+![Certificate details for Megabank Limited, including subject and issuer information with country, state, locality, organization, and email address.](images/module-77-018.png)
 
 
 #### Robots.txt
 
 It is common for websites to contain a `robots.txt` file, whose purpose is to instruct search engine web crawlers such as Googlebot which resources can and cannot be accessed for indexing. The `robots.txt` file can provide valuable information such as the location of private files and admin pages. In this case, we see that the `robots.txt` file contains two disallowed entries.
 
-![Robots.txt file disallowing access to /private and /uploaded_files for all user agents.](https://academy.hackthebox.com/storage/modules/77/robots.png)
+![Robots.txt file disallowing access to /private and /uploaded_files for all user agents.](images/module-77-017.png)
 
 Navigating to `http://10.10.10.121/private` in a browser reveals a HTB admin login page.
 
-![Login form with fields for username and password, and a login button.](https://academy.hackthebox.com/storage/modules/77/academy.png)
+![Login form with fields for username and password, and a login button.](images/module-77-016.png)
 
 #### Source Code
 
 It is also worth checking the source code for any web pages we come across. We can hit `[CTRL + U]` to bring up the source code window in a browser. This example reveals a developer comment containing credentials for a test account, which could be used to log in to the website.
 
-![HTML snippet with test account credentials, meta tags, and admin login title.](https://academy.hackthebox.com/storage/modules/77/source.png)
+![HTML snippet with test account credentials, meta tags, and admin login title.](images/module-77-015.png)
 
 
 # Public Exploits
@@ -1014,7 +1014,7 @@ Once we identify the services running on ports identified from our `Nmap` scan, 
 
 Many tools can help us search for public exploits for the various applications and services we may encounter during the enumeration phase. One way is to Google for the application name with `exploit` to see if we get any results:
 
-![Google search results for 'Windows 7 SMB exploit' showing links to EternalBlue exploit articles.](https://academy.hackthebox.com/storage/modules/77/google_smb.jpg)
+![Google search results for 'Windows 7 SMB exploit' showing links to EternalBlue exploit articles.](images/module-77-020.jpg)
 
 A well-known tool for this purpose is `searchsploit`, which we can use to search for public vulnerabilities/exploits for any application. We can install it with the following command:
 
@@ -1459,7 +1459,7 @@ echo '<?php system($_REQUEST["cmd"]); ?>' > /var/www/html/shell.php
 
 Once we write our web shell, we can either access it through a browser or by using `cURL`. We can visit the `shell.php` page on the compromised website, and use `?cmd=id` to execute the `id` command:
 
-![UID, GID, and groups set to www-data.](https://academy.hackthebox.com/storage/modules/33/write_shell_exec_1.png)
+![UID, GID, and groups set to www-data.](images/module-77-021.png)
 
 Another option is to use `cURL`:
 ```shell
@@ -1932,11 +1932,11 @@ Now that we've covered basic terminology and techniques and scanning/enumeration
 
 You can access your HTB profile page either on the left pane or by clicking on your username on the top pane.
 
-![Profile overview showing rank, progress, and ownership stats.](https://academy.hackthebox.com/storage/modules/77/htb_profile.jpg)
+![Profile overview showing rank, progress, and ownership stats.](images/module-77-035.jpg)
 
 Your profile page shows your HTB statistics, including your rank, progress towards the next rank, percentage towards owning various HTB challenges and labs, and other similar statistics.
 
-![Graph showing user, system, challenge owns, first bloods, and respect over a year; machine and challenge progress below.](https://academy.hackthebox.com/storage/modules/77/htb_profile_2.jpg)
+![Graph showing user, system, challenge owns, first bloods, and respect over a year; machine and challenge progress below.](images/module-77-034.jpg)
 
 You can also find detailed statistics about your machine and challenge progress, along with your progress history for each. You can also find various badges and certificates you've earned. You can share your profile page by clicking on the `Share Profile` button.
 
@@ -1946,11 +1946,11 @@ You can also find detailed statistics about your machine and challenge progress,
 
 The HTB Rankings page shows current rankings of users, teams, universities, countries, and VIP members.
 
-![Team rankings showing points, users, systems, challenges, fortresses, and endgames.](https://academy.hackthebox.com/storage/modules/77/htb_rankings.jpg)
+![Team rankings showing points, users, systems, challenges, fortresses, and endgames.](images/module-77-033.jpg)
 
 You can also view your ranking among other users, your best rank, and your general progress. In addition to that, your ranking and points add up to your country ranking, which you can view as well on the country ranking page. If you are in a team or university, your points would add up to them as well. If you are a user with a VIP subscription, you can view your VIP rank, which counts points gained on all machines. When we start on the main `HackTheBox` page, we see the `Labs` tab on the side panel, which includes the following main sections:
 
-![Dashboard showing 914 online players, 1020 machine owns, and 618 challenge owns today.](https://academy.hackthebox.com/storage/modules/77/htb_main_1.jpg)
+![Dashboard showing 914 online players, 1020 machine owns, and 618 challenge owns today.](images/module-77-032.jpg)
 
 | `Tracks` | `Machines` | `Challenges` | `Fortress` | `Endgame` | `Pro Lab` |
 |-|-|-|-|-|-|
@@ -1960,11 +1960,11 @@ You can also view your ranking among other users, your best rank, and your gener
 
 ## Tracks
 
-![Tracks: Beginner, Intro to Dante, Intro to Offshore, Active Directory 101.](https://academy.hackthebox.com/storage/modules/77/htb_tracks.jpg)
+![Tracks: Beginner, Intro to Dante, Intro to Offshore, Active Directory 101.](images/module-77-031.jpg)
 
 `HTB Tracks` is a great feature that helps in planning your next machines and challenges. A Track is a selection of machines and challenges tied together for users to progress through mastering a particular subject. Whether you are just getting started, or want to test your Active Directory skills, or are ready for a challenge in the Expert track, you will find an appropriate track that includes a great selection of machines and challenges that will help you enhance your skill set in a specific area. Tracks are created by the `HTB` team, companies, universities, and even users. When you click on a track, you will see all of its machines and challenges, your progress in each, and your general progress in the track.
 
-![Beginner Track progress: 82% complete, includes challenges Lame, Find The Easy Pass, Templated, Weak RSA.](https://academy.hackthebox.com/storage/modules/77/beginner_track.jpg)
+![Beginner Track progress: 82% complete, includes challenges Lame, Find The Easy Pass, Templated, Weak RSA.](images/module-77-030.jpg)
 
 You can easily enroll into the track and start working your way through it.
 
@@ -1974,11 +1974,11 @@ You can easily enroll into the track and start working your way through it.
 
 Next, we have the `Machines` page, one of the most popular pages on `HackTheBox`.
 
-![Machine Lab: Tenet (Medium, Linux) and Registry (Hard, Linux).](https://academy.hackthebox.com/storage/modules/77/htb_machines_1.jpg)
+![Machine Lab: Tenet (Medium, Linux) and Registry (Hard, Linux).](images/module-77-029.jpg)
 
 The first thing you'll see is two recommended machines that you can play, one is the latest released weekly machine, and the other is a `Staff Pick` machine that is recommended by `HTB` staff.
 
-![Active machines: Doctor, Academy, Laboratory; all easy difficulty.](https://academy.hackthebox.com/storage/modules/77/htb_machines_2.jpg)
+![Active machines: Doctor, Academy, Laboratory; all easy difficulty.](images/module-77-028.jpg)
 
 If you scroll down, you'll find a list of all `HTB` machines in two tabs: `Active` and `Retired`.
 
@@ -1994,7 +1994,7 @@ If you scroll down, you'll find a list of all `HTB` machines in two tabs: `Activ
 
 You can filter machines based on machines you've completed or not and based on their difficulty or operating system type. You can also sort the machines by their release date, rating, or user-rated difficulty. If we click on any machine, we are taken to its machine-specific page.
 
-![Academy machine: Easy difficulty, 4.6 rating, 6623 user owns, 5837 system owns.](https://academy.hackthebox.com/storage/modules/77/machine_page.jpg)
+![Academy machine: Easy difficulty, 4.6 rating, 6623 user owns, 5837 system owns.](images/module-77-027.jpg)
 
 You will be able to play the machine by clicking on `Join Machine`, after which you will get the machine's IP, which you can access once you are connected through `HTB` VPN. You can also submit the user and root flags you find on this page.
 
@@ -2004,7 +2004,7 @@ If the machine is retired, you can click on the `Walkthroughs` tab to see a list
 
 ## Challenges
 
-![Active challenges: 11 Reversing, 8 Stego, 12 Misc, 12 Web.](https://academy.hackthebox.com/storage/modules/77/htb_challenges.jpg)
+![Active challenges: 11 Reversing, 8 Stego, 12 Misc, 12 Web.](images/module-77-026.jpg)
 
 The layout of the challenges page is similar to the machines page. You will find both `Active` and `Retired` challenges sorted into ten different categories, each of which has a maximum of 10 challenges. You can click on any category to preview the list of challenges within it, and then you can click on any challenge to view its page and submit its flags.
 
@@ -2014,7 +2014,7 @@ The layout of the challenges page is similar to the machines page. You will find
 
 Fortresses are vulnerable labs created by external companies and hosted on `HackTheBox`. 
 
-![Context page: Entry point 10.13.37.12, progress tracker at 0%, lab reset status.](https://academy.hackthebox.com/storage/modules/77/htb_fortress_1.jpg)
+![Context page: Entry point 10.13.37.12, progress tracker at 0%, lab reset status.](images/module-77-025.jpg)
 
 Each lab has several flags that can be found and submitted to the Fortress page. Once you completed the lab by finding all flags, you are awarded a badge from the company that created the fortress. Some companies also provide job offers that are linked to completing the labs to qualify. You need to hold `HTB` rank `Hacker` and above to play fortresses. Try to up your ranking by playing active machines and challenges to qualify.
 
@@ -2024,7 +2024,7 @@ Each lab has several flags that can be found and submitted to the Fortress page.
 
 Endgames are virtual labs that contain several machines connected to a single network. The scenarios strive to reflect a real-world situation you may encounter when performing a pentest for an actual company.
 
-![Ascension page: Entry point 10.13.38.20, progress tracker at 0%, lab reset status.](https://academy.hackthebox.com/storage/modules/77/htb_endgame_1.jpg)
+![Ascension page: Entry point 10.13.38.20, progress tracker at 0%, lab reset status.](images/module-77-024.jpg)
 
 Just like machines, each Endgame lab has a specific attack path that you need to exploit. However, as Endgames have multiple machines, we can learn specific attack paths that we cannot otherwise learn using a single machine only. You need to be of `HTB` rank `Guru` and above to play Active Endgames. Retired Endgames are only available to users with a VIP subscription, and they can be played at any rank.
 
@@ -2034,7 +2034,7 @@ Just like machines, each Endgame lab has a specific attack path that you need to
 
 Pro Labs are the ultimate lab experience, as they are designed to simulate a real-world enterprise infrastructure, which is an excellent chance for testing out your pentesting skills.
 
-![Dante Pro Lab overview with cowboy mascot, 14 machines, 27 flags, beginner difficulty, Level 1 penetration tester.](https://academy.hackthebox.com/storage/modules/77/htb_prolab_dante.jpg)
+![Dante Pro Lab overview with cowboy mascot, 14 machines, 27 flags, beginner difficulty, Level 1 penetration tester.](images/module-77-023.jpg)
 
 Pro Labs are large and can take a while to finish and learn all of their attack paths and security challenges. Each Pro Lab has a specific scenario and level of difficulty:
 
@@ -2054,7 +2054,7 @@ Pro Labs require a separate subscription plan. Once you complete a Pro Lab, you 
 
 The latest addition to `HackThebox` is `HTB Battlegrounds`.
 
-![Cyber Mayhem and Server Siege game modes, with icons of a hacker and a server.](https://academy.hackthebox.com/storage/modules/77/htb_battlegrounds.jpg)
+![Cyber Mayhem and Server Siege game modes, with icons of a hacker and a server.](images/module-77-022.jpg)
 
 `HTB Battlegrounds` is a real-time game of strategy and hacking. You can play in a team of 4 or a team of 2.
 
@@ -2078,7 +2078,7 @@ There are 201 standalone boxes of various operating systems and difficulty level
 
 For our purposes, let us walk through the box `Nibbles`, an easy-rated Linux box that showcases common enumeration tactics, basic web application exploitation, and a file-related misconfiguration to escalate privileges.
 
-![Nibbles machine details: Linux OS, Easy difficulty, 20 points, released on 13 Jan 2018, IP 10.10.10.75.](https://academy.hackthebox.com/storage/modules/77/nibbles_card.png)
+![Nibbles machine details: Linux OS, Easy difficulty, 20 points, released on 13 Jan 2018, IP 10.10.10.75.](images/module-77-036.png)
 
 Let us first look at some machine statistics:
 
@@ -2220,12 +2220,12 @@ http://10.129.42.190 [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServer[
 
 This tool does not identify any standard web technologies in use. Browsing to the target in `Firefox` shows us a simple "Hello world!" message.
 
-![Text 'Hello world!' displayed on a white background.](https://academy.hackthebox.com/storage/modules/77/nibbles_hello2.png)
+![Text 'Hello world!' displayed on a white background.](images/module-77-042.png)
 
 Checking the page source reveals an interesting comment.
 
 
-![HTML code snippet with 'Hello world!' in bold and a comment about the /nibbleblog/ directory.](https://academy.hackthebox.com/storage/modules/77/nibbles_comment1.png)
+![HTML code snippet with 'Hello world!' in bold and a comment about the /nibbleblog/ directory.](images/module-77-041.png)
 
 We can also check this with cURL.
 
@@ -2255,7 +2255,7 @@ Now we are starting to get a better picture of things. We can see some of the te
 
 Browsing to the `/nibbleblog` directory in `Firefox`, we do not see anything exciting on the main page.
 
-![Blog page titled 'Nibbles Yum yum' with no posts, categories, and links to 'Home' and 'Powered by Nibbleblog'.](https://academy.hackthebox.com/storage/modules/77/yumyum_.png)
+![Blog page titled 'Nibbles Yum yum' with no posts, categories, and links to 'Home' and 'Powered by Nibbleblog'.](images/module-77-040.png)
 
 A quick Google search for "nibbleblog exploit" yields this [Nibbleblog File Upload Vulnerability](https://www.rapid7.com/db/modules/exploit/multi/http/nibbleblog_file_upload/). The flaw allows an authenticated attacker to upload and execute arbitrary PHP code on the underlying web server. The `Metasploit` module in question works for version `4.0.3`. We do not know the exact version of `Nibbleblog` in use yet, but it is a good bet that it is vulnerable to this. If we look at the source code of the `Metasploit` module, we can see that the exploit uses user-supplied credentials to authenticate the admin portal at `/admin.php`.
 
@@ -2332,13 +2332,13 @@ Documentation: http://docs.nibbleblog.com
 So we validate that version 4.0.3 is in use, confirming that this version is likely vulnerable to the `Metasploit` module (though this could be an old `README` page). Nothing else interesting pops out at us. Let us check out the admin portal login page.
 
 
-![Login form for Nibbleblog admin area with fields for username, password, 'Remember me' checkbox, and 'Back to blog' link.](https://academy.hackthebox.com/storage/modules/77/nibble_admin.png)
+![Login form for Nibbleblog admin area with fields for username, password, 'Remember me' checkbox, and 'Back to blog' link.](images/module-77-039.png)
 
 Now, to use the exploit mentioned above, we will need valid admin credentials. We can try some authorization bypass techniques and common credential pairs manually, such as `admin:admin` and `admin:password`, to no avail. There is a reset password function, but we receive an e-mail error. Also, too many login attempts too quickly trigger a lockout with the message `Nibbleblog security error - Blacklist protection`.
 
 Let us go back to our directory brute-forcing results. The `200` status codes show pages/directories that are directly accessible. The `403` status codes in the output indicate that access to these resources is forbidden. Finally, the `301` is a permanent redirect. Let us explore each of these. Browsing to `nibbleblog/themes/`. We can see that directory listing is enabled on the web application. Maybe we can find something interesting while poking around?
 
-![Directory listing of /nibbleblog/themes with folders: echo, medium, note-2, simpler, techie.](https://academy.hackthebox.com/storage/modules/77/nibbles_dir_listing.png)
+![Directory listing of /nibbleblog/themes with folders: echo, medium, note-2, simpler, techie.](images/module-77-038.png)
 
 Browsing to `nibbleblog/content` shows some interesting subdirectories `public`, `private`, and `tmp`. Digging around for a while, we find a `users.xml` file which at least seems to confirm the username is indeed admin. It also shows blacklisted IP addresses. We can request this file with `cURL` and prettify the `XML` output using [xmllint](https://linux.die.net/man/1/xmllint).
 
@@ -2453,7 +2453,7 @@ Checking it, hoping for passwords proofs fruitless, but we do see two mentions o
 When performing password cracking offline with a tool such as `Hashcat` or attempting to guess a password, it is important to consider all of the information in front of us. It is not uncommon to successfully crack a password hash (such as a company's wireless network passphrase) using a wordlist generated by crawling their website using a tool such as [CeWL](https://github.com/digininja/CeWL).
 
 
-![Nibbleblog dashboard with options to publish, manage, and settings. Notifications show session starts and login attempts.](https://academy.hackthebox.com/storage/modules/77/nibbles_loggedin.png)
+![Nibbleblog dashboard with options to publish, manage, and settings. Notifications show session starts and login attempts.](images/module-77-037.png)
 
 This shows us how crucial thorough enumeration is. Let us recap what we have found so far:
 
@@ -2493,7 +2493,7 @@ Now that we are logged in to the admin portal, we need to attempt to turn this a
 Attempting to make a new page and embed code or upload files does not seem like the path. Let us check out the plugins page.
 
 
-![Nibbleblog plugins page showing installed plugins: Categories, Hello world, Latest posts, My image, with options to configure or uninstall.](https://academy.hackthebox.com/storage/modules/77/plugins.png)
+![Nibbleblog plugins page showing installed plugins: Categories, Hello world, Latest posts, My image, with options to configure or uninstall.](images/module-77-044.png)
 
 Let us attempt to use this plugin to upload a snippet of `PHP` code instead of an image. The following snippet can be used to test for code execution.
 
@@ -2504,7 +2504,7 @@ Let us attempt to use this plugin to upload a snippet of `PHP` code instead of a
 Save this code to a file and then click on the `Browse` button and upload it.
 
 
-![Nibbleblog plugin configuration page for 'My image' with fields for title, position, caption, and file upload.](https://academy.hackthebox.com/storage/modules/77/upload.png)
+![Nibbleblog plugin configuration page for 'My image' with fields for title, position, caption, and file upload.](images/module-77-043.png)
 
 We get a bunch of errors, but it seems like the file may have uploaded.
 
@@ -2923,7 +2923,7 @@ If we feel a noticeable lag in our VPN connection, such as latency in pings or s
 
 To change our VPN Server, go to [HackTheBox](https://app.hackthebox.eu/home), click on the top-right icon that says `Lab Access` or `Offline`, click on `Labs`, and then click on `OpenVPN`. Once we do, we should be able to pick our VPN server location and pick any of the servers within that region:
 
-![Hack The Box dashboard with 801 online players, machine and challenge stats, and VPN connection options.](https://academy.hackthebox.com/storage/modules/77/htb_vpn.jpg)
+![Hack The Box dashboard with 801 online players, machine and challenge stats, and VPN connection options.](images/module-77-046.jpg)
 
 <div class="card bg-light">
     <div class="card-body">
@@ -2947,7 +2947,7 @@ When we turn the Burp proxy in our browser, Burp will start to capture our traff
 
 A common pitfall is forgetting to turn off the browser proxy after closing Burp, so it keeps intercepting our requests. If this happens, we will see that our browser is not loading any pages, so we should check if the browser proxy is still on. We can do that by clicking on the `Foxy Proxy` plugin icon in `Firefox`, and making sure it's set to `Turn Off`:
 
-<center>![FoxyProxy interface with options for 'Options', 'What's My IP?', and 'Log'.](https://academy.hackthebox.com/storage/modules/30/foxyproxy_options.jpg)</center>
+<center>![FoxyProxy interface with options for 'Options', 'What's My IP?', and 'Log'.](images/module-77-045.jpg)</center>
 
 If we are not using a plugin like `Foxy Proxy`, we can check the browser's connection settings and make sure the proxy is turned off. Once we do, we should be able to continue browsing without any issues.
 
@@ -3001,7 +3001,7 @@ When we start working on boxes on `Hack The Box`, we may likely get stuck in cer
 
 The [Hack The Box Forum](https://forum.hackthebox.com) is an excellent place for discussing live and retired `Hack The Box` boxes and challenges.
 
-![Hack The Box forum categories: HTB Content, Uncategorized, Tutorials, Off-topic, Site Feedback, Links, Capture the Flags, with latest topics listed.](https://academy.hackthebox.com/storage/modules/77/htb_forums.png)
+![Hack The Box forum categories: HTB Content, Uncategorized, Tutorials, Off-topic, Site Feedback, Links, Capture the Flags, with latest topics listed.](images/module-77-048.png)
 
 Each box has an official discussion thread, in which live discussions are had about all aspects of the box, without giving any spoilers or clear indications on how to exploit the box. If we want to work on a retired box and do not want to follow a step-by-step tutorial, we can read older box threads and look for hints and tips. This way, we can challenge ourselves on older boxes and consult the box's official discussion thread in case we get stuck.
 
@@ -3014,7 +3014,7 @@ We can join the Official `HTB` Discord server by clicking on this [link](https:/
 
 The Discord server covers a broad range of topics related to the `Hack The Box`, and you can also learn about the latest news and tournaments. The Discord server also covers discussions about `General Announcements`, `Boxes and Challenges`, `Academy Modules`, `HTB Labs`, `Hacking and Pentesting`, and `General Support`.
 
-![Discord rules: No trolling, keep content safe for work.](https://academy.hackthebox.com/storage/modules/77/htb_discord.jpg)
+![Discord rules: No trolling, keep content safe for work.](images/module-77-047.jpg)
 
 `Be sure to read over the Server Rules to avoid any wrongdoings.`
 
