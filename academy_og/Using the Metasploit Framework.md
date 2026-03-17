@@ -50,7 +50,7 @@ Suppose we audit our tools and set ourselves up with a solid methodology for pre
 
 The `Metasploit Project` is a Ruby-based, modular penetration testing platform that enables you to write, test, and execute the exploit code. This exploit code can be custom-made by the user or taken from a database containing the latest already discovered and modularized exploits. The `Metasploit Framework` includes a suite of tools that you can use to test security vulnerabilities, enumerate networks, execute attacks, and evade detection. At its core, the `Metasploit Project` is a collection of commonly used tools that provide a complete environment for penetration testing and exploit development.
 
-![Diagram of Metasploit Project showing two branches: Metasploit Framework, labeled as Open Source, Community Driven, Free; and Metasploit Pro, labeled as Commercial Use, Paid Subscription, Enterprise Oriented.](https://academy.hackthebox.com/storage/modules/39/S02_SS01.png)
+![Diagram of Metasploit Project showing two branches: Metasploit Framework, labeled as Open Source, Community Driven, Free; and Metasploit Pro, labeled as Commercial Use, Paid Subscription, Enterprise Oriented.](images/module-39-001.png)
 
 
 
@@ -281,7 +281,7 @@ This division makes it easier for us to find and select the appropriate MSF feat
 
 It is therefore crucial that we familiarize ourselves with this structure. Therefore, we will look at this framework's components to better understand how they are related.
 
-![Flowchart of Engagement Structure detailing steps: Enumeration with Service Validation and Vulnerability Research; Preparation with Code Auditing; Exploitation with Module Execution; Privilege Escalation; Post-Exploitation with Pivoting and Data Exfiltration.](https://academy.hackthebox.com/storage/modules/39/S04_SS03.png)
+![Flowchart of Engagement Structure detailing steps: Enumeration with Service Validation and Vulnerability Research; Preparation with Code Auditing; Exploitation with Module Execution; Privilege Escalation; Post-Exploitation with Pivoting and Data Exfiltration.](images/module-39-002.png)
 
 We will go through each of these categories during the module, but we recommend looking at the individual components ourselves and digging deeper. Experimenting with the different functions is an integral part of learning a new tool or skill. Therefore, we should try out everything imaginable here in the following labs and analyze the results independently.
 
@@ -1762,7 +1762,7 @@ buf += "\xc2\x9d\x53\x59\xa6\x37\xc3\x57\x11\xc8\x77\x77\x9e"
 ```
 
 #### Shikata Ga Nai Encoding
-![GIF showcasing the Shikata Ga Nai encoding with various XOR keys.](https://academy.hackthebox.com/storage/modules/39/shikata_ga_nai.gif)
+![GIF showcasing the Shikata Ga Nai encoding with various XOR keys.](images/module-39-005.gif)
 Source: https://hatching.io/blog/metasploit-payloads2/
 
 If we want to look at the functioning of the `shikata_ga_nai` encoder, we can look at an excellent post [here](https://hatching.io/blog/metasploit-payloads2/).
@@ -1834,7 +1834,7 @@ Saved as: TeamViewerInstall.exe
 
 This will generate a payload with the `exe` format, called TeamViewerInstall.exe, which is meant to work on x86 architecture processors for the Windows platform, with a hidden Meterpreter reverse_tcp shell payload, encoded once with the Shikata Ga Nai scheme. Let us take the result and upload it to VirusTotal.
 
-![VirusTotal report showing 54 out of 69 engines detected TeamViewerInstall.exe as malicious, listing various trojans and suspicious detections by different antivirus engines.](https://academy.hackthebox.com/storage/modules/39/S8_SS01.png)
+![VirusTotal report showing 54 out of 69 engines detected TeamViewerInstall.exe as malicious, listing various trojans and suspicious detections by different antivirus engines.](images/module-39-004.png)
 
 One better option would be to try running it through multiple iterations of the same Encoding scheme:
 
@@ -1859,7 +1859,7 @@ Final size of exe file: 73802 bytes
 Error: Permission denied @ rb_sysopen - /root/Desktop/TeamViewerInstall.exe
 ```
 
-![VirusTotal report showing 52 out of 65 engines detected TeamViewerInstall.exe as malicious, listing various trojans and suspicious detections by different antivirus engines.](https://academy.hackthebox.com/storage/modules/39/S8_SS02.png)
+![VirusTotal report showing 52 out of 65 engines detected TeamViewerInstall.exe as malicious, listing various trojans and suspicious detections by different antivirus engines.](images/module-39-003.png)
 
 As we can see, it is still not enough for AV evasion. There is a high number of products that still detect the payload. Alternatively, Metasploit offers a tool called `msf-virustotal` that we can use with an API key to analyze our payloads. However, this requires free registration on VirusTotal. 
 
@@ -2997,7 +2997,7 @@ host         port  proto  name  state  info
 
 Next, we look up some information about the services running on this box. Specifically, we want to explore port 80 and what kind of web service is hosted there.
 
-![Under Construction page with instructions for accessing IIS Help, including steps to run inetmgr and find Help Topics in Internet Information Services.](https://academy.hackthebox.com/storage/modules/39/S12_SS01.png)
+![Under Construction page with instructions for accessing IIS Help, including steps to run inetmgr and find Help Topics in Internet Information Services.](images/module-39-006.png)
 
 We notice it is an under-construction website—nothing web-related to see here. However, looking at both the end of the webpage and the result of the Nmap scan more closely, we notice that the server is running `Microsoft IIS httpd 6.0`. So we further our research in that direction, searching for common vulnerabilities for this version of IIS. After some searching, we find the following marker for a widespread vulnerability: `CVE-2017-7269`. It also has a Metasploit module developed for it.
 
@@ -3422,7 +3422,7 @@ However, if we need only a specific module and do not want to perform a full upg
 
 [ExploitDB](https://www.exploit-db.com) is a great choice when searching for a custom exploit. We can use tags to search through the different exploitation scenarios for each available script. One of these tags is [Metasploit Framework (MSF)](https://www.exploit-db.com/?tag=3), which, if selected, will display only scripts that are also available in Metasploit module format. These can be directly downloaded from ExploitDB and installed in our local Metasploit Framework directory, from where they can be searched and called from within the `msfconsole`.
 
-![Exploit Database interface showing search filters for Type, Platform, Author, Port, and Tag set to Metasploit Framework. Displays a list of exploits with details like date, type, platform, and author.](https://academy.hackthebox.com/storage/modules/39/exploit-db.png)
+![Exploit Database interface showing search filters for Type, Platform, Author, Port, and Tag set to Metasploit Framework. Displays a list of exploits with details like date, type, platform, and author.](images/module-39-007.png)
 
 
 Let's say we want to use an exploit found for `Nagios3`, which will take advantage of a command injection vulnerability. The module we are looking for is `Nagios3 - 'statuswml.cgi' Command Injection (Metasploit)`. So we fire up `msfconsole` and try to search for that specific exploit, but we cannot find it. This means that our Metasploit framework is not up to date or that the specific `Nagios3` exploit module we are looking for is not in the official updated release of the Metasploit Framework.
@@ -3922,7 +3922,7 @@ msf6 exploit(multi/handler) > run
 
 Now we can trigger the `.aspx` payload on the web service. Doing so will load absolutely nothing visually speaking on the page, but looking back to our `multi/handler` module, we would have received a connection. We should ensure that our `.aspx` file does not contain HTML, so we will only see a blank web page. However, the payload is executed in the background anyway.
 
-![Triggering the .aspx payload by visiting the appropriate web page.](https://academy.hackthebox.com/storage/modules/39/S16_SS01.jpg)
+![Triggering the .aspx payload by visiting the appropriate web page.](images/module-39-008.jpg)
 
 
 #### MSF - Meterpreter Shell

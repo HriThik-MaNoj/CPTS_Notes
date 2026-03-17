@@ -4,7 +4,7 @@
 
 `Web Reconnaissance` is the foundation of a thorough security assessment. This process involves systematically and meticulously collecting information about a target website or web application. Think of it as the preparatory phase before delving into deeper analysis and potential exploitation. It forms a critical part of the "`Information Gathering`" phase of the Penetration Testing Process.
 
-![Flowchart of the Penetration Testing Process: Pre-Engagement, Information Gathering, Vulnerability Assessment, Exploitation, Post-Exploitation, Lateral Movement, Proof-of-Concept, and Post-Engagement.](https://academy.hackthebox.com/storage/modules/144/PT-process.png)
+![Flowchart of the Penetration Testing Process: Pre-Engagement, Information Gathering, Vulnerability Assessment, Exploitation, Post-Exploitation, Lateral Movement, Proof-of-Concept, and Post-Engagement.](images/module-144-001.png)
 
 The primary goals of web reconnaissance include:
 
@@ -265,7 +265,7 @@ Without DNS, navigating the online world would be akin to driving without a map 
 
 Imagine you want to visit a website like `www.example.com`. You type this friendly domain name into your browser, but your computer doesn't understand words – it speaks the language of numbers, specifically IP addresses. So, how does your computer find the website's IP address? Enter DNS, the internet's trusty translator.
 
-![Flowchart showing two main sections: User Database and Data Collection. Includes steps like 'Check User', 'Send to Source Database', 'Store Data', and 'Send to UI System'.](https://mermaid.ink/svg/pako:eNptkk1uwjAQha8y8rpcIItWkAAtUNQmlSrksDDxlEQQT-QfJIS4ex2nNG1arzx-n5-ex3NhBUlkEdtr0ZSwSnMFfhm36w425DTEVDfOou60do15XGJxMBCLosQtjEb3MLk8vcCMnJIP156ceA3WFIiYZ6ikgWSdwatDfQZLkKKh4wn1dnBngyZceuQxKYWFNS39jjtTWfyCvdsgb2t9c-wN4-CU_A7dy8mPjFOeYuG0qU4IK6KDa4bgLdjck9ZpZcC_20e7dWmYbRroGU-JLKxFjZCh7h88C_KCv62Sf9RFUJd87GxJurLCtsH-cssuUlfMu8blit2xGnUtKul_-NKKObMl1pizyG-l0Iec5erqOeEsZWdVsMhqh3dMk9uXLPoQR-Mr10hhMamE73L9fYqysqSfuwEKc3T9BOe0sj4)
+![Flowchart showing two main sections: User Database and Data Collection. Includes steps like 'Check User', 'Send to Source Database', 'Store Data', and 'Send to UI System'.](images/module-144-002)
 
 1. `Your Computer Asks for Directions (DNS Query)`: When you enter the domain name, your computer first checks its memory (cache) to see if it remembers the IP address from a previous visit. If not, it reaches out to a DNS resolver, usually provided by your internet service provider (ISP).
 
@@ -633,7 +633,7 @@ While brute-forcing can be a fruitful approach, there's a less invasive and pote
 
 A DNS zone transfer is essentially a wholesale copy of all DNS records within a zone (a domain and its subdomains) from one name server to another. This process is essential for maintaining consistency and redundancy across DNS servers. However, if not adequately secured, unauthorised parties can download the entire zone file, revealing a complete list of subdomains, their associated IP addresses, and other sensitive DNS data.
 
-![Diagram showing data transfer between secondary and primary servers. Includes steps: XML Request, XML Record, loop for retries, XML Report, and AOK (Acknowledgment).](https://academy.hackthebox.com/storage/modules/144/ig_dns_zone_transfers_1.png)
+![Diagram showing data transfer between secondary and primary servers. Includes steps: XML Request, XML Record, loop for retries, XML Report, and AOK (Acknowledgment).](images/module-144-003.png)
 
 1. `Zone Transfer Request (AXFR)`: The secondary DNS server initiates the process by sending a zone transfer request to the primary server. This request typically uses the AXFR (Full Zone Transfer) type.
 2. `SOA Record Transfer`: Upon receiving the request (and potentially authenticating the secondary server), the primary server responds by sending its Start of Authority (SOA) record. The SOA record contains vital information about the zone, including its serial number, which helps the secondary server determine if its zone data is current.
@@ -745,7 +745,7 @@ Here, `example1.com`, `example2.org`, and `another-example.net` are distinct dom
 
 The following illustrates the process of how a web server determines the correct content to serve based on the `Host` header:
 
-![Sequence diagram showing interactions between Browser, WebServer, VirtualHostConfig, and DocumentRoot. Includes HTTP request, server response, and file access steps.](https://academy.hackthebox.com/storage/modules/144/ig_virtualhosts_1.png)
+![Sequence diagram showing interactions between Browser, WebServer, VirtualHostConfig, and DocumentRoot. Includes HTTP request, server response, and file access steps.](images/module-144-004.png)
 
 1. `Browser Requests a Website`: When you enter a domain name (e.g., `www.inlanefreight.com`) into your browser, it initiates an HTTP request to the web server associated with that domain's IP address.
 2. `Host Header Reveals the Domain`: The browser includes the domain name in the request's `Host` header, which acts as a label to inform the web server which website is being requested.
@@ -876,7 +876,7 @@ To ensure CT logs' integrity and tamper-proof nature, they employ a Merkle tree 
 
 Let's visualise this with a hypothetical Merkle tree for `inlanefreight.com`:
 
-![](https://academy.hackthebox.com/storage/modules/144/diagram-001.png)
+![](images/module-144-005.png)
 
 In this hypothetical tree:
 
@@ -1165,13 +1165,13 @@ There are two primary types of crawling strategies.
 
 ### Breadth-First Crawling
 
-![Flowchart showing a Seed URL leading to Page 1, which branches to Page 2 and Page 3. Page 2 connects to Page 4 and Page 5, while Page 3 connects to Page 6 and Page 7.](https://academy.hackthebox.com/storage/modules/144/ig_crawling_1.png)
+![Flowchart showing a Seed URL leading to Page 1, which branches to Page 2 and Page 3. Page 2 connects to Page 4 and Page 5, while Page 3 connects to Page 6 and Page 7.](images/module-144-007.png)
 
 `Breadth-first crawling` prioritizes exploring a website's width before going deep. It starts by crawling all the links on the seed page, then moves on to the links on those pages, and so on. This is useful for getting a broad overview of a website's structure and content.
 
 ### Depth-First Crawling
 
-![Flowchart showing a Seed URL leading to Page 1, then to Page 2. Page 2 connects to Page 3, which branches to Page 4 and Page 5.](https://mermaid.ink/svg/pako:eNo9zz0PgjAQBuC_0twsg18LgwlfGyYG4uQ5VHoC0RZS2sEQ_rsnTezU98mlvXeGZlAEMbRWjp0oKzSTf4RQEylxrUo0gk9yu8iWxPaOhoxCk4goOok06I41XSELsGfIVsgDHBjyFYoAR4YivCEEGtiAJqtlr3iZ-fclgutIE0LMVyXtCwHNwnPSu6H-mAZiZz1twA6-7SB-yvfEyY9KOsp7ySX0X0n1brDn0HWtvHwB2SFOww)
+![Flowchart showing a Seed URL leading to Page 1, then to Page 2. Page 2 connects to Page 3, which branches to Page 4 and Page 5.](images/module-144-006)
 
 In contrast, `depth-first crawling` prioritizes depth over breadth. It follows a single path of links as far as possible before backtracking and exploring other paths. This can be useful for finding specific content or reaching deep into a website's structure.
 
@@ -1518,7 +1518,7 @@ In the fast-paced digital world, websites come and go, leaving only fleeting tra
 
 ### What is the Wayback Machine?
 
-![Internet Archive Wayback Machine homepage with search bar for web pages, tools like browser extensions, and options for subscription service, collection search, and saving pages.](https://academy.hackthebox.com/storage/modules/144/wayback.png)
+![Internet Archive Wayback Machine homepage with search bar for web pages, tools like browser extensions, and options for subscription service, collection search, and saving pages.](images/module-144-010.png)
 
 `The Wayback Machine` is a digital archive of the World Wide Web and other information on the Internet. Founded by the Internet Archive, a non-profit organization, it has been archiving websites since 1996. 
 
@@ -1530,7 +1530,7 @@ The Wayback Machine operates by using web crawlers to capture snapshots of websi
 
 The Wayback Machine's operation can be visualized as a three-step process:
 
-![Flowchart with three steps: Crawling, Archiving, Accessing.](https://academy.hackthebox.com/storage/modules/144/ig_webarchives_1.png)
+![Flowchart with three steps: Crawling, Archiving, Accessing.](images/module-144-009.png)
 
 1. `Crawling`: The Wayback Machine employs automated web crawlers, often called "bots," to browse the internet systematically. These bots follow links from one webpage to another, like how you would click hyperlinks to explore a website. However, instead of just reading the content, these bots download copies of the webpages they encounter.
 2. `Archiving`: The downloaded webpages, along with their associated resources like images, stylesheets, and scripts, are stored in the Wayback Machine's vast archive. Each captured webpage is linked to a specific date and time, creating a historical snapshot of the website at that moment. This archiving process happens at regular intervals, sometimes daily, weekly, or monthly, depending on the website's popularity and frequency of updates.
@@ -1553,7 +1553,7 @@ The Wayback Machine is a treasure trove for web reconnaissance, offering informa
 
 We can view the first archived version of HackTheBox by entering the page we are looking for into the Wayback Machine and selecting the earliest available capture date, being `2017-06-10 @ 04h23:01`
 
-![Wayback Machine capture of Hack The Box homepage, version 0.8.7 beta, featuring a geometric cube logo and an 'About' section describing the platform for testing penetration skills.](https://academy.hackthebox.com/storage/modules/144/wayback-htb.png)
+![Wayback Machine capture of Hack The Box homepage, version 0.8.7 beta, featuring a geometric cube logo and an 'About' section describing the platform for testing penetration skills.](images/module-144-008.png)
 
 
 # Automating Recon

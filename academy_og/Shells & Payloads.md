@@ -1,7 +1,7 @@
 # Shells Jack Us In, Payloads Deliver Us Shells
 ----  
 
-![GIF showcasing a Bash script with matrix effect.](https://academy.hackthebox.com/storage/modules/115/nonono.txt)
+![GIF showcasing a Bash script with matrix effect.](images/module-115-001.txt)
   
 A `shell` is a program that provides a computer user with an interface to input instructions into the system and view text output (Bash, Zsh, cmd, and PowerShell, for example). As penetration testers and information security professionals, a shell is often the result of exploiting a vulnerability or bypassing security measures to gain interactive access to a host. We may have heard or read the following phrases used by people discussing an engagement or a recent practice session:  
   
@@ -118,7 +118,7 @@ Understanding the command language interpreter in use on any given system will a
 Let's use our `Parrot OS` Pwnbox to further explore the anatomy of a shell. Click the `green` square icon at the top of the screen to open the `MATE` terminal emulator and then type something random and hit enter.  
   
 #### Terminal Example
-![Terminal showing command not found errors for 'wasdf' and 'meep' on a Parrot OS system.](https://academy.hackthebox.com/storage/modules/115/green-square.png)  
+![Terminal showing command not found errors for 'wasdf' and 'meep' on a Parrot OS system.](images/module-115-003.png)  
   
 As soon as we selected the icon, it opened the MATE terminal emulator application, which has been pre-configured to use a command language interpreter. In this instance, we are "clued" to what language interpreter is in use by seeing the `$` sign. This $ sign is used in Bash, Ksh, POSIX, and many other shell languages to mark the start of the `shell prompt` where the user can begin typing commands and other input. When we typed out our random text and hit enter, our command language interpreter was identified. That is Bash telling us that it did not recognize that command we typed. So here, we can see command language interpreters can have their own set of commands that they recognize. Another way we can identify the language interpreter is by viewing the processes running on the machine. In Linux, we can do this using the following command: 
 
@@ -143,7 +143,7 @@ SHELL=/bin/bash
 Now let's select the blue square icon at the top of the screen in Pwnbox.
 
 #### PowerShell vs. Bash  
-![Terminal showing PowerShell version 7.1.3 on Linux, with a prompt for a new stable release v7.2.0.](https://academy.hackthebox.com/storage/modules/115/blue-box.png)  
+![Terminal showing PowerShell version 7.1.3 on Linux, with a prompt for a new stable release v7.2.0.](images/module-115-002.png)  
 
 
 Selecting this icon also opens the MATE terminal application but uses a different command language interpreter this time around. Compare them as they are placed side-by-side. 
@@ -167,7 +167,7 @@ In many cases, we will be working to establish a shell on a system on a local or
 With a bind shell, the `target` system has a listener started and awaits a connection from a pentester's system (attack box).
 
 #### Bind Example  
-![Bind shell setup: Pentester's system 10.10.14.15 connects to target 10.10.14.20:1337 using netcat command.](https://academy.hackthebox.com/storage/modules/115/bindshell.png)
+![Bind shell setup: Pentester's system 10.10.14.15 connects to target 10.10.14.20:1337 using netcat command.](images/module-115-004.png)
 
 As seen in the image, we would connect directly with the `IP address` and `port` listening on the target. There can be many challenges associated with getting a shell this way. Here are some to consider: 
 
@@ -285,7 +285,7 @@ Now, let's test our understanding of these concepts with some challenge question
 With a `reverse shell`, the attack box will have a listener running, and the target will need to initiate the connection. 
 
 #### Reverse Shell Example  
-![Reverse shell setup: Target 10.10.14.20 connects back to pentester's system 10.10.14.15:1337 using netcat command.](https://academy.hackthebox.com/storage/modules/115/reverseshell.png)  
+![Reverse shell setup: Target 10.10.14.20 connects back to pentester's system 10.10.14.15:1337 using netcat command.](images/module-115-005.png)  
 
 We will often use this kind of shell as we come across vulnerable systems because it is likely that an admin will overlook outbound connections, giving us a better chance of going undetected. The last section discussed how bind shells rely on incoming connections allowed through the firewall on the server-side. It will be much harder to pull this off in a real-world scenario. As seen in the image above, we are starting a listener for a reverse shell on our attack box and using some method (example: `Unrestricted File Upload`, `Command Injection`, etc..) to force the target to initiate a connection with our target box, effectively meaning our attack box becomes the server and the target becomes the client. 
   
@@ -1074,7 +1074,7 @@ Imagine for a moment: the target machine is an Ubuntu box that an IT admin uses 
 
 #### Ubuntu Payload
 
-![File explorer showing 'createbackup.elf' in the Downloads folder on a Linux system.](https://academy.hackthebox.com/storage/modules/115/ubuntupayload.png)
+![File explorer showing 'createbackup.elf' in the Downloads folder on a Linux system.](images/module-115-007.png)
 
 
 We would have a listener ready to catch the connection on the attack box side upon successful execution. 
@@ -1135,7 +1135,7 @@ The command syntax can be broken down in the same way we did above. The only dif
 
 This is another situation where we need to be creative in getting this payload delivered to a target system. Without any `encoding` or `encryption`, the payload in this form would almost certainly be detected by Windows Defender AV. 
 
-![File explorer showing 'BonusCompensationPlan.pdf' in the Downloads folder on a Windows system.](https://academy.hackthebox.com/storage/modules/115/winpayload.png)
+![File explorer showing 'BonusCompensationPlan.pdf' in the Downloads folder on a Windows system.](images/module-115-006.png)
 
 If the AV was disabled all the user would need to do is double click on the file to execute and we would have a shell session. 
 
@@ -1174,7 +1174,7 @@ For example, just in the last five years, there have been `3688` reported vulner
 
 #### Windows Vulnerability Table
 
-![Table showing the number of vulnerabilities and exploits from 1999 to 2021. It includes categories like DoS, Code Execution, Overflow, Memory Corruption, SQL Injection, XSS, Directory Traversal, and more. Each year lists the number of vulnerabilities and exploits, with totals and percentages at the bottom.](https://academy.hackthebox.com/storage/modules/115/window-vulns-table.png)               
+![Table showing the number of vulnerabilities and exploits from 1999 to 2021. It includes categories like DoS, Code Execution, Overflow, Memory Corruption, SQL Injection, XSS, Directory Traversal, and more. Each year lists the number of vulnerabilities and exploits, with totals and percentages at the bottom.](images/module-115-008.png)               
 
 ## Prominent Windows Exploits
 
@@ -1703,7 +1703,7 @@ Keeping our goal of `gaining a shell session` in mind, we must establish some ne
 Considering we can see the system is listening on ports 80 (`HTTP`), 443 (`HTTPS`), 3306 (`MySQL`), and 21 (`FTP`), it may be safe to assume that this is a web server hosting a web application. We can also see some version numbers revealed associated with the web stack (`Apache 2.4.6` and `PHP 7.2.34` ) and the distribution of Linux running on the system (`CentOS`). Before deciding on a direction to research further (dive down a rabbit hole), we should also try navigating to the IP address through a web browser to discover the hosted application if possible.  
 
 #### rConfig Management Tool
-![The image shows the rConfig Configuration Management login page with fields for username and password, a "Remember me" checkbox, and a "Forgot my password?" link. The rConfig logo is displayed on the right.](https://academy.hackthebox.com/storage/modules/115/rconfig.png)
+![The image shows the rConfig Configuration Management login page with fields for username and password, a "Remember me" checkbox, and a "Forgot my password?" link. The rConfig logo is displayed on the right.](images/module-115-010.png)
 
 Here we discover a network configuration management tool called [rConfig](https://www.rconfig.com). This application is used by network & system administrators to automate the process of configuring network appliances. One practical use case would be to use rConfig to remotely configure network interfaces with IP addressing information on multiple routers simultaneously. This tool saves admins time but, if compromised, could be used to pivot onto critical network devices that switch & route packets across the network. A malicious attacker could own the entire network through rConfig since it will likely have admin access to all the network appliances used to configure. As pentesters, finding a vulnerability in this application would be considered a very critical discovery.
 
@@ -1714,7 +1714,7 @@ Take a close look at the bottom of the web login page, and we can see the rConfi
 
 Using your search engine of choice will turn up some promising results. We can use the keywords: `rConfig 3.9.6 vulnerability.`
 
-![The image shows a Google search results page for "rconfig 3.9.6 vulnerability." The top results include links to exploit-db.com and mageni.net, discussing arbitrary file upload to remote code execution and multiple vulnerabilities in rConfig 3.9.6.](https://academy.hackthebox.com/storage/modules/115/rconfigresearch.png)
+![The image shows a Google search results page for "rconfig 3.9.6 vulnerability." The top results include links to exploit-db.com and mageni.net, discussing arbitrary file upload to remote code execution and multiple vulnerabilities in rConfig 3.9.6.](images/module-115-009.png)
 
 We can see that it may be worthwhile to choose this as the main focus of our research. The same thinking could be applied to the Apache and PHP versions, but since the application is running on the web stack, let's see if we can gain a shell through an exploit written for the vulnerabilities found in rConfig. 
 
@@ -2024,24 +2024,24 @@ Add your IP address to the `allowedIps` variable on line `59`. Make any other ch
 
 #### Modify the Shell for Use 
 
-![The image shows a code snippet in a text editor. It highlights an array of allowed IP addresses, including "10.10.14.12". A yellow arrow points to this line, indicating its significance.](https://academy.hackthebox.com/storage/modules/115/modify-shell.png)
+![The image shows a code snippet in a text editor. It highlights an array of allowed IP addresses, including "10.10.14.12". A yellow arrow points to this line, indicating its significance.](images/module-115-014.png)
 
 We are taking advantage of the upload function at the bottom of the status page(`Green Arrow`) for this to work. Select your shell file and hit upload. If successful, it should print out the path to where the file was saved (Yellow Arrow). Use the upload function. Success prints out where the file went, navigate to it.
 
 #### Take Advantage of the Upload Function
 
-![The image shows a server status page with BIOS, disk, and services information. Several services are marked as "Stopped" in red. A section for importing configuration files is highlighted with a yellow arrow pointing to the file path and a green arrow pointing to the "Upload File" button.](https://academy.hackthebox.com/storage/modules/115/laud-upload.png)
+![The image shows a server status page with BIOS, disk, and services information. Several services are marked as "Stopped" in red. A section for importing configuration files is highlighted with a yellow arrow pointing to the file path and a green arrow pointing to the "Upload File" button.](images/module-115-013.png)
 
 Once the upload is successful, you will need to navigate to your web shell to utilize its functions. The image below shows us how to do it. As seen from the last image, our shell was uploaded to the `\\files\` directory, and the name was kept the same. This won't always be the case. You may run into some implementations that randomize filenames on upload that do not have a public files directory or any number of other potential safeguards. For now, we are lucky that's not the case. With this particular web application, our file went to `status.inlanefreight.local\\files\demo.aspx` and will require us to browse for the upload by using that \ in the path instead of the / like normal. Once you do this, your browser will clean it up in your URL window to appear as `status.inlanefreight.local//files/demo.aspx`. 
 
 #### Navigate to Our Shell
-![The image shows a Laundanum ASPX Shell interface with a command input field labeled "cmd /c" and a "Submit Query" button. A green arrow points to the URL "status.inlanefreight.local/files/demo.aspx" in the browser's address bar.](https://academy.hackthebox.com/storage/modules/115/laud-nav.png)
+![The image shows a Laundanum ASPX Shell interface with a command input field labeled "cmd /c" and a "Submit Query" button. A green arrow points to the URL "status.inlanefreight.local/files/demo.aspx" in the browser's address bar.](images/module-115-012.png)
 
 We can now utilize the Laudanum shell we uploaded to issue commands to the host. We can see in the example that the `systeminfo` command was run.
 
 #### Shell Success
 
-![The image shows a Laundanum ASPX Shell interface displaying system information. It includes details like host name, OS version, manufacturer, system type, processor, memory, and network card information. The command "systeminfo" is executed, and the output is shown under "STDOUT" in the browser window.](https://academy.hackthebox.com/storage/modules/115/laud-success.png)
+![The image shows a Laundanum ASPX Shell interface displaying system information. It includes details like host name, OS version, manufacturer, system type, processor, memory, and network card information. The command "systeminfo" is executed, and the output is shown under "STDOUT" in the browser window.](images/module-115-011.png)
 
 
 # Antak Webshell
@@ -2051,7 +2051,7 @@ We can now utilize the Laudanum shell we uploaded to issue commands to the host.
 
 Before diving into aspx shell concepts and exercises, we should take the time to cover a learning resource that can help reinforce most of the concepts covered here in HTB Academy. Occasionally it can be a challenge to visualize a concept using just one learning method. It is good to supplement reading with watching demonstrations and performing hands-on as we have been doing thus far. Video walkthroughs can be an amazing way to learn concepts, plus they can be consumed casually (eating lunch, laying in bed, sitting on the couch, etc.). One great resource to use in learning is `IPPSEC's` blog site [ippsec.rocks](https://ippsec.rocks/?#). The site is a powerful learning tool. Take, for example, the concept of web shells. We can use his site to type in the concept we want to learn, like aspx.
 
-![The image shows a list of IPPSEC videos and courses related to ASPX. It includes titles like "Cereal," "RE," "Bounty," "Silo," "Minion," and "Granny and Grandpa," with descriptions of tasks such as hosting an ASPX file and using Gobuster to find ASPX pages.](https://academy.hackthebox.com/storage/modules/115/ippsecrocks.png)
+![The image shows a list of IPPSEC videos and courses related to ASPX. It includes titles like "Cereal," "RE," "Bounty," "Silo," "Minion," and "Granny and Grandpa," with descriptions of tasks such as hosting an ASPX file and using Gobuster to find ASPX pages.](images/module-115-019.png)
 
 His site crawls the descriptions of each of the videos he has posted on YouTube and recommends a timestamp associated with that keyword. When we click one of the links, it will take us to that section of the video where this concept is demonstrated. It's like a search engine to learn hacking skills. To gain a good basic understanding of what an aspx web shell is, let's watch the short portion of IPPSEC's demonstration of the retired box [Cereal](https://www.youtube.com/watch?v=04ZBIioD5pA&t=4677s). The link should start us at the 1-hour 17-minute mark. Watch from 1 hour 17-minute mark to the 1-hour 20-minute mark.
 
@@ -2095,21 +2095,21 @@ cp /usr/share/nishang/Antak-WebShell/antak.aspx /home/administrator/Upload.aspx
 Make sure you set credentials for access to the web shell. Modify `line 14`, adding a user (green arrow) and password (orange arrow). This comes into play when you browse to your web shell, much like Laudanum. This can help make your operations more secure by ensuring random people can't just stumble into using the shell. It can be prudent to remove the ASCII art and comments from the file. These items in a payload are often signatured on and can alert the defenders/AV to what you are doing.
 
 #### Modify the Shell for Use 
-![The image shows a code snippet with a conditional statement checking if the username is "Disclaimer" and the password is "ForLegitUseOnly". If true, it sets execution visibility and enables it. Green and orange arrows highlight the username and password conditions.](https://academy.hackthebox.com/storage/modules/115/antak-changes.png)
+![The image shows a code snippet with a conditional statement checking if the username is "Disclaimer" and the password is "ForLegitUseOnly". If true, it sets execution visibility and enables it. Green and orange arrows highlight the username and password conditions.](images/module-115-018.png)
 
 For the sake of demonstrating the tool, we are uploading it to the same status portal we used for Laudanum. That host was a Windows host, so our shell should work just fine with PowerShell. Upload the file and then navigate to the page for use. It will give you a user and password prompt. Remember, with this web application, the files are stored in the `\\files\` directory. When you navigate to the `upload.aspx` file, you should see a prompt as we have below. 
 
 #### Shell Success
-![The image shows a login form for the Antak Webshell with fields for username and password, both filled with "htb-student". A "Login" button is present below the fields. The URL in the browser's address bar is "status.inlanefreight.local/files/upload.aspx".](https://academy.hackthebox.com/storage/modules/115/antak-creds-prompt.png)
+![The image shows a login form for the Antak Webshell with fields for username and password, both filled with "htb-student". A "Login" button is present below the fields. The URL in the browser's address bar is "status.inlanefreight.local/files/upload.aspx".](images/module-115-017.png)
 
 As seen in the following image, we will be granted access if our credentials are entered properly.
 
-![The image shows the Antak Webshell interface with a blue command prompt area displaying the message: "Welcome to Antak - A Webshell which utilizes PowerShell. Use help for more details. Use clear to clear the screen." Below are buttons labeled "Submit," "Browse," "Upload the File," "Encode and Execute," "Download," "Parse web.config," "Execute SQL Query," and a field for entering a connection string.](https://academy.hackthebox.com/storage/modules/115/antak-success.png)
+![The image shows the Antak Webshell interface with a blue command prompt area displaying the message: "Welcome to Antak - A Webshell which utilizes PowerShell. Use help for more details. Use clear to clear the screen." Below are buttons labeled "Submit," "Browse," "Upload the File," "Encode and Execute," "Download," "Parse web.config," "Execute SQL Query," and a field for entering a connection string.](images/module-115-016.png)
 
 Now that we have access, we can utilize PowerShell commands to navigate and take actions against the host. We can issue basic commands from the Antak shell window, upload and download files, encode and execute scripts, and much more (green arrow below). This is an excellent way to utilize a Webshell to deliver us a callback to our command and control platform. We could upload the payload via the Upload function or use a PowerShell one-liner to download and execute the shell for us. If you feel unsure where to start, issue the command `help` in the prompt window (orange arrow ) below.
 
 #### Issuing Commands
-![The image shows a command prompt window listing files and directories in two sections. The first section displays logs in a directory, and the second section lists user directories under "C:\Users". Below the command output, there are buttons labeled "Submit," "Browse," "Upload the File," "Encode and Execute," and "Download." An orange arrow points to the "Submit" button, and a green arrow points to the "Encode and Execute" button.](https://academy.hackthebox.com/storage/modules/115/antak-commands.png)
+![The image shows a command prompt window listing files and directories in two sections. The first section displays logs in a directory, and the second section lists user directories under "C:\Users". Below the command output, there are buttons labeled "Submit," "Browse," "Upload the File," "Encode and Execute," and "Download." An orange arrow points to the "Submit" button, and a green arrow points to the "Encode and Execute" button.](images/module-115-015.png)
 
 
 # PHP Web Shells 
@@ -2120,7 +2120,7 @@ Hypertext Preprocessor or [PHP](https://www.php.net) is an open-source general-p
 Let's consider a practical example of filling out the user account and password fields on a login web form.
 
 #### PHP Login Page 
-![rConfig login page with fields for username and password, 'Remember me' checkbox, and 'Forgot my password' link.](https://academy.hackthebox.com/storage/modules/115/rconfig.png)
+![rConfig login page with fields for username and password, 'Remember me' checkbox, and 'Forgot my password' link.](images/module-115-025.png)
 
 Recall the rConfig server from earlier in this module? It uses PHP. We can see a `login.php` file. So when we select the login button after filling out the Username and Password field, that information is processed server-side using PHP. Knowing that a web server is using PHP gives us pentesters a clue that we may gain a PHP-based web shell on this system. Let's work through this concept hands-on. 
 
@@ -2130,14 +2130,14 @@ Recall the rConfig server from earlier in this module? It uses PHP. We can see a
 Since PHP processes code & commands on the server-side, we can use pre-written payloads to gain a shell through the browser or initiate a reverse shell session with our attack box. In this case, we will take advantage of the vulnerability in rConfig 3.9.6 to manually upload a PHP web shell and interact with the underlying Linux host. In addition to all the functionality mentioned earlier, rConfig allows admins to add network devices and categorize them by vendor. Go ahead and log in to rConfig with the default credentials (admin:admin), then navigate to `Devices` > `Vendors` and click `Add Vendor`.
 
 #### Vendors Tab
-![rConfig vendor management page with options to add, edit, or remove vendors, fields for vendor name and logo upload, and save or close buttons.](https://academy.hackthebox.com/storage/modules/115/vendors_tab.png)
+![rConfig vendor management page with options to add, edit, or remove vendors, fields for vendor name and logo upload, and save or close buttons.](images/module-115-024.png)
 
 We will be using [WhiteWinterWolf's PHP Web Shell](https://github.com/WhiteWinterWolf/wwwolf-php-webshell). We can download this or copy and paste the source code into a `.php` file. Keep in mind that the file type is significant, as we will soon witness. Our goal is to upload the PHP web shell via the Vendor Logo `browse` button. Attempting to do this initially will fail since rConfig is checking for the file type. It will only allow uploading image file types (.png,.jpg,.gif, etc.). However, we can bypass this utilizing `Burp Suite`.
 
 Start Burp Suite, navigate to the browser's network settings menu and fill out the proxy settings. `127.0.0.1` will go in the IP address field, and `8080` will go in the port field to ensure all requests pass through Burp (recall that Burp acts as the web proxy). 
 
 #### Proxy Settings
-![Proxy settings dialog with options for no proxy, auto-detect, system settings, and manual configuration with HTTP proxy set to 127.0.0.1:8080.](https://academy.hackthebox.com/storage/modules/115/proxy_settings.png)
+![Proxy settings dialog with options for no proxy, auto-detect, system settings, and manual configuration with HTTP proxy set to 127.0.0.1:8080.](images/module-115-023.png)
 
 Our goal is to change the `content-type` to bypass the file type restriction in uploading files to be "presented" as the vendor logo so we can navigate to that file and have our web shell.
 
@@ -2153,12 +2153,12 @@ Our goal is to change the `content-type` to bypass the file type restriction in 
 With Burp open and our web browser proxy settings properly configured, we can now upload the PHP web shell. Click the browse button, navigate to wherever our .php file is stored on our attack box, and select open and `Save` (we may need to accept the PortSwigger Certificate). It will seem as if the web page is hanging, but that's just because we need to tell Burp to forward the HTTP requests. Forward requests until you see the POST request containing our file upload. It will look like this: 
 
 #### Post Request  
-![Burp Suite showing intercepted HTTP request with headers and PHP code snippet.](https://academy.hackthebox.com/storage/modules/115/burp.png)
+![Burp Suite showing intercepted HTTP request with headers and PHP code snippet.](images/module-115-022.png)
 
 As mentioned in an earlier section, you will notice that some payloads have comments from the author that explain usage, provide kudos and links to personal blogs. This can give us away, so it's not always best to leave the comments in place. We will change Content-type from `application/x-php` to `image/gif`. This will essentially "trick" the server and allow us to upload the .php file, bypassing the file type restriction. Once we do this, we can select `Forward` twice, and the file will be submitted. We can turn the Burp interceptor off now and go back to the browser to see the results.
 
 #### Vendor Added
-![Vendor management page showing added vendor 'NetVen' with options to add, edit, or remove vendors, and a table listing 'Cisco' and 'NetVen'.](https://academy.hackthebox.com/storage/modules/115/added_vendor.png)
+![Vendor management page showing added vendor 'NetVen' with options to add, edit, or remove vendors, and a table listing 'Cisco' and 'NetVen'.](images/module-115-021.png)
 
 The message: `Added new vendor NetVen to Database` lets us know our file upload was successful. We can also see the NetVen vendor entry with the logo showcasing a ripped piece of paper. This means rConfig did not recognize the file type as an image, so it defaulted to that image. We can now attempt to use our web shell. Using the browser, navigate to this directory on the rConfig server: 
 
@@ -2167,7 +2167,7 @@ The message: `Added new vendor NetVen to Database` lets us know our file upload 
 This executes the payload and provides us with a non-interactive shell session entirely in the browser, allowing us to execute commands on the underlying OS. 
 
 #### Webshell Success
-![Web interface for fetching files with fields for host, port, path, command execution, and sudo output showing allowed commands.](https://academy.hackthebox.com/storage/modules/115/web_shell_now.png)
+![Web interface for fetching files with fields for host, port, path, command execution, and sudo output showing allowed commands.](images/module-115-020.png)
 
 ----
 ## Considerations when Dealing with Web Shells
@@ -2232,12 +2232,12 @@ You can find the `target IP`, `Username`, and `Password` needed below:
    
 Once you initiate the connection, you will be required to enter the provided credentials again in the window you see below:    
 #### XFreeRDP Login    
-![Login screen for FreeRDP with fields for session, username, and password.](https://academy.hackthebox.com/storage/modules/115/xfree-login.png)  
+![Login screen for FreeRDP with fields for session, username, and password.](images/module-115-027.png)  
 
 Enter your credentials again and click `OK` and you will be connected to the provided Parrot Linux desktop instance. 
 
 #### Target Hosts   
-![Network diagram with three hosts: Host-01 at 172.16.1.11:8080, Host-02 at blog.inlanefreight.local, Host-03 at 172.16.1.13, and a foothold labeled 'See target spawn'.](https://academy.hackthebox.com/storage/modules/115/challenge-map.png)  
+![Network diagram with three hosts: Host-01 at 172.16.1.11:8080, Host-02 at blog.inlanefreight.local, Host-03 at 172.16.1.13, and a foothold labeled 'See target spawn'.](images/module-115-026.png)  
   
 Hosts 1-3 will be your targets for this skills challenge. Each host has a unique vector to attack and may even have more than one route built-in. The challenge questions below can be answered by exploiting these three hosts. Gain access and enumerate these targets. You will need to utilize the Foothold PC provided. The IP will appear when you spawn the targets. Attempting to interact with the targets from anywhere other than the foothold will not work. Keep in mind that the Foothold host has access to the Internal inlanefreight network (`172.16.0.0/23` network) so you may want to pay careful attention to the IP address you pick when starting your listeners.
   
@@ -2285,7 +2285,7 @@ We are on the downslope now! Let's take a break from our super-spy business of i
 When it comes to looking for and identifying active shells, payload delivery and execution, and potential attempts to subvert our defenses, we have many different options to utilize to detect and respond to these events. Before talking about data sources and tools we can use, let's take a second to talk about the [MITRE ATT&CK Framework](https://attack.mitre.org/) and define the techniques and tactics being utilized by attackers. The `ATT&CK Framework` as defined by MITRE, is "`a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations`."
 
 #### ATT&CK Framework
-![MITRE ATT&CK Enterprise Framework matrix showing tactics like Initial Access, Execution, Persistence, and techniques under each category.](https://academy.hackthebox.com/storage/modules/115/attack-framework.png) 
+![MITRE ATT&CK Enterprise Framework matrix showing tactics like Initial Access, Execution, Persistence, and techniques under each category.](images/module-115-030.png) 
 
 Keeping the framework in mind, three of the most notable techniques we can tie to Shells & Payloads are listed below in the table with descriptions. 
 
@@ -2321,14 +2321,14 @@ This image shows NetFlow between two hosts frequently and on a suspicious port (
 ----
 
 #### Suspicious Traffic.. In Clear Text
-![Wireshark displaying TCP packet capture with source and destination IPs, protocol details, and hex data view.](https://academy.hackthebox.com/storage/modules/115/pcap-4444.png)
+![Wireshark displaying TCP packet capture with source and destination IPs, protocol details, and hex data view.](images/module-115-029.png)
 
 Notice now that that same traffic has been expanded, and we can see that someone is using `net` commands to create a new user on this host.
 
 ----
 
 #### Following the Traffic
-![Wireshark TCP stream showing commands for directory listing and user creation with net user and net localgroup commands.](https://academy.hackthebox.com/storage/modules/115/follow-sus.png)
+![Wireshark TCP stream showing commands for directory listing and user creation with net user and net localgroup commands.](images/module-115-028.png)
 
 This is an excellent example of basic access and command execution to gain persistence via the addition of a user to the host. Regardless of the name `hacker` being used, if command-line logging is in place paired with the NetFlow data, we can quickly tell that the user is performing potentially malicious actions and triage this event to determine if an incident has occurred or if this is just some admin playing around. A modern security appliance may detect, alert and prevent further network communications from that host using deep packet inspection. 
 

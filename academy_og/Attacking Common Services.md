@@ -21,15 +21,15 @@ SMB is commonly used in Windows networks, and we will often find share folders i
 
 There are different ways we can interact with a shared folder using Windows, and we will explore a couple of them. On Windows GUI, we can press `[WINKEY] + [R]` to open the Run dialog box and type the file share location, e.g.: `\\192.168.220.129\Finance\`
 
-![Windows Server 2012 R2 desktop with Run dialog open, showing network path entry.](https://academy.hackthebox.com/storage/modules/116/windows_run_sharefolder2.jpg)
+![Windows Server 2012 R2 desktop with Run dialog open, showing network path entry.](images/module-116-007.jpg)
 
 Suppose the shared folder allows anonymous authentication, or we are authenticated with a user who has privilege over that shared folder. In that case, we will not receive any form of authentication request, and it will display the content of the shared folder.
 
-![File explorer open to network path \192.168.220.133\Finance showing Contracts folder.](https://academy.hackthebox.com/storage/modules/116/finance_share_folder2.jpg)
+![File explorer open to network path \192.168.220.133\Finance showing Contracts folder.](images/module-116-006.jpg)
 
 If we do not have access, we will receive an authentication request. 
 
-![Windows Security prompt for network credentials with fields for username, password, and domain.](https://academy.hackthebox.com/storage/modules/116/auth_request_share_folder2.jpg)
+![Windows Security prompt for network credentials with fields for username, password, and domain.](images/module-116-005.jpg)
 
 Windows has two command-line shells: the [Command shell](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands) and [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview). Each shell is a software program that provides direct communication between us and the operating system or application, providing an environment to automate IT operations. 
 
@@ -277,7 +277,7 @@ sudo apt-get install evolution
 
 Click on the image below to see a short video demonstration.
  
-[![Email account summary with settings for jason@inlanefreight.htb, including server details.](https://academy.hackthebox.com/storage/modules/116/ConnectToIMAPandSMTP.jpg)](https://www.youtube.com/watch?v=xelO2CiaSVs)
+[![Email account summary with settings for jason@inlanefreight.htb, including server details.](images/module-116-004.jpg)](https://www.youtube.com/watch?v=xelO2CiaSVs)
 
 We can use the domain name or IP address of the mail server. If the server uses SMTPS or IMAPS, we'll need the appropriate encryption method (TLS on a dedicated port or STARTTLS after connecting). We can use the `Check for Supported Types` option under authentication to confirm if the server supports our selected method.
 
@@ -292,7 +292,7 @@ Databases are typically used in enterprises, and most companies use them to stor
 | `3.` | A GUI application to interact with databases such as HeidiSQL, MySQL Workbench, or SQL Server Management Studio. |
 
 #### MySQL example
-![MySQL Database diagram with labeled components.](https://academy.hackthebox.com/storage/modules/116/3_way_to_interact_with_MySQL.png)
+![MySQL Database diagram with labeled components.](images/module-116-003.png)
 
 Let's explore command-line utilities and a GUI application.
 
@@ -361,12 +361,12 @@ To connect to a database, we will need a set of credentials, the target IP and p
 
 Click on the image below for a short video demonstration of connecting to an MSSQL database using `dbeaver`.
 
-[![SQL Server connection settings with host, database, and user details.](https://academy.hackthebox.com/storage/modules/116/ConnectToMSSQL.jpg)](https://www.youtube.com/watch?v=gU6iQP5rFMw)
+[![SQL Server connection settings with host, database, and user details.](images/module-116-002.jpg)](https://www.youtube.com/watch?v=gU6iQP5rFMw)
 
 Click on the image below for a short video demonstration of connecting to a MySQL database using `dbeaver`.
 
 #### Video - Connecting to MySQL DB using dbeaver
-[![MySQL connection settings with host, port, and user details.](https://academy.hackthebox.com/storage/modules/116/ConnectToMYSQL.jpg)](https://www.youtube.com/watch?v=PeuWmz8S6G8)
+[![MySQL connection settings with host, port, and user details.](images/module-116-001.jpg)](https://www.youtube.com/watch?v=PeuWmz8S6G8)
 
 Once we have access to the database using a command-line utility or a GUI application, we can use common [Transact-SQL statements](https://docs.microsoft.com/en-us/sql/t-sql/statements/statements?view=sql-server-ver15) to enumerate databases and tables containing sensitive information such as usernames and passwords. If we have the correct privileges, we could potentially execute commands as the MSSQL service account. Later in this module, we will discuss common Transact-SQL statements and attacks for MSSQL & MySQL databases. 
 
@@ -416,7 +416,7 @@ Analyzing commonalities and creating pattern templates that fit all conceivable 
 
 
 #### The Concept of Attacks
-![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](https://academy.hackthebox.com/storage/modules/116/attack_concept2.png)
+![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](images/module-116-009.png)
 
 The concept is based on four categories that occur for each vulnerability. First, we have a `Source` that performs the specific request to a `Process` where the vulnerability gets triggered. Each process has a specific set of  `Privileges` with which it is executed. Each process has a task with a specific goal or `Destination` to either compute new data or forward it. However, the individual and unique specifications under these categories may differ from service to service.
 
@@ -496,7 +496,7 @@ The misinterpretation of the User-Agent leads to a JNDI lookup which is executed
 
 GovCERT.ch has created an excellent graphical representation of the Log4j vulnerability worth examining in detail.
 
-![Diagram of Log4j JNDI attack flow from attacker to vulnerable server and malicious LDAP server, with prevention steps like blocking WAF, disabling JNDI lookups, and patching Log4j.](https://academy.hackthebox.com/storage/modules/116/log4jattack.png)
+![Diagram of Log4j JNDI attack flow from attacker to vulnerable server and malicious LDAP server, with prevention steps like blocking WAF, disabling JNDI lookups, and patching Log4j.](images/module-116-008.png)
 Source: https://www.govcert.ch/blog/zero-day-exploit-targeting-popular-java-library-log4j/
 
 This graphic breaks down the Log4j JNDI attack based on the `Concept of Attacks`.
@@ -730,7 +730,7 @@ An FTP bounce attack is a network attack that uses FTP servers to deliver outbou
 
 Consider we are targetting an FTP Server `FTP_DMZ` exposed to the internet. Another device within the same network, `Internal_DMZ`, is not exposed to the internet. We can use the connection to the `FTP_DMZ` server to scan `Internal_DMZ` using the FTP Bounce attack and obtain information about the server's open ports. Then, we can use that information as part of our attack against the infrastructure.
 
-![Diagram showing attacker using an intermediate device to connect to a target, execute commands, and receive sensitive data.](https://academy.hackthebox.com/storage/modules/116/ftp_bounce_attack.png)
+![Diagram showing attacker using an intermediate device to connect to a target, execute commands, and receive sensitive data.](images/module-116-010.png)
 Source: [https://www.geeksforgeeks.org/what-is-ftp-bounce-attack/](https://www.geeksforgeeks.org/what-is-ftp-bounce-attack/)
 
 The `Nmap` -b flag can be used to perform an FTP bounce attack:
@@ -788,7 +788,7 @@ We create a raw HTTP `PUT` request (`-X PUT`) with basic auth (`--basic -u <user
 
 
 #### The Concept of Attacks
-![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](https://academy.hackthebox.com/storage/modules/116/attack_concept2.png)
+![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](images/module-116-011.png)
 
 In short, the actual process misinterprets the user's input of the path. This leads to access to the restricted folder being bypassed. As a result, the write permissions on the HTTP `PUT` request are not adequately controlled, which leads to us being able to create the files we want outside of the authorized folders. However, we will skip the explanation of the `Basic Auth` process and jump directly to the first part of the exploit.
 
@@ -1465,7 +1465,7 @@ In simple terms, this is an [integer overflow](https://en.wikipedia.org/wiki/Int
 To learn more about buffer overflow techniques and vulnerabilities, check out the [Stack-Based Buffer Overflows on Linux x86](https://academy.hackthebox.com/course/preview/stack-based-buffer-overflows-on-linux-x86), and [Stack-Based Buffer Overflows on Windows x86](https://academy.hackthebox.com/course/preview/stack-based-buffer-overflows-on-windows-x86) module. These go into detail on the basics of how the buffer can be overwritten and handled by the attacker.
 
 #### The Concept of Attacks
-![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](https://academy.hackthebox.com/storage/modules/116/attack_concept2.png)
+![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](images/module-116-012.png)
 
 The vulnerability occurs while processing a malformed compressed message after the `Negotiate Protocol Responses`. If the SMB server allows requests (over TCP/445), compression is generally supported, where the server and client set the terms of communication before the client sends any more data. Suppose the data transmitted exceeds the integer variable limits due to the excessive amount of data. In that case, these parts are written into the buffer, which leads to the overwriting of the subsequent CPU instructions and interrupts the process's normal or planned execution. These data sets can be structured so that the overwritten instructions are replaced with our own ones, and thus we force the CPU (and hence also the process) to perform other tasks and instructions. 
 
@@ -2162,7 +2162,7 @@ This time let's discuss a vulnerability that does not have a CVE and does not re
 We will focus on the undocumented MSSQL server function called `xp_dirtree` for this vulnerability. This function is used to view the contents of a specific folder (local or remote). Furthermore, this function provides some additional parameters that can be specified. These include the depth, how far the function should go in the folder, and the actual target folder.
 
 #### The Concept of Attacks
-![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](https://academy.hackthebox.com/storage/modules/116/attack_concept2.png)
+![Diagram showing flow from Source to Processes, Privileges, and Destination with related components.](images/module-116-013.png)
 
 The interesting thing is that the MSSQL function `xp_dirtree` is not directly a vulnerability but takes advantage of the authentication mechanism of SMB. When we try to access a shared folder on the network with a Windows host, this Windows host automatically sends an `NTLMv2` hash for authentication. 
 
@@ -2294,7 +2294,7 @@ If you do not trust the certificate, the connection atempt will be aborted:
 Do you trust this certificate (yes/no)? yes
 ```
 
-![Terminal displaying rdesktop command to connect to Windows Server 2012 R2 with desktop icons visible.](https://academy.hackthebox.com/storage/modules/116/rdp_session-7-2.png)
+![Terminal displaying rdesktop command to connect to Windows Server 2012 R2 with desktop icons visible.](images/module-116-020.png)
 
 ---
 ## Protocol Specific Attacks
@@ -2306,7 +2306,7 @@ Let's imagine we successfully gain access to a machine and have an account with 
 
 As shown in the example below, we are logged in as the user `juurena` (UserID = 2) who has `Administrator` privileges. Our goal is to hijack the user `lewen` (User ID = 4), who is also logged in via RDP.
 
-![Windows Server desktop with Task Manager and PowerShell showing user sessions.](https://academy.hackthebox.com/storage/modules/116/rdp_session-1-2.png)
+![Windows Server desktop with Task Manager and PowerShell showing user sessions.](images/module-116-019.png)
 
 To successfully impersonate a user without their password, we need to have `SYSTEM` privileges and use the Microsoft [tscon.exe](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/tscon) binary that enables users to connect to another desktop session. It works by specifying which `SESSION ID` (`4` for the `lewen` session in our example) we would like to connect to which session name (`rdp-tcp#13`, which is our current session). So, for example, the following command will open a new console as the specified `SESSION_ID` within our current RDP session:
 
@@ -2328,7 +2328,7 @@ C:\htb> sc.exe create sessionhijack binpath= "cmd.exe /k tscon 2 /dest:rdp-tcp#1
 [SC] CreateService SUCCESS
 ```
 
-![PowerShell session displaying user queries and service creation command with success message.](https://academy.hackthebox.com/storage/modules/116/rdp_session-2-2.png)
+![PowerShell session displaying user queries and service creation command with success message.](images/module-116-018.png)
 
 To run the command, we can start the `sessionhijack` service :
 
@@ -2338,7 +2338,7 @@ C:\htb> net start sessionhijack
 
 Once the service is started, a new terminal with the `lewen` user session will appear. With this new account, we can attempt to discover what kind of privileges it has on the network, and maybe we'll get lucky, and the user is a member of the Help Desk group with admin rights to many hosts or even a Domain Admin.
 
-![PowerShell session showing 'whoami' command and Task Manager with user sessions.](https://academy.hackthebox.com/storage/modules/116/rdp_session-3-2.png)
+![PowerShell session showing 'whoami' command and Task Manager with user sessions.](images/module-116-017.png)
 
 
 *Note: This method no longer works on Server 2019.*
@@ -2351,7 +2351,7 @@ We may want to access applications or software installed on a user's Windows sys
 There are a few caveats to this attack:
 * `Restricted Admin Mode`, which is disabled by default, should be enabled on the target host; otherwise, we will be prompted with the following error:
 
-![Error message: Account restrictions prevent sign-in due to blank passwords, limited sign-in times, or policy restrictions. OK button present.](https://academy.hackthebox.com/storage/modules/116/rdp_session-4.png)
+![Error message: Account restrictions prevent sign-in due to blank passwords, limited sign-in times, or policy restrictions. OK button present.](images/module-116-016.png)
 
 This can be enabled by adding a new registry key `DisableRestrictedAdmin` (REG_DWORD) under `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`. It can be done using the following command: 
 
@@ -2360,7 +2360,7 @@ This can be enabled by adding a new registry key `DisableRestrictedAdmin` (REG_D
 C:\htb> reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
 ```
 
-![Registry Editor showing path: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa. Highlighted entry: DisableRestrictedAdmin, REG_DWORD, value 0.](https://academy.hackthebox.com/storage/modules/116/rdp_session-5.png)
+![Registry Editor showing path: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa. Highlighted entry: DisableRestrictedAdmin, REG_DWORD, value 0.](images/module-116-015.png)
 
 Once the registry key is added, we can use `xfreerdp` with the option `/pth` to gain RDP access:
 
@@ -2390,7 +2390,7 @@ Once the registry key is added, we can use `xfreerdp` with the option `/pth` to 
 
 If it works, we'll now be logged in via RDP as the target user without knowing their cleartext password.
 
-![Remote desktop session showing PowerShell on Windows Server 2012 R2. Command 'whoami' executed, output: 'superstore\lewen'.](https://academy.hackthebox.com/storage/modules/116/rdp_session-6-2.png)
+![Remote desktop session showing PowerShell on Windows Server 2012 R2. Command 'whoami' executed, output: 'superstore\lewen'.](images/module-116-014.png)
 
 Keep in mind that this will not work against every Windows system we encounter, but it is always worth trying in a situation where we have an NTLM hash, know the user has RDP rights against a machine or set of machines, and GUI access would benefit us in some ways towards fulfilling the goal of our assessment. 
 
@@ -2409,7 +2409,7 @@ The vulnerability is also based, as with SMB, on manipulated requests sent to th
 
 
 #### The Concept of Attacks
-![Flowchart with four stages: Source (Code, Libraries, Config, APIs, User Input), Processes (PID, Input, Data processing, Variables, Logging), Privileges (System, User, Groups, Policies, Rules), and Destination (Local: Files, Process; Network: Interface, Network Address, Route).](https://academy.hackthebox.com/storage/modules/116/attack_concept2.png)
+![Flowchart with four stages: Source (Code, Libraries, Config, APIs, User Input), Processes (PID, Input, Data processing, Variables, Logging), Privileges (System, User, Groups, Policies, Rules), and Destination (Local: Files, Process; Network: Interface, Network Address, Route).](images/module-116-021.png)
 
 This attack involves many different steps in the kernel of the operating system, which are not of great importance here for the time being to understand the concept behind it. After the function has been exploited and the memory has been freed, data is written to the kernel, which allows us to overwrite the kernel memory. This memory is used to write our instructions into the freed memory and let the CPU execute them. If we want to look at the technical analysis of the BlueKeep vulnerability, this [article](https://unit42.paloaltonetworks.com/exploitation-of-windows-cve-2019-0708-bluekeep-three-ways-to-write-data-into-the-kernel-with-rdp-pdu/) provides a nice overview.
 
@@ -2623,7 +2623,7 @@ support.inlanefreight.com is an alias for inlanefreight.s3.amazonaws.com
 
 The `support` subdomain has an alias record pointing to an AWS S3 bucket. However, the URL `https://support.inlanefreight.com` shows a `NoSuchBucket` error indicating that the subdomain is potentially vulnerable to a subdomain takeover. Now, we can take over the subdomain by creating an AWS S3 bucket with the same subdomain name.
 
-![XML error: NoSuchBucket. Message: The specified bucket 'inlanefreight' does not exist. Includes RequestId and HostId.](https://academy.hackthebox.com/storage/modules/116/s3.png)
+![XML error: NoSuchBucket. Message: The specified bucket 'inlanefreight' does not exist. Includes RequestId and HostId.](images/module-116-025.png)
 
 The [can-i-take-over-xyz](https://github.com/EdOverflow/can-i-take-over-xyz) repository is also an excellent reference for a subdomain takeover vulnerability. It shows whether the target services are vulnerable to a subdomain takeover and provides guidelines on assessing the vulnerability. 
 
@@ -2650,15 +2650,15 @@ inlanefreight.com      A   192.168.225.110
 
 Next, start the `Ettercap` tool and scan for live hosts within the network by navigating to `Hosts > Scan for Hosts`. Once completed, add the target IP address (e.g., `192.168.152.129`) to Target1 and add a default gateway IP (e.g., `192.168.152.2`) to Target2.
 
-![Ettercap interface showing host list with IP and MAC addresses. Highlighted entry: IP 192.168.152.129, MAC 00:0C:29:A7:9D:13. Options to delete or add host to targets.](https://academy.hackthebox.com/storage/modules/116/target.png)
+![Ettercap interface showing host list with IP and MAC addresses. Highlighted entry: IP 192.168.152.129, MAC 00:0C:29:A7:9D:13. Options to delete or add host to targets.](images/module-116-024.png)
 
 Activate `dns_spoof` attack by navigating to `Plugins > Manage Plugins`. This sends the target machine with fake DNS responses that will resolve `inlanefreight.com` to IP address `192.168.225.110`:
 
-![Ettercap plugins list showing dns_spoof version 1.3, highlighted. Info: Sends spoofed DNS replies. Host 192.168.152.129 added to TARGET1.](https://academy.hackthebox.com/storage/modules/116/etter_plug.png)
+![Ettercap plugins list showing dns_spoof version 1.3, highlighted. Info: Sends spoofed DNS replies. Host 192.168.152.129 added to TARGET1.](images/module-116-023.png)
 
 After a successful DNS spoof attack, if a victim user coming from the target machine `192.168.152.129` visits the `inlanefreight.com` domain on a web browser, they will be redirected to a `Fake page` that is hosted on IP address `192.168.225.110`:
 
-![Browser window displaying URL 'http://inlanefreight.com/' with text 'Fake page' on a blank webpage](https://academy.hackthebox.com/storage/modules/116/etter_site.png)
+![Browser window displaying URL 'http://inlanefreight.com/' with text 'Fake page' on a blank webpage](images/module-116-022.png)
 
 In addition, a ping coming from the target IP address `192.168.152.129` to `inlanefreight.com` should be resolved to `192.168.225.110` as well:
 
@@ -2688,7 +2688,7 @@ These are a few examples of common DNS attacks. There are other more advanced at
 We can find thousands of subdomains and domains on the web. Often they point to no longer active third-party service providers such as AWS, GitHub, and others and, at best, display an error message as confirmation of a deactivated third-party service. Large companies and corporations are also affected time and again. Companies often cancel services from third-party providers but forget to delete the associated DNS records. This is because no additional costs are incurred for a DNS entry. Many well-known bug bounty platforms, such as [HackerOne](https://www.hackerone.com/), already explicitly list `Subdomain Takeover` as a bounty category. With a simple search, we can find several tools on GitHub, for example, that automate the discovery of vulnerable subdomains or help create Proof of Concepts (`PoC`) that can then be submitted to the bug bounty program of our choice or the affected company. RedHuntLabs did a [study](https://redhuntlabs.com/blog/project-resonance-wave-1.html) on this in 2020, and they found that over 400,000 subdomains out of 220 million were vulnerable to subdomain takeover. 62% of them belonged to the e-commerce sector.
 
 #### RedHuntLabs Study
-![Infographic on subdomain takeover: 33 third-party services prone to vulnerability, 220 million domains studied, 424,120 possible takeovers identified, 139 in Alexa Top 1000.](https://i0.wp.com/redhuntlabs.com/wp-content/uploads/2020/11/image-3.png)
+![Infographic on subdomain takeover: 33 third-party services prone to vulnerability, 220 million domains studied, 424,120 possible takeovers identified, 139 in Alexa Top 1000.](images/module-116-027.png)
 Source: https://redhuntlabs.com/blog/project-resonance-wave-1.html
 
 ---
@@ -2699,7 +2699,7 @@ One of the biggest dangers of a subdomain takeover is that a phishing campaign c
 Therefore, if an attacker finds a `CNAME` record in the company's DNS records that points to a subdomain that no longer exists and returns an `HTTP 404 error`, this subdomain can most likely be taken over by us through the use of the third-party provider. A subdomain takeover occurs when a subdomain points to another domain using the CNAME record that does not currently exist. When an attacker registers this nonexistent domain, the subdomain points to the domain registration by us. By making a single DNS change, we make ourselves the owner of that particular subdomain, and after that, we can manage the subdomain as we choose.
 
 #### The Concept of Attacks
-![Flowchart with stages: Source (Code, Libraries, Config, APIs, User Input), Processes (PID, Input, Data processing, Variables, Logging), Privileges (System, User, Groups, Policies, Rules), Destination (Local: Files, Process; Network: Interface, Network Address, Route).](https://academy.hackthebox.com/storage/modules/116/attack_concept2.png)
+![Flowchart with stages: Source (Code, Libraries, Config, APIs, User Input), Processes (PID, Input, Data processing, Variables, Logging), Privileges (System, User, Groups, Policies, Rules), Destination (Local: Files, Process; Network: Interface, Network Address, Route).](images/module-116-026.png)
 
 What happens here is that the existing subdomain no longer points to a third-party provider and is therefore no longer occupied by this provider. Pretty much anyone can register this subdomain as their own. Visiting this subdomain and the presence of the CNAME record in the company's DNS leads, in most cases, to things working as expected. However, the design and function of this subdomain are in the hands of the attacker. 
 
@@ -2737,7 +2737,7 @@ By default, `POP3` clients remove downloaded messages from the email server. Thi
 
 On the other hand, by default, `IMAP4` clients do not remove downloaded messages from the email server. This behavior makes it easy to access email messages from multiple devices. Let's see how we can target mail servers.
 
-![Diagram of email flow: 1. Email sent from a computer via SMTP to a server. 2. Server forwards email via SMTP to another server. 3. Email retrieved by another computer via IMAP.](https://academy.hackthebox.com/storage/modules/116/SMTP-IMAP-1.png)
+![Diagram of email flow: 1. Email sent from a computer via SMTP to a server. 2. Server forwards email via SMTP to another server. 3. Email retrieved by another computer via IMAP.](images/module-116-028.png)
 
 ---
 ## Enumeration 
@@ -3141,10 +3141,10 @@ One of the most recent publicly disclosed and dangerous [Simple Mail Transfer Pr
 According to [Shodan.io](https://www.shodan.io), at the time of writing (April 2022), there are over 5,000 publicly accessible OpenSMTPD servers worldwide, and the trend is growing. However, this does not mean that this vulnerability affects every service. Instead, we want to show you how significant the impact of an RCE would be in case this vulnerability were discovered now. However, of course, this applies to all other services as well.
 
 #### Shodan Search
-![Shodan report for OpenSMTPD showing a world map with highlighted countries. Total: 5,290. Top countries: United States (1,305), Germany (1,187), France (553), Netherlands (536), United Kingdom (258).](https://academy.hackthebox.com/storage/modules/116/opensmtpd.png)
+![Shodan report for OpenSMTPD showing a world map with highlighted countries. Total: 5,290. Top countries: United States (1,305), Germany (1,187), France (553), Netherlands (536), United Kingdom (258).](images/module-116-031.png)
 
 #### Shodan Trend
-![Shodan trends graph for OpenSMTPD showing growth over time. Data points: 24 months ago 4,061, 12 months ago 4,853, 6 months ago 5,297, 3 months ago 5,382, 1 month ago 5,349, March 2022 5,640.](https://academy.hackthebox.com/storage/modules/116/opensmtpd_trend.png)
+![Shodan trends graph for OpenSMTPD showing growth over time. Data points: 24 months ago 4,061, 12 months ago 4,853, 6 months ago 5,297, 3 months ago 5,382, 1 month ago 5,349, March 2022 5,640.](images/module-116-030.png)
 
 
 ---
@@ -3153,7 +3153,7 @@ According to [Shodan.io](https://www.shodan.io), at the time of writing (April 2
 As we already know, with the SMTP service, we can compose emails and send them to desired people. The vulnerability in this service lies in the program's code, namely in the function that records the sender's email address. This offers the possibility of escaping the function using a semicolon (`;`) and making the system execute arbitrary shell commands. However, there is a limit of 64 characters, which can be inserted as a command. The technical details of this vulnerability can be found [here](https://www.openwall.com/lists/oss-security/2020/01/28/3).
 
 #### The Concept of Attacks
-![Flowchart with stages: Source (Code, Libraries, Config, APIs, User Input), Processes (PID, Input, Data processing, Variables, Logging), Privileges (System, User, Groups, Policies, Rules), Destination (Local: Files, Process; Network: Interface, Network Address, Route).](https://academy.hackthebox.com/storage/modules/116/attack_concept2.png)
+![Flowchart with stages: Source (Code, Libraries, Config, APIs, User Input), Processes (PID, Input, Data processing, Variables, Logging), Privileges (System, User, Groups, Policies, Rules), Destination (Local: Files, Process; Network: Interface, Network Address, Route).](images/module-116-029.png)
 
 Here we need to initialize a connection with the SMTP service first. This can be automated by a script or entered manually. After the connection is established, an email must be composed in which we define the sender, the recipient, and the actual message for the recipient. The desired system command is inserted in the sender field connected to the sender address with a semicolon (`;`). As soon as we finish writing, the data entered is processed by the OpenSMTPD process.
 
