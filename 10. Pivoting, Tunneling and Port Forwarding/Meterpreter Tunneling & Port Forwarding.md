@@ -19,3 +19,24 @@ run
 
 #### Executing the Payload on the Pivot Host
 ![[Pasted image 20260317185213.png]]
+
+![[Pasted image 20260317185459.png]]
+#### Ping Sweep
+```
+run post/multi/gather/ping_sweep RHOSTS=172.16.5.0/23
+```
+
+#### Ping Sweep For Loop on Linux Pivot Hosts
+```bash
+for i in {1..254} ;do (ping -c 1 172.16.5.$i | grep "bytes from" &) ;done
+```
+
+#### Ping Sweep For Loop Using CMD
+```bash
+for /L %i in (1 1 254) do ping 172.16.5.%i -n 1 -w 100 | find "Reply"
+```
+
+#### Ping Sweep Using PowerShell
+```
+1..254 | % {"172.16.5.$($_): $(Test-Connection -count 1 -comp 172.16.5.$($_) -quiet)"}
+```
