@@ -54,3 +54,9 @@ set SRVHOST 0.0.0.0
 set version 4a
 run
 ```
+
+#### Confirming Proxy Server is Running
+![[Pasted image 20260317190443.png]]
+
+**Make sure that the proxychains.conf file has the below line**
+![[Pasted image 20260317190643.png]]
