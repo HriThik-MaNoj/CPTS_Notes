@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10. Pivoting, Tunneling and Port Forwarding/10. Port Forwarding with Windows Netsh.md",
+                "file": "10. Pivoting, Tunneling and Port Forwarding/11. DNS Tunneling with Dnscat2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10. Port Forwarding with Windows Netsh"
+              "title": "11. DNS Tunneling with Dnscat2"
             }
           }
         ]
@@ -207,10 +207,11 @@
   },
   "active": "70d76e218a9dad82",
   "lastOpenFiles": [
+    "10. Pivoting, Tunneling and Port Forwarding/10. Port Forwarding with Windows Netsh.md",
+    "10. Pivoting, Tunneling and Port Forwarding/11. DNS Tunneling with Dnscat2.md",
     "attachments/Pasted image 20260319200016.png",
     "attachments/Pasted image 20260319174427.png",
     "10. Pivoting, Tunneling and Port Forwarding/9. Web Server Pivoting with Rpivot.md",
-    "10. Pivoting, Tunneling and Port Forwarding/10. Port Forwarding with Windows Netsh.md",
     "10. Pivoting, Tunneling and Port Forwarding/4. Meterpreter Tunneling & Port Forwarding.md",
     "attachments/Pasted image 20260319165754.png",
     "10. Pivoting, Tunneling and Port Forwarding/8. SSH Pivoting with Sshuttle.md",
@@ -233,7 +234,6 @@
     "6. Shells and Payloads/1. Bind Shells.md",
     "6. Shells and Payloads/7. Spawning Interactive Shells.md",
     "attachments/Pasted image 20260317194444.png",
-    "attachments/Pasted image 20260317193558.png",
     "academy_og/Attacking Web Applications with Ffuf.md",
     "academy_og/images/module-115-001.txt",
     "academy_og/images/module-144-006",
