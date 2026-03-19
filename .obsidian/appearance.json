@@ -1,7 +1,7 @@
 {
   "theme": "obsidian",
   "cssTheme": "Royal Velvet",
-  "baseFontSize": 20,
+  "baseFontSize": 24,
   "accentColor": "#a000eb",
   "nativeMenus": false
 }
