@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10. Pivoting, Tunneling and Port Forwarding/7. SSH for Windows plink.exe.md",
+                "file": "10. Pivoting, Tunneling and Port Forwarding/8. SSH Pivoting with Sshuttle.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7. SSH for Windows plink.exe"
+              "title": "8. SSH Pivoting with Sshuttle"
             }
           }
         ]
@@ -207,8 +207,10 @@
   },
   "active": "70d76e218a9dad82",
   "lastOpenFiles": [
-    "10. Pivoting, Tunneling and Port Forwarding/6. Socat Redirection with a Bind Shell.md",
     "10. Pivoting, Tunneling and Port Forwarding/7. SSH for Windows plink.exe.md",
+    "10. Pivoting, Tunneling and Port Forwarding/8. SSH Pivoting with Sshuttle.md",
+    "attachments/Pasted image 20260319145134.png",
+    "10. Pivoting, Tunneling and Port Forwarding/6. Socat Redirection with a Bind Shell.md",
     "attachments/Pasted image 20260319144311.png",
     "attachments/Pasted image 20260319143630.png",
     "10. Pivoting, Tunneling and Port Forwarding/5. Socat Redirection with a Reverse Shell.md",
@@ -229,7 +231,6 @@
     "attachments/Pasted image 20260317191443.png",
     "attachments/Pasted image 20260317191159.png",
     "attachments/Pasted image 20260317190643.png",
-    "attachments/Pasted image 20260317190443.png",
     "academy_og/Attacking Web Applications with Ffuf.md",
     "academy_og/images/module-115-001.txt",
     "academy_og/images/module-144-006",
@@ -246,7 +247,6 @@
     "academy_og/File Upload Attacks.md",
     "academy_og/File Inclusion.md",
     "academy_og/Cross-Site Scripting (XSS).md",
-    "academy_og/SQLMap Essentials.md",
     "academy_og/modules.txt",
     "academy_og/htb-academy-to-md-linux-amd64",
     "academy_og",
