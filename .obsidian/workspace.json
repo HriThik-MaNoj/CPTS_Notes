@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10. Pivoting, Tunneling and Port Forwarding/9. Web Server Pivoting with Rpivot.md",
+                "file": "10. Pivoting, Tunneling and Port Forwarding/10. Port Forwarding with Windows Netsh.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "9. Web Server Pivoting with Rpivot"
+              "title": "10. Port Forwarding with Windows Netsh"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "ping sweep",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -207,9 +207,11 @@
   },
   "active": "70d76e218a9dad82",
   "lastOpenFiles": [
+    "10. Pivoting, Tunneling and Port Forwarding/9. Web Server Pivoting with Rpivot.md",
+    "10. Pivoting, Tunneling and Port Forwarding/10. Port Forwarding with Windows Netsh.md",
+    "10. Pivoting, Tunneling and Port Forwarding/4. Meterpreter Tunneling & Port Forwarding.md",
     "attachments/Pasted image 20260319165754.png",
     "10. Pivoting, Tunneling and Port Forwarding/8. SSH Pivoting with Sshuttle.md",
-    "10. Pivoting, Tunneling and Port Forwarding/9. Web Server Pivoting with Rpivot.md",
     "attachments/Pasted image 20260319151027.png",
     "10. Pivoting, Tunneling and Port Forwarding/7. SSH for Windows plink.exe.md",
     "attachments/Pasted image 20260319145134.png",
@@ -221,7 +223,6 @@
     "attachments/Pasted image 20260319142732.png",
     "academy_og/Command Injections.md",
     "10. Pivoting, Tunneling and Port Forwarding/3. Remote or Reverse Port Forwarding with SSH.md",
-    "10. Pivoting, Tunneling and Port Forwarding/4. Meterpreter Tunneling & Port Forwarding.md",
     "academy_og/Active Directory Enumeration & Attacks.md",
     "9. Attacking common Services/3. Attacking SMB.md",
     "10. Pivoting, Tunneling and Port Forwarding/1.Intro.md",
@@ -232,7 +233,6 @@
     "attachments/Pasted image 20260317194444.png",
     "attachments/Pasted image 20260317193558.png",
     "attachments/Pasted image 20260317191443.png",
-    "attachments/Pasted image 20260317191159.png",
     "academy_og/Attacking Web Applications with Ffuf.md",
     "academy_og/images/module-115-001.txt",
     "academy_og/images/module-144-006",
