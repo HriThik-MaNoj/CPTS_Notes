@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "135",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -207,6 +208,7 @@
   },
   "active": "70d76e218a9dad82",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260319144311.png",
     "attachments/Pasted image 20260319143630.png",
     "10. Pivoting, Tunneling and Port Forwarding/5. Socat Redirection with a Reverse Shell.md",
     "attachments/Pasted image 20260319143603.png",
@@ -229,7 +231,6 @@
     "attachments/Pasted image 20260317190643.png",
     "attachments/Pasted image 20260317190443.png",
     "attachments/Pasted image 20260317185459.png",
-    "attachments/Pasted image 20260317185213.png",
     "academy_og/Attacking Web Applications with Ffuf.md",
     "academy_og/images/module-115-001.txt",
     "academy_og/images/module-144-006",
