@@ -10,12 +10,12 @@ Injection vulnerabilities are considered the number 3 risk in [OWASP's Top 10 We
 
 There are many types of injections found in web applications, depending on the type of web query being executed. The following are some of the most common types of injections:
 
-| Injection | Description |
-| ----- | ----- |
-| OS Command Injection | Occurs when user input is directly used as part of an OS command. |
-| Code Injection | Occurs when user input is directly within a function that evaluates code. |
-| SQL Injections | Occurs when user input is directly used as part of an SQL query. |
-| Cross-Site Scripting/HTML Injection | Occurs when exact user input is displayed on a web page. |
+| Injection                           | Description                                                               |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| OS Command Injection                | Occurs when user input is directly used as part of an OS command.         |
+| Code Injection                      | Occurs when user input is directly within a function that evaluates code. |
+| SQL Injections                      | Occurs when user input is directly used as part of an SQL query.          |
+| Cross-Site Scripting/HTML Injection | Occurs when exact user input is displayed on a web page.                  |
 
 There are many other types of injections other than the above, like `LDAP injection`, `NoSQL Injection`, `HTTP Header Injection`, `XPath Injection`, `IMAP Injection`, `ORM Injection`, and others. Whenever user input is used within a query without being properly sanitized, it may be possible to escape the boundaries of the user input string to the parent query and manipulate it to change its intended purpose. This is why as more web technologies are introduced to web applications, we will see new types of injections introduced to web applications.
 
