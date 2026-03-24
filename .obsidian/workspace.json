@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10. Pivoting, Tunneling and Port Forwarding/12. SOCKS5 Tunneling with Chisel.md",
+                "file": "10. Pivoting, Tunneling and Port Forwarding/13. ICMP Tunneling with SOCKS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "12. SOCKS5 Tunneling with Chisel"
+              "title": "13. ICMP Tunneling with SOCKS"
             }
           }
         ]
@@ -207,8 +207,10 @@
   },
   "active": "70d76e218a9dad82",
   "lastOpenFiles": [
-    "5. File Transfers/7. Living off The Land.md",
     "10. Pivoting, Tunneling and Port Forwarding/12. SOCKS5 Tunneling with Chisel.md",
+    "10. Pivoting, Tunneling and Port Forwarding/13. ICMP Tunneling with SOCKS.md",
+    "attachments/Pasted image 20260324101700.png",
+    "5. File Transfers/7. Living off The Land.md",
     "attachments/Pasted image 20260324092734.png",
     "attachments/Pasted image 20260324092640.png",
     "10. Pivoting, Tunneling and Port Forwarding/10. Port Forwarding with Windows Netsh.md",
@@ -225,7 +227,6 @@
     "10. Pivoting, Tunneling and Port Forwarding/8. SSH Pivoting with Sshuttle.md",
     "attachments/Pasted image 20260319151027.png",
     "10. Pivoting, Tunneling and Port Forwarding/7. SSH for Windows plink.exe.md",
-    "attachments/Pasted image 20260319145134.png",
     "10. Pivoting, Tunneling and Port Forwarding/6. Socat Redirection with a Bind Shell.md",
     "10. Pivoting, Tunneling and Port Forwarding/5. Socat Redirection with a Reverse Shell.md",
     "academy_og/Command Injections.md",
@@ -246,7 +247,6 @@
     "Untitled.md",
     "academy_og/Attacking Enterprise Networks.md",
     "academy_og/Documentation & Reporting.md",
-    "academy_og/Windows Privilege Escalation.md",
     "academy_og/modules.txt",
     "academy_og/htb-academy-to-md-linux-amd64",
     "academy_og",
