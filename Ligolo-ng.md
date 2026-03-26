@@ -107,8 +107,10 @@ Now you must tell your local OS to send internal traffic into the tunnel.
 Bash
 
 ```
-# On Parrot (New Terminal)
-sudo ip route add 172.16.119.0/24 dev ligolo
+# Inside ligolo interface
+autoroute
+
+#Then select the interface ligolo that we created earlier.
 ```
 
 **Verify the Connection:**
