@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ligolo-ng.md",
+                "file": "5. File Transfers/1. Windows File Transfer Methods.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ligolo-ng"
+              "title": "1. Windows File Transfer Methods"
             }
           }
         ],
@@ -222,10 +222,13 @@
   },
   "active": "46b045a911238258",
   "lastOpenFiles": [
+    "8. Password Attacks/9. Attacking LSASS.md",
+    "Rust scan Installation.md",
+    "10. Pivoting, Tunneling and Port Forwarding/4. Meterpreter Tunneling & Port Forwarding.md",
+    "Ligolo-ng.md",
     "10. Pivoting, Tunneling and Port Forwarding/13. ICMP Tunneling with SOCKS.md",
     "10. Pivoting, Tunneling and Port Forwarding/14.1 SocksOverRDP — Windows Pivoting via RDP Tunneling.md",
     "10. Pivoting, Tunneling and Port Forwarding/14. RDP and SOCKS Tunneling with SocksOverRDP.md",
-    "Ligolo-ng.md",
     "1. Getting Started/7. Transferring Files/1. Transferring Files.md",
     "10. Pivoting, Tunneling and Port Forwarding/2.Dynamic Port Forwarding with SSH and SOCKS Tunneling.md",
     "10. Pivoting, Tunneling and Port Forwarding/11. DNS Tunneling with Dnscat2.md",
@@ -234,7 +237,6 @@
     "10. Pivoting, Tunneling and Port Forwarding/8. SSH Pivoting with Sshuttle.md",
     "10. Pivoting, Tunneling and Port Forwarding/3. Remote or Reverse Port Forwarding with SSH.md",
     "1. Getting Started/6. Privilege Escalation/1. Privilege Escalation.md",
-    "Rust scan Installation.md",
     "10. Pivoting, Tunneling and Port Forwarding/6. Socat Redirection with a Bind Shell.md",
     "attachments/Pasted image 20260324164829.png",
     "attachments/Pasted image 20260324164507.png",
@@ -249,7 +251,6 @@
     "attachments/Pasted image 20260319204818.png",
     "attachments/Pasted image 20260319204656.png",
     "5. File Transfers/1. Windows File Transfer Methods.md",
-    "10. Pivoting, Tunneling and Port Forwarding/4. Meterpreter Tunneling & Port Forwarding.md",
     "10. Pivoting, Tunneling and Port Forwarding/7. SSH for Windows plink.exe.md",
     "10. Pivoting, Tunneling and Port Forwarding/5. Socat Redirection with a Reverse Shell.md",
     "academy_og/Command Injections.md",
@@ -257,7 +258,6 @@
     "9. Attacking common Services/3. Attacking SMB.md",
     "10. Pivoting, Tunneling and Port Forwarding/1.Intro.md",
     "7. Metasploit/1. Metasploit.md",
-    "6. Shells and Payloads/2. Reverse Shells.md",
     "academy_og/images/module-115-001.txt",
     "academy_og/images/module-144-006",
     "academy_og/images/module-144-002",
