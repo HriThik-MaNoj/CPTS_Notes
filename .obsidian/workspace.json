@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10. Pivoting, Tunneling and Port Forwarding/Lab.md",
+                "file": "11. Active Directory Enumeration & Attacks/1. Intro.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lab"
+              "title": "1. Intro"
             }
           }
         ],
@@ -236,13 +236,18 @@
   },
   "active": "78e41ddc4f4b46ec",
   "lastOpenFiles": [
+    "8. Password Attacks/20. Pass the Certificate.md",
+    "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
+    "11. Active Directory Enumeration & Attacks/1. Intro.md",
+    "academy_og/CPTS_Exam_Methodology.md",
+    "11. Active Directory Enumeration & Attacks",
+    "10. Pivoting, Tunneling and Port Forwarding/Lab.md",
     "attachments/Pasted image 20260328121338.png",
     "attachments/Pasted image 20260328121151.png",
     "attachments/Pasted image 20260328121115.png",
     "attachments/Pasted image 20260328120814.png",
     "attachments/Pasted image 20260328120538.png",
     "Rust scan Installation.md",
-    "10. Pivoting, Tunneling and Port Forwarding/Lab.md",
     "attachments/Pasted image 20260328115735.png",
     "10. Pivoting, Tunneling and Port Forwarding/4. Meterpreter Tunneling & Port Forwarding.md",
     "attachments/Pasted image 20260328115156.png",
@@ -251,7 +256,6 @@
     "Ligolo-ng.md",
     "attachments/Pasted image 20260328114026.png",
     "attachments/Pasted image 20260328113818.png",
-    "attachments/Pasted image 20260328113551.png",
     "Pivoting, Tunneling, and Port Forwarding.md",
     "8. Password Attacks/9. Attacking LSASS.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
@@ -269,9 +273,6 @@
     "10. Pivoting, Tunneling and Port Forwarding/12. SOCKS5 Tunneling with Chisel.md",
     "5. File Transfers/7. Living off The Land.md",
     "10. Pivoting, Tunneling and Port Forwarding/7. SSH for Windows plink.exe.md",
-    "10. Pivoting, Tunneling and Port Forwarding/5. Socat Redirection with a Reverse Shell.md",
-    "academy_og/Command Injections.md",
-    "academy_og/Active Directory Enumeration & Attacks.md",
     "academy_og/images/module-115-001.txt",
     "academy_og/images/module-144-006",
     "academy_og/images/module-144-002",
@@ -281,7 +282,6 @@
     "academy_og",
     "htb-academy-to-md-linux-amd64",
     "10. Pivoting, Tunneling and Port Forwarding",
-    "9. Attacking common Services",
     "Untitled.canvas"
   ]
 }
