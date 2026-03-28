@@ -147,3 +147,38 @@ sudo proxy -selfcert
 chmod +x agent
 ./agent -connect <ip-address-of-attack-host>:11601 -ignore cert
 ```
+
+- This connects the agent to the server.
+![[Pasted image 20260328102346.png]]
+```python
+#Inside ligolo interface
+session
+#select the session
+start --tun ligolo
+```
+
+##### On a new terminal
+```python
+#Add the route
+sudo ip route addd 172.16.5.0/24 dev ligolo
+```
+
+###### That's it!, now we'll be able to access hosts on that network range.
+
+### Pivoting to the second host
+- lets say we pivoted in to the new machine and we can see a new separate network interface on the new host which connects to a different network range that we didn't previously have access to.
+#### Setting up the new network interface
+
+```python
+#On the attack host
+sudo ip tuntap add user htb-ac-2081772 mode tun ligolo-double
+sudo ip link set ligolo-double up
+```
+#### Go back to the ligolo proxy interface
+- make sure that we are in the session of our initial pivot host
+- then
+```python
+listener_add -addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp
+#Essentially we're connecting the new jump server to our previous jump server and the first jump server is gonna forward all the traffic to our attack host
+```
+
