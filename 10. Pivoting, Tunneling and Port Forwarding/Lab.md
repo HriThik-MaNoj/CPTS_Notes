@@ -82,3 +82,6 @@ Turns out rdp is also running..
 ```python
 xfreerdp /u:mlefay /p:"Plain Human work!" /v:172.16.5.35 /cert:ignore
 ```
+![[Pasted image 20260328121115.png]]
+### Flag inside C:
+![[Pasted image 20260328121151.png]]
