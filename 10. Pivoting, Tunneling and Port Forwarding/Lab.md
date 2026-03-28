@@ -90,3 +90,182 @@ xfreerdp /u:mlefay /p:"Plain Human work!" /v:172.16.5.35 /cert:ignore
 ##### The machine has a second network interface which has access to a different network
 
 ![[Pasted image 20260328121338.png]]
+5. In previous pentests against Inlanefreight, we have seen that they have a bad habit of utilizing accounts with services in a way that exposes the users credentials and the network as a whole. **What user is vulnerable?**
+
+To get the user who is vulnerable, I used the technique of **Extracting Passwords from Windows Systems through dumping LSASS.**
+
+**LSASS** is a core Windows process responsible for enforcing security policies, handling user authentication, and storing sensitive credential material in memory.
+
+Upon initial logon, LSASS will:
+
+- _Cache credentials locally in memory_
+- _Create_ [_access tokens_](https://docs.microsoft.com/en-us/windows/win32/secauthz/access-tokens)
+- _Enforce security policies_
+- _Write to Windows’_ [_security log_](https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging-security)
+
+### Dumping LSASS process memory
+
+### Task Manager method
+
+With access to an interactive graphical session on the target, we can use the **task manager** to create a memory dump. This requires us to:
+
+1. Open `Task Manager`
+2. Select the `Processes` tab
+3. Find and right click the `Local Security Authority Process`
+4. Select `Create dump file`
+
+A file called `lsass.DMP` is created and saved in `%temp%`. This is the file we will transfer to our attack host.
+
+I disconnected the connection to 172.16.5.35 and connected again with the shard Folder command with my RDP syntax. This will give the opportunity to be able to copy lsass.DMP file to the shared folder and have access to it on my Kali Linux machine for further processing.
+
+proxychains4 -f /home/kali/Tools/proxychains4.conf xfreerdp3 /u:mlefay  /p:'Plain Human work!' /v:172.16.5.35 /cert:ignore /dynamic-resolution "/drive:sf_kalifolder,/media/sf_kalifolder"
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*1LDRXFIUwHx3B9LJ-xYltQ.png)
+
+shared folder!
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*YuN2yls2JwnRVW2X9Mnvww.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*n1a-clS3gvt4mY6RGiuviA.png)
+
+The next is to navigate to the location of the file, **C:\Users\mlefay\AppData\Local\Temp**
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*Ri0YA1FbYRhCMH4wKJxYjA.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*DebVvAgUOnYW5wILMTUWew.png)
+
+Right click and copy
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*euIZZPxZmmjuYS6Iw8WA7g.png)
+
+copied
+
+The next is to extract the credentials using **Pypykatz.**
+
+### Using Pypykatz to extract credentials
+
+Now, on the attack machine, we can make use of **Pypykatz** to extract credentials.
+
+pypykatz lsa minidump /<path of the file>/lsass.dmp 
+
+kali@kali ~ % pypykatz lsa minidump lsass.DMP
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*C-qgbgIdtAmW7UWOnVJMQA.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*oSD_3fk3SEMECnSktk3oZA.png)
+
+vfrank credentials captured!
+
+**vfrank:Imply wet Unmasked!**
+
+Therefore, the user who is vulnerable is **vfrank.**
+
+6. For your next hop, enumerate the networks and then utilize a common remote access solution to pivot. Submit the **C:\Flag.txt** located on the workstation.
+
+Remember on **172.16.5.35**, we discovered another ethernet adapter with ip address **172.16.6.35,** which is another subnet. That is, the host is dual NICd.
+
+It is so we need to identify hosts on the same network using **PowerShell**.
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*Y9UrNfWXjUcUsSmxo_xpSQ.png)
+
+1..254 | % {"172.16.6.$($_): $(Test-Connection -count 1 -comp 172.16.6.$($_) -quiet)"}
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*-n9CNhUAclTCYRyyxGACaQ.png)
+
+172.16.6.25
+
+Remember the vulnerable user….
+
+**vfrank:Imply wet Unmasked!**
+
+I used his credentials to RDP to **172.16.6.25** right from **172.16.5.35.** Remember the hint: _“…utilize a common remote access solution to pivot. Submit the C:\Flag.txt located on the workstation.”_
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*Lbwa_S2-mfdNyBFd2ZWgLA.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*DEH9atlQbXjQj48N2UhXzw.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*CX_TWIzyODQNDREVsUxSoA.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*EkXDsxe8EnyH7QocCMgvfg.png)
+
+Get ready to encounter this failed attempt…enter the same password again and press Ok.
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*iLpnErYCdEu7cIh2Uj0AHg.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*5H7OG2rs63y0FpuSxHuw0Q.png)
+
+click **Yes**
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*YaoI2dCS6brBkZI_dSsTXw.png)
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*7eutDbI6FubPLRy2eHggNQ.png)
+
+172.16.6.25 desktop
+
+![](https://miro.medium.com/v2/resize:fit:669/1*yk4a0q0zWXtVE6GMB-lLTg.png)
+
+The next is to navigate to the C drive and capture the flag….
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*P6jRwS3W9YG0GFhuGfrL4Q.png)
+
+**Two Drives C and Z**
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*rUg6pnzD8sNIuqpkOWi-6Q.png)
+
+Answer: **N3tw0rk-H0pp1ng-f0R-FuN**
+
+7. Submit the contents of C:\Flag.txt located on the Domain Controller.
+
+I tried to open the second drive, **drive Z,** and see what was inside; behold, I was able to capture the last flag for question 7. Which I don’t even need to get access to DC…remember the drive name, **AutomateDCAdmin.** Means the information inside the drive is related to **DC**.
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*S_hs-dALXJZXxlUZE4MfRg.png)
+
+Answer: **3nd-0xf-Th3-R@inbow!**
+
+Press enter or click to view image in full size
+
+![](https://miro.medium.com/v2/resize:fit:700/1*8tdC2GvvO7-onoaQqv2CeA.png)
+
+End!!!!
