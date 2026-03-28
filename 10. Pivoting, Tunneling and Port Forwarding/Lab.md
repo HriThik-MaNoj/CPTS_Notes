@@ -85,3 +85,8 @@ xfreerdp /u:mlefay /p:"Plain Human work!" /v:172.16.5.35 /cert:ignore
 ![[Pasted image 20260328121115.png]]
 ### Flag inside C:
 ![[Pasted image 20260328121151.png]]
+- Let's check if this machine has access to any networks that we did not have access to previously.
+
+##### The machine has a second network interface which has access to a different network
+
+![[Pasted image 20260328121338.png]]
