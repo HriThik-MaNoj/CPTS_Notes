@@ -1,84 +1,56 @@
 {
   "main": {
-    "id": "060c57d65a2d1644",
+    "id": "b5e35a40e1ce89ab",
     "type": "split",
     "children": [
       {
-        "id": "97c2937df254dacf",
+        "id": "d88ddfd9ca1fdd39",
         "type": "tabs",
         "children": [
           {
-            "id": "70d76e218a9dad82",
+            "id": "1ddc7f38381da763",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10. Pivoting, Tunneling and Port Forwarding/Untitled.md",
+                "file": "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "3. LLMNR or NBT-NS Poisoning  from linux"
             }
           },
           {
-            "id": "46b045a911238258",
+            "id": "5ecafddb8d0847f4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ligolo-ng.md",
+                "file": "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ligolo-ng"
-            }
-          },
-          {
-            "id": "78e41ddc4f4b46ec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "11. Active Directory Enumeration & Attacks/2. External Recon and Enumeration Principles.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2. External Recon and Enumeration Principles"
-            }
-          },
-          {
-            "id": "57dcbadf183a9b6e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "11. Active Directory Enumeration & Attacks/2. External Recon and Enumeration Principles.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2. External Recon and Enumeration Principles"
+              "title": "3. LLMNR or NBT-NS Poisoning  from linux"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "3990945d8dc909a4",
+    "id": "1c3678f977b98aaf",
     "type": "split",
     "children": [
       {
-        "id": "25a6f665ff84edc6",
+        "id": "567ddcabe9f71055",
         "type": "tabs",
         "children": [
           {
-            "id": "e2ded69b05a05f30",
+            "id": "932c6f6a2c9d5158",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -91,12 +63,12 @@
             }
           },
           {
-            "id": "db25b4e49b5eabe4",
+            "id": "50e017fd42aee496",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "LLMNR",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -108,7 +80,7 @@
             }
           },
           {
-            "id": "6aa34dfd84729eb9",
+            "id": "4381e0160488b930",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -117,55 +89,56 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 374.5
+    "width": 300
   },
   "right": {
-    "id": "dc2011c432f60d19",
+    "id": "ccd62be3c15c9b6f",
     "type": "split",
     "children": [
       {
-        "id": "4821ccb6856789d0",
+        "id": "aa7f32d90c12cea1",
         "type": "tabs",
         "children": [
           {
-            "id": "67471e3d4834d10a",
+            "id": "569411f5eea37c74",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/2. External Recon and Enumeration Principles.md",
+                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": false
+                "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 2. External Recon and Enumeration Principles"
+              "title": "Backlinks for 3. Initial Enumeration of the Domain"
             }
           },
           {
-            "id": "762f6c3fd36fd191",
+            "id": "8073e1b9caeef627",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "5.Types of Shells/1. Shell types.md",
+                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
                 "linksCollapsed": false,
-                "unlinkedCollapsed": false
+                "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 1. Shell types"
+              "title": "Outgoing links from 3. Initial Enumeration of the Domain"
             }
           },
           {
-            "id": "1bd5af83763eddee",
+            "id": "e553728bf5d2e3f3",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -180,7 +153,7 @@
             }
           },
           {
-            "id": "d652ea97e1a2ab95",
+            "id": "b98bdb3eaa4f72ff",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -194,21 +167,22 @@
             }
           },
           {
-            "id": "b578952767d51717",
+            "id": "072bbbee3e6f9f83",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
+                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of 3. Initial Enumeration of the Domain"
             }
           },
           {
-            "id": "9869e33a3693b299",
+            "id": "296ce821f1f8a4d4",
             "type": "leaf",
             "state": {
               "type": "calendar",
@@ -216,22 +190,13 @@
               "icon": "calendar-with-checkmark",
               "title": "Calendar"
             }
-          },
-          {
-            "id": "1a21a56e42fce1d9",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
-            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -246,54 +211,8 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "57dcbadf183a9b6e",
+  "active": "5ecafddb8d0847f4",
   "lastOpenFiles": [
-    "attachments/Pasted image 20260328210913.png",
-    "11. Active Directory Enumeration & Attacks/1. Intro.md",
-    "11. Active Directory Enumeration & Attacks/2. External Recon and Enumeration Principles.md",
-    "8. Password Attacks/20. Pass the Certificate.md",
-    "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
-    "academy_og/CPTS_Exam_Methodology.md",
-    "11. Active Directory Enumeration & Attacks",
-    "10. Pivoting, Tunneling and Port Forwarding/Lab.md",
-    "attachments/Pasted image 20260328121338.png",
-    "attachments/Pasted image 20260328121151.png",
-    "attachments/Pasted image 20260328121115.png",
-    "attachments/Pasted image 20260328120814.png",
-    "attachments/Pasted image 20260328120538.png",
-    "Rust scan Installation.md",
-    "attachments/Pasted image 20260328115735.png",
-    "10. Pivoting, Tunneling and Port Forwarding/4. Meterpreter Tunneling & Port Forwarding.md",
-    "attachments/Pasted image 20260328115156.png",
-    "attachments/Pasted image 20260328115143.png",
-    "10. Pivoting, Tunneling and Port Forwarding/14.1 SocksOverRDP — Windows Pivoting via RDP Tunneling.md",
-    "Ligolo-ng.md",
-    "attachments/Pasted image 20260328114026.png",
-    "attachments/Pasted image 20260328113818.png",
-    "Pivoting, Tunneling, and Port Forwarding.md",
-    "8. Password Attacks/9. Attacking LSASS.md",
-    "5. File Transfers/1. Windows File Transfer Methods.md",
-    "10. Pivoting, Tunneling and Port Forwarding/13. ICMP Tunneling with SOCKS.md",
-    "10. Pivoting, Tunneling and Port Forwarding/14. RDP and SOCKS Tunneling with SocksOverRDP.md",
-    "1. Getting Started/7. Transferring Files/1. Transferring Files.md",
-    "10. Pivoting, Tunneling and Port Forwarding/2.Dynamic Port Forwarding with SSH and SOCKS Tunneling.md",
-    "10. Pivoting, Tunneling and Port Forwarding/11. DNS Tunneling with Dnscat2.md",
-    "10. Pivoting, Tunneling and Port Forwarding/10. Port Forwarding with Windows Netsh.md",
-    "10. Pivoting, Tunneling and Port Forwarding/9. Web Server Pivoting with Rpivot.md",
-    "10. Pivoting, Tunneling and Port Forwarding/8. SSH Pivoting with Sshuttle.md",
-    "10. Pivoting, Tunneling and Port Forwarding/3. Remote or Reverse Port Forwarding with SSH.md",
-    "1. Getting Started/6. Privilege Escalation/1. Privilege Escalation.md",
-    "10. Pivoting, Tunneling and Port Forwarding/6. Socat Redirection with a Bind Shell.md",
-    "10. Pivoting, Tunneling and Port Forwarding/12. SOCKS5 Tunneling with Chisel.md",
-    "academy_og/images/module-115-001.txt",
-    "academy_og/images/module-144-006",
-    "academy_og/images/module-144-002",
-    "academy_og/images",
-    "academy_og/modules.txt",
-    "academy_og/htb-academy-to-md-linux-amd64",
-    "academy_og",
-    "htb-academy-to-md-linux-amd64",
-    "10. Pivoting, Tunneling and Port Forwarding",
-    "Untitled.canvas"
+    "academy_og/Active Directory Enumeration & Attacks.md"
   ]
 }
