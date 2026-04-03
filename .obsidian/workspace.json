@@ -68,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "fping",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -210,16 +210,19 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "5ecafddb8d0847f4",
+  "active": "932c6f6a2c9d5158",
   "lastOpenFiles": [
+    "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
+    "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
+    "attachments/Pasted image 20260403180812.png",
+    "attachments/Pasted image 20260403180705.png",
+    "attachments/Pasted image 20260403175924.png",
     "CPTS_MEMORY.md",
     "11. Active Directory Enumeration & Attacks/9. Enumerating Security Controls.md",
-    "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
     "Active Directory Enumeration.md",
     "11. Active Directory Enumeration & Attacks/8. Internal Password Spraying - from Windows.md",
     "11. Active Directory Enumeration & Attacks/7. Internal Password Spraying - from Linux.md",
     "11. Active Directory Enumeration & Attacks/6. Password Spraying - Making a Target User List.md",
-    "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
     "11. Active Directory Enumeration & Attacks/4. LLMNR OR NBT-NS Poisoning - from Windows.md",
     "11. Active Directory Enumeration & Attacks/2. External Recon and Enumeration Principles.md",
     "11. Active Directory Enumeration & Attacks/5. Enumerating & Retrieving password policies.md",
