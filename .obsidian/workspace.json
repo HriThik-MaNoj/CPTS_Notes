@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/11. Credential Enumeration - from Windows.md",
+                "file": "11. Active Directory Enumeration & Attacks/12. Living off the Land.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11. Credential Enumeration - from Windows"
+              "title": "12. Living off the Land"
             }
           }
         ],
@@ -226,6 +226,10 @@
   },
   "active": "6aedb6c7935b6da4",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260405101419.png",
+    "attachments/Pasted image 20260405093045.png",
+    "11. Active Directory Enumeration & Attacks/11. Credential Enumeration - from Windows.md",
+    "11. Active Directory Enumeration & Attacks/12. Living off the Land.md",
     "attachments/Pasted image 20260404105940.png",
     "attachments/Pasted image 20260404103429.png",
     "attachments/Pasted image 20260404103258.png",
@@ -233,7 +237,6 @@
     "attachments/Pasted image 20260404101655.png",
     "attachments/Pasted image 20260404100333.png",
     "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
-    "11. Active Directory Enumeration & Attacks/11. Credential Enumeration - from Windows.md",
     "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
     "attachments/Pasted image 20260403180812.png",
     "attachments/Pasted image 20260403180705.png",
@@ -248,7 +251,6 @@
     "11. Active Directory Enumeration & Attacks/2. External Recon and Enumeration Principles.md",
     "11. Active Directory Enumeration & Attacks/5. Enumerating & Retrieving password policies.md",
     "3. Footprinting/2. Domain Information.md",
-    "attachments/Pasted image 20260402230005.png",
     "academy_og/Active Directory Enumeration & Attacks.md"
   ]
 }
