@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/14. Kerberoasting - from Windows.md",
+                "file": "11. Active Directory Enumeration & Attacks/15. Access Control List (ACL) Abuse primer.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "14. Kerberoasting - from Windows"
+              "title": "15. Access Control List (ACL) Abuse primer"
             }
           }
         ],
@@ -226,6 +226,22 @@
   },
   "active": "6aedb6c7935b6da4",
   "lastOpenFiles": [
+    "Qwen_Methodology/GAP_ANALYSIS_FINAL.md",
+    "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md.bak",
+    "Qwen_Methodology/Comprehensive_Penetration_Testing_Methodology.md.bak",
+    "Qwen_Methodology/ADDENDUM_06_PrivEsc_Web.md",
+    "Qwen_Methodology/ADDENDUM_05_AD_Password.md",
+    "Qwen_Methodology/ADDENDUM_04_Pivoting.md",
+    "Qwen_Methodology/ADDENDUM_03_File_Transfers.md",
+    "Qwen_Methodology/ADDENDUM_02_Shells_Payloads.md",
+    "Qwen_Methodology/ADDENDUM_01_Metasploit.md",
+    "11. Active Directory Enumeration & Attacks/14. Kerberoasting - from Windows.md",
+    "11. Active Directory Enumeration & Attacks/15. Access Control List (ACL) Abuse primer.md",
+    "Qwen_Methodology/MASTER_GAP_ANALYSIS.md",
+    "Qwen_Methodology/GAP_ANALYSIS.md",
+    "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md",
+    "Qwen_Methodology/Comprehensive_Penetration_Testing_Methodology.md",
+    "attachments/Pasted image 20260407143503.png",
     "attachments/Pasted image 20260407142116.png",
     "attachments/Pasted image 20260407142059.png",
     "attachments/Pasted image 20260407141747.png",
@@ -234,18 +250,12 @@
     "attachments/Pasted image 20260407100137.png",
     "attachments/Pasted image 20260407094618.png",
     "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
-    "11. Active Directory Enumeration & Attacks/14. Kerberoasting - from Windows.md",
     "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
     "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
-    "Qwen_Methodology/GAP_ANALYSIS.md",
-    "Qwen_Methodology/Comprehensive_Penetration_Testing_Methodology.md",
-    "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md",
     "Comprehensive_Methodology.md",
     "Qwen_Methodology",
     "attachments/Pasted image 20260405113008.png",
     "attachments/Pasted image 20260405112831.png",
-    "attachments/Pasted image 20260405112722.png",
-    "attachments/Pasted image 20260405112619.png",
     "11. Active Directory Enumeration & Attacks/12. Living off the Land.md",
     "11. Active Directory Enumeration & Attacks/11. Credential Enumeration - from Windows.md",
     "CPTS_MEMORY.md",
@@ -254,10 +264,6 @@
     "11. Active Directory Enumeration & Attacks/8. Internal Password Spraying - from Windows.md",
     "11. Active Directory Enumeration & Attacks/7. Internal Password Spraying - from Linux.md",
     "11. Active Directory Enumeration & Attacks/6. Password Spraying - Making a Target User List.md",
-    "11. Active Directory Enumeration & Attacks/4. LLMNR OR NBT-NS Poisoning - from Windows.md",
-    "11. Active Directory Enumeration & Attacks/2. External Recon and Enumeration Principles.md",
-    "11. Active Directory Enumeration & Attacks/5. Enumerating & Retrieving password policies.md",
-    "3. Footprinting/2. Domain Information.md",
-    "academy_og/Active Directory Enumeration & Attacks.md"
+    "11. Active Directory Enumeration & Attacks/4. LLMNR OR NBT-NS Poisoning - from Windows.md"
   ]
 }
