@@ -1,7 +1,7 @@
 {
   "theme": "obsidian",
-  "cssTheme": "Royal Velvet",
-  "baseFontSize": 24,
+  "cssTheme": "Brainhack",
+  "baseFontSize": 27,
   "accentColor": "#a000eb",
   "nativeMenus": false
 }
