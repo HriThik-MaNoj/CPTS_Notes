@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "ccd62be3c15c9b6f",
@@ -198,10 +197,13 @@
   },
   "active": "63a4cc16f40b0ec8",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260411205046.png",
+    "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
+    "11. Active Directory Enumeration & Attacks/17. DCSync.md",
+    "attachments/Pasted image 20260411172744.png",
     "attachments/Pasted image 20260411172219.png",
     "attachments/Pasted image 20260411171743.png",
     "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
-    "11. Active Directory Enumeration & Attacks/17. DCSync.md",
     "attachments/Pasted image 20260411162847.png",
     "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
     "Untitled.base",
@@ -232,9 +234,6 @@
     "Qwen_Methodology/Comprehensive_Penetration_Testing_Methodology.md.bak",
     "Qwen_Methodology/MASTER_GAP_ANALYSIS.md",
     "Qwen_Methodology/GAP_ANALYSIS.md",
-    "attachments/Pasted image 20260407143503.png",
-    "attachments/Pasted image 20260407142116.png",
-    "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
     "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
     "Comprehensive_Methodology.md",
     "Qwen_Methodology"
