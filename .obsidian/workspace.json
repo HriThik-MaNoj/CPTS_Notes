@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/17. DCSync.md",
+                "file": "11. Active Directory Enumeration & Attacks/18. Privileged Access.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "17. DCSync"
+              "title": "18. Privileged Access"
             }
           }
         ]
@@ -197,28 +197,29 @@
   },
   "active": "63a4cc16f40b0ec8",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260411221857.png",
+    "attachments/Pasted image 20260411221710.png",
+    "attachments/Pasted image 20260411221443.png",
+    "attachments/Pasted image 20260411221216.png",
+    "attachments/Pasted image 20260411220925.png",
+    "attachments/Pasted image 20260411220520.png",
+    "attachments/Pasted image 20260411220239.png",
+    "attachments/Pasted image 20260411215425.png",
+    "attachments/Pasted image 20260411215126.png",
+    "11. Active Directory Enumeration & Attacks/17. DCSync.md",
+    "11. Active Directory Enumeration & Attacks/18. Privileged Access.md",
+    "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
+    "11. Active Directory Enumeration & Attacks/15. Access Control List (ACL) Abuse primer.md",
+    "attachments/Pasted image 20260411205413.png",
     "attachments/Pasted image 20260411205046.png",
     "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
-    "11. Active Directory Enumeration & Attacks/17. DCSync.md",
-    "attachments/Pasted image 20260411172744.png",
-    "attachments/Pasted image 20260411172219.png",
-    "attachments/Pasted image 20260411171743.png",
-    "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
-    "attachments/Pasted image 20260411162847.png",
     "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
     "Untitled.base",
-    "attachments/Pasted image 20260411160936.png",
-    "attachments/Pasted image 20260411160822.png",
-    "attachments/Pasted image 20260411160332.png",
-    "attachments/Pasted image 20260411160251.png",
-    "attachments/Pasted image 20260411160206.png",
-    "attachments/Pasted image 20260411155914.png",
     "11. Active Directory Enumeration & Attacks/6. Password Spraying - Making a Target User List.md",
     "11. Active Directory Enumeration & Attacks/12. Living off the Land.md",
     "11. Active Directory Enumeration & Attacks/4. LLMNR OR NBT-NS Poisoning - from Windows.md",
     "Untitled 1.md",
     "11. Active Directory Enumeration & Attacks/14. Kerberoasting - from Windows.md",
-    "11. Active Directory Enumeration & Attacks/15. Access Control List (ACL) Abuse primer.md",
     "Rust scan Installation.md",
     "rockyou.md",
     "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md",
@@ -235,7 +236,6 @@
     "Qwen_Methodology/MASTER_GAP_ANALYSIS.md",
     "Qwen_Methodology/GAP_ANALYSIS.md",
     "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
-    "Comprehensive_Methodology.md",
     "Qwen_Methodology"
   ]
 }
