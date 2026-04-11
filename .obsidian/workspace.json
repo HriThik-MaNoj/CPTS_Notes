@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
-                "mode": "source",
+                "file": "Rust scan Installation.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "16. ACL Enumeration"
+              "title": "Rust scan Installation"
             }
           }
         ],
@@ -200,8 +200,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
         ]
@@ -213,19 +213,21 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false,
       "obsidian-git:Open Git source control": false,
       "templater-obsidian:Templater": false
     }
   },
   "active": "6aedb6c7935b6da4",
   "lastOpenFiles": [
+    "rockyou.md",
+    "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
     "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md",
     "Qwen_Methodology/Comprehensive_Penetration_Testing_Methodology.md",
     "Qwen_Methodology/ADDENDUM_06_PrivEsc_Web.md",
@@ -234,7 +236,6 @@
     "Qwen_Methodology/ADDENDUM_03_File_Transfers.md",
     "Qwen_Methodology/ADDENDUM_02_Shells_Payloads.md",
     "Qwen_Methodology/ADDENDUM_01_Metasploit.md",
-    "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
     "11. Active Directory Enumeration & Attacks/15. Access Control List (ACL) Abuse primer.md",
     "Qwen_Methodology/GAP_ANALYSIS_FINAL.md",
     "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md.bak",
@@ -263,7 +264,6 @@
     "11. Active Directory Enumeration & Attacks/9. Enumerating Security Controls.md",
     "Active Directory Enumeration.md",
     "11. Active Directory Enumeration & Attacks/8. Internal Password Spraying - from Windows.md",
-    "11. Active Directory Enumeration & Attacks/7. Internal Password Spraying - from Linux.md",
-    "11. Active Directory Enumeration & Attacks/6. Password Spraying - Making a Target User List.md"
+    "11. Active Directory Enumeration & Attacks/7. Internal Password Spraying - from Linux.md"
   ]
 }
