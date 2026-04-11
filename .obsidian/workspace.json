@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
+                "file": "11. Active Directory Enumeration & Attacks/17. DCSync.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "16. ACL Enumeration"
+              "title": "17. DCSync"
             }
           }
         ]
@@ -198,13 +198,20 @@
   },
   "active": "63a4cc16f40b0ec8",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260411172219.png",
+    "attachments/Pasted image 20260411171743.png",
+    "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
+    "11. Active Directory Enumeration & Attacks/17. DCSync.md",
+    "attachments/Pasted image 20260411162847.png",
+    "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
+    "Untitled.base",
+    "attachments/Pasted image 20260411160936.png",
+    "attachments/Pasted image 20260411160822.png",
     "attachments/Pasted image 20260411160332.png",
     "attachments/Pasted image 20260411160251.png",
     "attachments/Pasted image 20260411160206.png",
     "attachments/Pasted image 20260411155914.png",
-    "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
     "11. Active Directory Enumeration & Attacks/6. Password Spraying - Making a Target User List.md",
-    "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
     "11. Active Directory Enumeration & Attacks/12. Living off the Land.md",
     "11. Active Directory Enumeration & Attacks/4. LLMNR OR NBT-NS Poisoning - from Windows.md",
     "Untitled 1.md",
@@ -227,15 +234,9 @@
     "Qwen_Methodology/GAP_ANALYSIS.md",
     "attachments/Pasted image 20260407143503.png",
     "attachments/Pasted image 20260407142116.png",
-    "attachments/Pasted image 20260407142059.png",
-    "attachments/Pasted image 20260407141747.png",
-    "attachments/Pasted image 20260407141329.png",
-    "attachments/Pasted image 20260407141026.png",
-    "attachments/Pasted image 20260407100137.png",
     "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
     "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
     "Comprehensive_Methodology.md",
-    "Qwen_Methodology",
-    "11. Active Directory Enumeration & Attacks/11. Credential Enumeration - from Windows.md"
+    "Qwen_Methodology"
   ]
 }
