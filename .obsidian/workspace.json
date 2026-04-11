@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "ccd62be3c15c9b6f",
@@ -197,6 +198,9 @@
   },
   "active": "63a4cc16f40b0ec8",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260411160332.png",
+    "attachments/Pasted image 20260411160251.png",
+    "attachments/Pasted image 20260411160206.png",
     "attachments/Pasted image 20260411155914.png",
     "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
     "11. Active Directory Enumeration & Attacks/6. Password Spraying - Making a Target User List.md",
@@ -228,13 +232,10 @@
     "attachments/Pasted image 20260407141329.png",
     "attachments/Pasted image 20260407141026.png",
     "attachments/Pasted image 20260407100137.png",
-    "attachments/Pasted image 20260407094618.png",
     "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
     "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
     "Comprehensive_Methodology.md",
     "Qwen_Methodology",
-    "attachments/Pasted image 20260405113008.png",
-    "attachments/Pasted image 20260405112831.png",
     "11. Active Directory Enumeration & Attacks/11. Credential Enumeration - from Windows.md"
   ]
 }
