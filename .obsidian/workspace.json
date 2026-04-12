@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Bloodhound.md",
+                "file": "11. Active Directory Enumeration & Attacks/19. Bleeding Edge Vulnerabilities.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Bloodhound"
+              "title": "19. Bleeding Edge Vulnerabilities"
             }
           }
         ],
@@ -212,13 +212,17 @@
   },
   "active": "4a3e3608caa4ef75",
   "lastOpenFiles": [
-    "Untitled.md",
+    "attachments/Pasted image 20260412211159.png",
+    "attachments/Pasted image 20260412211036.png",
+    "test.wav",
     "Bloodhound.md",
+    "11. Active Directory Enumeration & Attacks/19. Bleeding Edge Vulnerabilities.md",
+    "11. Active Directory Enumeration & Attacks/18. Privileged Access.md",
+    "Untitled.md",
     "Rust scan Installation.md",
     "Untitled.base",
     "11. Active Directory Enumeration & Attacks/6. Password Spraying - Making a Target User List.md",
     "rockyou.md",
-    "11. Active Directory Enumeration & Attacks/18. Privileged Access.md",
     "README.md",
     "attachments/Pasted image 20260411221857.png",
     "attachments/Pasted image 20260411221710.png",
@@ -232,7 +236,6 @@
     "11. Active Directory Enumeration & Attacks/17. DCSync.md",
     "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
     "11. Active Directory Enumeration & Attacks/15. Access Control List (ACL) Abuse primer.md",
-    "attachments/Pasted image 20260411205413.png",
     "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
     "11. Active Directory Enumeration & Attacks/10. Credential Enumeration - from Linux.md",
     "11. Active Directory Enumeration & Attacks/12. Living off the Land.md",
@@ -249,8 +252,6 @@
     "Qwen_Methodology/GAP_ANALYSIS_FINAL.md",
     "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md.bak",
     "Qwen_Methodology/Comprehensive_Penetration_Testing_Methodology.md.bak",
-    "Qwen_Methodology/MASTER_GAP_ANALYSIS.md",
-    "Qwen_Methodology/GAP_ANALYSIS.md",
     "Qwen_Methodology"
   ]
 }
