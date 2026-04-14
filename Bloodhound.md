@@ -23,4 +23,7 @@ sudo rusthound -u 'olivia' -p 'ichiliebedich' -f 10.10.11.42 -d administrator.ht
 - written in C#
 - [releases page](https://github.com/SpecterOps/SharpHound/releases)
 
-  
+#### Netexec
+```python
+netexec ldap $target -u <username> -p <password> --bloodhound --collection All --dns-server $target
+```
