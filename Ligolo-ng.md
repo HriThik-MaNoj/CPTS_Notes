@@ -131,7 +131,7 @@ C:\Users\mlefay\AppData\Local\Temp\agent.exe -connect 172.16.5.35:11601 -ignore-
 #### Creating the network interface
 
 ```python
-sudo ip tuntap add user htb-ac-2081772 mode tun ligolo
+sudo ip tuntap add user $USER mode tun ligolo
 sudo ip link set ligolo up
 ```
 
