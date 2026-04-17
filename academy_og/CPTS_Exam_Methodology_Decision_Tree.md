@@ -8,6 +8,7 @@
 ## 📋 TABLE OF CONTENTS
 
 1. [Phase 0: Pre-Engagement Setup](#phase-0-pre-engagement-setup)
+1. [Phase 0: Pre-Engagement Setup](#phase-0-pre-engagement-setup)
 2. [Phase 1: Information Gathering & Enumeration](#phase-1-information-gathering--enumeration)
 3. [Phase 2: Vulnerability Assessment](#phase-2-vulnerability-assessment)
 4. [Phase 3: Exploitation](#phase-3-exploitation)

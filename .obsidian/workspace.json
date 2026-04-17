@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/24. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Windows.md",
+                "file": "11. Active Directory Enumeration & Attacks/25. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Linux.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "24. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Windows"
+              "title": "25. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Linux"
             }
           }
         ]
@@ -197,10 +197,12 @@
   },
   "active": "6e709f6ee9b4534a",
   "lastOpenFiles": [
+    "11. Active Directory Enumeration & Attacks/24. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Windows.md",
+    "11. Active Directory Enumeration & Attacks/25. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Linux.md",
+    "attachments/Pasted image 20260417102957.png",
     "attachments/Pasted image 20260417102751.png",
     "attachments/Pasted image 20260417095029.png",
     "11. Active Directory Enumeration & Attacks/23. Attacking Domain Trusts - Child -> Parent Trusts - from Linux.md",
-    "11. Active Directory Enumeration & Attacks/24. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Windows.md",
     "11. Active Directory Enumeration & Attacks/22. Attacking Domain Trusts - Child -> Parent Trusts - from Windows.md",
     "11. Active Directory Enumeration & Attacks/0. Tips and Tricks.md",
     "attachments/Pasted image 20260417084958.png",
@@ -215,8 +217,6 @@
     "academy_og/CPTS_Exam_Methodology_Decision_Tree.md",
     "Untitled.md",
     "11. Active Directory Enumeration & Attacks/21. Domain Trusts.md",
-    "attachments/Pasted image 20260416113530.png",
-    "attachments/Pasted image 20260416112624.png",
     "11. Active Directory Enumeration & Attacks/20. Miscellaneous Misconfigurations.md",
     "11. Active Directory Enumeration & Attacks/19. Bleeding Edge Vulnerabilities.md",
     "11. Active Directory Enumeration & Attacks/15. Access Control List (ACL) Abuse primer.md",
