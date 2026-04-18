@@ -171,7 +171,7 @@ sudo ip route addd 172.16.5.0/24 dev ligolo
 
 ```python
 #On the attack host
-sudo ip tuntap add user htb-ac-2081772 mode tun ligolo-double
+sudo ip tuntap add user $USER mode tun ligolo-double
 sudo ip link set ligolo-double up
 ```
 #### Go back to the ligolo proxy interface
