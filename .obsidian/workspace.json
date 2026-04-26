@@ -8,34 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "6e709f6ee9b4534a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "9. Attacking common Services/4. Attacking SQL Databases..md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "4. Attacking SQL Databases."
-            }
-          },
-          {
-            "id": "427d95435533f441",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "6. Shells and Payloads/2. Reverse Shells.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2. Reverse Shells"
-            }
-          },
-          {
             "id": "1fee65c05ddc4b01",
             "type": "leaf",
             "state": {
@@ -64,17 +36,17 @@
             }
           },
           {
-            "id": "d807c0450dae2b61",
+            "id": "daa689bc9eab09fe",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Footprinting/2. Network Enumeration with Nmap/1. Enumeration.md",
+                "file": "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Enumeration"
+              "title": "27. LAB 2"
             }
           }
         ],
@@ -110,7 +82,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "mssql",
+                "query": "secrets",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -131,8 +103,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -253,19 +224,34 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "1fee65c05ddc4b01",
+  "active": "daa689bc9eab09fe",
   "lastOpenFiles": [
+    "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
+    "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
+    "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
+    "8. Password Attacks/5. Network Services.md",
+    "CPTS_Exam_Master_Methodology.md",
+    "Ligolo-ng.md",
+    "3. Footprinting/2. Network Enumeration with Nmap/1. Enumeration.md",
+    "academy_og/CLAUDE.md",
+    "restructure_methodology.py.tmp.91118.1777198789365",
+    "CPTS_Exam_Methodology.md",
+    "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md",
+    "AD Methodology.md",
+    "CPTS_Exam_Master_Methodology.md.bak",
+    "restructure_methodology.py",
+    "restructure_methodology.py.tmp.91118.1777198685669",
+    "Untitled 2.md",
+    "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
+    "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
+    "Untitled 1.md",
     "attachments/Pasted image 20260426121336.png",
     "attachments/Pasted image 20260426121222.png",
     "attachments/Pasted image 20260426112651.png",
     "9. Attacking common Services/4. Attacking SQL Databases..md",
-    "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
-    "3. Footprinting/2. Network Enumeration with Nmap/1. Enumeration.md",
     "6. Shells and Payloads/2. Reverse Shells.md",
     "9. Attacking common Services/1. Theory.md",
     "11. Active Directory Enumeration & Attacks/1. Intro.md",
-    "CPTS_Exam_Master_Methodology.md",
-    "Ligolo-ng.md",
     "6. Shells and Payloads/7. Spawning Interactive Shells.md",
     "6. Shells and Payloads/8. Web Shells.md",
     "Bloodhound.md",
@@ -277,29 +263,14 @@
     "methodology_agent.py",
     "methodology_agent.py.tmp.270729.1777128316254",
     "academy_og/cpts-methodology/agents/prompts.py",
-    "academy_og/cpts-methodology/agents/orchestrator.py",
-    "academy_og/cpts-methodology/agents",
     "academy_og/cpts-methodology/methodology_v0.md",
     "academy_og/cpts-methodology/CPTS_Exam_Master_Methodology.md",
-    "academy_og/cpts-methodology/notes/Windows Privilege Escalation.md",
-    "academy_og/cpts-methodology/notes/Web Attacks.md",
-    "academy_og/cpts-methodology/notes/Vulnerability Assessment.md",
-    "academy_og/cpts-methodology/notes/Using Web Proxies.md",
-    "academy_og/cpts-methodology/notes/Using the Metasploit Framework.md",
-    "academy_og/cpts-methodology/notes/SQLMap Essentials.md",
-    "academy_og/cpts-methodology/notes/SQL Injection Fundamentals.md",
-    "academy_og/cpts-methodology/notes/Shells & Payloads.md",
-    "academy_og/cpts-methodology/notes/Pivoting, Tunneling, and Port Forwarding.md",
-    "academy_og/cpts-methodology/notes/Penetration Testing Process.md",
-    "academy_og/cpts-methodology/notes",
-    "academy_og/notes",
     "attachments/Pasted image 20260417214736.png",
     "attachments/Pasted image 20260417214659.png",
     "attachments/Pasted image 20260417210820.png",
     "attachments/Pasted image 20260417140804.png",
     "attachments/Pasted image 20260417140628.png",
     "attachments/Pasted image 20260417102957.png",
-    "attachments/Pasted image 20260417102751.png",
-    "attachments/Pasted image 20260417095029.png"
+    "attachments/Pasted image 20260417102751.png"
   ]
 }
