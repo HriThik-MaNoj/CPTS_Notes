@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -238,29 +238,36 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d22499d0308e281d",
+  "active": "c6694e8f2d8fe3f7",
   "lastOpenFiles": [
-    "attachments/Pasted image 20260426180942.png",
-    "attachments/Pasted image 20260426180520.png",
+    "Untitled 2.md",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295115000",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295084424",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295071315",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295061900",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295054919",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295046295",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295030980",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295019099",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777295004916",
+    "CPTS_Exam_Master_Methodology.md.tmp.3912.1777294978711",
+    "Untitled 1.md",
+    "Untitled.md",
     "CPTS_Exam_Master_Methodology.md",
     "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
+    "attachments/Pasted image 20260426180942.png",
+    "attachments/Pasted image 20260426180520.png",
     "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
     "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
     "8. Password Attacks/5. Network Services.md",
     "Ligolo-ng.md",
     "3. Footprinting/2. Network Enumeration with Nmap/1. Enumeration.md",
     "academy_og/CLAUDE.md",
-    "restructure_methodology.py.tmp.91118.1777198789365",
     "CPTS_Exam_Methodology.md",
     "Qwen_Methodology/CPTS_Decision_Tree_Methodology.md",
     "AD Methodology.md",
-    "CPTS_Exam_Master_Methodology.md.bak",
-    "restructure_methodology.py",
-    "restructure_methodology.py.tmp.91118.1777198685669",
-    "Untitled 2.md",
     "11. Active Directory Enumeration & Attacks/16. ACL Enumeration.md",
     "11. Active Directory Enumeration & Attacks/13. Kerberoasting - from Linux.md",
-    "Untitled 1.md",
     "attachments/Pasted image 20260426121336.png",
     "attachments/Pasted image 20260426121222.png",
     "attachments/Pasted image 20260426112651.png",
@@ -272,19 +279,11 @@
     "6. Shells and Payloads/8. Web Shells.md",
     "Bloodhound.md",
     "11. Active Directory Enumeration & Attacks/0. Tips and Tricks.md",
-    "methodology_agent.py.tmp.270729.1777128705294",
     "agent_workspace/assembled_methodology.md",
-    "agent_workspace/all_gaps.json",
-    "agent_workspace",
-    "methodology_agent.py",
-    "methodology_agent.py.tmp.270729.1777128316254",
-    "academy_og/cpts-methodology/agents/prompts.py",
-    "academy_og/cpts-methodology/methodology_v0.md",
     "attachments/Pasted image 20260417214736.png",
     "attachments/Pasted image 20260417214659.png",
     "attachments/Pasted image 20260417210820.png",
     "attachments/Pasted image 20260417140804.png",
-    "attachments/Pasted image 20260417140628.png",
-    "attachments/Pasted image 20260417102957.png"
+    "attachments/Pasted image 20260417140628.png"
   ]
 }
