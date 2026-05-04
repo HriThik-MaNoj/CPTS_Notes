@@ -148,6 +148,7 @@ N.X Title
 │ 4. Exploitation                                              │
 │    - Initial foothold (web/service exploit)                  │
 │    - Privilege escalation (local)                            │
+
 ├──────────────────────────────────────────────────────────────┤
 │ 5. Post-Exploitation                                         │
 │    - Pillaging (creds, configs, sensitive data)              │
