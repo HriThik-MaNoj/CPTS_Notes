@@ -1,0 +1,7 @@
+session
+autoroute
+session
+autoroute
+session
+listener_add --addr 127.0.0.1:5678 --to 127.0.0.1:5678
+listener_add --addr 127.0.0.1:8888 --to 127.0.0.1:5678
