@@ -8,63 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1fee65c05ddc4b01",
+            "id": "ec74d030231a27f3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
+                "file": "12. FFUF/1. Page Fuzzing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "26. LAB 1"
-            }
-          },
-          {
-            "id": "7b6f4132f4a2a301",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Ligolo-ng.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Ligolo-ng"
-            }
-          },
-          {
-            "id": "c6694e8f2d8fe3f7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "27. LAB 2"
-            }
-          },
-          {
-            "id": "d22499d0308e281d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "27. LAB 2"
+              "title": "1. Page Fuzzing"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -96,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "secrets",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -238,22 +195,28 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "c6694e8f2d8fe3f7",
+  "active": "ec74d030231a27f3",
   "lastOpenFiles": [
+    "academy_og/mimo_methodology.md",
+    "12. FFUF/1. Page Fuzzing.md",
+    "12. FFUF",
+    "academy_og/ui.log",
+    "academy_og/ligolo-ng.history",
+    "academy_og/ligolo-selfcerts/ligolo_key",
+    "academy_og/ligolo-selfcerts/ligolo_cert",
+    "academy_og/ligolo-selfcerts",
+    "academy_og/ligolo-ng.yaml",
+    "academy_og/mimo_methodology.md.tmp.224347.4651dc220b52",
+    "academy_og/mimo_methodology.md.tmp.224347.a77525aea419",
+    "academy_og/mimo_methodology.md.tmp.224347.ad1baa78d79e",
+    "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
+    "Ligolo-ng.md",
+    "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
+    "WORKFLOW_GUIDE.md",
     "11. Active Directory Enumeration & Attacks/AD_Attack_Methodology_Complete.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/estree-jsx/package.json",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/estree-jsx/index.d.ts",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/estree-jsx/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/estree-jsx/LICENSE",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/parse-entities/node_modules/@types/unist/package.json",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/parse-entities/node_modules/@types/unist/index.d.ts",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/parse-entities/node_modules/@types/unist/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/parse-entities/node_modules/@types/unist/LICENSE",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/hast/package.json",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/hast/index.d.ts",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/hast/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/hast/LICENSE",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/mdast/package.json",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/mdast/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/ms/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/unist/README.md",
@@ -270,12 +233,6 @@
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/hast-util-to-jsx-runtime/readme.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/html-url-attributes/readme.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/devlop/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/style-to-js/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/unist-util-visit/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/remark-parse/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/remark-rehype/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/mdast-util-from-markdown/readme.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
