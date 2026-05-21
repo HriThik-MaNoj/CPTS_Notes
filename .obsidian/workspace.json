@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "12. FFUF/1. Page Fuzzing.md",
+                "file": "13. Login Bruteforcing/1. Hydra.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Page Fuzzing"
+              "title": "1. Hydra"
             }
           }
         ]
@@ -197,8 +197,10 @@
   },
   "active": "ec74d030231a27f3",
   "lastOpenFiles": [
-    "academy_og/mimo_methodology.md",
     "12. FFUF/1. Page Fuzzing.md",
+    "13. Login Bruteforcing/1. Hydra.md",
+    "13. Login Bruteforcing",
+    "academy_og/mimo_methodology.md",
     "12. FFUF",
     "academy_og/ui.log",
     "academy_og/ligolo-ng.history",
@@ -208,7 +210,6 @@
     "academy_og/ligolo-ng.yaml",
     "academy_og/mimo_methodology.md.tmp.224347.4651dc220b52",
     "academy_og/mimo_methodology.md.tmp.224347.a77525aea419",
-    "academy_og/mimo_methodology.md.tmp.224347.ad1baa78d79e",
     "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
     "Ligolo-ng.md",
     "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
@@ -232,7 +233,6 @@
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/react-markdown/readme.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/hast-util-to-jsx-runtime/readme.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/html-url-attributes/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/readme.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
