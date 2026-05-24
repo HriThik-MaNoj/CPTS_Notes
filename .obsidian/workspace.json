@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "14. SQL Injection Fundamentals/1. Basics of SQL.md",
+                "file": "14. SQL Injection Fundamentals/6. Writing Files.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Basics of SQL"
+              "title": "6. Writing Files"
             }
           }
         ]
@@ -197,25 +197,31 @@
   },
   "active": "ec74d030231a27f3",
   "lastOpenFiles": [
-    "3. Footprinting/5. FTP.md",
+    "14. SQL Injection Fundamentals/5. Reading Files..md",
+    "14. SQL Injection Fundamentals/6. Writing Files.md",
+    "14. SQL Injection Fundamentals/4. Database Enumeration.md",
+    "14. SQL Injection Fundamentals/3. Inections.md",
     "14. SQL Injection Fundamentals/1. Basics of SQL.md",
-    "14. SQL Injection Fundamentals",
+    "academy_og/mimo_methodology.md.tmp.24184.9ebdc7445791",
+    "academy_og/mimo_methodology.md.tmp.24184.6fc6788a99a6",
+    "academy_og/mimo_methodology.md.tmp.24184.17736a072e5d",
+    "academy_og/mimo_methodology.md.tmp.24184.3ff673825d66",
+    "academy_og/mimo_methodology.md.tmp.24184.acd9da7e456b",
+    "academy_og/mimo_methodology.md.tmp.24184.ffbee34dbc5b",
+    "academy_og/mimo_methodology.md.tmp.24184.6b524c598043",
+    "academy_og/mimo_methodology.md.tmp.24184.f10595c7c022",
+    "academy_og/mimo_methodology.md.tmp.24184.6ea14a94f11f",
+    "academy_og/mimo_methodology.md.tmp.24184.5287e6391b3e",
+    "14. SQL Injection Fundamentals/2. Types of SQL Injections.md",
+    "attachments/Pasted image 20260523102419.png",
+    "3. Footprinting/5. FTP.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
     "13. Login Bruteforcing/2. Medusa.md",
     "13. Login Bruteforcing/3. Custom wordlists..md",
     "13. Login Bruteforcing/1. Hydra.md",
     "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
     "12. FFUF/1. Page Fuzzing.md",
-    "13. Login Bruteforcing",
     "academy_og/mimo_methodology.md",
-    "12. FFUF",
-    "academy_og/ui.log",
-    "academy_og/ligolo-ng.history",
-    "academy_og/ligolo-selfcerts/ligolo_key",
-    "academy_og/ligolo-selfcerts/ligolo_cert",
-    "academy_og/ligolo-selfcerts",
-    "academy_og/ligolo-ng.yaml",
-    "academy_og/mimo_methodology.md.tmp.224347.4651dc220b52",
     "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
     "Ligolo-ng.md",
     "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
@@ -228,11 +234,6 @@
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/ms/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/unist/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/debug/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/mdast-util-to-markdown/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/micromark-core-commonmark/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/mdast-util-to-hast/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/micromark/readme.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/property-information/readme.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
@@ -241,7 +242,6 @@
     "attachments/Pasted image 20260426180942.png",
     "attachments/Pasted image 20260426180520.png",
     "attachments/Pasted image 20260426121336.png",
-    "attachments/Pasted image 20260426121222.png",
-    "attachments/Pasted image 20260426112651.png"
+    "attachments/Pasted image 20260426121222.png"
   ]
 }

