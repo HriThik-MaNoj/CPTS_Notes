@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "14. SQL Injection Fundamentals/6. Writing Files.md",
+                "file": "15. SQLMAP/1. Database Enumeration.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "6. Writing Files"
+              "title": "1. Database Enumeration"
             }
           }
         ]
@@ -197,11 +197,15 @@
   },
   "active": "ec74d030231a27f3",
   "lastOpenFiles": [
-    "14. SQL Injection Fundamentals/5. Reading Files..md",
-    "14. SQL Injection Fundamentals/6. Writing Files.md",
-    "14. SQL Injection Fundamentals/4. Database Enumeration.md",
     "14. SQL Injection Fundamentals/3. Inections.md",
+    "15. SQLMAP/1. Database Enumeration.md",
+    "15. SQLMAP",
+    "14. SQL Injection Fundamentals/2. Types of SQL Injections.md",
     "14. SQL Injection Fundamentals/1. Basics of SQL.md",
+    "6. Shells and Payloads/8. Web Shells.md",
+    "14. SQL Injection Fundamentals/6. Writing Files.md",
+    "14. SQL Injection Fundamentals/5. Reading Files..md",
+    "14. SQL Injection Fundamentals/4. Database Enumeration.md",
     "academy_og/mimo_methodology.md.tmp.24184.9ebdc7445791",
     "academy_og/mimo_methodology.md.tmp.24184.6fc6788a99a6",
     "academy_og/mimo_methodology.md.tmp.24184.17736a072e5d",
@@ -211,8 +215,6 @@
     "academy_og/mimo_methodology.md.tmp.24184.6b524c598043",
     "academy_og/mimo_methodology.md.tmp.24184.f10595c7c022",
     "academy_og/mimo_methodology.md.tmp.24184.6ea14a94f11f",
-    "academy_og/mimo_methodology.md.tmp.24184.5287e6391b3e",
-    "14. SQL Injection Fundamentals/2. Types of SQL Injections.md",
     "attachments/Pasted image 20260523102419.png",
     "3. Footprinting/5. FTP.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
@@ -232,8 +234,6 @@
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/hast/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/mdast/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/ms/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/unist/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/debug/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
