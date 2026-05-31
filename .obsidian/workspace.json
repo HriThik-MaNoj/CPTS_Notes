@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "15. SQLMAP/2. Advanced Database Enumeration.md",
+                "file": "15. SQLMAP/3. Bypassing Web Application Protections.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. Advanced Database Enumeration"
+              "title": "3. Bypassing Web Application Protections"
             }
           }
         ]
@@ -197,11 +197,12 @@
   },
   "active": "ec74d030231a27f3",
   "lastOpenFiles": [
+    "15. SQLMAP/1. Database Enumeration.md",
+    "15. SQLMAP/3. Bypassing Web Application Protections.md",
+    "15. SQLMAP/2. Advanced Database Enumeration.md",
     "attachments/Pasted image 20260531112921.png",
     "attachments/Pasted image 20260531112854.png",
     "attachments/Pasted image 20260531112757.png",
-    "15. SQLMAP/1. Database Enumeration.md",
-    "15. SQLMAP/2. Advanced Database Enumeration.md",
     "14. SQL Injection Fundamentals/3. Inections.md",
     "15. SQLMAP",
     "14. SQL Injection Fundamentals/2. Types of SQL Injections.md",
@@ -241,7 +242,6 @@
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
     "11. Active Directory Enumeration & Attacks/playbook/public/icons.svg",
     "11. Active Directory Enumeration & Attacks/playbook/public/favicon.svg",
-    "attachments/Pasted image 20260426180942.png",
-    "attachments/Pasted image 20260426180520.png"
+    "attachments/Pasted image 20260426180942.png"
   ]
 }
