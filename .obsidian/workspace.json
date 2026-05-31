@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "16. XSS/2. XSS Discovery.md",
+                "file": "16. XSS/1. XSS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. XSS Discovery"
+              "title": "1. XSS"
             }
           }
         ]
@@ -197,8 +197,8 @@
   },
   "active": "ec74d030231a27f3",
   "lastOpenFiles": [
-    "16. XSS/1. XSS.md",
     "16. XSS/2. XSS Discovery.md",
+    "16. XSS/1. XSS.md",
     "15. SQLMAP/4. OS Exploitation.md",
     "16. XSS",
     "15. SQLMAP/3. Bypassing Web Application Protections.md",
