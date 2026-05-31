@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "15. SQLMAP/1. Database Enumeration.md",
+                "file": "15. SQLMAP/2. Advanced Database Enumeration.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Database Enumeration"
+              "title": "2. Advanced Database Enumeration"
             }
           }
         ]
@@ -197,8 +197,9 @@
   },
   "active": "ec74d030231a27f3",
   "lastOpenFiles": [
-    "14. SQL Injection Fundamentals/3. Inections.md",
     "15. SQLMAP/1. Database Enumeration.md",
+    "15. SQLMAP/2. Advanced Database Enumeration.md",
+    "14. SQL Injection Fundamentals/3. Inections.md",
     "15. SQLMAP",
     "14. SQL Injection Fundamentals/2. Types of SQL Injections.md",
     "14. SQL Injection Fundamentals/1. Basics of SQL.md",
@@ -233,7 +234,6 @@
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/parse-entities/node_modules/@types/unist/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/hast/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/mdast/README.md",
-    "11. Active Directory Enumeration & Attacks/playbook/node_modules/@types/ms/README.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
