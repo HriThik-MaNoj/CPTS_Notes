@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "16. XSS/1. XSS.md",
+                "file": "15. SQLMAP/3. Phising.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. XSS"
+              "title": "3. Phising"
             }
           }
         ]
@@ -197,8 +197,9 @@
   },
   "active": "ec74d030231a27f3",
   "lastOpenFiles": [
-    "16. XSS/2. XSS Discovery.md",
     "16. XSS/1. XSS.md",
+    "15. SQLMAP/3. Phising.md",
+    "16. XSS/2. XSS Discovery.md",
     "15. SQLMAP/4. OS Exploitation.md",
     "16. XSS",
     "15. SQLMAP/3. Bypassing Web Application Protections.md",
@@ -236,7 +237,6 @@
     "Ligolo-ng.md",
     "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
     "WORKFLOW_GUIDE.md",
-    "11. Active Directory Enumeration & Attacks/AD_Attack_Methodology_Complete.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
