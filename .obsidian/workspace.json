@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "b8017706800c020d",
+        "id": "3ce736ef254fee6b",
         "type": "tabs",
         "children": [
           {
-            "id": "ec74d030231a27f3",
+            "id": "711dee4989a84fd3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "15. SQLMAP/3. Phising.md",
+                "file": "17. File Inclusion/1. File Inclusion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Phising"
+              "title": "1. File Inclusion"
             }
           }
         ]
@@ -195,12 +195,23 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ec74d030231a27f3",
+  "active": "711dee4989a84fd3",
   "lastOpenFiles": [
+    "academy_og/m3_ad_methodology.md",
+    "Comprehensive_Methodology.md",
+    "17. File Inclusion/1. File Inclusion.md",
+    "Bloodhound.md",
+    "AD Methodology.md",
+    "16. XSS/4. Session Hijacking.md",
+    "2026-03-03.md",
+    "17. File Inclusion",
+    "attachments/Pasted image 20260602083126.png",
+    "academy_og/mimo_methodology.md",
+    "academy_og/CLAUDE.md",
+    "16. XSS/3. Phising.md",
     "16. XSS/1. XSS.md",
-    "15. SQLMAP/3. Phising.md",
-    "16. XSS/2. XSS Discovery.md",
     "15. SQLMAP/4. OS Exploitation.md",
+    "16. XSS/2. XSS Discovery.md",
     "16. XSS",
     "15. SQLMAP/3. Bypassing Web Application Protections.md",
     "15. SQLMAP/1. Database Enumeration.md",
@@ -223,25 +234,14 @@
     "academy_og/mimo_methodology.md.tmp.24184.acd9da7e456b",
     "academy_og/mimo_methodology.md.tmp.24184.ffbee34dbc5b",
     "academy_og/mimo_methodology.md.tmp.24184.6b524c598043",
-    "academy_og/mimo_methodology.md.tmp.24184.f10595c7c022",
     "attachments/Pasted image 20260523102419.png",
     "3. Footprinting/5. FTP.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
     "13. Login Bruteforcing/2. Medusa.md",
-    "13. Login Bruteforcing/3. Custom wordlists..md",
-    "13. Login Bruteforcing/1. Hydra.md",
-    "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
-    "12. FFUF/1. Page Fuzzing.md",
-    "academy_og/mimo_methodology.md",
-    "11. Active Directory Enumeration & Attacks/26. LAB 1.md",
-    "Ligolo-ng.md",
-    "11. Active Directory Enumeration & Attacks/27. LAB 2.md",
-    "WORKFLOW_GUIDE.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
     "11. Active Directory Enumeration & Attacks/playbook/public/icons.svg",
-    "11. Active Directory Enumeration & Attacks/playbook/public/favicon.svg",
-    "attachments/Pasted image 20260426180942.png"
+    "11. Active Directory Enumeration & Attacks/playbook/public/favicon.svg"
   ]
 }
