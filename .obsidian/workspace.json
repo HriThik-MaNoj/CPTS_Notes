@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "17. File Inclusion/1. File Inclusion.md",
+                "file": "17. File Inclusion/2. Remote File Inclusion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. File Inclusion"
+              "title": "2. Remote File Inclusion"
             }
           }
         ]
@@ -197,9 +197,15 @@
   },
   "active": "711dee4989a84fd3",
   "lastOpenFiles": [
+    "17. File Inclusion/1. Local File Inclusion.md",
+    "17. File Inclusion/2. Remote File Inclusion.md",
+    "17. File Inclusion/2. Remote File Inclusion",
+    "attachments/Pasted image 20260606110553.png",
+    "attachments/Pasted image 20260606110543.png",
+    "attachments/Pasted image 20260606104203.png",
+    "attachments/Pasted image 20260606103554.png",
     "academy_og/m3_ad_methodology.md",
     "Comprehensive_Methodology.md",
-    "17. File Inclusion/1. File Inclusion.md",
     "Bloodhound.md",
     "AD Methodology.md",
     "16. XSS/4. Session Hijacking.md",
@@ -233,15 +239,9 @@
     "academy_og/mimo_methodology.md.tmp.24184.3ff673825d66",
     "academy_og/mimo_methodology.md.tmp.24184.acd9da7e456b",
     "academy_og/mimo_methodology.md.tmp.24184.ffbee34dbc5b",
-    "academy_og/mimo_methodology.md.tmp.24184.6b524c598043",
     "attachments/Pasted image 20260523102419.png",
     "3. Footprinting/5. FTP.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
-    "13. Login Bruteforcing/2. Medusa.md",
-    "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg",
-    "11. Active Directory Enumeration & Attacks/playbook/src/assets/react.svg",
-    "11. Active Directory Enumeration & Attacks/playbook/src/assets/hero.png",
-    "11. Active Directory Enumeration & Attacks/playbook/public/icons.svg",
-    "11. Active Directory Enumeration & Attacks/playbook/public/favicon.svg"
+    "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg"
   ]
 }
