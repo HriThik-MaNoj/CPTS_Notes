@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "17. File Inclusion/2. Remote File Inclusion.md",
+                "file": "17. File Inclusion/3. LFI and File Uploads.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. Remote File Inclusion"
+              "title": "3. LFI and File Uploads"
             }
           }
         ]
@@ -197,8 +197,9 @@
   },
   "active": "711dee4989a84fd3",
   "lastOpenFiles": [
-    "17. File Inclusion/1. Local File Inclusion.md",
     "17. File Inclusion/2. Remote File Inclusion.md",
+    "17. File Inclusion/3. LFI and File Uploads.md",
+    "17. File Inclusion/1. Local File Inclusion.md",
     "17. File Inclusion/2. Remote File Inclusion",
     "attachments/Pasted image 20260606110553.png",
     "attachments/Pasted image 20260606110543.png",
@@ -241,7 +242,6 @@
     "academy_og/mimo_methodology.md.tmp.24184.ffbee34dbc5b",
     "attachments/Pasted image 20260523102419.png",
     "3. Footprinting/5. FTP.md",
-    "5. File Transfers/1. Windows File Transfer Methods.md",
     "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg"
   ]
 }
