@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "17. File Inclusion/3. LFI and File Uploads.md",
+                "file": "17. File Inclusion/4. Log poisoning.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. LFI and File Uploads"
+              "title": "4. Log poisoning"
             }
           }
         ]
@@ -197,8 +197,12 @@
   },
   "active": "711dee4989a84fd3",
   "lastOpenFiles": [
-    "17. File Inclusion/2. Remote File Inclusion.md",
+    "attachments/Pasted image 20260607104042.png",
+    "attachments/Pasted image 20260607103816.png",
+    "attachments/Pasted image 20260607103532.png",
     "17. File Inclusion/3. LFI and File Uploads.md",
+    "17. File Inclusion/4. Log poisoning.md",
+    "17. File Inclusion/2. Remote File Inclusion.md",
     "17. File Inclusion/1. Local File Inclusion.md",
     "17. File Inclusion/2. Remote File Inclusion",
     "attachments/Pasted image 20260606110553.png",
@@ -233,15 +237,11 @@
     "6. Shells and Payloads/8. Web Shells.md",
     "14. SQL Injection Fundamentals/6. Writing Files.md",
     "14. SQL Injection Fundamentals/5. Reading Files..md",
-    "14. SQL Injection Fundamentals/4. Database Enumeration.md",
     "academy_og/mimo_methodology.md.tmp.24184.9ebdc7445791",
     "academy_og/mimo_methodology.md.tmp.24184.6fc6788a99a6",
     "academy_og/mimo_methodology.md.tmp.24184.17736a072e5d",
     "academy_og/mimo_methodology.md.tmp.24184.3ff673825d66",
     "academy_og/mimo_methodology.md.tmp.24184.acd9da7e456b",
-    "academy_og/mimo_methodology.md.tmp.24184.ffbee34dbc5b",
-    "attachments/Pasted image 20260523102419.png",
-    "3. Footprinting/5. FTP.md",
-    "11. Active Directory Enumeration & Attacks/playbook/src/assets/vite.svg"
+    "academy_og/mimo_methodology.md.tmp.24184.ffbee34dbc5b"
   ]
 }
