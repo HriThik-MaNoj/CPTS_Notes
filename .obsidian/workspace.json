@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "17. File Inclusion/1. Local File Inclusion.md",
+                "file": "18. File Upload attacks/1. File uploads.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Local File Inclusion"
+              "title": "1. File uploads"
             }
           }
         ]
@@ -195,8 +195,13 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "932c6f6a2c9d5158",
+  "active": "711dee4989a84fd3",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260611092141.png",
+    "attachments/Pasted image 20260611084345.png",
+    "attachments/Pasted image 20260611084318.png",
+    "17. File Inclusion/1. Local File Inclusion.md",
+    "18. File Upload attacks/1. File uploads.md",
     "18. File Upload attacks",
     "17. File Inclusion/2. Remote File Inclusion.md",
     "17. File Inclusion/3. LFI and File Uploads.md",
@@ -206,7 +211,6 @@
     "attachments/Pasted image 20260607104042.png",
     "attachments/Pasted image 20260607103816.png",
     "attachments/Pasted image 20260607103532.png",
-    "17. File Inclusion/1. Local File Inclusion.md",
     "17. File Inclusion/2. Remote File Inclusion",
     "attachments/Pasted image 20260606110553.png",
     "attachments/Pasted image 20260606110543.png",
@@ -219,7 +223,6 @@
     "16. XSS/4. Session Hijacking.md",
     "2026-03-03.md",
     "17. File Inclusion",
-    "attachments/Pasted image 20260602083126.png",
     "academy_og/mimo_methodology.md",
     "academy_og/CLAUDE.md",
     "16. XSS/3. Phising.md",
@@ -230,18 +233,15 @@
     "15. SQLMAP/3. Bypassing Web Application Protections.md",
     "15. SQLMAP/1. Database Enumeration.md",
     "15. SQLMAP/2. Advanced Database Enumeration.md",
-    "attachments/Pasted image 20260531112921.png",
     "14. SQL Injection Fundamentals/3. Inections.md",
     "15. SQLMAP",
     "14. SQL Injection Fundamentals/2. Types of SQL Injections.md",
     "14. SQL Injection Fundamentals/1. Basics of SQL.md",
     "6. Shells and Payloads/8. Web Shells.md",
-    "14. SQL Injection Fundamentals/6. Writing Files.md",
     "academy_og/mimo_methodology.md.tmp.24184.9ebdc7445791",
     "academy_og/mimo_methodology.md.tmp.24184.6fc6788a99a6",
     "academy_og/mimo_methodology.md.tmp.24184.17736a072e5d",
     "academy_og/mimo_methodology.md.tmp.24184.3ff673825d66",
-    "academy_og/mimo_methodology.md.tmp.24184.acd9da7e456b",
-    "academy_og/mimo_methodology.md.tmp.24184.ffbee34dbc5b"
+    "academy_og/mimo_methodology.md.tmp.24184.acd9da7e456b"
   ]
 }
