@@ -1,0 +1,4394 @@
+=== Active Directory Enumeration & Attacks.md ===
+# Introduction to Active Directory Enumeration & Attacks
+## Active Directory Explained
+## Why Should We Care About AD?
+## Real-World Examples
+## This Is The Way
+## Practical Examples
+#### Connecting via FreeRDP
+#### Connecting via SSH
+#### Xfreerdp to the ATTACK01 Parrot Host
+## Toolkit
+# Tools of the Trade
+# Scenario
+#### Tasking Email
+## Assessment Scope
+#### In Scope For Assessment
+#### Out Of Scope
+## Methods Used
+### External Information Gathering (Passive Checks)
+### Internal Testing
+### Password Testing
+## The Stage Is Set
+# External Recon and Enumeration Principles
+## What Are We Looking For?
+## Where Are We Looking?
+### Finding Address Spaces
+### DNS
+#### Viewdns.info
+### Public Data
+### Sharepoint Admin Job Listing
+## Overarching Enumeration Principles
+## Example Enumeration Process
+#### Check for ASN/IP & Domain Data
+#### Viewdns Results
+#### Hunting For Files
+#### Hunting E-mail Addresses
+#### E-mail Dork Results
+#### Username Harvesting
+#### Credential Hunting
+# Initial Enumeration of the Domain
+## Setting Up
+## Tasks
+#### Key Data Points
+## TTPs
+### Identifying Hosts
+#### Start Wireshark on ea-attack01
+#### Wireshark Output
+#### Tcpdump Output
+#### Starting Responder
+#### Responder Results
+#### FPing Active Checks
+#### Nmap Scanning
+#### NMAP Result Highlights
+## Identifying Users
+### Kerbrute - Internal AD Username Enumeration
+#### Cloning Kerbrute GitHub Repo
+#### Listing Compiling Options
+#### Compiling for Multiple Platforms and Architectures
+#### Listing the Compiled Binaries in dist
+#### Testing the kerbrute_linux_amd64 Binary
+#### Adding the Tool to our Path
+#### Moving the Binary
+#### Enumerating Users with Kerbrute
+## Identifying Potential Vulnerabilities
+## A Word Of Caution
+## Let's Find a User
+# LLMNR/NBT-NS Poisoning - from Linux
+## LLMNR & NBT-NS Primer
+## Quick Example - LLMNR/NBT-NS Poisoning
+## TTPs
+### Responder In Action
+#### Responder Logs
+#### Starting Responder with Default Settings
+#### Capturing with Responder
+#### Cracking an NTLMv2 Hash With Hashcat
+## Moving On
+# LLMNR/NBT-NS Poisoning - from Windows
+## Inveigh - Overview
+## Using Inveigh
+## C# Inveigh (InveighZero)
+## Remediation
+## Detection
+## Moving On
+# Password Spraying Overview
+## Story Time
+### Scenario 1
+### Scenario 2
+#!/bin/bash
+## Password Spraying Considerations
+####  Password Spray Visualization
+# Enumerating & Retrieving Password Policies
+## Enumerating the Password Policy - from Linux - Credentialed
+## Enumerating the Password Policy - from Linux - SMB NULL Sessions
+#### Using rpcclient
+#### Obtaining the Password Policy using rpcclient
+#### Using enum4linux
+#### Using enum4linux-ng
+#### Displaying the contents of ilfreight.json
+## Enumerating Null Session - from Windows
+#### Establish a null session from windows
+#### Error: Account is Disabled
+#### Error: Password is Incorrect
+#### Error: Account is locked out (Password Policy)
+## Enumerating the Password Policy - from Linux - LDAP Anonymous Bind
+#### Using ldapsearch
+## Enumerating the Password Policy - from Windows
+#### Using net.exe
+#### Using PowerView
+## Analyzing the Password Policy
+## Next Steps
+# Password Spraying - Making a Target User List
+## Detailed User Enumeration
+## SMB NULL Session to Pull User List
+#### Using enum4linux
+#### Using rpcclient
+#### Using CrackMapExec --users Flag
+## Gathering Users with LDAP Anonymous
+#### Using ldapsearch
+#### Using windapsearch
+## Enumerating Users with Kerbrute
+#### Kerbrute User Enumeration
+## Credentialed Enumeration to Build our User List
+#### Using CrackMapExec with Valid Credentials
+## Now for the Fun
+# Internal Password Spraying - from Linux
+## Internal Password Spraying from a Linux Host
+#### Using a Bash one-liner for the Attack
+#### Using Kerbrute for the Attack
+#### Using CrackMapExec & Filtering Logon Failures
+#### Validating the Credentials with CrackMapExec
+## Local Administrator Password Reuse
+#### Local Admin Spraying with CrackMapExec
+# Internal Password Spraying - from Windows
+#### Using DomainPasswordSpray.ps1
+## Mitigations
+## Other Considerations
+##  Detection
+## External Password Spraying
+## Moving Deeper
+# Enumerating Security Controls
+## Windows Defender
+#### Checking the Status of Defender with Get-MpComputerStatus
+## AppLocker
+#### Using Get-AppLockerPolicy cmdlet
+## PowerShell Constrained Language Mode
+#### Enumerating Language Mode
+## LAPS
+#### Using Find-LAPSDelegatedGroups
+#### Using Find-AdmPwdExtendedRights
+#### Using Get-LAPSComputers
+## Conclusion
+# Credentialed Enumeration - from Linux
+## CrackMapExec
+#### CME Help Menu
+#### CME Options (SMB)
+#### CME - Domain User Enumeration
+#### CME - Domain Group Enumeration
+#### CME - Logged On Users
+#### CME Share Searching
+#### Share Enumeration - Domain Controller
+#### Spider_plus
+## SMBMap
+#### SMBMap To Check Access
+#### Recursive List Of All Directories
+## rpcclient
+#### SMB NULL Session with rpcclient
+#### rpcclient Enumeration
+#### RPCClient User Enumeration By RID
+#### Enumdomusers
+## Impacket Toolkit
+#### Psexec.py
+#### Using psexec.py
+#### wmiexec.py
+#### Using wmiexec.py
+## Windapsearch
+#### Windapsearch Help
+#### Windapsearch - Domain Admins
+#### Windapsearch - Privileged Users
+## Bloodhound.py
+#### BloodHound.py Options
+#### Executing BloodHound.py
+#### Viewing the Results
+#### Upload the Zip File into the BloodHound GUI
+#### Uploading the Zip File
+#### Searching for Relationships
+# Credentialed Enumeration - from Windows
+## TTPs
+## ActiveDirectory PowerShell Module
+#### Discover Modules
+####  Load ActiveDirectory Module
+### Get Domain Info
+#### Get-ADUser
+#### Checking For Trust Relationships
+#### Group Enumeration
+#### Detailed Group Info
+### Group Membership
+## PowerView
+#### Domain User Information
+#### Recursive Group Membership
+#### Trust Enumeration
+#### Testing for Local Admin Access
+#### Finding Users With SPN Set
+## SharpView
+## Shares
+## Snaffler
+#### Snaffler Execution
+#### Snaffler in Action
+### BloodHound
+#### SharpHound in Action
+#### Unsupported Operating Systems
+#### Local Admins
+# Living Off the Land
+## Scenario
+## Env Commands For Host & Network Recon
+#### Basic Enumeration Commands
+#### Basic Enumeration
+#### Systeminfo
+## Harnessing PowerShell
+#### Quick Checks Using PowerShell
+#### Downgrade Powershell
+#### Examining the Powershell Event Log
+#### Starting V2 Logs
+### Checking Defenses
+#### Firewall Checks
+#### Windows Defender Check (from CMD.exe)
+#### Get-MpComputerStatus
+## Am I Alone?
+#### Using qwinsta
+## Network Information
+#### Using arp -a
+#### Viewing the Routing Table
+##  Windows Management Instrumentation (WMI)
+#### Quick WMI checks
+## Net Commands
+#### Table of Useful Net Commands
+#### Listing Domain Groups
+#### Information about a Domain User
+#### Net Commands Trick
+#### Running Net1 Command
+## Dsquery
+#### Dsquery DLL
+#### User Search
+#### Computer Search
+#### Wildcard Search
+#### Users With Specific Attributes Set (PASSWD_NOTREQD)
+#### Searching for Domain Controllers
+### LDAP Filtering Explained
+#### UAC Values
+#### OID match strings
+#### Logical Operators
+# Kerberoasting - from Linux
+## Kerberoasting Overview
+## Kerberoasting - Performing the Attack
+## Efficacy of the Attack
+## Performing the Attack
+## Kerberoasting with GetUserSPNs.py
+#### Installing Impacket using Pip
+#### Listing GetUserSPNs.py Help Options
+#### Listing SPN Accounts with GetUserSPNs.py
+#### Requesting all TGS Tickets
+#### Requesting a Single TGS ticket
+#### Saving the TGS Ticket to an Output File
+#### Cracking the Ticket Offline with Hashcat
+#### Testing Authentication against a Domain Controller
+## More Roasting
+# Kerberoasting - from Windows
+## Kerberoasting - Semi Manual method
+#### Enumerating SPNs with setspn.exe
+#### Targeting a Single User
+#### Retrieving All Tickets Using setspn.exe
+## Extracting Tickets from Memory with Mimikatz
+#### Preparing the Base64 Blob for Cracking
+#### Placing the Output into a File as .kirbi
+#### Extracting the Kerberos Ticket using kirbi2john.py
+#### Modifiying crack_file for Hashcat
+#### Viewing the Prepared Hash
+#### Cracking the Hash with Hashcat
+## Automated / Tool Based Route
+#### Using PowerView to Enumerate SPN Accounts
+#### Using PowerView to Target a Specific User
+#### Exporting All Tickets to a CSV File
+#### Viewing the Contents of the .CSV File
+#### Using Rubeus
+#### Viewing Rubeus's Capabilities
+#### Using the /stats Flag
+#### Using the /nowrap Flag
+## A Note on Encryption Types
+#### Cracking the Ticket with Hashcat & rockyou.txt
+#### Checking Supported Encryption Types
+#### Requesting a New Ticket
+#### Running Hashcat & Checking the Status of the Cracking Job
+#### Viewing the Length of Time it Took to Crack
+#### Using the /tgtdeleg Flag
+## Mitigation & Detection
+## Continuing Onwards
+# Access Control List (ACL) Abuse Primer
+## Access Control List (ACL) Overview
+#### Viewing forend's ACL
+#### Viewing the SACLs through the Auditing Tab
+## Access Control Entries (ACEs)
+#### Viewing Permissions through Active Directory Users & Computers
+## Why are ACEs Important?
+## ACL Attacks in the Wild
+# ACL Enumeration
+## Enumerating ACLs with PowerView
+#### Using Find-InterestingDomainAcl
+#### Using Get-DomainObjectACL
+#### Performing a Reverse Search & Mapping to a GUID Value
+#### Using the -ResolveGUIDs Flag
+#### Creating a List of Domain Users
+#### A Useful foreach Loop
+#### Further Enumeration of Rights Using damundsen
+#### Investigating the Help Desk Level 1 Group with Get-DomainGroup
+#### Investigating the Information Technology Group
+#### Looking for Interesting Access
+## Enumerating ACLs with BloodHound
+#### Viewing Node Info through BloodHound
+#### Investigating ForceChangePassword Further
+#### Viewing Potential Attack Paths through BloodHound
+#### Viewing Pre-Build queries through BloodHound
+# ACL Abuse Tactics
+## Abusing ACLs
+#### Creating a PSCredential Object
+#### Creating a SecureString Object
+#### Changing the User's Password
+#### Creating a SecureString Object using damundsen
+#### Adding damundsen to the Help Desk Level 1 Group
+#### Confirming damundsen was Added to the Group
+#### Creating a Fake SPN
+#### Kerberoasting with Rubeus
+## Cleanup
+#### Removing the Fake SPN from adunn's Account
+#### Removing damundsen from the Help Desk Level 1 Group
+#### Confirming damundsen was Removed from the Group
+## Detection and Remediation
+#### Viewing Event ID 5136
+#### Viewing Associated SDDL
+#### Converting the SDDL String into a Readable Format
+# DCSync
+## Scenario Setup
+## What is DCSync and How Does it Work?
+#### Viewing adunn's Replication Privileges through ADSI Edit
+#### Using Get-DomainUser to View adunn's Group Membership
+#### Using Get-ObjectAcl to Check adunn's Replication Rights
+#### Extracting NTLM Hashes and Kerberos Keys Using secretsdump.py
+#### Listing Hashes, Kerberos Keys, and Cleartext Passwords
+#### Viewing an Account with Reversible Encryption Password Storage Set
+#### Enumerating Further using Get-ADUser
+#### Checking for Reversible Encryption Option using Get-DomainUser
+#### Displaying the Decrypted Password
+#### Using runas.exe
+#### Performing the Attack with Mimikatz
+## Moving On
+# Privileged Access
+## Scenario Setup
+## Remote Desktop
+#### Enumerating the Remote Desktop Users Group
+#### Checking the Domain Users Group's Local Admin & Execution Rights using BloodHound
+#### Checking Remote Access Rights using BloodHound
+## WinRM
+#### Enumerating the Remote Management Users Group
+#### Using the Cypher Query in BloodHound
+#### Adding the Cypher Query as a Custom Query in BloodHound
+#### Establishing WinRM Session from Windows
+#### Installing Evil-WinRM
+#### Viewing Evil-WinRM's Help Menu
+#### Connecting to a Target with Evil-WinRM and Valid Credentials
+## SQL Server Admin
+#### Using a Custom Cypher Query to Check for SQL Admin Rights in BloodHound
+#### Enumerating MSSQL Instances with PowerUpSQL
+#### Displaying mssqlclient.py Options
+#### Running mssqlclient.py Against the Target
+#### Viewing our Options with Access to the SQL Server
+#### Choosing enable_xp_cmdshell
+#### Enumerating our Rights on the System using xp_cmdshell
+## Moving On
+# Kerberos "Double Hop" Problem
+## Background
+## Workarounds
+##  Workaround #1: PSCredential Object
+#0> Client: backupadm @ INLANEFREIGHT.LOCAL
+#0>     Client: backupadm @ INLANEFREIGHT.LOCAL
+#1>     Client: backupadm @ INLANEFREIGHT.LOCAL
+#2>     Client: backupadm @ INLANEFREIGHT.LOCAL
+#3>     Client: backupadm @ INLANEFREIGHT.LOCAL
+## Workaround #2: Register PSSession Configuration
+#0>     Client: backupadm @ INLANEFREIGHT.LOCAL
+#0>     Client: backupadm @ INLANEFREIGHT.LOCAL
+## Wrap Up
+# Bleeding Edge Vulnerabilities
+## Scenario Setup
+## NoPac (SamAccountName Spoofing)
+#### Ensuring Impacket is Installed
+#### Cloning the NoPac Exploit Repo
+#### Scanning for NoPac
+#### Running NoPac & Getting a Shell
+#### Confirming the Location of Saved Tickets
+#### Using noPac to DCSync the Built-in Administrator Account
+## Windows Defender & SMBEXEC.py Considerations
+#### Windows Defender Quarantine Log
+## PrintNightmare
+#### Cloning the Exploit
+#### Install cube0x0's Version of Impacket
+#### Enumerating for MS-RPRN
+#### Generating a DLL Payload
+#### Creating a Share with smbserver.py
+#### Configuring & Starting MSF multi/handler
+#### Running the Exploit
+#### Getting the SYSTEM Shell
+## PetitPotam (MS-EFSRPC)
+#### Starting ntlmrelayx.py
+#### Running PetitPotam.py
+#### Catching Base64 Encoded Certificate for DC01
+#### Requesting a TGT Using gettgtpkinit.py
+#### Setting the KRB5CCNAME Environment Variable
+#### Using Domain Controller TGT to DCSync
+#### Running klist
+#### Confirming Admin Access to the Domain Controller
+#### Submitting a TGS Request for Ourselves Using getnthash.py
+#### Using Domain Controller NTLM Hash to DCSync
+#### Requesting TGT and Performing PTT with DC01$ Machine Account
+#### Confirming the Ticket is in Memory
+#0>     Client: ACADEMY-EA-DC01$ @ INLANEFREIGHT.LOCAL
+#1>     Client: ACADEMY-EA-DC01$ @ INLANEFREIGHT.LOCAL
+#2>     Client: ACADEMY-EA-DC01$ @ INLANEFREIGHT.LOCAL
+#### Performing DCSync with Mimikatz
+## PetitPotam Mitigations
+## Recap
+# Miscellaneous Misconfigurations
+## Scenario Setup
+## Exchange Related Group Membership
+#### Viewing Organization Management's Permissions
+## PrivExchange
+## Printer Bug
+#### Enumerating for MS-PRN Printer Bug
+## MS14-068
+## Sniffing LDAP Credentials
+## Enumerating DNS Records
+#### Using adidnsdump
+#### Viewing the Contents of the records.csv File
+#### Using the -r Option to Resolve Unknown Records
+#### Finding Hidden Records in the records.csv File
+## Other Misconfigurations
+### Password in Description Field
+#### Finding Passwords in the Description Field using Get-Domain User
+## PASSWD_NOTREQD Field
+#### Checking for PASSWD_NOTREQD Setting using Get-DomainUser
+## Credentials in SMB Shares and SYSVOL Scripts
+#### Discovering an Interesting Script
+#### Finding a Password in the Script
+## Group Policy Preferences (GPP) Passwords
+#### Viewing Groups.xml
+#### Decrypting the Password with gpp-decrypt
+#### Locating & Retrieving GPP Passwords with CrackMapExec
+#### Using CrackMapExec's gpp_autologin Module
+## ASREPRoasting
+#### Viewing an Account with the Do not Require Kerberos Preauthentication Option
+#### Enumerating for DONT_REQ_PREAUTH Value using Get-DomainUser
+#### Retrieving AS-REP in Proper Format using Rubeus
+#### Cracking the Hash Offline with Hashcat
+#### Retrieving the AS-REP Using Kerbrute
+#### Hunting for Users with Kerberos Pre-auth Not Required
+## Group Policy Object (GPO) Abuse
+#### Enumerating GPO Names with PowerView
+#### Enumerating GPO Names with a Built-In Cmdlet
+#### Enumerating Domain User GPO Rights
+#### Converting GPO GUID to Name
+## Onwards
+# Domain Trusts Primer
+## Scenario
+## Domain Trusts Overview
+#### Trust Table Side By Side
+## Enumerating Trust Relationships
+#### Using Get-ADTrust
+#### Checking for Existing Trusts using Get-DomainTrust
+#### Using Get-DomainTrustMapping
+#### Checking Users in the Child Domain using Get-DomainUser
+#### Using netdom to query domain trust
+#### Using netdom to query domain controllers
+#### Using netdom to query workstations and servers
+#### Visualizing Trust Relationships in BloodHound
+## Onwards
+# Attacking Domain Trusts - Child -> Parent Trusts - from Windows
+## SID History Primer
+## ExtraSids Attack - Mimikatz
+#### Obtaining the KRBTGT Account's NT Hash using Mimikatz
+#### Using Get-DomainSID
+#### Obtaining Enterprise Admins Group's SID using Get-DomainGroup
+#### Using ls to Confirm No Access
+#### Creating a Golden Ticket with Mimikatz
+#### Confirming a Kerberos Ticket is in Memory Using klist
+#0>     Client: hacker @ LOGISTICS.INLANEFREIGHT.LOCAL
+#### Listing the Entire C: Drive of the Domain Controller
+## ExtraSids Attack - Rubeus
+#### Using ls to Confirm No Access Before Running Rubeus
+#### Creating a Golden Ticket using Rubeus
+#### Confirming the Ticket is in Memory Using klist
+#0>	Client: hacker @ LOGISTICS.INLANEFREIGHT.LOCAL
+#### Performing a DCSync Attack
+## Next Steps
+# Attacking Domain Trusts - Child -> Parent Trusts - from Linux
+#### Performing DCSync with secretsdump.py
+#### Performing SID Brute Forcing using lookupsid.py
+#### Looking for the Domain SID
+#### Grabbing the Domain SID & Attaching to Enterprise Admin's RID
+#### Constructing a Golden Ticket using ticketer.py
+#### Setting the KRB5CCNAME Environment Variable
+#### Getting a SYSTEM shell using Impacket's psexec.py
+#### Performing the Attack with raiseChild.py
+#   The workflow is as follows:
+#       Input:
+#           1) child-domain Admin credentials (password, hashes or aesKey) in the form of 'domain/username[:password]'
+#              The domain specified MUST be the domain FQDN.
+#           2) Optionally a pathname to save the generated golden ticket (-w switch)
+#           3) Optionally a target-user RID to get credentials (-targetRID switch)
+#              Administrator by default.
+#           4) Optionally a target to PSEXEC with the target-user privileges to (-target-exec switch).
+#              Enterprise Admin by default.
+#
+#       Process:
+#           1) Find out where the child domain controller is located and get its info (via [MS-NRPC])
+#           2) Find out what the forest FQDN is (via [MS-NRPC])
+#           3) Get the forest's Enterprise Admin SID (via [MS-LSAT])
+#           4) Get the child domain's krbtgt credentials (via [MS-DRSR])
+#           5) Create a Golden Ticket specifying SID from 3) inside the KERB_VALIDATION_INFO's ExtraSids array
+#              and setting expiration 10 years from now
+#           6) Use the generated ticket to log into the forest and get the target user info (krbtgt/admin by default)
+#           7) If file was specified, save the golden ticket in ccache format
+#           8) If target was specified, a PSEXEC shell is launched
+#
+#       Output:
+#           1) Target user credentials (Forest's krbtgt/admin credentials by default)
+#           2) A golden ticket saved in ccache for future fun and profit
+#           3) PSExec Shell with the target-user privileges (Enterprise Admin privileges by default) at target-exec
+#              parameter.
+## More Fun
+# Attacking Domain Trusts - Cross-Forest Trust Abuse - from Windows
+## Cross-Forest Kerberoasting
+#### Enumerating Accounts for Associated SPNs Using Get-DomainUser
+#### Enumerating the mssqlsvc Account
+#### Performing a Kerberoasting Attacking with Rubeus Using /domain Flag
+## Admin Password Re-Use & Group Membership
+#### Using Get-DomainForeignGroupMember
+#### Accessing DC03 Using Enter-PSSession
+## SID History Abuse - Cross Forest
+## Onwards
+# Attacking Domain Trusts - Cross-Forest Trust Abuse - from Linux
+## Cross-Forest Kerberoasting
+#### Using GetUserSPNs.py
+#### Using the -request Flag
+## Hunting Foreign Group Membership with Bloodhound-python
+#### Adding INLANEFREIGHT.LOCAL Information to /etc/resolv.conf
+# Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)
+#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN
+# 127.0.0.53 is the systemd-resolved stub resolver.
+# run "resolvectl status" to see details about the actual nameservers.
+#nameserver 1.1.1.1
+#nameserver 8.8.8.8
+#### Running bloodhound-python Against INLANEFREIGHT.LOCAL
+#### Compressing the File with zip -r
+#### Adding FREIGHTLOGISTICS.LOCAL Information to /etc/resolv.conf
+# Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)
+#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN
+# 127.0.0.53 is the systemd-resolved stub resolver.
+# run "resolvectl status" to see details about the actual nameservers.
+#nameserver 1.1.1.1
+#nameserver 8.8.8.8
+#### Running bloodhound-python Against FREIGHTLOGISTICS.LOCAL
+#### Viewing Dangerous Rights through BloodHound
+## Closing Thoughts on Trusts
+# Hardening Active Directory
+## Step One: Document and Audit
+#### Things To Document and Track
+## People, Processes, and Technology
+### People
+### Protected Users Group
+#### Viewing the Protected Users Group with Get-ADGroup
+### Processes
+### Technology
+## Protections By Section
+#### MITRE ATT&CK Breakdown
+# Additional AD Auditing Techniques
+## Creating an AD Snapshot with Active Directory Explorer
+#### Logging in with AD Explorer
+#### Browsing AD with AD Explorer
+#### Creating a Snapshot of AD with AD Explorer
+## PingCastle
+#### Viewing the PingCastle Help Menu
+#### Running PingCastle
+#### PingCastle Interactive TUI
+# @@  >  End of support: 7/31/2023
+#### Scanner Options
+# @@  >  End of support: 7/31/2023
+#### Viewing The Report
+#### Group Policy
+## Group3r
+#### Group3r Basic Usage
+#### Reading Output
+#### Group3r Finding
+## ADRecon
+#### Running ADRecon
+#### Reporting
+# AD Enumeration & Attacks - Skills Assessment Part I
+## Scenario
+# AD Enumeration & Attacks - Skills Assessment Part II
+## Scenario
+#  Beyond this Module
+## Status Update
+## Real World
+## What's Next?
+## More AD Learning Opportunities
+#### Boxes To Pwn
+#### ProLabs
+#### Endgames
+#### Great Videos to Check Out
+#### Writers and Blogs To Follow
+## Closing Thoughts
+
+=== Attacking Common Applications.md ===
+# Introduction to Attacking Common Applications
+## Application Data
+## A Quick Story
+## Common Applications
+## Module Targets
+# Your system has configured 'manage_etc_hosts' as True.
+# As a result, if you wish for changes to this file to persist
+# then you will need to either
+# a.) make changes to the master file in /etc/cloud/templates/hosts.debian.tmpl
+# b.) change or remove the value of 'manage_etc_hosts' in
+#     /etc/cloud/cloud.cfg or cloud-config from user-data
+#
+# The following lines are desirable for IPv6 capable hosts
+# Application Discovery & Enumeration
+#### Nmap - Web Discovery
+## Getting Organized
+## Initial Enumeration
+## Using EyeWitness
+#                                  EyeWitness                                  #
+#           FortyNorth Security - https://www.fortynorthsecurity.com           #
+## Using Aquatone
+## Interpreting the Results
+## Moving On
+# WordPress - Discovery & Enumeration
+## Discovery/Footprinting
+## Enumeration
+## Enumerating Users
+## WPScan
+## Moving On
+# Attacking WordPress
+## Login Bruteforce
+## Code Execution
+## Leveraging Known Vulnerabilities
+#### Vulnerable Plugins - mail-masta
+#### Vulnerable Plugins - wpDiscuz
+## Moving On
+# Joomla - Discovery & Enumeration
+## Discovery/Footprinting
+# If the Joomla site is installed within a folder
+# eg www.example.com/joomla/ then the robots.txt file
+# MUST be moved to the site root
+# eg www.example.com/robots.txt
+# AND the joomla folder name MUST be prefixed to all of the
+# paths.
+# eg the Disallow rule for the /administrator/ folder MUST
+# be changed to read
+# Disallow: /joomla/administrator/
+#
+# For more information about the robots.txt standard, see:
+# https://www.robotstxt.org/orig.html
+## Enumeration
+#### Alternative Installation of Python2.7
+# Attacking Joomla
+## Abusing Built-In Functionality
+## Leveraging Known Vulnerabilities
+# Exploit Title: Joomla Core (1.5.0 through 3.9.4) - Directory Traversal && Authenticated Arbitrary File Deletion
+# Web Site: Haboob.sa
+# Email: research@haboob.sa
+# Versions: Joomla 1.5.0 through Joomla 3.9.4
+# https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10945
+## Moving On
+# Drupal - Discovery & Enumeration
+## Discovery/Footprinting
+## Enumeration
+# Attacking Drupal
+## Leveraging the PHP Filter Module
+## Uploading a Backdoored Module
+## Leveraging Known Vulnerabilities
+## Drupalgeddon
+## Drupalgeddon2
+# Proof-Of-Concept for CVE-2018-7600
+# by Vitalii Rudnykh
+# Thanks by AlbinoDrought, RicterZ, FindYanot, CostelSalanders
+# https://github.com/a2u/CVE-2018-7600
+# Proof-Of-Concept for CVE-2018-7600
+# by Vitalii Rudnykh
+# Thanks by AlbinoDrought, RicterZ, FindYanot, CostelSalanders
+# https://github.com/a2u/CVE-2018-7600
+## Drupalgeddon3
+## Onwards
+# Tomcat - Discovery & Enumeration
+## Discovery/Footprinting
+## Enumeration
+# Attacking Tomcat
+## Tomcat Manager - Login Brute Force
+#!/usr/bin/python
+#print r.status_code
+## Tomcat Manager - WAR File Upload
+## A Quick Note on Web shells
+## CVE-2020-1938 : Ghostcat
+## Moving On
+# Jenkins - Discovery & Enumeration
+## Discovery/Footprinting
+## Enumeration
+# Attacking Jenkins
+## Script Console
+## Miscellaneous Vulnerabilities
+## Shifting Gears
+# Splunk - Discovery & Enumeration
+## Discovery/Footprinting
+## Enumeration
+# Attacking Splunk
+## Abusing Built-In Functionality
+#A simple and small reverse shell. Options and help removed to save space.
+#Uncomment and change the hardcoded IP address and port number in the below line. Remove all help comments as well.
+# PRTG Network Monitor
+## Discovery/Footprinting/Enumeration
+## Leveraging Known Vulnerabilities
+## Onwards
+# osTicket
+## Footprinting/Discovery/Enumeration
+#### User Input
+#### Processing
+#### Solution
+## Attacking osTicket
+## osTicket - Sensitive Data Exposure
+## Closing Thoughts
+# Gitlab - Discovery & Enumeration
+## Footprinting & Discovery
+## Enumeration
+## Onwards
+# Attacking GitLab
+## Username Enumeration
+# Number of authentication tries before locking an account if lock_strategy
+# is failed attempts.
+# Time interval to unlock the account if :time is enabled as unlock_strategy.
+## Authenticated Remote Code Execution
+# Attacking Tomcat CGI
+## Enumeration
+#### Nmap - Open Ports
+#### Finding a CGI script
+#### Fuzzing Extentions - .CMD
+#### Fuzzing Extentions - .BAT
+## Exploitation
+# http://10.129.204.227:8080/cgi/welcome.bat?&set
+# Attacking Common Gateway Interface (CGI) Applications - Shellshock
+## CGI Attacks
+## Shellshock via CGI
+## Hands-on Example
+#### Enumeration - Gobuster
+#### Confirming the Vulnerability
+#### Exploitation to Reverse Shell Access
+## Mitigation
+## Closing Thoughts
+# Attacking Thick Client Applications
+## Penetration Testing Steps
+#### Information Gathering
+#### Client Side attacks
+#### Network Side Attacks
+#### Server Side Attacks
+## Retrieving hardcoded Credentials from Thick-Client Applications
+# Exploiting Web Vulnerabilities in Thick-Client Applications
+## Foothold
+## Path Traversal
+## SQL Injection
+# ColdFusion - Discovery & Enumeration
+## Enumeration
+#### NMap ports and service scan results
+# Attacking ColdFusion
+#### Searchsploit
+## Directory  Traversal
+#### Coldfusion - Exploitation
+#### Coldfusion - Exploitation
+#Wed Mar 22 20:53:51 EET 2017
+## Unauthenticated RCE
+# Decoded: http://www.example.com/index.cfm?; echo "This server has been compromised!" > C:\compromise.txt
+#### Searchsploit
+#### Exploit Modification
+#### Exploitation
+#### Reverse Shell
+# IIS Tilde Enumeration
+## Enumeration
+#### Nmap - Open ports
+#### Tilde Enumeration using IIS ShortName Scanner
+# IIS Short Name (8.3) Scanner version 2023.0 - scan initiated 2023/03/23 15:06:57
+#### Generate Wordlist
+#### Gobuster Enumeration
+# LDAP
+#### ldapsearch
+## LDAP Injection
+## Enumeration
+#### nmap
+#### Injection
+# Web Mass Assignment Vulnerabilities
+## Exploiting Mass Assignment Vulnerability
+## Prevention
+# Attacking Applications Connecting to Services
+## ELF Executable Examination
+## DLL File Examination
+# Other Notable Applications
+## Honorable Mentions
+# Application Hardening
+## General Hardening Tips
+## Application-Specific Hardening Tips
+## Conclusion
+# Attacking Common Applications - Skills Assessment I
+# Attacking Common Applications - Skills Assessment II
+# Attacking Common Applications - Skills Assessment III
+
+=== Attacking Common Services.md ===
+# Interacting with Common Services
+## File Share Services
+## Server Message Block (SMB)
+#### Windows
+#### Windows CMD - DIR
+#### Windows CMD - Net Use
+#### Windows CMD - DIR
+#### Windows CMD - Findstr
+#### Windows PowerShell
+#### Windows PowerShell
+#### Windows PowerShell - PSCredential Object
+#### Windows PowerShell - GCI
+#### Windows PowerShell - Select-String
+#### Linux
+#### Linux - Mount
+#### CredentialFile
+#### Linux - Find
+## Other Services
+#### Email
+#### Linux - Install Evolution
+#### Video - Connecting to IMAP and SMTP using Evolution
+#### Databases
+#### MySQL example
+## Command Line Utilities
+#### MSSQL
+#### Linux - SQSH
+#### Windows - SQLCMD
+#### MySQL
+#### Linux - MySQL
+#### Windows - MySQL
+#### GUI Application
+#### Install dbeaver
+#### Run dbeaver
+#### Video - Connecting to MSSQL DB using dbeaver
+#### Video - Connecting to MySQL DB using dbeaver
+#### Tools
+#### Tools to Interact with Common Services
+## General Troubleshooting
+# The Concept of Attacks
+#### The Concept of Attacks
+## Source
+#### Log4j
+## Processes
+#### Log4j
+## Privileges
+#### Log4j
+## Destination
+#### Log4j
+#### Initiation of the Attack
+#### Trigger Remote Code Execution
+# Service Misconfigurations
+## Authentication
+#### Anonymous Authentication
+#### Misconfigured Access Rights
+## Unnecessary Defaults
+## Preventing Misconfiguration
+# Finding Sensitive Information
+#### Understanding of What We Have to Look for
+# Attacking FTP
+## Enumeration
+#### Nmap
+## Misconfigurations
+#### Anonymous Authentication
+## Protocol Specifics Attacks
+#### Brute Forcing
+#### Brute Forcing with Medusa
+#### FTP Bounce Attack
+# Latest FTP Vulnerabilities
+## The Concept of the Attack
+#### CoreFTP Exploitation
+#### The Concept of Attacks
+#### Directory Traversal
+#### Arbitrary File Write
+#### Target System
+# Attacking SMB
+## Enumeration
+## Misconfigurations
+#### Anonymous Authentication
+#### File Share
+#### Remote Procedure Call (RPC)
+## Protocol Specifics Attacks
+#### Brute Forcing and Password Spray
+#### SMB
+#### Remote Code Execution (RCE)
+#### Impacket PsExec
+#### CrackMapExec
+#### Enumerating Logged-on Users
+#### Extract Hashes from SAM Database
+#### Pass-the-Hash (PtH)
+#### Forced Authentication Attacks
+#### RPC
+# Latest SMB Vulnerabilities
+## The Concept of the Attack
+#### The Concept of Attacks
+#### Initiation of the Attack
+#### Trigger Remote Code Execution
+# Attacking SQL Databases
+## Enumeration
+#### Banner Grabbing
+## Authentication Mechanisms
+#### Misconfigurations
+#### Privileges
+## Protocol Specific Attacks
+#### Read/Change the Database
+#### MySQL - Connecting to the SQL Server
+#### Sqlcmd - Connecting to the SQL Server
+#### SQL Default Databases
+#### SQL Syntax
+#### Show Databases
+#### Select a Database
+#### Show Tables
+#### Select all Data from Table "users"
+## Execute Commands
+#### XP_CMDSHELL
+## Write Local Files
+#### MySQL - Write Local File
+#### MySQL - Secure File Privileges
+#### MSSQL - Enable Ole Automation Procedures
+#### MSSQL - Create a File
+## Read Local Files
+#### Read Local Files in MSSQL
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to hostnames. Each
+# entry should be kept on an individual line. The IP address should
+#### MySQL - Read Local Files in MySQL
+## Capture MSSQL Service Hash
+#### XP_DIRTREE Hash Stealing
+#### XP_SUBDIRS Hash Stealing
+#### XP_SUBDIRS Hash Stealing with Responder
+#### XP_SUBDIRS Hash Stealing with impacket
+## Impersonate Existing Users with MSSQL
+#### Identify Users that We Can Impersonate
+#### Verifying our Current User and Role
+#### Impersonating the SA User
+## Communicate with Other Databases with MSSQL
+#### Identify linked Servers in MSSQL
+# Latest SQL Vulnerabilities
+## The Concept of the Attack
+#### The Concept of Attacks
+#### Initiation of the Attack
+#### Steal The Hash
+# Attacking RDP
+## Misconfigurations
+#### Crowbar - RDP Password Spraying
+#### Hydra - RDP Password Spraying
+#### RDP Login
+## Protocol Specific Attacks
+#### RDP Session Hijacking
+## RDP Pass-the-Hash (PtH)
+#### Adding the DisableRestrictedAdmin Registry Key
+# Latest RDP Vulnerabilities
+## The Concept of the Attack
+#### The Concept of Attacks
+#### Initiation of the Attack
+#### Trigger Remote Code Execution
+# Attacking DNS
+## Enumeration
+## DNS Zone Transfer
+#### DIG - AXFR Zone Transfer
+## Domain Takeovers & Subdomain Enumeration
+#### Subdomain Enumeration
+#### Subbrute
+## DNS Spoofing
+#### Local DNS Cache Poisoning
+# Latest DNS Vulnerabilities
+#### RedHuntLabs Study
+## The Concept of the Attack
+#### The Concept of Attacks
+#### Initiation of Subdomain Takeover
+#### Trigger the Forwarding
+# Attacking Email Services
+## Enumeration
+#### Host - MX Records
+#### DIG - MX Records
+#### Host - A Records
+## Misconfigurations
+#### Authentication
+#### VRFY Command
+#### EXPN Command
+#### RCPT TO Command
+#### USER Command
+## Cloud Enumeration
+#### O365 Spray
+## Password Attacks
+#### Hydra - Password Attack
+#### O365 Spray - Password Spraying
+## Protocol Specifics Attacks
+#### Open Relay
+# Latest Email Service Vulnerabilities
+#### Shodan Search
+#### Shodan Trend
+## The Concept of the Attack
+#### The Concept of Attacks
+#### Initiation of the Attack
+#### Trigger Remote Code Execution
+## Next Steps
+# Attacking Common Services - Easy
+# Attacking Common Services - Medium
+# Attacking Common Services - Hard
+
+=== Attacking Enterprise Networks.md ===
+# Intro to Attacking Enterprise Networks
+# Scenario & Kickoff
+## Project Kickoff
+## Start of Testing
+# External Information Gathering
+## inlanefreight hosts
+# Service Enumeration & Exploitation
+## Listening Services
+## FTP
+## SSH
+### Email Services
+## Moving On
+# Web Enumeration & Exploitation
+## Web Application Enumeration
+#                                  EyeWitness                                  #
+#           FortyNorth Security - https://www.fortynorthsecurity.com           #
+## blog.inlanefreight.local
+## careers.inlanefreight.local
+## dev.inlanefreight.local
+## ir.inlanefreight.local
+## status.inlanefreight.local
+## support.inlanefreight.local
+## tracking.inlanefreight.local
+## Dealing with The Unexpected
+## vpn.inlanefreight.local
+## gitlab.inlanefreight.local
+## shopdev2.inlanefreight.local
+## monitoring.inlanefreight.local
+## Next Steps
+# Initial Access
+## Getting a Reverse Shell
+# date time event auid term sess comm data
+# Post-Exploitation Persistence
+## Local Privilege Escalation
+## Establishing Persistence
+# Internal Information Gathering
+## Setting Up Pivoting - SSH
+#	 	socks4	192.168.1.49	1080
+#       proxy types: http, socks4, socks5
+## Setting Up Pivoting - Metasploit
+## Host Discovery - 172.16.8.0/23 Subnet - Metasploit
+## Host Discovery - 172.16.8.0/23 Subnet - SSH Tunnel
+## Host Enumeration
+## Active Directory Quick Hits - SMB NULL SESSION
+## 172.16.8.50 - Tomcat
+## Enumerating 172.16.8.20 - DotNetNuke (DNN)
+## Moving On
+# Exploitation & Privilege Escalation
+## Attacking DNN
+## Privilege Escalation
+## Alternate Method - Reverse Port Forwarding
+## Off to a Good Start
+# Lateral Movement
+# Share Hunting
+## Kerberoasting
+## Password Spraying
+## Misc Techniques
+## Next Steps
+## Post-Exploitation/Pillaging
+## Closing In
+# Active Directory Compromise
+## Next Steps
+# Post-Exploitation
+## Domain Password Analysis - Cracking NTDS
+## Active Directory Security Audit
+## Hunting for Sensitive Data/Hosts
+## The Double Pivot - MGMT01
+# id
+## Data Exfiltration Simulation
+## Attacking Domain Trusts
+## Closing Thoughts
+# Engagement Closeout
+## Attack Path Recap
+## Structuring our Findings
+## Post-Engagement Cleanup
+## Client Communication
+## Internal Project Closeout
+## Next Steps
+# Beyond This Module
+## Practice on the Main Platform
+#### Starting Point
+#### Tracks
+#### Pro Labs
+## Give Back
+## Start Looking for Work
+
+=== Attacking Web Applications with Ffuf.md ===
+# Introduction
+# Web Fuzzing
+## Fuzzing
+## Wordlists
+# Directory Fuzzing
+## Ffuf
+## Directory Fuzzing
+# Page Fuzzing
+## Extension Fuzzing
+## Page Fuzzing
+# Recursive Fuzzing
+## Recursive Flags
+## Recursive Scanning
+# DNS Records
+# Sub-domain Fuzzing
+## Sub-domains
+# Vhost Fuzzing
+## Vhosts vs. Sub-domains
+## Vhosts Fuzzing
+# Filtering Results
+## Filtering
+# Parameter Fuzzing - GET
+## GET Request Fuzzing
+# Parameter Fuzzing - POST
+# Value Fuzzing
+## Custom Wordlist
+## Value Fuzzing
+# Skills Assessment - Web Fuzzing
+
+=== CLAUDE.md ===
+
+=== Command Injections.md ===
+# Intro to Command Injections
+## What are Injections
+## OS Command Injections
+#### PHP Example
+#### NodeJS Example
+# Detection
+## Command Injection Detection
+## Command Injection Methods
+# Injecting Commands
+## Injecting Our Command
+## Bypassing Front-End Validation
+#### Burp POST Request
+#### Burp POST Request
+# Other Injection Operators
+## AND Operator
+## OR Operator
+# Identifying Filters
+## Filter/WAF Detection
+## Blacklisted Characters
+## Identifying Blacklisted Character
+# Bypassing Space Filters
+## Bypass Blacklisted Operators
+## Bypass Blacklisted Spaces
+#### Using Tabs
+#### Using $IFS
+#### Using Brace Expansion
+# Bypassing Other Blacklisted Characters
+## Linux
+## Windows
+## Character Shifting
+# Bypassing Blacklisted Commands
+## Commands Blacklist
+## Linux & Windows
+#### Burp POST Request
+## Linux Only
+## Windows Only
+# Advanced Command Obfuscation
+## Case Manipulation
+#### Burp POST Request
+#### Burp POST Request
+## Reversed Commands
+#### Burp POST Request
+## Encoded Commands
+#### Burp POST Request
+# Evasion Tools
+## Linux (Bashfuscator)
+## Windows (DOSfuscation)
+# Command Injection Prevention
+## System Commands
+## Input Validation
+## Input Sanitization
+## Server Configuration
+# Skills Assessment
+
+=== Cross-Site Scripting (XSS).md ===
+# Introduction
+## What is XSS
+## XSS Attacks
+## Types of XSS
+# Stored XSS
+## XSS Testing Payloads
+# Reflected XSS
+# DOM XSS
+## Source & Sink
+## DOM Attacks
+# XSS Discovery
+## Automated Discovery
+## Manual Discovery
+#### XSS Payloads
+## Code Review
+# Defacing
+## Defacement Elements
+## Changing Background
+## Changing Page Title
+## Changing Page Text
+# Phishing
+## XSS Discovery
+## Login Form Injection
+## Cleaning Up
+## Credential Stealing
+# Session Hijacking
+## Blind XSS Detection
+## Loading a Remote Script
+## Session Hijacking
+# XSS Prevention
+## Front-end
+#### Input Validation
+#### Input Sanitization
+#### Direct Input
+## Back-end
+#### Input Validation
+#### Input Sanitization
+#### Output HTML Encoding
+#### Server Configuration
+# Skills Assessment
+
+=== Documentation & Reporting.md ===
+## Introduction to Documentation and Reporting
+## Documentation & Reporting in Practice
+## About this Module
+# Notetaking & Organization
+## Notetaking Sample Structure
+## Notetaking Tools
+#### Obsidian
+## Logging
+#### Exploitation Attempts
+# List of plugins
+# Initialize TMUX plugin manager (keep at bottom)
+#### Tmux.conf
+## Artifacts Left Behind
+#### Account Creation/System Modifications
+## Evidence
+#### What to Capture
+#### Storage
+## Formatting and Redaction
+#### Screenshots
+#### Blurring Password Data
+#### Blanking Out Password with Solid Shape
+#### Terminal
+## What Not to Archive
+## Module Exercises
+## Onwards
+# Types of Reports
+## Differences Across Assessment Types
+#### Vulnerability Assessment
+#### Internal vs External
+#### Report Contents
+## Penetration Testing
+#### Internal vs External
+## Inter-Disciplinary Assessments
+#### Purple Team Style Assessments
+#### Cloud Focused Penetration Testing
+#### Comprehensive IoT Testing
+## Web Application Penetration Testing
+## Hardware Penetration Testing
+## Draft Report
+## Final Report
+#### Post-Remediation Report
+## Attestation Report
+## Other Deliverables
+#### Slide Deck
+#### Spreadsheet of Findings
+## Vulnerability Notifications
+#### When to Draft One
+#### Contents
+## Piecing it Together
+# Components of a Report
+## Prioritizing Our Efforts
+## Writing an Attack Chain
+## Sample Attack Chain - INLANEFREIGHT.LOCAL Internal Penetration Test
+#### Detailed reproduction steps for this attack chain are as follows:
+#### Responder
+#### Hashcat
+#### GetUserSPNs
+#### Bloodhound
+#### GetUserSPNs
+#### Hashcat
+#### CrackMapExec
+#### Logged In Users
+#### Rubeus
+#### Cached Kerberos Tickets
+#0>     Client: pramirez @ INLANEFREIGHT.LOCAL
+#### Mimikatz
+#### CrackMapExec
+#### Dumping NTDS with SecretsDump
+## Writing a Strong Executive Summary
+#### Key Concepts
+#### Do
+#### Do Not
+#### Vocabulary Changes
+## Example Executive Summary
+#### Anatomy of the Executive Summary
+## Summary of Recommendations
+## Findings
+## Appendices
+## Static Appendices
+#### Scope
+#### Methodology
+#### Severity Ratings
+#### Biographies
+## Dynamic Appendices
+#### Exploitation Attempts and Payloads
+#### Compromised Credentials
+#### Configuration Changes
+#### Additional Affected Scope
+#### Information Gathering
+#### Domain Password Analysis
+## Report Type Differences
+# How to Write Up a Finding
+## Breakdown of a Finding
+## Showing Finding Reproduction Steps Adequately
+## Effective Remediation Recommendations
+#### Example 1
+#### Rationale
+#### Example 2
+#### Rationale
+## Selecting Quality References
+## Example Findings
+#### Weak Kerberos Authentication (“Kerberoasting”)
+####  Tomcat Manager Weak/Default Credentials
+#### Poorly Written Finding
+## Hands-On Practice
+## Nearly There
+# Reporting Tips and Tricks
+## Templates
+## MS Word Tips & Tricks
+## Automation
+## Reporting Tools/Findings Database
+## Misc Tips/Tricks
+## Client Communication
+## Presenting Your Report - The Final Product
+#### QA Process
+## Report Review Meeting
+## Wrap Up
+# Documentation & Reporting Practice Lab
+# Beyond this Module - Documentation & Reporting
+## Practicing
+## Next Steps
+
+=== File Inclusion.md ===
+# Intro to File Inclusions
+## Local File Inclusion (LFI)
+## Examples of Vulnerable Code
+#### PHP
+#### NodeJS
+#### Java
+#### .NET
+## Read vs Execute
+# Local File Inclusion (LFI)
+## Basic LFI
+## Path Traversal
+## Filename Prefix
+## Appended Extensions
+## Second-Order Attacks
+# Basic Bypasses
+## Non-Recursive Path Traversal Filters
+## Encoding
+## Approved Paths
+## Appended Extension
+#### Path Truncation
+#### Null Bytes
+# PHP Filters
+## Input Filters
+## Fuzzing for PHP Files
+## Standard PHP Inclusion
+## Source Code Disclosure
+# PHP Wrappers
+## Data
+#### Checking PHP Configurations
+#### Remote Code Execution
+## Input
+## Expect
+# Remote File Inclusion (RFI)
+## Local vs. Remote File Inclusion
+## Verify RFI
+## Remote Code Execution with RFI
+## HTTP
+## FTP
+## SMB
+# LFI and File Uploads
+## Image upload
+#### Crafting Malicious Image
+#### Uploaded File Path
+## Zip Upload
+## Phar Upload
+# Log Poisoning
+## PHP Session Poisoning
+## Server Log Poisoning
+# Automated Scanning
+## Fuzzing Parameters
+## LFI wordlists
+## Fuzzing Server Files
+#### Server Webroot
+#### Server Logs/Configurations
+# temporary state file location. This might be changed to /run in Wheezy+1
+# Only /var/log/apache2 is handled by /etc/logrotate.d/apache2.
+## LFI Tools
+# File Inclusion Prevention
+## File Inclusion Prevention
+## Preventing Directory Traversal
+## Web Server Configuration
+## Web Application Firewall (WAF)
+# Skills Assessment - File Inclusion
+## Scenario
+
+=== File Transfers.md ===
+# File Transfers
+# Windows File Transfer Methods
+## Introduction
+## Download Operations
+## PowerShell Base64 Encode & Decode
+#### Pwnbox Check SSH Key MD5 Hash
+#### Pwnbox Encode SSH Key to Base64
+#### Confirming the MD5 Hashes Match
+## PowerShell Web Downloads
+#### PowerShell DownloadFile Method
+#### File Download
+#### PowerShell DownloadString - Fileless Method
+#### PowerShell Invoke-WebRequest
+#### Common Errors with PowerShell
+## SMB Downloads
+#### Create the SMB Server
+#### Copy a File from the SMB Server
+#### Create the SMB Server with a Username and Password
+#### Mount the SMB Server with Username and Password
+## FTP Downloads
+#### Installing the FTP Server Python3 Module - pyftpdlib
+#### Setting up a Python3 FTP Server
+#### Transferring Files from an FTP Server Using PowerShell
+#### Create a Command File for the FTP Client and Download the Target File
+## Upload Operations
+## PowerShell Base64 Encode & Decode
+#### Encode File Using PowerShell
+#### Decode Base64 String in Linux
+## PowerShell Web Uploads
+#### Installing a Configured WebServer with Upload
+#### PowerShell Script to Upload a File to Python Upload Server
+### PowerShell Base64 Web Upload
+## SMB Uploads
+#### Configuring WebDav Server
+#### Installing WebDav Python modules
+####  Using the WebDav Python module
+#### Connecting to the Webdav Share
+#### Uploading Files using SMB
+## FTP Uploads
+#### PowerShell Upload File
+#### Create a Command File for the FTP Client to Upload a File
+## Recap
+## Linux File Transfer Methods
+## Download Operations
+## Base64 Encoding / Decoding
+#### Pwnbox - Check File MD5 hash
+#### Pwnbox - Encode SSH Key to Base64
+#### Linux - Decode the File
+#### Linux - Confirm the MD5 Hashes Match
+## Web Downloads with Wget and cURL
+#### Download a File Using wget
+#### Download a File Using cURL
+## Fileless Attacks Using Linux
+#### Fileless Download with cURL
+#### Fileless Download with wget
+## Download with Bash (/dev/tcp)
+#### Connect to the Target Webserver
+#### HTTP GET Request
+#### Print the Response
+## SSH Downloads
+#### Enabling the SSH Server
+#### Starting the SSH Server
+#### Checking for SSH Listening Port
+#### Linux - Downloading Files Using SCP
+## Upload Operations
+## Web Upload
+#### Pwnbox - Start Web Server
+#### Pwnbox - Create a Self-Signed Certificate
+#### Pwnbox - Start Web Server
+#### Linux - Upload Multiple Files
+## Alternative Web File Transfer Method
+#### Linux -  Creating a Web Server with Python3
+#### Linux -  Creating a Web Server with Python2.7
+#### Linux -  Creating a Web Server with PHP
+#### Linux -  Creating a Web Server with Ruby
+#### Download the File from the Target Machine onto the Pwnbox
+## SCP Upload
+#### File Upload using SCP
+## Onwards
+# Transferring Files with Code
+## Python
+#### Python 2 - Download
+#### Python 3 - Download
+## PHP
+#### PHP Download with File_get_contents()
+#### PHP Download with Fopen()
+#### PHP Download a File and Pipe it to Bash
+## Other Languages
+#### Ruby - Download a File
+#### Perl - Download a File
+## JavaScript
+#### Download a File Using JavaScript and cscript.exe
+## VBScript
+#### Download a File Using VBScript and cscript.exe
+## Upload Operations using Python3
+#### Starting the Python uploadserver Module
+#### Uploading a File Using a Python One-liner
+# To use the requests function, we need to import the module first.
+# Define the target URL where we will upload the file.
+# Define the file we want to read, open it and save it in a variable.
+# Use a requests POST request to upload the file.
+## Section Recap
+# Miscellaneous File Transfer Methods
+## Netcat
+## File Transfer with Netcat and Ncat
+#### NetCat - Compromised Machine - Listening on Port 8000
+#### Ncat - Compromised Machine - Listening on Port 8000
+#### Netcat - Attack Host - Sending File to Compromised machine
+# Example using Original Netcat
+#### Ncat - Attack Host - Sending File to Compromised machine
+# Example using Ncat
+#### Attack Host - Sending File as Input to Netcat
+# Example using Original Netcat
+#### Compromised Machine Connect to Netcat to Receive the File
+#### Attack Host - Sending File as Input to Ncat
+# Example using Ncat
+#### Compromised Machine Connect to Ncat to Receive the File
+#### NetCat - Sending File as Input to Netcat
+# Example using Original Netcat
+#### Ncat - Sending File as Input to Ncat
+# Example using Ncat
+#### Compromised Machine Connecting to Netcat Using /dev/tcp to Receive the File
+## PowerShell Session File Transfer
+#### From DC01 - Confirm WinRM port TCP 5985 is Open on DATABASE01.
+#### Create a PowerShell Remoting Session to DATABASE01
+#### Copy samplefile.txt from our Localhost to the DATABASE01 Session
+#### Copy DATABASE.txt from DATABASE01 Session to our Localhost
+## RDP
+#### Mounting a Linux Folder Using rdesktop
+#### Mounting a Linux Folder Using xfreerdp
+## Practice Makes Perfect
+# Protected File Transfers
+## File Encryption on Windows
+#### Invoke-AESEncryption.ps1
+#>
+#### Import Module Invoke-AESEncryption.ps1
+#### File Encryption Example
+## File Encryption on Linux
+#### Encrypting /etc/passwd with openssl
+#### Decrypt passwd.enc with openssl
+# Catching Files over HTTP/S
+## HTTP/S
+## Nginx - Enabling PUT
+#### Create a Directory to Handle Uploaded Files
+#### Change the Owner to www-data
+#### Create Nginx Configuration File
+#### Symlink our Site to the sites-enabled Directory
+#### Start Nginx
+#### Verifying Errors
+#### Remove NginxDefault Configuration
+#### Upload File Using cURL
+## Using Built-in Tools
+# Living off The Land
+## Using the LOLBAS and GTFOBins Project
+### LOLBAS
+#### Upload win.ini to our Pwnbox
+#### File Received in our Netcat Session
+### GTFOBins
+#### Create Certificate in our Pwnbox
+#### Stand up the Server in our Pwnbox
+#### Download File from the Compromised Machine
+## Other Common Living off the Land tools
+### Bitsadmin Download function
+#### File Download with Bitsadmin
+#### Download
+### Certutil
+#### Download a File with Certutil
+## Extra Practice
+# Detection
+#### Invoke-WebRequest - Client
+#### Invoke-WebRequest - Server
+#### WinHttpRequest - Client
+#### WinHttpRequest - Server
+#### Msxml2 - Client
+#### Msxml2 - Server
+#### Certutil - Client
+#### Certutil - Server
+#### BITS - Client
+#### BITS - Server
+# Evading Detection
+## Changing User Agent
+#### Listing out User Agents
+#### Request with Chrome User Agent
+## LOLBAS / GTFOBins
+#### Transferring File with GfxDownloadWrapper.exe
+## Closing Thoughts
+
+=== File Upload Attacks.md ===
+# Intro to File Upload Attacks
+## Types of File Upload Attacks
+# Absent Validation
+## Arbitrary File Upload
+## Identifying Web Framework
+## Vulnerability Identification
+# Upload Exploitation
+## Web Shells
+## Writing Custom Web Shell
+## Reverse Shell
+# id
+## Generating Custom Reverse Shell Scripts
+# id
+# Client-Side Validation
+## Client-Side Validation
+## Back-end Request Modification
+## Disabling Front-end Validation
+# Blacklist Filters
+## Blacklisting Extensions
+## Fuzzing Extensions
+## Non-Blacklisted Extensions
+# Whitelist Filters
+## Whitelisting Extensions
+## Double Extensions
+## Reverse Double Extension
+## Character Injection
+# Type Filters
+## Content-Type
+## MIME-Type
+# Limited File Uploads
+## XSS
+## XXE
+## DoS
+# Other Upload Attacks
+## Injections in File Name
+## Upload Directory Disclosure
+## Windows-specific Attacks
+## Advanced File Upload Attacks
+# Preventing File Upload Vulnerabilities
+## Extension Validation
+## Content Validation
+## Upload Disclosure
+## Further Security
+# Skills Assessment - File Upload Attacks
+## Extra Exercise
+
+=== Footprinting.md ===
+# Enumeration Principles
+# Enumeration Methodology
+## Layer No.1: Internet Presence
+## Layer No.2: Gateway
+## Layer No.3: Accessible Services
+## Layer No.4: Processes
+## Layer No.5: Privileges
+## Layer No.6: OS Setup
+## Enumeration Methodology in Practice
+# Domain Information
+## Online Presence
+#### Certificate Transparency
+#### Company Hosted Servers
+#### Shodan - IP List
+#### DNS Records
+# Cloud Resources
+#### Company Hosted Servers
+#### Google Search for AWS
+#### Google Search for Azure
+#### Target Website - Source Code
+#### Domain.Glass Results
+#### GrayHatWarfare Results
+#### Private and Public SSH Keys Leaked
+#### SSH Private Key
+# Staff
+#### LinkedIn - Job Post
+#### LinkedIn - Employee #1 About
+#### Github
+#### LinkedIn - Employee #2 Career
+# FTP
+## TFTP
+## Default Configuration
+#### Install vsFTPd
+#### vsFTPd Config File
+#### FTPUSERS
+## Dangerous Settings
+#### Anonymous Login
+#### vsFTPd Status
+#### vsFTPd Detailed Output
+#### Hiding IDs - YES
+#### Recursive Listing
+#### Download a File
+#### Download All Available Files
+#### Upload a File
+## Footprinting the Service
+#### Nmap FTP Scripts
+#### Nmap
+#### Nmap Script Trace
+#### Service Interaction
+# SMB
+## Samba
+## Default Configuration
+#### Default Configuration
+## Dangerous Settings
+#### Example Share
+#### Restart Samba
+#### SMBclient - Connecting to the Share
+#### Download Files from SMB
+#### Samba Status
+## Footprinting the Service
+#### Nmap
+#### RPCclient
+#### RPCclient - Enumeration
+#### Rpcclient - User Enumeration
+#### Rpcclient - Group Information
+#### Brute Forcing User RIDs
+#### Impacket - Samrdump.py
+#### SMBmap
+#### CrackMapExec
+#### Enum4Linux-ng - Installation
+#### Enum4Linux-ng - Enumeration
+# NFS
+## Default Configuration
+#### Exports File
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#### ExportFS
+## Dangerous Settings
+## Footprinting the Service
+#### Nmap
+#### Show Available NFS Shares
+#### Mounting NFS Share
+#### List Contents with Usernames & Group Names
+#### List Contents with UIDs & GUIDs
+#### Unmounting
+# DNS
+## Default Configuration
+#### Local DNS Configuration
+#### Zone Files
+#### Reverse Name Resolution Zone Files
+## Dangerous Settings
+## Footprinting the Service
+#### DIG - NS Query
+#### DIG - Version Query
+#### DIG - ANY Query
+#### DIG - AXFR Zone Transfer
+#### DIG - AXFR Zone Transfer - Internal
+#### Subdomain Brute Forcing
+# SMTP
+## Default Configuration
+#### Default Configuration
+#### Telnet - HELO/EHLO
+#### Telnet - VRFY
+#### Send an Email
+## Dangerous Settings
+#### Open Relay Configuration
+## Footprinting the Service
+#### Nmap
+#### Nmap - Open Relay
+# IMAP / POP3
+## Default Configuration
+#### IMAP Commands
+#### POP3 Commands
+## Dangerous Settings
+## Footprinting the Service
+#### Nmap
+#### cURL
+#### OpenSSL - TLS Encrypted Interaction POP3
+#### OpenSSL - TLS Encrypted Interaction IMAP
+# SNMP
+#### MIB
+#### OID
+#### SNMPv1
+#### SNMPv2
+#### SNMPv3
+#### Community Strings
+## Default Configuration
+#### SNMP Daemon Config
+## Dangerous Settings
+## Footprinting the Service
+#### SNMPwalk
+#### OneSixtyOne
+#### Braa
+# MySQL
+#### MySQL Clients
+#### MySQL Databases
+#### MySQL Commands
+## Default Configuration
+#### Default Configuration
+## Dangerous Settings
+## Footprinting the Service
+#### Scanning MySQL Server
+#### Interaction with the MySQL Server
+# MSSQL
+#### MSSQL Clients
+#### MSSQL Databases
+## Default Configuration
+## Dangerous Settings
+## Footprinting the Service
+#### NMAP MSSQL Script Scan
+#### MSSQL Ping in Metasploit
+#### Connecting with Mssqlclient.py
+# Oracle TNS
+## Default Configuration
+#### Tnsnames.ora
+#### Listener.ora
+#### Setting up
+#### Testing ODAT
+#### Nmap
+#### Nmap - SID Bruteforcing
+#### ODAT
+#### SQLplus - Log In
+#### Oracle RDBMS - Interaction
+#### Oracle RDBMS - Database Enumeration
+#### Oracle RDBMS - Extract Password Hashes
+#### Oracle RDBMS - File Upload
+# IPMI
+## Footprinting the Service
+#### Nmap
+#### Metasploit Version Scan
+## Dangerous Settings
+#### Metasploit Dumping Hashes
+# Linux Remote Management Protocols
+## SSH
+#### Public Key Authentication
+## Default Configuration
+#### Default Configuration
+## Dangerous Settings
+## Footprinting the Service
+#### SSH-Audit
+# general
+# key exchange algorithms
+# host-key algorithms
+#### Change Authentication Method
+## Rsync
+#### Scanning for Rsync
+#### Probing for Accessible Shares
+#list
+#### Enumerating an Open Share
+## R-Services
+#### /etc/hosts.equiv
+# <hostname> <local username>
+#### Scanning for R-Services
+#### Access Control & Trusted Relationships
+#### Sample .rhosts File
+#### Logging in Using Rlogin
+#### Listing Authenticated Users Using Rwho
+#### Listing Authenticated Users Using Rusers
+## Final Thoughts
+# Windows Remote Management Protocols
+## RDP
+## Footprinting the Service
+#### Nmap
+#### RDP Security Check - Installation
+#### RDP Security Check
+#### Initiate an RDP Session
+## WinRM
+## Footprinting the Service
+#### Nmap WinRM
+## WMI
+## Footprinting the Service
+#### WMIexec.py
+# Footprinting Lab - Easy
+# Footprinting Lab - Medium
+# Footprinting Lab - Hard
+
+=== Getting Started.md ===
+# Infosec Overview
+## Risk Management Process
+## Red Team vs. Blue Team
+## Role of Penetration Testers
+# Getting Started with a Pentest Distro
+## Choosing a Distro
+## Setting Up a Pentest Distro
+#### ISO
+#### OVA
+## Practicing with Parrot
+# Staying Organized
+## Folder Structure
+## Note Taking Tools
+## Other Tools and Tips
+## Moving On
+# Connecting Using VPN
+## Why Use A VPN?
+## Connecting to HTB VPN
+## Help with VPN
+# Common Terms
+## What is a Shell?
+## What is a Port?
+## What is a Web Server
+# Basic Tools
+## Using SSH
+## Using Netcat
+## Using Tmux
+## Using Vim
+# Service Scanning
+## Nmap
+#### Nmap Scripts
+## Attacking Network Services
+#### Banner Grabbing
+#### FTP
+#### SMB
+#### Shares
+#### SNMP
+## Conclusion
+# Web Enumeration
+## Gobuster
+#### Directory/File Enumeration
+#### DNS Subdomain Enumeration
+#### Install SecLists
+## Web Enumeration Tips
+#### Banner Grabbing / Web Server Headers
+#### Whatweb
+#### Certificates
+#### Robots.txt
+#### Source Code
+# Public Exploits
+## Finding Public Exploits
+## Metasploit Primer
+# Types of Shells
+## Reverse Shell
+#### Netcat Listener
+#### Connect Back IP
+#### Reverse Shell Command
+## Bind Shell
+#### Bind Shell Command
+#### Netcat Connection
+#### Upgrading TTY
+## Web Shell
+#### Writing a Web Shell
+#### Uploading a Web Shell
+#### Accessing Web Shell
+# Privilege Escalation
+## PrivEsc Checklists
+## Enumeration Scripts
+## Kernel Exploits
+## Vulnerable Software
+## User Privileges
+## Scheduled Tasks
+## Exposed Credentials
+## SSH Keys
+# Transferring Files
+## Using wget
+## Using SCP
+## Using Base64
+## Validating File Transfers
+# Starting Out
+## Resources
+#### Vulnerable Machines/Applications
+#### YouTube Channels
+#### Blogs
+#### Tutorial Websites
+#### HTB Starting Point
+#### HTB Tracks
+#### Beginner Friendly HTB Machines
+#### Beginner Friendly HTB Challenges
+#### Dante Prolab
+## Moving On
+# Navigating HTB
+## Profile
+## Rankings
+## Tracks
+## Machines
+## Challenges
+## Fortress
+## Endgame
+## Pro Labs
+## Battlegrounds
+# Nibbles - Enumeration
+## Nmap
+# Nmap 7.80 scan initiated Wed Dec 16 23:22:26 2020 as: nmap -v -oG -
+# Ports scanned: TCP(1000;1,3-4,6-7,9,13,17,19-26,30,32-33,37,42-43,49,53,70,79-85,88-90,99-100,106,109-111,113,119,125,135,139,143-144,146,161,163,179,199,211-212,222,254-256,259,264,280,301,306,311,340,366,389,406-407,416-417,425,427,443-445,458,464-465,481,497,500,512-515,524,541,543-545,548,554-555,563,587,593,616-617,625,631,636,646,648,666-668,683,687,691,700,705,711,714,720,722,726,749,765,777,783,787,800-801,808,843,873,880,888,898,900-903,911-912,981,987,990,992-993,995,999-1002,1007,1009-1011,1021-1100,1102,1104-1108,1110-1114,1117,1119,1121-1124,1126,1130-1132,1137-1138,1141,1145,1147-1149,1151-1152,1154,1163-1166,1169,1174-1175,1183,1185-1187,1192,1198-1199,1201,1213,1216-1218,1233-1234,1236,1244,1247-1248,1259,1271-1272,1277,1287,1296,1300-1301,1309-1311,1322,1328,1334,1352,1417,1433-1434,1443,1455,1461,1494,1500-1501,1503,1521,1524,1533,1556,1580,1583,1594,1600,1641,1658,1666,1687-1688,1700,1717-1721,1723,1755,1761,1782-1783,1801,1805,1812,1839-1840,1862-1864,1875,1900,1914,1935,1947,1971-1972,1974,1984,1998-2010,2013,2020-2022,2030,2033-2035,2038,2040-2043,2045-2049,2065,2068,2099-2100,2103,2105-2107,2111,2119,2121,2126,2135,2144,2160-2161,2170,2179,2190-2191,2196,2200,2222,2251,2260,2288,2301,2323,2366,2381-2383,2393-2394,2399,2401,2492,2500,2522,2525,2557,2601-2602,2604-2605,2607-2608,2638,2701-2702,2710,2717-2718,2725,2800,2809,2811,2869,2875,2909-2910,2920,2967-2968,2998,3000-3001,3003,3005-3007,3011,3013,3017,3030-3031,3052,3071,3077,3128,3168,3211,3221,3260-3261,3268-3269,3283,3300-3301,3306,3322-3325,3333,3351,3367,3369-3372,3389-3390,3404,3476,3493,3517,3527,3546,3551,3580,3659,3689-3690,3703,3737,3766,3784,3800-3801,3809,3814,3826-3828,3851,3869,3871,3878,3880,3889,3905,3914,3918,3920,3945,3971,3986,3995,3998,4000-4006,4045,4111,4125-4126,4129,4224,4242,4279,4321,4343,4443-4446,4449,4550,4567,4662,4848,4899-4900,4998,5000-5004,5009,5030,5033,5050-5051,5054,5060-5061,5080,5087,5100-5102,5120,5190,5200,5214,5221-5222,5225-5226,5269,5280,5298,5357,5405,5414,5431-5432,5440,5500,5510,5544,5550,5555,5560,5566,5631,5633,5666,5678-5679,5718,5730,5800-5802,5810-5811,5815,5822,5825,5850,5859,5862,5877,5900-5904,5906-5907,5910-5911,5915,5922,5925,5950,5952,5959-5963,5987-5989,5998-6007,6009,6025,6059,6100-6101,6106,6112,6123,6129,6156,6346,6389,6502,6510,6543,6547,6565-6567,6580,6646,6666-6669,6689,6692,6699,6779,6788-6789,6792,6839,6881,6901,6969,7000-7002,7004,7007,7019,7025,7070,7100,7103,7106,7200-7201,7402,7435,7443,7496,7512,7625,7627,7676,7741,7777-7778,7800,7911,7920-7921,7937-7938,7999-8002,8007-8011,8021-8022,8031,8042,8045,8080-8090,8093,8099-8100,8180-8181,8192-8194,8200,8222,8254,8290-8292,8300,8333,8383,8400,8402,8443,8500,8600,8649,8651-8652,8654,8701,8800,8873,8888,8899,8994,9000-9003,9009-9011,9040,9050,9071,9080-9081,9090-9091,9099-9103,9110-9111,9200,9207,9220,9290,9415,9418,9485,9500,9502-9503,9535,9575,9593-9595,9618,9666,9876-9878,9898,9900,9917,9929,9943-9944,9968,9998-10004,10009-10010,10012,10024-10025,10082,10180,10215,10243,10566,10616-10617,10621,10626,10628-10629,10778,11110-11111,11967,12000,12174,12265,12345,13456,13722,13782-13783,14000,14238,14441-14442,15000,15002-15004,15660,15742,16000-16001,16012,16016,16018,16080,16113,16992-16993,17877,17988,18040,18101,18988,19101,19283,19315,19350,19780,19801,19842,20000,20005,20031,20221-20222,20828,21571,22939,23502,24444,24800,25734-25735,26214,27000,27352-27353,27355-27356,27715,28201,30000,30718,30951,31038,31337,32768-32785,33354,33899,34571-34573,35500,38292,40193,40911,41511,42510,44176,44442-44443,44501,45100,48080,49152-49161,49163,49165,49167,49175-49176,49400,49999-50003,50006,50300,50389,50500,50636,50800,51103,51493,52673,52822,52848,52869,54045,54328,55055-55056,55555,55600,56737-56738,57294,57797,58080,60020,60443,61532,61900,62078,63331,64623,64680,65000,65129,65389) UDP(0;) SCTP(0;) PROTOCOLS(0;)
+# Nmap done at Wed Dec 16 23:22:26 2020 -- 0 IP addresses (0 hosts up) scanned in 0.04 seconds
+# Nibbles - Web Footprinting
+## Directory Enumeration
+# Nibbles - Initial Foothold
+# Nibbles - Privilege Escalation
+#! /bin/bash
+# unset any variable which system may be using
+# clear the screen
+# id
+# Nibbles - Alternate User Method - Metasploit
+## Next Steps
+# Common Pitfalls
+## VPN Issues
+#### Still Connected to VPN
+#### Getting VPN Address
+#### Checking Routing Table
+#### Pinging Gateway
+#### Working on Two Devices
+#### Checking Region
+#### VPN Troubleshooting
+## Burp Suite Proxy Issues
+#### Not Disabling Proxy
+## Changing SSH Key and Password
+# Getting Help
+## Forum
+## Discord
+## Asking Questions Effectively
+## Answering Questions Effectively
+## Getting Technical Help
+# Next Steps
+## Boxes & Challenges
+#### Root a Retired Easy Box
+#### Complete a Retired Medium Box
+#### Root Our First Live Box
+## Keep Learning
+## Giving Back
+#### Answer Questions
+#### Share a Retired Box Walkthrough
+## Way Forward
+# Knowledge Check
+## Tips
+
+=== Information Gathering - Web Edition.md ===
+# Introduction
+## Types of Reconnaissance
+### Active Reconnaissance
+### Passive Reconnaissance
+# WHOIS
+## History of WHOIS
+### Formalisation and Standardization
+### The Rise of Distributed WHOIS and RIRs
+### ICANN and the Modernization of WHOIS
+### Privacy Concerns and the GDPR Era
+## Why WHOIS Matters for Web Recon
+# Utilising WHOIS
+## Scenario 1: Phishing Investigation
+## Scenario 2: Malware Analysis
+## Scenario 3: Threat Intelligence Report
+## Using WHOIS
+# DNS
+## How DNS Works
+### The Hosts File
+### It's Like a Relay Race
+### Key DNS Concepts
+## Why DNS Matters for Web Recon
+# Digging DNS
+## DNS Tools
+## The Domain Information Groper
+### Common dig Commands
+## Groping DNS
+# Subdomains
+## Why is this important for web reconnaissance?
+## Subdomain Enumeration
+### 1. Active Subdomain Enumeration
+### 2. Passive Subdomain Enumeration
+# Subdomain Bruteforcing
+### DNSEnum
+# DNS Zone Transfers
+## What is a Zone Transfer
+## The Zone Transfer Vulnerability
+### Remediation
+#### Exploiting Zone Transfers
+# Virtual Hosts
+## How Virtual Hosts Work: Understanding VHosts and Subdomains
+# Example of name-based virtual host configuration in Apache
+### Server VHost Lookup
+### Types of Virtual Hosting
+## Virtual Host Discovery Tools
+### gobuster
+# Certificate Transparency Logs
+## What are Certificate Transparency Logs?
+## How Certificate Transparency Logs Work
+### The Merkle Tree Structure
+## CT Logs and Web Recon
+## Searching CT Logs
+### crt.sh lookup
+# Fingerprinting
+## Fingerprinting Techniques
+## Fingerprinting inlanefreight.com
+### Banner Grabbing
+### Wafw00f
+### Nikto
+# Crawling
+## How Web Crawlers Work
+### Breadth-First Crawling
+### Depth-First Crawling
+## Extracting Valuable Information
+### The Importance of Context
+# robots.txt
+## What is robots.txt?
+### How robots.txt Works
+### Understanding robots.txt Structure
+### Why Respect robots.txt?
+## robots.txt in Web Reconnaissance
+### Analyzing robots.txt
+# Well-Known URIs
+## Web Recon and .well-known
+# Creepy Crawlies
+## Popular Web Crawlers
+## Scrapy
+### Installing Scrapy
+### ReconSpider
+### results.json
+# Search Engine Discovery
+## Why Search Engine Discovery Matters
+## Search Operators
+### Google Dorking
+# Web Archives
+### What is the Wayback Machine?
+### How Does the Wayback Machine Work?
+## Why the Wayback Machine Matters for Web Reconnaissance
+## Going Wayback on HTB
+# Automating Recon
+## Why Automate Reconnaissance?
+## Reconnaissance Frameworks
+### FinalRecon
+# Skills Assessment
+
+=== Linux Privilege Escalation.md ===
+# Introduction to Linux Privilege Escalation
+## Enumeration
+#### List Current Processes
+#### List Current Terminal-Attached Processes
+#### Home Directory Contents
+#### User's Home Directory Contents
+#### SSH Directory Contents
+#### Bash History
+#### Sudo - List User's Privileges
+#### Passwd
+#### Cron Jobs
+#### File Systems & Additional Drives
+#### Find Writable Directories
+#### Find Writable Files
+## Moving on
+# Environment Enumeration
+## Gaining Situational Awareness
+# /etc/shells: valid login shells
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/ubuntu-vg/ubuntu-lv during curtin installation
+# /boot was on /dev/sda2 during curtin installation
+#### Existing Users
+#### Existing Groups
+#### Mounted File Systems
+#### Unmounted File Systems
+#### All Hidden Files
+#### All Hidden Directories
+#### Temporary Files
+## Moving On
+# Linux Services & Internals Enumeration
+## Internals
+#### Network Interfaces
+#### Hosts
+# The following lines are desirable for IPv6 capable hosts
+#### User's Last Login
+#### Logged In Users
+#### Command History
+#### Finding History Files
+#### Cron
+#### Proc
+## Services
+#### Installed Packages
+#### Sudo Version
+#### Binaries
+#### GTFObins
+#### Trace System Calls
+#### Configuration Files
+#### Scripts
+#### Running Services by User
+# Credential Hunting
+## SSH Keys
+# Path Abuse
+# Wildcard Abuse
+#
+#
+# Escaping Restricted Shells
+#### RBASH
+#### RKSH
+#### RZSH
+## Escaping
+#### Command injection
+#### Command Substitution
+#### Command Chaining
+#### Environment Variables
+#### Shell Functions
+# Special Permissions
+## GTFOBins
+# id
+# Sudo Rights Abuse
+# Privileged Groups
+## LXC / LXD
+## Docker
+## Disk
+## ADM
+# Capabilities
+#### Set Capability
+## Enumerating Capabilities
+#### Enumerating Capabilities
+## Exploitation
+#### Exploiting Capabilities
+# Vulnerable Services
+#### Screen Version Identification
+#### Privilege Escalation - Screen_Exploit.sh
+# id
+#### Screen_Exploit_POC.sh
+#!/bin/bash
+# screenroot.sh
+# setuid screen v4.5.0 local root exploit
+# abuses ld.so.preload overwriting to get root.
+# bug: https://lists.gnu.org/archive/html/screen-devel/2017-01/msg00025.html
+# HACK THE PLANET
+# ~ infodox (25/1/2017)
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <stdio.h>
+# Cron Job Abuse
+#!/bin/bash
+#!/bin/bash
+# Containers
+## Linux Containers
+#### Linux Daemon
+# Docker
+## Docker Architecture
+#### Docker Daemon
+#### Managing Docker Containers
+#### Network and Storage
+#### Docker Clients
+#### Docker Desktop
+## Docker Images and Containers
+## Docker Privilege Escalation
+#### Docker Shared Directories
+#### Docker Sockets
+#### Docker Group
+#### Docker Socket
+# Kubernetes
+## K8s Concept
+#### Nodes
+#### Control Plane
+#### Minions
+#### K8's Security Measures
+## Kubernetes API
+#### Authentication
+#### K8's API Server Interaction
+#### Kubelet API - Extracting Pods
+#### Kubeletctl - Extracting Pods
+#### Kubelet API - Available Commands
+#### Kubelet API - Executing Commands
+## Privilege Escalation
+#### Kubelet API - Extracting Tokens
+#### Kubelet API - Extracting Certificates
+#### List Privileges
+#### Pod YAML
+#### Creating a new Pod
+#### Extracting Root's SSH Key
+# Logrotate
+# or
+# see "man logrotate" for details
+# global options do not affect preceding include directives
+# rotate log files weekly
+# use the adm group by default, since this is the owning group
+# of /var/log/syslog.
+# keep 4 weeks worth of backlogs
+# create new (empty) log files after rotating old ones
+# use date as a suffix of the rotated file
+#dateext
+# uncomment this if you want your log files compressed
+#compress
+# packages drop log rotation information into this directory
+# system-specific logs may also be configured here.
+# id
+# Miscellaneous Techniques
+## Passive Traffic Capture
+## Weak NFS Privileges
+# /etc/exports: the access control list for filesystems which may be exported
+#		to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+## Hijacking Tmux Sessions
+# Kernel Exploits
+## Kernel Exploit Example
+# Shared Libraries
+## LD_PRELOAD Privilege Escalation
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
+# Shared Object Hijacking
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+# id
+# Python Library Hijacking
+#### Importing Modules
+#!/usr/bin/env python3
+# Method 1
+# Method 2
+# Method 3
+## Wrong Write Permissions
+#### Python Script
+#### Python Script - Contents
+#!/usr/bin/env python3
+#### Module Permissions
+#### Module Contents
+#### Module Contents - Hijacking
+#### Privilege Escalation
+## Library Path
+#### PYTHONPATH Listing
+#### Psutil Default Installation Location
+#### Misconfigured Directory Permissions
+#### Hijacked Module Contents - psutil.py
+#!/usr/bin/env python3
+#### Privilege Escalation via Hijacking Python Library Path
+## PYTHONPATH Environment Variable
+#### Checking sudo permissions
+#### Privilege Escalation using PYTHONPATH Environment Variable
+# Sudo
+# id
+## Sudo Policy Bypass
+# Polkit
+# id
+# Dirty Pipe
+#### Download Dirty Pipe Exploit
+#### Verify Kernel Version
+#### Exploitation
+#### Find SUID Binaries
+#### Exploitation
+# id
+# Netfilter
+#### CVE-2021-22555
+#### CVE-2022-25636
+# id
+#### CVE-2023-32233
+#### Proof-Of-Concept
+#### Exploitation
+# id
+# Linux Hardening
+## Updates and Patching
+## Configuration Management
+## User Management
+## Audit
+## Conclusion
+# Linux Local Privilege Escalation - Skills Assessment
+
+=== Login Brute Forcing.md ===
+# Introduction
+## What is Brute Forcing?
+## How Brute Forcing Works
+## Types of Brute Forcing
+## The Role of Brute Forcing in Penetration Testing
+# Password Security Fundamentals
+## The Importance of Strong Passwords
+## The Anatomy of a Strong Password
+## Common Password Weaknesses
+## Password Policies
+## The Perils of Default Credentials
+### Brute-forcing and Password Security
+# Brute Force Attacks
+## Cracking the PIN
+# Try every possible 4-digit PIN (from 0000 to 9999)
+# Dictionary Attacks
+## The Power of Words
+## Brute Force vs. Dictionary Attack
+## Building and Utilizing Wordlists
+## Throwing a dictionary at the problem
+# Download a list of common passwords from the web and split it into lines
+# Try each password from the list
+# Hybrid Attacks
+### Hybrid Attacks in Action
+### The Power of Hybrid Attacks
+## Credential Stuffing: Leveraging Stolen Data for Unauthorized Access
+### The Password Reuse Problem
+# Hydra
+### Installation
+## Basic Usage
+### Hydra Services
+### Brute-Forcing HTTP Authentication
+### Targeting Multiple SSH Servers
+### Testing FTP Credentials on a Non-Standard Port
+### Brute-Forcing a Web Login Form
+### Advanced RDP Brute-Forcing
+# Basic HTTP Authentication
+## Exploiting Basic Auth with Hydra
+# Download wordlist if needed
+# Hydra command
+# Login Forms
+## Understanding Login Forms
+## A Basic Login Form Example
+## http-post-form
+### Understanding the Condition String
+### Manual Inspection
+### Browser Developer Tools
+### Proxy Interception
+## Constructing the params String for Hydra
+# Download wordlists if needed
+# Hydra command
+# Medusa
+## Installation
+## Command Syntax and Parameter Table
+### Medusa Modules
+### Targeting an SSH Server
+### Targeting Multiple Web Servers with Basic HTTP Authentication
+### Testing for Empty or Default Passwords
+# Web Services
+## Kick-off
+## Gaining Access
+### Expanding the Attack Surface
+### Targeting the FTP Server
+### Retrieving The Flag
+# Custom Wordlists
+## Username Anarchy
+## CUPP
+# Skills Assessment Part 1
+# Skills Assessment Part 2
+
+=== Network Enumeration with Nmap.md ===
+# Enumeration
+# Introduction to Nmap
+## Use Cases
+## Nmap Architecture
+## Syntax
+## Scan Techniques
+# Host Discovery
+#### Scan Network Range
+## Scan IP List
+## Scan Multiple IPs
+## Scan Single IP
+# Host and Port Scanning
+## Discovering Open TCP Ports
+#### Scanning Top 10 TCP Ports
+#### Nmap - Trace the Packets
+#### Request
+#### Response
+#### Connect Scan
+#### Connect Scan on TCP Port 443
+## Filtered Ports
+## Discovering Open UDP Ports
+#### UDP Port Scan
+#### Version Scan
+# Saving the Results
+## Different Formats
+#### Normal Output
+# Nmap 7.80 scan initiated Tue Jun 16 12:14:53 2020 as: nmap -p- -oA target 10.129.2.28
+# Nmap done at Tue Jun 16 12:15:03 2020 -- 1 IP address (1 host up) scanned in 10.22 seconds
+#### Grepable Output
+# Nmap 7.80 scan initiated Tue Jun 16 12:14:53 2020 as: nmap -p- -oA target 10.129.2.28
+# Nmap done at Tue Jun 16 12:14:53 2020 -- 1 IP address (1 host up) scanned in 10.22 seconds
+#### XML Output
+## Style sheets
+#### Nmap Report
+# Service Enumeration
+## Service Version Detection
+## Banner Grabbing
+#### Tcpdump
+#### Nc
+#### Tcpdump - Intercepted Traffic
+# Nmap Scripting Engine
+#### Default Scripts
+#### Specific Scripts Category
+#### Defined Scripts
+#### Nmap - Specifying Scripts
+#### Nmap - Aggressive Scan
+## Vulnerability Assessment
+#### Nmap - Vuln Category
+# Performance
+## Timeouts
+#### Default Scan
+#### Optimized RTT
+## Max Retries
+#### Default Scan
+#### Reduced Retries
+## Rates
+#### Default Scan
+#### Optimized Scan
+#### Default Scan - Found Open Ports
+#### Optimized Scan - Found Open Ports
+## Timing
+#### Default Scan
+#### Insane Scan
+#### Default Scan - Found Open Ports
+#### Insane Scan - Found Open Ports
+# Firewall and IDS/IPS Evasion
+## Firewalls
+## IDS/IPS
+#### Determine Firewalls and Their Rules
+#### SYN-Scan
+#### ACK-Scan
+## Detect IDS/IPS
+## Decoys
+#### Scan by Using Decoys
+#### Testing Firewall Rule
+#### Scan by Using Different Source IP
+## DNS Proxying
+#### SYN-Scan of a Filtered Port
+#### SYN-Scan From DNS Port
+#### Connect To The Filtered Port
+## Firewall and IDS/IPS Evasion Labs
+# Firewall and IDS/IPS Evasion - Easy Lab
+# Firewall and IDS/IPS Evasion - Medium Lab
+# Firewall and IDS/IPS Evasion - Hard Lab
+
+=== Password Attacks.md ===
+# Introduction
+## Authentication
+## The use of passwords
+## Digging in
+# Introduction to Password Cracking
+## Rainbow tables
+## Brute-force attack
+## Dictionary attack
+# Introduction to John The Ripper
+## Cracking modes
+#### Single crack mode
+#### Wordlist mode
+#### Incremental mode
+# Incremental modes
+# This is for one-off uses (make your own custom.chr).
+# A charset can now also be named directly from command-line, so no config
+# entry needed: --incremental=whatever.chr
+# The theoretical CharCount is 211, we've got 196.
+# This is CP1252, a super-set of ISO-8859-1.
+# The theoretical CharCount is 219, we've got 203.
+## Identifying hash formats
+## Cracking files
+# Introduction to Hashcat
+## Hash types
+## Attack modes
+#### Dictionary attack
+#### Mask attack
+# Writing Custom Wordlists and Rules
+## Generating wordlists using CeWL
+## Exercise
+# Cracking Protected Files
+## Hunting for Encrypted Files
+## Hunting for SSH keys
+## Cracking encrypted SSH keys
+## Cracking password-protected documents
+# Cracking Protected Archives
+## Cracking ZIP files
+## Cracking OpenSSL encrypted GZIP files
+## Cracking BitLocker-encrypted drives
+#### Mounting BitLocker-encrypted drives in Windows
+#### Mounting BitLocker-encrypted drives in Linux (or macOS)
+# Network Services
+## WinRM
+#### NetExec
+#### Installing NetExec
+#### NetExec Menu Options
+#### NetExec Protocol-Specific Help
+#### NetExec Usage
+#### Evil-WinRM
+#### Installing Evil-WinRM
+#### Evil-WinRM Usage
+## SSH
+#### Symmetric Encryption
+#### Asymmetric Encryption
+#### Hashing
+#### Hydra - SSH
+##  Remote Desktop Protocol (RDP)
+#### Hydra - RDP
+#### xFreeRDP
+## SMB
+#### Hydra - SMB
+#### Hydra - Error
+#### Metasploit Framework
+#### NetExec
+#### Smbclient
+# Spraying, Stuffing, and Defaults
+## Password spraying
+## Credential stuffing
+## Default credentials
+# Windows Authentication Process
+#### Windows authentication process diagram
+#### LSASS
+#### SAM database
+#### Credential Manager
+#### NTDS
+# Attacking SAM, SYSTEM, and SECURITY
+## Registry hives
+#### Using reg.exe to copy registry hives
+#### Creating a share with smbserver
+#### Moving hive copies to share
+## Dumping hashes with secretsdump
+## Cracking hashes with Hashcat
+#### Running Hashcat against NT hashes
+## DCC2 hashes
+## DPAPI
+## Remote dumping & LSA secrets considerations
+#### Dumping LSA secrets remotely
+#### Dumping SAM Remotely
+# Attacking LSASS
+## Dumping LSASS process memory
+#### Task Manager method
+#### Rundll32.exe & Comsvcs.dll method
+#### Finding LSASS's PID in cmd
+#### Finding LSASS's PID in PowerShell
+#### Creating a dump file using PowerShell
+## Using Pypykatz to extract credentials
+#### Running Pypykatz
+#### MSV
+#### WDIGEST
+#### Kerberos
+#### DPAPI
+#### Cracking the NT Hash with Hashcat
+# Attacking Windows Credential Manager
+## Windows Vault and Credential Manager
+## Enumerating credentials with cmdkey
+## Extracting credentials with Mimikatz
+# Attacking Active Directory and NTDS.dit
+## Dictionary attacks against AD accounts using NetExec
+#### Creating a custom list of usernames
+#### Enumerating valid usernames with Kerbrute
+#### Launching a brute-force attack with NetExec
+#### Event logs from the attack
+## Capturing NTDS.dit
+#### Connecting to a DC with Evil-WinRM
+#### Checking local group membership
+#### Checking user account privileges including domain
+#### Creating shadow copy of C:
+#### Copying NTDS.dit from the VSS
+#### Transferring NTDS.dit to attack host
+#### Extracting hashes from NTDS.dit
+#### A faster method: Using NetExec to capture NTDS.dit
+## Cracking hashes and gaining credentials
+#### Cracking a single hash with Hashcat
+## Pass the Hash (PtH) considerations
+#### Pass the Hash (PtH) with Evil-WinRM Example
+# Credential Hunting in Windows
+## Search-centric
+#### Key terms to search for
+## Search tools
+#### Windows Search
+#### LaZagne
+#### findstr
+## Additional considerations
+# Linux Authentication Process
+## Passwd file
+## Shadow file
+## Opasswd
+## Cracking Linux Credentials
+## Further reading
+# Credential Hunting in Linux
+## Files
+#### Searching for configuration files
+#### Searching for databases
+#### Searching for notes
+#### Searching for scripts
+#### Enumerating cronjobs
+# /etc/crontab: system-wide crontab
+# Unlike any other crontab you don't have to run the `crontab'
+# command to install the new version when you edit this file
+# and files in /etc/cron.d. These files also have username fields,
+# that none of the other crontabs do.
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed
+#### Enumerating history files
+#### Enumerating log files
+#### Log file:  /var/log/dpkg.log.1
+## Memory and cache
+#### Mimipenguin
+#### LaZagne
+#### Browser credentials
+# Credential Hunting in Network Traffic
+## Wireshark
+## Pcredz
+## Exercise
+# Credential Hunting in Network Shares
+#### Common credential patterns
+## Hunting from Windows
+#### Snaffler
+#### PowerHuntShares
+## Hunting from Linux
+#### MANSPIDER
+#### NetExec
+## Exercise
+# Pass the Hash (PtH)
+## Introduction to Windows NTLM
+## Pass the Hash with Mimikatz (Windows)
+#### Pass the Hash from Windows Using Mimikatz
+## Pass the Hash with PowerShell Invoke-TheHash (Windows)
+#### Invoke-TheHash with SMB
+#### Netcat listener
+#### Invoke-TheHash with WMI
+## Pass the Hash with Impacket (Linux)
+#### Pass the Hash with Impacket PsExec
+## Pass the Hash with NetExec (Linux)
+#### Pass the Hash with NetExec
+#### NetExec - Command Execution
+## Pass the Hash with evil-winrm (Linux)
+#### Pass the Hash with evil-winrm
+## Pass the Hash with RDP (Linux)
+#### Enable Restricted Admin Mode to allow PtH
+#### Pass the Hash using RDP
+## UAC limits Pass the Hash for local accounts
+## Next steps
+# Pass the Ticket (PtT) from Windows
+## Kerberos protocol refresher
+## Pass the Ticket (PtT) attack
+## Scenario
+## Harvesting Kerberos tickets from Windows
+#### Mimikatz - Export tickets
+#### Rubeus - Export tickets
+## Pass the Key aka. OverPass the Hash
+#### Mimikatz - Extract Kerberos keys
+#### Mimikatz - Pass the Key aka. OverPass the Hash
+#### Rubeus - Pass the Key aka. OverPass the Hash
+## Pass the Ticket (PtT)
+#### Rubeus - Pass the Ticket
+#### Rubeus - Pass the Ticket
+#### Convert .kirbi to Base64 Format
+#### Pass the Ticket - Base64 Format
+#### Mimikatz - Pass the Ticket
+## Pass The Ticket with PowerShell Remoting (Windows)
+## Mimikatz - PowerShell Remoting with Pass the Ticket
+#### Mimikatz - Pass the Ticket for lateral movement.
+## Rubeus - PowerShell Remoting with Pass the Ticket
+#### Create a sacrificial process with Rubeus
+#### Rubeus - Pass the Ticket for lateral movement
+## Moving on
+# Pass the Ticket (PtT) from Linux
+## Kerberos on Linux
+## Scenario
+#### Linux auth from MS01
+#### Linux auth via port forward
+## Identifying Linux and Active Directory integration
+#### realm - Check if Linux machine is domain-joined
+#### PS - Check if Linux machine is domain-joined
+## Finding Kerberos tickets in Linux
+## Finding KeyTab files
+#### Using Find to search for files with keytab in the name
+#### Identifying KeyTab files in Cronjobs
+# Edit this file to introduce tasks to be run by cron.
+#
+#
+# m h  dom mon dow   command
+#!/bin/bash
+## Finding ccache files
+#### Reviewing environment variables for ccache files.
+#### Searching for ccache files in /tmp
+## Abusing KeyTab files
+#### Listing KeyTab file information
+#### Impersonating a user with a KeyTab
+#### Connecting to SMB Share as Carlos
+### KeyTab Extract
+#### Extracting KeyTab hashes with KeyTabExtract
+#### Log in as Carlos
+### Obtaining more hashes
+## Abusing KeyTab ccache
+#### Privilege escalation to root
+#### Looking for ccache files
+#### Identifying group membership with the id command
+#### Importing the ccache file into our current session
+## Using Linux attack tools with Kerberos
+#### Host file modified
+# Host addresses
+#### Proxychains configuration file
+#### Download Chisel to our attack host
+#### Connect to MS01 with xfreerdp
+#### Execute chisel from MS01
+#### Setting the KRB5CCNAME environment variable
+### Impacket
+#### Using Impacket with proxychains and Kerberos authentication
+### Evil-WinRM
+#### Installing Kerberos authentication package
+#### Default Kerberos v5 realm
+#### Administrative server for your Kerberos realm
+#### Kerberos configuration file for INLANEFREIGHT.HTB
+#### Using Evil-WinRM with Kerberos
+## Miscellaneous
+#### Impacket Ticket converter
+#### Importing converted ticket into Windows session with Rubeus
+#0>     Client: julio @ INLANEFREIGHT.HTB
+## Linikatz
+#### Linikatz download and execution
+# Pass the Certificate
+## AD CS NTLM Relay Attack (ESC8)
+## Shadow Credentials (msDS-KeyCredentialLink)
+## No PKINIT?
+## Onwards
+# Password Policies
+## Password policy
+#### Password policy standards
+#### Sample password policy
+## Enforcing password policy
+## Creating a strong password
+# Password Managers
+## How does a password manager work?
+## Cloud password managers
+## Local password managers
+## Features
+## Alternatives
+## Going passwordless
+# Skills Assessment - Password Attacks
+## The Credential Theft Shuffle
+## Skills Assessment
+#### Pivoting Primer
+
+=== Penetration Testing Process.md ===
+# Introduction to the Penetration Tester Path
+## HTB Academy Learning Philosophy
+## Ethical and Legal Considerations
+## Penetration Tester Path Syllabus
+# Academy Modules Layout
+## Pre-Engagement
+#### 1. Learning Process
+#### 2. Linux Fundamentals
+#### 3. Windows Fundamentals
+#### 4. Introduction to Networking
+#### 5. Introduction to Web Applications
+#### 6. Web Requests
+#### 7. JavaScript Deobfuscation
+#### 8. Introduction to Active Directory
+#### 9. Getting Started
+## Information Gathering
+#### 10. Network Enumeration with Nmap
+#### 11. Footprinting
+#### 12. Information Gathering - Web Edition
+#### 13. OSINT: Corporate Recon
+## Vulnerability Assessment
+#### 14. Vulnerability Assessment
+#### 15. File Transfers
+#### 16. Shells & Payloads
+#### 17. Using the Metasploit-Framework
+## Exploitation
+#### 18. Password Attacks
+#### 19. Attacking Common Services
+#### 20. Pivoting, Tunneling & Port Forwarding
+#### 21. Active Directory Enumeration & Attacks
+#### Web Exploitation
+#### 22. Using Web Proxies
+#### 23. Attacking Web Applications with Ffuf
+#### 24. Login Brute Forcing
+#### 25. SQL Injection Fundamentals
+#### 26. SQLMap Essentials
+#### 27. Cross-Site Scripting (XSS)
+#### 28. File Inclusion
+#### 29. Command Injections
+#### 30. Web Attacks
+#### 31. Attacking Common Applications
+## Post-Exploitation
+#### 32. Linux Privilege Escalation
+#### 33. Windows Privilege Escalation
+## Lateral Movement
+## Proof-of-Concept
+#### 34. Introduction to Python 3
+## Post-Engagement
+#### 35. Documentation & Reporting
+#### 36. Attacking Enterprise Networks
+# Academy Exercises & Questions
+## The Goal
+## Asking for Help
+## Words of Wisdom
+# Penetration Testing Overview
+#### Risk Management
+#### Vulnerability Assessments
+## Testing Methods
+#### External Penetration Test
+#### Internal Penetration Test
+## Types of Penetration Testing
+## Types of Testing Environments
+# Laws and Regulations
+## USA
+## Europe
+## UK
+## India
+## China
+## Precautionary Measures during Penetration Tests
+# Penetration Testing Process
+## Penetration Testing Stages
+#### Pre-Engagement
+#### Information Gathering
+#### Vulnerability Assessment
+#### Exploitation
+#### Post-Exploitation
+#### Lateral Movement
+#### Proof-of-Concept
+#### Post-Engagement
+## Importance
+# Pre-Engagement
+## Scoping Questionnaire
+## Pre-Engagement Meeting
+#### Contract - Checklist
+#### Rules of Engagement - Checklist
+## Kick-Off Meeting
+## Contractors Agreement
+#### Contractors Agreement - Checklist for Physical Assessments
+## Setting Up
+# Information Gathering
+## Open-Source Intelligence
+#### Private and Public SSH Keys
+## Infrastructure Enumeration
+## Service Enumeration
+## Host Enumeration
+## Pillaging
+# Vulnerability Assessment
+## Vulnerability Research and Analysis
+## Assessment of Possible Attack Vectors
+## The Return
+# Exploitation
+## Prioritization of Possible Attacks
+#### Prioritization Example
+## Preparation for the Attack
+# Post-Exploitation
+## Evasive Testing
+## Information Gathering
+## Pillaging
+## Persistence
+## Vulnerability Assessment
+## Privilege Escalation
+## Data Exfiltration
+# Lateral Movement
+## Pivoting
+## Evasive Testing
+## Information Gathering
+## Vulnerability Assessment
+## (Privilege) Exploitation
+## Post-Exploitation
+# Proof-of-Concept
+# Post-Engagement
+## Cleanup
+## Documentation and Reporting
+## Report Review Meeting
+## Deliverable Acceptance
+## Post-Remediation Testing
+## Role of the Pentester in Remediation
+## Data Retention
+## Close Out
+# Practice
+## Practicing Steps
+#### Modules
+#### Retired Machines
+#### Active Machines
+#### Pro Lab/Endgame
+# Wrapping Up
+
+=== Pivoting, Tunneling, and Port Forwarding.md ===
+# Introduction to Pivoting, Tunneling, and Port Forwarding
+## Lateral Movement, Pivoting, and Tunneling Compared
+####  Lateral Movement
+#### Pivoting
+#### Tunneling
+# The Networking Behind Pivoting
+## IP Addressing & NICs
+#### Using ifconfig
+#### Using ipconfig
+## Routing
+#### Routing Table on Pwnbox
+## Protocols, Services & Ports
+# Dynamic Port Forwarding with SSH and SOCKS Tunneling
+## Port Forwarding in Context
+## SSH Local Port Forwarding
+#### Scanning the Pivot Target
+#### Executing the Local Port Forward
+#### Confirming Port Forward with Netstat
+#### Confirming Port Forward with Nmap
+#### Forwarding Multiple Ports
+## Setting up to Pivot
+#### Looking for Opportunities to Pivot using ifconfig
+#### Enabling Dynamic Port Forwarding with SSH
+#### Checking /etc/proxychains.conf
+# meanwile
+# defaults set to "tor"
+#### Using Nmap with Proxychains
+#### Enumerating the Windows Target through Proxychains
+## Using Metasploit with Proxychains
+#### Using rdp_scanner Module
+#### Using xfreerdp with Proxychains
+#### Successful RDP Pivot
+# Remote/Reverse Port Forwarding with SSH
+#### Creating a Windows Payload with msfvenom
+#### Configuring & Starting the multi/handler
+#### Transferring Payload to Pivot Host
+#### Starting Python3 Webserver on Pivot Host
+#### Downloading Payload on the Windows Target
+#### Using SSH -R
+#### Viewing the Logs from the Pivot
+#### Meterpreter Session Established
+# Meterpreter Tunneling & Port Forwarding
+#### Creating Payload for Ubuntu Pivot Host
+#### Configuring & Starting the multi/handler
+#### Executing the Payload on the Pivot Host
+#### Meterpreter Session Establishment
+#### Ping Sweep
+#### Ping Sweep For Loop on Linux Pivot Hosts
+#### Ping Sweep For Loop Using CMD
+#### Ping Sweep Using PowerShell
+#### Configuring MSF's SOCKS Proxy
+#### Confirming Proxy Server is Running
+#### Adding a Line to proxychains.conf if Needed
+#### Creating Routes with AutoRoute
+#### Listing Active Routes with AutoRoute
+#### Testing Proxy & Routing Functionality
+## Port Forwarding
+#### Portfwd options
+#### Creating Local TCP Relay
+#### Connecting to Windows Target through localhost
+#### Netstat Output
+## Meterpreter Reverse Port Forwarding
+#### Reverse Port Forwarding Rules
+#### Configuring & Starting multi/handler
+#### Generating the Windows Payload
+#### Establishing the Meterpreter session
+# Socat Redirection with a Reverse Shell
+#### Starting Socat Listener
+#### Creating the Windows Payload
+#### Starting MSF Console
+#### Configuring & Starting the multi/handler
+#### Establishing the Meterpreter Session
+# Socat Redirection with a Bind Shell
+#### Creating the Windows Payload
+#### Starting Socat Bind Shell Listener
+#### Configuring & Starting the Bind multi/handler
+#### Establishing Meterpreter Session
+# SSH for Windows: plink.exe
+## Getting To Know Plink
+#### Using Plink.exe
+# SSH Pivoting with Sshuttle
+#### Installing sshuttle
+#### Running sshuttle
+#### Traffic Routing through iptables Routes
+# Web Server Pivoting with Rpivot
+#### Cloning rpivot
+#### Installing Python2.7
+#### Alternative Installation of Python2.7
+#### Running server.py from the Attack Host
+#### Transferring rpivot to the Target
+#### Running client.py from Pivot Target
+#### Confirming Connection is Established
+#### Browsing to the Target Webserver using Proxychains
+#### Connecting to a Web Server using HTTP-Proxy & NTLM Auth
+# Port Forwarding with Windows Netsh
+#### Using Netsh.exe to Port Forward
+#### Verifying Port Forward
+#### Connecting to the Internal Host through the Port Forward
+# DNS Tunneling with Dnscat2
+## Setting Up & Using dnscat2
+#### Cloning dnscat2 and Setting Up the Server
+#### Starting the dnscat2 server
+#### Cloning dnscat2-powershell to the Attack Host
+#### Importing dnscat2.ps1
+#### Confirming Session Establishment
+#### Listing dnscat2 Options
+#### Interacting with the Established Session
+# SOCKS5 Tunneling with Chisel
+## Setting Up & Using Chisel
+#### Cloning Chisel
+#### Building the Chisel Binary
+#### Transferring Chisel Binary to Pivot Host
+#### Running the Chisel Server on the Pivot Host
+#### Connecting to the Chisel Server
+#### Editing & Confirming proxychains.conf
+#
+#       proxy types: http, socks4, socks5
+#        ( auth types supported: "basic"-http  "user/pass"-socks )
+#
+# add proxy here ...
+# meanwile
+# defaults set to "tor"
+# socks4 	127.0.0.1 9050
+#### Pivoting to the DC
+## Chisel Reverse Pivot
+#### Starting the Chisel Server on our Attack Host
+#### Connecting the Chisel Client to our Attack Host
+#### Editing & Confirming proxychains.conf
+# add proxy here ...
+# socks4    127.0.0.1 9050
+# ICMP Tunneling with SOCKS
+## Setting Up & Using ptunnel-ng
+#### Cloning Ptunnel-ng
+#### Building Ptunnel-ng with Autogen.sh
+#### Alternative approach of building a static binary
+#### Transferring Ptunnel-ng to the Pivot Host
+#### Starting the ptunnel-ng Server on the Target Host
+#### Connecting to ptunnel-ng Server from Attack Host
+#### Tunneling an SSH connection through an ICMP Tunnel
+#### Viewing Tunnel Traffic Statistics
+#### Enabling Dynamic Port Forwarding over SSH
+#### Proxychaining through the ICMP Tunnel
+## Network Traffic Analysis Considerations
+# RDP and SOCKS Tunneling with SocksOverRDP
+#### Loading SocksOverRDP.dll using regsvr32.exe
+#### Confirming the SOCKS Listener is Started
+#### Configuring Proxifier
+#### RDP Performance Considerations
+# Skills Assessment
+## Scenario
+## Objectives
+## Connection Info
+# Detection & Prevention
+## Setting a Baseline
+#### Things to Document and Track
+## People, Processes, and Technology
+### People
+### BYOD and Other Concerns
+### Processes
+### Technology
+## From the Outside Moving In
+#### Perimeter First
+#### Internal Considerations
+## MITRE Breakdown
+#  Beyond this Module
+## Real World
+## What's Next?
+## Pivoting & Tunneling Into Other Learning Opportunities
+#### Boxes To Pwn
+#### Pro Labs
+#### Mini Pro Labs
+#### Writers/Educational Creators and Blogs To Follow
+## Closing Thoughts
+
+=== SQL Injection Fundamentals.md ===
+# Introduction
+## SQL Injection (SQLi)
+## Use Cases and Impact
+## Prevention
+# Intro to Databases
+## Database Management Systems
+## Architecture
+# Types of Databases
+## Relational Databases
+## Non-relational Databases
+# Intro to MySQL
+## Structured Query Language (SQL)
+## Command Line
+## Creating a database
+## Tables
+#### Table Properties
+# SQL Statements
+## INSERT Statement
+## SELECT Statement
+## DROP Statement
+## ALTER Statement
+## UPDATE Statement
+# Query Results
+## Sorting Results
+## LIMIT results
+## WHERE Clause
+## LIKE Clause
+# SQL Operators
+## AND Operator
+## OR Operator
+## NOT Operator
+## Symbol Operators
+## Operators in queries
+## Multiple Operator Precedence
+# Intro to SQL Injections
+## Use of SQL in Web Applications
+## What is an Injection?
+## SQL Injection
+## Syntax Errors
+## Types of SQL Injections
+# Subverting Query Logic
+## Authentication Bypass
+## SQLi Discovery
+## OR Injection
+## Auth Bypass with OR operator
+# Using Comments
+## Comments
+## Auth Bypass with comments
+## Another Example
+# Union Clause
+## Union
+## Even Columns
+## Un-even Columns
+# Union Injection
+## Detect number of columns
+#### Using ORDER BY
+#### Using UNION
+## Location of Injection
+# Database Enumeration
+## MySQL Fingerprinting
+## INFORMATION_SCHEMA Database
+## SCHEMATA
+## TABLES
+## COLUMNS
+## Data
+# Reading Files
+## Privileges
+#### DB User
+#### User Privileges
+## LOAD_FILE
+## Another Example
+# Writing Files
+## Write File Privileges
+#### secure_file_priv
+## SELECT INTO OUTFILE
+## Writing Files through SQL Injection
+## Writing a Web Shell
+# Mitigating SQL Injection
+## Input Sanitization
+## Input Validation
+## User Privileges
+## Web Application Firewall
+## Parameterized Queries
+## Conclusion
+# Skills Assessment - SQL Injection Fundamentals
+## Scenario
+## Intercepting HTTPS Traffic with Burp Suite
+#### Option 1: Using Burp Suite's Integrated Browser (Chromium)
+#### Option 2: Installing PortSwigger's CA in your own Browser
+
+=== SQLMap Essentials.md ===
+# SQLMap Overview
+## SQLMap Installation
+## Supported Databases
+## Supported SQL Injection Types
+## Boolean-based blind SQL Injection
+## Error-based SQL Injection
+## UNION query-based
+## Stacked queries
+## Time-based blind SQL Injection
+## Inline queries
+## Out-of-band SQL Injection
+# Getting Started with SQLMap
+## Basic Scenario
+# SQLMap Output Description
+## Log Messages Description
+#### URL content is stable
+#### Parameter appears to be dynamic
+#### Parameter might be injectable
+#### Parameter might be vulnerable to XSS attacks
+#### Back-end DBMS is '...'
+#### Level/risk values
+#### Reflective values found
+#### Parameter appears to be injectable
+#### Time-based comparison statistical model
+#### Extending UNION query injection technique tests
+#### Technique appears to be usable
+#### Parameter is vulnerable
+#### Sqlmap identified injection points
+#### Data logged to text files
+# Running SQLMap on an HTTP Request
+## Curl Commands
+## GET/POST Requests
+## Full HTTP Requests
+## Custom SQLMap Requests
+## Custom HTTP Requests
+# Handling SQLMap Errors
+## Display Errors
+## Store the Traffic
+## Verbose Output
+## Using Proxy
+# Attack Tuning
+## Prefix/Suffix
+## Level/Risk
+## Advanced Tuning
+#### Status Codes
+#### Titles
+#### Strings
+#### Text-only
+#### Techniques
+#### UNION SQLi Tuning
+# Database Enumeration
+## SQLMap Data Exfiltration
+## Basic DB Data Enumeration
+## Table Enumeration
+## Table/Row Enumeration
+## Conditional Enumeration
+## Full DB Enumeration
+# Advanced Database Enumeration
+## DB Schema Enumeration
+## Searching for Data
+## Password Enumeration and Cracking
+## DB Users Password Enumeration and Cracking
+# Bypassing Web Application Protections
+## Anti-CSRF Token Bypass
+## Unique Value Bypass
+## Calculated Parameter Bypass
+## IP Address Concealing
+## WAF Bypass
+## User-agent Blacklisting Bypass
+## Tamper Scripts
+## Miscellaneous Bypasses
+# OS Exploitation
+## File Read/Write
+## Checking for DBA Privileges
+## Reading Local Files
+## Writing Local Files
+## OS Command Execution
+## Skills Assessment
+
+=== Shells & Payloads.md ===
+# Shells Jack Us In, Payloads Deliver Us Shells
+## Why Get a Shell?
+## Payloads Deliver us Shells
+# CAT5 Security's Engagement Preparation
+#### Shell basics
+#### Payload Basics
+#### Getting a Shell on Windows
+#### Getting a Shell on Linux
+#### Landing a Web Shell
+#### Spotting a Shell or Payload
+#### Final Challenge
+# Anatomy of a Shell
+## Command Language Interpreters
+## Hands-on with Terminal Emulators and Shells
+#### Terminal Example
+#### Shell Validation From 'ps'
+#### Shell Validation Using 'env'
+#### PowerShell vs. Bash
+# Bind Shells
+## What Is It?
+#### Bind Example
+## Practicing with GNU Netcat
+#### No. 1: Server - Target starting Netcat listener
+#### No. 2: Client - Attack box connecting to target
+#### No. 3: Server - Target receiving connection from client
+#### No. 4: Client - Attack box sending message Hello Academy
+#### No. 5: Server - Target receiving Hello Academy message
+## Establishing a Basic Bind Shell with Netcat
+#### No. 1: Server - Binding a Bash shell to the TCP session
+#### No. 2: Client - Connecting to bind shell on target
+# Reverse Shells
+#### Reverse Shell Example
+## Hands-on With A Simple Reverse Shell in Windows
+#### Server (`attack box`)
+#### Client (target)
+#### Client (target)
+#### Disable AV
+#### Server (attack box)
+# Introduction to Payloads
+## One-Liners Examined
+#### Netcat/Bash Reverse Shell One-liner
+#### Remove /tmp/f
+#### Make A Named Pipe
+#### Output Redirection
+#### Set Shell Options
+#### Open a Connection with Netcat
+## PowerShell One-liner Explained
+#### Powershell One-liner
+#### Calling PowerShell
+#### Binding A Socket
+#### Setting The Command Stream
+#### Empty Byte Stream
+#### Stream Parameters
+#### Set The Byte Encoding
+#### Invoke-Expression
+#### Show Working Directory
+#### Sets Sendbyte
+#### Terminate TCP Connection
+#>
+## Payloads Take Different Shapes and Forms
+# Automating Payloads & Delivery with Metasploit
+## Practicing with Metasploit
+#### Starting MSF
+#### NMAP Scan
+#### Searching Within Metasploit
+#    Name                                                          Disclosure Date    Rank   Check  Description
+#### Option Selection
+#### Examining an Exploit's Options
+#### Setting Options
+#### Exploits Away
+#### Interactive Shell
+# Crafting Payloads with MSFvenom
+## Practicing with MSFvenom
+#### List Payloads
+## Staged vs. Stageless Payloads
+## Building A Stageless Payload
+#### Build It
+#### Call MSFvenom
+#### Creating a Payload
+#### Choosing the Payload based on Architecture
+#### Address To Connect Back To
+#### Format To Generate Payload In
+#### Output
+## Executing a Stageless Payload
+#### Ubuntu Payload
+#### NC Connection
+#### Connection Established
+## Building a simple Stageless Payload for a Windows system
+#### Windows Payload
+## Executing a Simple Stageless Payload On a Windows System
+# Infiltrating Windows
+#### Windows Vulnerability Table
+## Prominent Windows Exploits
+## Enumerating Windows & Fingerprinting Methods
+#### Pinged Host
+#### OS Detection Scan
+#### Banner Grab to Enumerate Ports
+## Bats, DLLs, & MSI Files, Oh My!
+#### Payload Types to Consider
+## Tools, Tactics, and Procedures for Payload Generation, Transfer, and Execution
+#### Payload Generation
+#### Payload Transfer and Execution:
+## Example Compromise Walkthrough
+#### Enumerate the Host
+#### Determine an Exploit Path
+#### Choose & Configure Our Exploit & Payload
+#### Configure The Exploit & Payload
+#### Validate Our Options
+#### Execute Our Attack
+#### Identify Our Shell
+## CMD-Prompt and Power[Shell]s for Fun and Profit.
+## WSL and PowerShell For Linux
+# Infiltrating Unix/Linux
+## Common Considerations
+## Gaining a Shell Through Attacking a Vulnerable Application
+#### Enumerate the Host
+#### rConfig Management Tool
+## Discovering a Vulnerability in rConfig
+#### Search For an Exploit Module
+#### Locate
+## Using the rConfig Exploit and Gaining a Shell
+#### Select an Exploit
+#### Execute the Exploit
+#### Interact With the Shell
+## Spawning a TTY Shell with Python
+#### Interactive Python
+# Spawning Interactive Shells
+## /bin/sh -i
+#### Interactive
+## Perl
+#### Perl To Shell
+## Ruby
+#### Ruby To Shell
+## Lua
+#### Lua To Shell
+## AWK
+#### AWK To Shell
+## Find
+#### Using Find For A Shell
+## Using Exec To Launch A Shell
+## VIM
+#### Vim To Shell
+#### Vim Escape
+## Execution Permissions Considerations
+#### Permissions
+#### Sudo -l
+# Introduction to Web Shells
+## What is a Web Shell?
+# Laudanum, One Webshell to Rule Them All
+## Working with Laudanum
+## Laudanum Demonstration
+#### Move a Copy for Modification
+#### Modify the Shell for Use
+#### Take Advantage of the Upload Function
+#### Navigate to Our Shell
+#### Shell Success
+# Antak Webshell
+## ASPX and a Quick Learning Tip
+## ASPX Explained
+## Antak Webshell
+## Working with Antak
+## Antak Demonstration
+#### Move a Copy for Modification
+#### Modify the Shell for Use
+#### Shell Success
+#### Issuing Commands
+# PHP Web Shells
+#### PHP Login Page
+## Hands-on With a PHP-Based Web Shell.
+#### Vendors Tab
+#### Proxy Settings
+## Bypassing the File Type Restriction
+#### Post Request
+#### Vendor Added
+#### Webshell Success
+## Considerations when Dealing with Web Shells
+# The Live Engagement
+## Scenario:
+## Objectives:
+## Credentials and Other Needed Info:
+## Connectivity To The Foothold
+#### XFreeRDP Login
+#### Target Hosts
+## Hints
+# Detection & Prevention
+## Monitoring
+#### ATT&CK Framework
+#### Notable MITRE ATT&CK Tactics and Techniques:
+## Events To Watch For:
+## Establish Network Visibility
+#### Suspicious Traffic.. In Clear Text
+#### Following the Traffic
+## Protecting End Devices
+## Potential Mitigations:
+## Sum It All Up
+
+=== Using Web Proxies.md ===
+# Intro to Web Proxies
+## What Are Web Proxies?
+## Uses of Web Proxies
+## Burp Suite
+## OWASP Zed Attack Proxy (ZAP)
+# Setting Up
+## Burp Suite
+## ZAP
+# Proxy Setup
+## Pre-Configured Browser
+## Proxy Setup
+## Installing CA Certificate
+# Intercepting Web Requests
+## Intercepting Requests
+#### Burp
+#### ZAP
+## Manipulating Intercepted Requests
+# Intercepting Responses
+## Burp
+## ZAP
+# Automatic Modification
+## Automatic Request Modification
+#### Burp Match and Replace
+#### ZAP Replacer
+## Automatic Response Modification
+# Repeating Requests
+## Proxy History
+## Repeating Requests
+#### Burp
+#### ZAP
+# Encoding/Decoding
+## URL Encoding
+## Decoding
+## Encoding
+# Proxying Tools
+## Proxychains
+#socks4         127.0.0.1 9050
+## Nmap
+## Metasploit
+# Burp Intruder
+## Target
+## Positions
+## Payloads
+#### Payload Position & Payload Type
+#### Payload Configuration
+#### Payload Processing
+#### Payload Encoding
+## Settings
+## Attack
+# ZAP Fuzzer
+## Fuzz
+## Locations
+## Payloads
+## Processors
+## Options
+## Start
+# Burp Scanner
+## Target Scope
+## Crawler
+## Passive Scanner
+## Active Scanner
+## Reporting
+# ZAP Scanner
+## Spider
+## Passive Scanner
+## Active Scanner
+## Reporting
+# Extensions
+## BApp Store
+## ZAP Marketplace
+## Closing Thoughts
+# Skills Assessment - Using Web Proxies
+
+=== Using the Metasploit Framework.md ===
+# Preface
+## Discipline
+## Conclusion
+# Introduction to Metasploit
+## Metasploit Pro
+## Metasploit Framework Console
+## Understanding the Architecture
+#### Data, Documentation, Lib
+#### Modules
+#### Plugins
+#### Scripts
+#### Tools
+# Introduction to MSFconsole
+## Preparation
+#### Launching MSFconsole
+#### Installing MSF
+## MSF Engagement Structure
+# Modules
+#### Syntax
+#### Example
+#### Index No.
+#### Type
+#### OS
+#### Service
+#### Name
+## Searching for Modules
+#### MSF - Search Function
+#### MSF - Searching for EternalRomance
+#### MSF - Specific Search
+## Module Selection
+#### MSF - Search for MS17_010
+## Using Modules
+#### MSF - Select Module
+#### MSF - Module Information
+#### MSF - Target Specification
+#### MSF - Permanent Target Specification
+#### MSF - LHOST Specification
+#### MSF - Exploit Execution
+#### MSF - Target Interaction
+# Targets
+#### MSF - Show Targets
+## Selecting a Target
+#### MSF - Target Selection
+## Target Types
+# Payloads
+#### Singles
+#### Stagers
+#### Stages
+## Staged Payloads
+#### MSF - Staged Payloads
+#### Meterpreter Payload
+## Searching for Payloads
+#### MSF - List Payloads
+#### MSF - Searching for Specific Payload
+## Selecting Payloads
+#### MSF - Select Payload
+## Using Payloads
+#### MSF - Exploit and Payload Configuration
+#### MSF - Meterpreter Commands
+#### MSF - Meterpreter Navigation
+#### MSF - Windows CMD
+## Payload Types
+# Encoders
+## Selecting an Encoder
+#### Generating Payload - Without Encoding
+#### Generating Payload - With Encoding
+#### Shikata Ga Nai Encoding
+#### MSF - VirusTotal
+# Databases
+## Setting up the Database
+#### PostgreSQL Status
+#### Start PostgreSQL
+#### MSF - Initiate a Database
+#### MSF - Connect to the Initiated Database
+#### MSF - Reinitiate the Database
+#### MSF - Database Options
+## Using the Database
+#### Workspaces
+## Importing Scan Results
+#### Stored Nmap Scan
+#### Importing Scan Results
+## Using Nmap Inside MSFconsole
+#### MSF - Nmap
+## Data Backup
+#### MSF - DB Export
+## Hosts
+#### MSF - Stored Hosts
+## Services
+#### MSF - Stored Services of Hosts
+## Credentials
+#### MSF - Stored Credentials
+## Loot
+#### MSF - Stored Loot
+# Plugins
+## Using Plugins
+#### MSF - Load Nessus
+## Installing new Plugins
+#### Downloading MSF Plugins
+#### MSF - Copying Plugin to MSF
+#### MSF - Load Plugin
+## Mixins
+# Sessions
+## Using Sessions
+#### Listing Active Sessions
+#### Interacting with a Session
+## Jobs
+#### Viewing the Jobs Command Help Menu
+#### Viewing the Exploit Command Help Menu
+#### Running an Exploit as a Background Job
+#### Listing Running Jobs
+# Meterpreter
+## Running Meterpreter
+#### MSF - Meterpreter Commands
+## Stealthy
+## Powerful
+## Extensible
+## Using Meterpreter
+#### MSF - Scanning Target
+#### MSF - Searching for Exploit
+#### MSF - Configuring Exploit & Payload
+#### MSF - Meterpreter Migration
+#### MSF - Interacting with the Target
+#### MSF - Session Handling
+#### MSF - Privilege Escalation
+#### MSF - Dumping Hashes
+#### MSF - Meterpreter LSA Secrets Dump
+# Writing and Importing Modules
+#### MSF - Search for Exploits
+#### MSF - Directory Structure
+#### MSF - Loading Additional Modules at Runtime
+#### MSF - Loading Additional Modules
+## Porting Over Scripts into Metasploit Modules
+#### Porting MSF Modules
+## Writing Our Module
+#### Proof-of-Concept - Requirements
+##
+# This module requires Metasploit: https://metasploit.com/download
+# Current source: https://github.com/rapid7/metasploit-framework
+##
+#### Proof-of-Concept - Module Information
+#### Proof-of-Concept - Functions
+#### Proof-of-Concept
+##
+# This module requires Metasploit: https://metasploit.com/download
+# Current source: https://github.com/rapid7/metasploit-framework
+##
+#   Cookie#domain returns dot-less domain name now. Use Cookie#dot_domain if you need "." at the beginning.
+# see https://github.com/nahi/httpclient/issues/252
+#begin
+#  args = Docopt.docopt(doc)
+#  pp args if args['--debug']
+#
+#  clnt = HTTPClient.new
+#  bruteforce_auth(clnt, args['--root-url'], args['--user'], args['--#wordlist'])
+#rescue Docopt::Exit => e
+#  puts e.message
+#end
+# Introduction to MSFVenom
+## Creating Our Payloads
+#### Scanning the Target
+#### FTP Anonymous Access
+#### Generating Payload
+#### MSF - Setting Up Multi/Handler
+## Executing the Payload
+#### MSF - Meterpreter Shell
+## Local Exploit Suggester
+#### MSF - Searching for Local Exploit Suggester
+#### MSF - Local Privilege Escalation
+# Firewall and IDS/IPS Evasion
+## Endpoint Protection
+#### Perimeter Protection
+## Security Policies
+## Evasion Techniques
+## Archives
+#### Generating Payload
+#### VirusTotal
+#### Archiving the Payload
+#### Removing the .RAR Extension
+#### Archiving the Payload Again
+#### Removing the .RAR Extension
+#### VirusTotal
+## Packers
+## Exploit Coding
+## A Note on Evasion
+# Metasploit-Framework Updates - August 2020
+## Generation Features
+## Expanded Encryption
+## Cleaner Payload Artifacts
+## Plugins
+## Payloads
+## Closing Thoughts
+
+=== Vulnerability Assessment.md ===
+# Security Assessments
+## Vulnerability Assessment
+## Penetration Test
+## Vulnerability Assessments vs. Penetration Tests
+## Other Types of Security Assessments
+#### Security Audits
+#### Bug Bounties
+#### Red Team Assessment
+#### Purple Team Assessment
+## Moving on
+# Vulnerability Assessment
+## Methodology
+## Understanding Key Terms
+#### Vulnerability
+#### Threat
+#### Exploit
+#### Risk
+## Asset Management
+#### Asset Inventory
+#### Application and System Inventory
+## Onwards
+# Assessment Standards
+## Compliance Standards
+#### Payment Card Industry Data Security Standard (PCI DSS)
+#### Health Insurance Portability and Accountability Act (HIPAA)
+### Federal Information Security Management Act (FISMA)
+#### ISO 27001
+## Penetration Testing Standards
+#### PTES
+#### OSSTMM
+#### NIST
+#### OWASP
+# Common Vulnerability Scoring System (CVSS)
+## Severity Scoring
+## Base Metric Group
+#### Exploitability Metrics
+#### Impact Metrics
+## Temporal Metric Group
+#### Exploit Code Maturity
+#### Remediation Level
+#### Report Confidence
+## Environmental Metric Group
+#### Modified Base Metrics
+## Calculating CVSS Severity
+#### CVSS Calculation Example
+## Next Steps
+# Common Vulnerabilities and Exposures (CVE)
+## Open Vulnerability Assessment Language (OVAL)
+#### OVAL Process
+#### OVAL Definitions
+## Common Vulnerabilities and Exposures (CVE)
+## Stages of Obtaining a CVE
+#### Stage 1: Identify if CVE is Required and Relevant
+#### Stage 2: Reach Out to Affected Product Vendor
+#### Stage 3: Identify if Request Should Be For Vendor CNA or Third Party CNA
+#### Stage 4: Requesting CVE ID Through CVE Web Form
+#### Stage 5: Confirmation of CVE Form
+#### Stage 6: Receival of CVE ID
+#### Stage 7: Public Disclosure of CVE ID
+#### Stage 8: Announcing the CVE
+#### Stage 9: Providing Information to The CVE Team
+## Responsible Disclosure
+## Examples
+#### CVE-2020-5902
+#### CVE-2021-34527
+## Getting Hands-on
+# Vulnerability Scanning Overview
+## Nessus Overview
+## OpenVAS Overview
+# Getting Started with Nessus
+## Downloading Nessus
+## Requesting Free License
+## Installing Package
+## Starting Nessus
+## Accessing Nessus
+# Nessus Scan
+## New Scan
+## Discovery
+## Assessment
+## Advanced
+# Advanced Settings
+## Scan Policies
+## Creating a Scan Policy
+## Nessus Plugins
+## Scanning with Credentials
+# Working with Nessus Scan Output
+## Nessus Reports
+## Exporting Nessus Scans
+# Scanning Issues
+## Mitigating Issues
+## Network Impact
+# Nessus Skills Assessment
+## Requirements
+# Getting Started with OpenVAS
+## Installing Package
+## Starting OpenVas
+# OpenVAS Scan
+## Configuration
+## Setting Up a Scan
+# Exporting The Results
+## Exporting Formats
+# OpenVAS Skills Assessment
+## Requirements
+# Reporting
+## Executive Summary
+## Overview of Assessment
+## Scope and Duration
+## Vulnerabilities and Recommendations
+## Closing
+
+=== Web Attacks.md ===
+# Introduction to Web Attacks
+## Web Attacks
+#### HTTP Verb Tampering
+#### Insecure Direct Object References (IDOR)
+#### XML External Entity (XXE) Injection
+# Intro to HTTP Verb Tampering
+## HTTP Verb Tampering
+## Insecure Configurations
+## Insecure Coding
+# Bypassing Basic Authentication
+## Identify
+## Exploit
+# Bypassing Security Filters
+## Identify
+## Exploit
+# Verb Tampering Prevention
+## Insecure Configuration
+## Insecure Coding
+# Intro to IDOR
+## What Makes an IDOR Vulnerability
+## Impact of IDOR Vulnerabilities
+# Identifying IDORs
+## URL Parameters & APIs
+## AJAX Calls
+## Understand Hashing/Encoding
+## Compare User Roles
+# Mass IDOR Enumeration
+## Insecure Parameters
+## Mass Enumeration
+#!/bin/bash
+#!/bin/bash
+# Bypassing Encoded References
+## Function Disclosure
+## Mass Enumeration
+#!/bin/bash
+#!/bin/bash
+# IDOR in Insecure APIs
+## Identifying Insecure APIs
+## Exploiting Insecure APIs
+# Chaining IDOR Vulnerabilities
+## Information Disclosure
+## Modifying Other Users' Details
+## Chaining Two IDOR Vulnerabilities
+# IDOR Prevention
+## Object-Level Access Control
+## Object Referencing
+# Intro to XXE
+## XML
+## XML DTD
+## XML Entities
+# Local File Disclosure
+## Identifying
+## Reading Sensitive Files
+## Reading Source Code
+## Remote Code Execution with XXE
+## Other XXE Attacks
+# Advanced File Disclosure
+## Advanced Exfiltration with CDATA
+## Error Based XXE
+# Blind Data Exfiltration
+## Out-of-band Data Exfiltration
+## Automated OOB Exfiltration
+# XXE Prevention
+## Avoiding Outdated Components
+## Using Safe XML Configurations
+# Web Attacks - Skills Assessment
+## Scenario
+
+=== Windows Privilege Escalation.md ===
+# Introduction to Windows Privilege Escalation
+## Scenario 1 - Overcoming Network Restrictions
+## Scenario 2 - Pillaging Open Shares
+## Scenario 3 - Hunting Credentials and Abusing Account Privileges
+## Why does Privilege Escalation Happen?
+## Moving On
+## Practical Examples
+#### Connecting via FreeRDP
+# Useful Tools
+# Situational Awareness
+## Network Information
+#### Interface(s), IP Address(es), DNS Information
+#### ARP Table
+#### Routing Table
+## Enumerating Protections
+#### Check Windows Defender Status
+#### List AppLocker Rules
+#### Test AppLocker Policy
+## Next Steps
+# Initial Enumeration
+## Key Data Points
+## System Information
+#### Tasklist
+#### Display All Environment Variables
+#### View Detailed Configuration Information
+#### Patches and Updates
+#### Installed Programs
+#### Display Running Processes
+#### Netstat
+## User & Group Information
+#### Logged-In Users
+#### Current User
+#### Current User Privileges
+#### Current User Group Information
+#### Get All Users
+#### Get All Groups
+#### Details About a Group
+#### Get Password Policy & Other Account Information
+## Moving On
+# Communication with Processes
+## Access Tokens
+## Enumerating Network Services
+#### Display Active Network Connections
+#### More Examples
+## Named Pipes
+#### More on Named Pipes
+#### Listing Named Pipes with Pipelist
+#### Listing Named Pipes with PowerShell
+#### Reviewing LSASS Named Pipe Permissions
+## Named Pipes Attack Example
+#### Checking WindscribeService Named Pipe Permissions
+# Windows Privileges Overview
+## Windows Authorization Process
+## Rights and Privileges in Windows
+## User Rights Assignment
+#### Local Admin User Rights - Elevated
+#### Standard User Rights
+#### Backup Operators Rights
+## Detection
+## Moving On
+# SeImpersonate and SeAssignPrimaryToken
+## SeImpersonate Example - JuicyPotato
+#### Connecting with MSSQLClient.py
+#### Enabling xp_cmdshell
+#### Confirming Access
+#### Checking Account Privileges
+#### Escalating Privileges Using JuicyPotato
+#### Catching SYSTEM Shell
+## PrintSpoofer and RoguePotato
+#### Escalating Privileges using PrintSpoofer
+#### Catching Reverse Shell as SYSTEM
+# SeDebugPrivilege
+## Remote Code Execution as SYSTEM
+# SeTakeOwnershipPrivilege
+## Leveraging the Privilege
+#### Reviewing Current User Privileges
+#### Enabling SeTakeOwnershipPrivilege
+#### Choosing a Target File
+#### Checking File Ownership
+#### Taking Ownership of the File
+#### Confirming Ownership Changed
+#### Modifying the File ACL
+#### Reading the File
+## When to Use?
+#### Files of Interest
+# Windows Built-in Groups
+## Backup Operators
+#### Importing Libraries
+#### Verifying SeBackupPrivilege is Enabled
+#### Enabling SeBackupPrivilege
+#### Copying a Protected File
+#### Attacking a Domain Controller - Copying NTDS.dit
+#### Copying NTDS.dit Locally
+#### Backing up SAM and SYSTEM Registry Hives
+#### Extracting Credentials from NTDS.dit
+#### Extracting Hashes Using SecretsDump
+## Robocopy
+#### Copying Files with Robocopy
+# Event Log Readers
+#### Confirming Group Membership
+#### Searching Security Logs Using wevtutil
+#### Passing Credentials to wevtutil
+#### Searching Security Logs Using Get-WinEvent
+# DnsAdmins
+## Leveraging DnsAdmins Access
+#### Generating Malicious DLL
+#### Starting Local HTTP Server
+#### Downloading File to Target
+#### Loading DLL as Non-Privileged User
+#### Loading DLL as Member of DnsAdmins
+#### Loading Custom DLL
+#### Finding User's SID
+#### Checking Permissions on DNS Service
+#### Stopping the DNS Service
+#### Starting the DNS Service
+#### Confirming Group Membership
+## Cleaning Up
+#### Confirming Registry Key Added
+#### Deleting Registry Key
+#### Starting the DNS Service Again
+#### Checking DNS Service Status
+## Using Mimilib.dll
+#include "kdns.h"
+#pragma warning(push)
+#pragma warning(disable:4996)
+#pragma warning(pop)
+## Creating a WPAD Record
+#### Disabling the Global Query Block List
+#### Adding a WPAD Record
+# Hyper-V Administrators
+#### Target File
+#### Taking Ownership of the File
+#### Starting the Mozilla Maintenance Service
+# Print Operators
+#### Confirming Privileges
+#### Checking Privileges Again
+#include <windows.h>
+#include <assert.h>
+#include <winternl.h>
+#include <sddl.h>
+#include <stdio.h>
+#include "tchar.h"
+#### Compile with cl.exe
+#### Add Reference to Driver
+#### Verify Driver is not Loaded
+#### Verify Privilege is Enabled
+#### Verify Capcom Driver is Listed
+#### Use ExploitCapcom Tool to Escalate Privileges
+## Alternate Exploitation - No GUI
+## Automating the Steps
+#### Automating with EopLoadDriver
+## Clean-up
+#### Removing Registry Key
+# Server Operators
+#### Querying the AppReadiness Service
+#### Checking Service Permissions with PsService
+#### Checking Local Admin Group Membership
+#### Modifying the Service Binary Path
+#### Starting the Service
+#### Confirming Local Admin Group Membership
+#### Confirming Local Admin Access on Domain Controller
+#### Retrieving NTLM Password Hashes from the Domain Controller
+# User Account Control
+#### Checking Current User
+#### Confirming Admin Group Membership
+#### Reviewing User Privileges
+#### Confirming UAC is Enabled
+#### Checking UAC Level
+#### Checking Windows Version
+#### Reviewing Path Variable
+#### Generating Malicious srrstr.dll DLL
+#### Starting Python HTTP Server on Attack Host
+#### Downloading DLL Target
+#### Starting nc Listener on Attack Host
+#### Testing Connection
+#### Executing SystemPropertiesAdvanced.exe on Target Host
+#### Receiving Connection Back
+# Weak Permissions
+## Permissive File System ACLs
+#### Running SharpUp
+#### Checking Permissions with icacls
+#### Replacing Service Binary
+## Weak Service Permissions
+#### Reviewing SharpUp Again
+#### Checking Permissions with AccessChk
+#### Check Local Admin Group
+#### Changing the Service Binary Path
+#### Stopping Service
+#### Starting the Service
+#### Confirming Local Admin Group Addition
+## Weak Service Permissions - Cleanup
+#### Reverting the Binary Path
+#### Starting the Service Again
+#### Verifying Service is Running
+## Unquoted Service Path
+#### Service Binary Path
+#### Querying Service
+#### Searching for Unquoted Service Paths
+## Permissive Registry ACLs
+#### Checking for Weak Service ACLs in Registry
+#### Changing ImagePath with PowerShell
+##  Modifiable Registry Autorun Binary
+#### Check Startup Programs
+# Kernel Exploits
+## Notable Vulnerabilities
+#### Checking Permissions on the SAM File
+#### Performing Attack and Parsing Password Hashes
+#### Checking for Spooler Service
+#### Adding Local Admin with PrintNightmare PowerShell PoC
+#### Confirming New Admin User
+## Enumerating Missing Patches
+#### Examining Installed Updates
+#### Viewing Installed Updates with WMI
+## CVE-2020-0668 Example
+#### Checking Current User Privileges
+#### After Building Solution
+#### Checking Permissions on Binary
+#### Generating Malicious Binary
+#### Hosting the Malicious Binary
+#### Downloading the Malicious Binary
+#### Running the Exploit
+#### Checking Permissions of New File
+#### Replacing File with Malicious Binary
+#### Metasploit Resource Script
+#### Launching Metasploit with Resource Script
+#### Starting the Service
+#### Receiving a Meterpreter Session
+# Vulnerable Services
+#### Enumerating Installed Programs
+#### Enumerating Local Ports
+#### Enumerating Process ID
+#### Enumerating Running Service
+## Druva inSync Windows Client Local Privilege Escalation Example
+#### Druva inSync PowerShell PoC
+#### Modifying PowerShell PoC
+#### Starting a Python Web Server
+#### Catching a SYSTEM Shell
+## Moving On
+# DLL Injection
+## LoadLibrary
+#include <windows.h>
+#include <stdio.h>
+#include <windows.h>
+#include <stdio.h>
+## Manual Mapping
+## Reflective DLL Injection
+## DLL Hijacking
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <windows.h>
+### Proxying
+#include <stdio.h>
+#include <Windows.h>
+#ifdef _WIN32
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#define DLL_EXPORT
+#endif
+### Invalid Libraries
+#include <stdio.h>
+#include <Windows.h>
+# Credential Hunting
+## Application Configuration Files
+#### Searching for Files
+## Dictionary Files
+#### Chrome Dictionary Files
+## Unattended Installation Files
+#### Unattend.xml
+## PowerShell History File
+#### Confirming PowerShell History Save Path
+#### Reading PowerShell History File
+## PowerShell Credentials
+# Connect-VC.ps1
+# Get-Credential | Export-Clixml -Path 'C:\scripts\pass.xml'
+#### Decrypting PowerShell Credentials
+# Other Files
+## Manually Searching the File System for Credentials
+#### Search File Contents for String - Example 1
+#### Search File Contents for String - Example 2
+#### Search File Contents for String - Example 3
+#### Search File Contents with PowerShell
+#### Search for File Extensions - Example 1
+#### Search for File Extensions - Example 2
+#### Search for File Extensions Using PowerShell
+## Sticky Notes Passwords
+#### Looking for StickyNotes DB Files
+#### Viewing Sticky Notes Data Using PowerShell
+#### Strings to View DB File Contents
+## Other Files of Interest
+#### Other Interesting Files
+# Further Credential Theft
+## Cmdkey Saved Credentials
+#### Listing Saved Credentials
+#### Run Commands as Another User
+## Browser Credentials
+#### Retrieving Saved Credentials from Chrome
+## Password Managers
+#### Extracting KeePass Hash
+#### Cracking Hash Offline
+## Email
+## More Fun with Credentials
+#### Viewing LaZagne Help Menu
+#### Running All LaZagne Modules
+## Even More Fun with Credentials
+#### Running SessionGopher as Current User
+## Clear-Text Password Storage in the Registry
+### Windows AutoLogon
+#### Enumerating Autologon with reg.exe
+### Putty
+#### Enumerating Sessions and Finding Credentials:
+## Wifi Passwords
+#### Viewing Saved Wireless Networks
+#### Retrieving Saved Wireless Passwords
+# Citrix Breakout
+## Bypassing Path Restrictions
+## Accessing SMB share from restricted environment
+#include <stdlib.h>
+## Alternate Explorer
+## Alternate Registry Editors
+## Modify existing shortcut file
+## Script Execution
+## Escalating Privileges
+## Bypassing UAC
+#### Additional resources worth checking:
+# Interacting with Users
+## Traffic Capture
+## Process Command Lines
+#### Monitoring for Process Command Lines
+#### Running Monitor Script on Target Host
+## Vulnerable Services
+## SCF on a File Share
+#### Malicious SCF File
+#### Starting Responder
+#### Cracking NTLMv2 Hash with Hashcat
+## Capturing Hashes with a Malicious .lnk File
+#### Generating a Malicious .lnk File
+# Pillaging
+## Data Sources
+## Scenario
+## Installed Applications
+#### Identifying Common Applications
+#### Get Installed Programs via PowerShell & Registry Keys
+#### mRemoteNG
+#### Discover mRemoteNG Configuration Files
+#### mRemoteNG Configuration File - confCons.xml
+#### Decrypt the Password with mremoteng_decrypt
+#### mRemoteNG Configuration File - confCons.xml
+#### Attempt to Decrypt the Password with a Custom Password
+#### Decrypt the Password with mremoteng_decrypt and a Custom Password
+#### For Loop to Crack the Master Password with mremoteng_decrypt
+## Abusing Cookies to Get Access to IM Clients
+##### Cookie Extraction from Firefox
+#### Copy Firefox Cookies Database
+#### Extract Slack Cookie from Firefox Cookies Database
+##### Cookie Extraction from Chromium-based Browsers
+#### PowerShell Script - Invoke-SharpChromium
+#### Copy Cookies to SharpChromium Expected Location
+#### Invoke-SharpChromium Cookies Extraction
+## Clipboard
+#### Monitor the Clipboard with PowerShell
+#### Capture Credentials from the Clipboard with Invoke-ClipboardLogger
+## Roles and Services
+#### Attacking Backup Servers
+#### restic - Initialize Backup Directory
+#### restic - Back up a Directory
+#### restic - Back up a Directory with VSS
+#### restic - Check Backups Saved in a Repository
+#### restic - Restore a Backup with ID
+## Conclusion
+# Miscellaneous Techniques
+## Living Off The Land Binaries and Scripts (LOLBAS)
+#### Transferring File with Certutil
+#### Encoding File with Certutil
+#### Decoding File with Certutil
+## Always Install Elevated
+#### Enumerating Always Install Elevated Settings
+#### Generating MSI Package
+#### Executing MSI Package
+#### Catching Shell
+## CVE-2019-1388
+## Scheduled Tasks
+#### Enumerating Scheduled Tasks
+#### Enumerating Scheduled Tasks with PowerShell
+#### Checking Permissions on C:\Scripts Directory
+## User/Computer Description Field
+#### Checking Local User Description Field
+#### Enumerating Computer Description Field with Get-WmiObject Cmdlet
+## Mount VHDX/VMDK
+#### Mount VMDK on Linux
+#### Mount VHD/VHDX on Linux
+#### Retrieving Hashes using Secretsdump.py
+# Legacy Operating Systems
+## End of Life Systems (EOL)
+#### Windows Desktop - EOL Dates by Version
+#### Windows Server - EOL Dates by Version
+## Impact
+# Windows Server
+## Server 2008 vs. Newer Versions
+## Server 2008 Case Study
+#### Querying Current Patch Level
+#### Running Sherlock
+#### Obtaining a Meterpreter Shell
+#### Rundll Command on Target Host
+#### Receiving Reverse Shell
+#### Searching for Local Privilege Escalation Exploit
+#### Migrating to a 64-bit Process
+#### Setting Privilege Escalation Module Options
+#### Receiving Elevated Reverse Shell
+## Attacking Server 2008
+# Windows Desktop Versions
+## Windows 7 vs. Newer Versions
+## Windows 7 Case Study
+#### Install Python Dependencies (local VM only)
+#### Gathering Systeminfo Command Output
+#### Updating the Local Microsoft Vulnerability Database
+#### Running Windows Exploit Suggester
+#### Exploiting MS16-032 with PowerShell PoC
+#### Spawning a SYSTEM Console
+## Attacking Windows 7
+# Windows Hardening
+## Secure Clean OS Installation
+## Updates and Patching
+## Configuration Management
+## User Management
+## Audit
+## Logging
+## Sysmon
+## Network and Host Logs.
+## Key Hardening Measures
+## Conclusion
+# Windows Privilege Escalation Skills Assessment - Part I
+# Windows Privilege Escalation Skills Assessment - Part II
+
