@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "b5e35a40e1ce89ab",
+    "id": "4324ae9c97f1b458",
     "type": "split",
     "children": [
       {
-        "id": "8968aef387cfd1ab",
+        "id": "e3c2c03d7624a319",
         "type": "tabs",
         "children": [
           {
-            "id": "4d9feef1b843e926",
+            "id": "9952986fc9f9ca33",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1. Getting Started/5.Types of Shells/1. Shell types.md",
-                "mode": "source",
+                "file": "00_MASTER_METHODOLOGY.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1. Shell types"
+              "title": "00_MASTER_METHODOLOGY"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "1c3678f977b98aaf",
+    "id": "c31ce5eb4b7e62ca",
     "type": "split",
     "children": [
       {
-        "id": "567ddcabe9f71055",
+        "id": "00e37fb495165d8d",
         "type": "tabs",
         "children": [
           {
-            "id": "932c6f6a2c9d5158",
+            "id": "7d64b6a6ac5a4376",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,12 +48,12 @@
             }
           },
           {
-            "id": "50e017fd42aee496",
+            "id": "75e34b7867559395",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "ftp",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "4381e0160488b930",
+            "id": "ba78bc563c0a7691",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "ccd62be3c15c9b6f",
+    "id": "a36da1bae6499df4",
     "type": "split",
     "children": [
       {
-        "id": "aa7f32d90c12cea1",
+        "id": "bedfe716966426f3",
         "type": "tabs",
         "children": [
           {
-            "id": "569411f5eea37c74",
+            "id": "2eaad36069fd6457",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
+                "file": "00_MASTER_METHODOLOGY.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 3. Initial Enumeration of the Domain"
+              "title": "Backlinks for 00_MASTER_METHODOLOGY"
             }
           },
           {
-            "id": "8073e1b9caeef627",
+            "id": "0937e891095cb01a",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
+                "file": "00_MASTER_METHODOLOGY.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 3. Initial Enumeration of the Domain"
+              "title": "Outgoing links from 00_MASTER_METHODOLOGY"
             }
           },
           {
-            "id": "e553728bf5d2e3f3",
+            "id": "a3cbb22bc80e2923",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,7 +137,7 @@
             }
           },
           {
-            "id": "b98bdb3eaa4f72ff",
+            "id": "752090b49f9d40ab",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -151,28 +151,18 @@
             }
           },
           {
-            "id": "072bbbee3e6f9f83",
+            "id": "9e81e4b078f9b371",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
+                "file": "00_MASTER_METHODOLOGY.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3. Initial Enumeration of the Domain"
-            }
-          },
-          {
-            "id": "296ce821f1f8a4d4",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "Outline of 00_MASTER_METHODOLOGY"
             }
           }
         ]
@@ -184,64 +174,21 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "templater-obsidian:Templater": false
+      "bases:Create new base": false
     }
   },
-  "active": "4d9feef1b843e926",
+  "active": "9952986fc9f9ca33",
   "lastOpenFiles": [
-    "1. Getting Started/4. Public Exploits/1.Public Exploits.md",
-    "1. Getting Started/3. Web Enumeration/1. Web Enumeration.md",
-    "1. Getting Started/5.Types of Shells/1. Shell types.md",
-    "1. Getting Started/2. Service Scanning/2. Attacking Network Services.md",
-    "1. Getting Started/2. Service Scanning/1. Nmap.md",
-    "1. Getting Started/1. Basic Tools/3. Tmux.md",
-    "1. Getting Started/1. Basic Tools/2. Netcat.md",
-    "1. Getting Started/1. Basic Tools/1. SSH.md",
-    "1. Getting Started/1. Basic Tools/8. Nibble Walkthrough/1. Walkthrough.md",
-    "8. Password Attacks/1. John The Ripper.md",
-    "Understanding Tylers methodology/Vulnlab - Trusted.md",
-    "Bloodhound.md",
-    "WORKFLOW_GUIDE.md",
-    "Untitled 1.md",
-    "Untitled 2.md",
-    "Ligolo-ng.md",
-    "AD Methodology.md",
-    "academy-to-md.md",
-    "Rust scan Installation.md",
-    "rockyou.md",
-    "test.wav",
-    "18. File Upload attacks/wordlists.md",
-    "18. File Upload attacks/1. File uploads.md",
-    "6. Shells and Payloads/9. Detection and prevention.md",
-    "6. Shells and Payloads/8. Web Shells.md",
-    "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
-    "5. File Transfers/5. Protected File Transfers.md",
-    "fix_phase8.py",
-    "split_mimo.py",
-    "transfer_audit.txt",
-    "password_audit.txt",
-    "recon_audit.txt",
-    "pivot_audit.txt",
-    "linux_privesc_audit.txt",
-    "verify_rest.py",
-    "win_audit.txt",
-    "attachments/Pasted image 20260614101055.png",
-    "attachments/Pasted image 20260613190654.png",
-    "attachments/Pasted image 20260613150548.png",
-    "attachments/Pasted image 20260611092141.png",
-    "attachments/Pasted image 20260611084345.png",
-    "attachments/Pasted image 20260611084318.png",
-    "attachments/Pasted image 20260607112715.png",
-    "attachments/Pasted image 20260607104042.png",
-    "attachments/Pasted image 20260607103816.png",
-    "attachments/Pasted image 20260607103532.png"
+    "03_COMMON_SERVICES.md",
+    "02_WEB_ATTACKS.md",
+    "01_RECON_AND_ENUMERATION.md",
+    "00_MASTER_METHODOLOGY.md",
+    "05_AD_METHODOLOGY.md"
   ]
 }
