@@ -197,6 +197,9 @@
   },
   "active": "4d9feef1b843e926",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260627122437.png",
+    "attachments/Pasted image 20260627122301.png",
+    "attachments/Pasted image 20260627122131.png",
     "Methodology/modules/mimo_methodology.md",
     "20. Web Attacks/5. XXE.md",
     "Methodology/modules/MASTER_METHODOLOGY.md",
@@ -228,7 +231,6 @@
     "Methodology/battlecards/Pivoting.md",
     "Methodology/decision-trees/database-attack-flow.md",
     "Methodology/decision-trees/credential-flow.md",
-    "Methodology/decision-trees/ad-attack-flow.md",
     "academy_og/images/module-24-009.jpg",
     "academy_og/images/module-24-006.png",
     "academy_og/images/module-24-002.png",
@@ -240,8 +242,6 @@
     "Methodology/playbooks",
     "Methodology/operator",
     "Methodology/battlecards",
-    "attachments/Pasted image 20260623130701.png",
-    "attachments/Pasted image 20260614101055.png",
-    "attachments/Pasted image 20260613190654.png"
+    "attachments/Pasted image 20260623130701.png"
   ]
 }
