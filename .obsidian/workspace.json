@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "21. Attacking Common Applications/1..md",
+                "file": "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1."
+              "title": "2. Application Discovery and Enumeration"
             }
           }
         ]
@@ -197,7 +197,8 @@
   },
   "active": "d0ccb0f28407ba9e",
   "lastOpenFiles": [
-    "21. Attacking Common Applications/1..md",
+    "21. Attacking Common Applications/1. Pre req.md",
+    "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
     "20. Web Attacks/1. HTTP Verb Tampering.md",
     "20. Web Attacks/5. XXE.md",
     "21. Attacking Common Applications",
@@ -232,7 +233,6 @@
     "Methodology/battlecards/SMB.md",
     "Methodology/battlecards/Post-Exploitation.md",
     "Methodology/battlecards/Pivoting.md",
-    "Methodology/decision-trees/database-attack-flow.md",
     "academy_og/images/module-24-009.jpg",
     "academy_og/images/module-24-006.png",
     "academy_og/images/module-24-002.png",
