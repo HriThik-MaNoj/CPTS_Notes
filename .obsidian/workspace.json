@@ -197,6 +197,8 @@
   },
   "active": "d0ccb0f28407ba9e",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260706055942.png",
+    "attachments/Pasted image 20260706055901.png",
     "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
     "21. Attacking Common Applications/3. WordPress.md",
     "21. Attacking Common Applications/1. Pre req.md",
@@ -232,7 +234,6 @@
     "Methodology/decision-trees/web-attack-flow.md",
     "Methodology/battlecards/SNMP.md",
     "Methodology/battlecards/SMB.md",
-    "Methodology/battlecards/Post-Exploitation.md",
     "academy_og/images/module-24-009.jpg",
     "academy_og/images/module-24-006.png",
     "academy_og/images/module-24-002.png",
@@ -240,7 +241,6 @@
     "Methodology/operator/credential-tracker-template.csv",
     "attachments/Pasted image 20260623152716.png",
     "attachments/Pasted image 20260623150533.png",
-    "attachments/Pasted image 20260623145316.png",
     "Methodology/playbooks",
     "Methodology/operator"
   ]
