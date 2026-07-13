@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "21. Attacking Common Applications/4. Joomla.md",
+                "file": "21. Attacking Common Applications/8. Splunk.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4. Joomla"
+              "title": "8. Splunk"
             }
           }
         ]
@@ -197,22 +197,28 @@
   },
   "active": "d0ccb0f28407ba9e",
   "lastOpenFiles": [
-    "attachments/Pasted image 20260706090905.png",
-    "attachments/Pasted image 20260706090747.png",
-    "attachments/Pasted image 20260706090630.png",
-    "21. Attacking Common Applications/3. WordPress.md",
-    "21. Attacking Common Applications/4. Joomla.md",
-    "attachments/Pasted image 20260706062052.png",
-    "attachments/Pasted image 20260706055942.png",
-    "attachments/Pasted image 20260706055901.png",
+    "attachments/Pasted image 20260713074833.png",
+    "attachments/Pasted image 20260713074754.png",
+    "attachments/Pasted image 20260713074035.png",
+    "21. Attacking Common Applications/7. Jenkins.md",
+    "21. Attacking Common Applications/8. Splunk.md",
+    "21. Attacking Common Applications/6. Tomcat.md",
+    "attachments/Pasted image 20260712171511.png",
     "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
+    "21. Attacking Common Applications/4. Joomla.md",
+    "21. Attacking Common Applications/3. WordPress.md",
     "21. Attacking Common Applications/1. Pre req.md",
+    "21. Attacking Common Applications/5. Drupal.md",
+    "attachments/Pasted image 20260707083820.png",
+    "attachments/Pasted image 20260707083643.png",
+    "attachments/Pasted image 20260707083450.png",
+    "attachments/Pasted image 20260707070839.png",
+    "attachments/Pasted image 20260707070628.png",
+    "attachments/Pasted image 20260707070601.png",
+    "attachments/Pasted image 20260706090905.png",
     "20. Web Attacks/1. HTTP Verb Tampering.md",
     "20. Web Attacks/5. XXE.md",
     "21. Attacking Common Applications",
-    "attachments/Pasted image 20260627122437.png",
-    "attachments/Pasted image 20260627122301.png",
-    "attachments/Pasted image 20260627122131.png",
     "Methodology/modules/mimo_methodology.md",
     "Methodology/modules/MASTER_METHODOLOGY.md",
     "Methodology/modules/15-exam-strategy.md",
@@ -234,12 +240,6 @@
     "Methodology/modules/09-linux-privesc.md",
     "Methodology/modules/04-web-application.md",
     "Methodology/modules/02-enumeration.md",
-    "Methodology/modules/01-info-gathering.md",
-    "Methodology/modules/00-pre-engagement.md",
-    "Methodology/decision-trees/web-attack-flow.md",
-    "Methodology/battlecards/SNMP.md",
-    "academy_og/images/module-24-009.jpg",
-    "academy_og/images/module-24-006.png",
     "Methodology/operator/credential-tracker-template.csv",
     "Methodology/playbooks",
     "Methodology/operator"
