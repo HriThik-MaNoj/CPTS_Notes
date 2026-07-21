@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "21. Attacking Common Applications/10. osTicket.md",
+                "file": "21. Attacking Common Applications/11. Gitlab.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10. osTicket"
+              "title": "11. Gitlab"
             }
           }
         ],
@@ -212,8 +212,9 @@
   },
   "active": "4ba746712e66c55b",
   "lastOpenFiles": [
-    "8. Password Attacks/5. Network Services.md",
     "21. Attacking Common Applications/10. osTicket.md",
+    "21. Attacking Common Applications/11. Gitlab.md",
+    "8. Password Attacks/5. Network Services.md",
     "Methodology/modules/02-enumeration.md",
     "21. Attacking Common Applications/9. PRTG Network Monitor.md",
     "attachments/Pasted image 20260713090841.png",
@@ -254,7 +255,6 @@
     "Methodology/playbooks/METHODOLOGY_GENERATION_PLAN.md",
     "Methodology/modules/modules.txt",
     "20. Web Attacks/3. Mass IDOR Enumeration.md",
-    "academy_og/_PHASE2_DESIGN.md",
     "Methodology/operator/credential-tracker-template.csv",
     "Methodology/playbooks",
     "Methodology/operator"
