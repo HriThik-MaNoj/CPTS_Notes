@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "21. Attacking Common Applications/11. Gitlab.md",
+                "file": "21. Attacking Common Applications/13. Attacking Common Gateway Interface (CGI) Applications - Shellshock.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11. Gitlab"
+              "title": "13. Attacking Common Gateway Interface (CGI) Applications - Shellshock"
             }
           }
         ],
@@ -212,8 +212,12 @@
   },
   "active": "4ba746712e66c55b",
   "lastOpenFiles": [
-    "21. Attacking Common Applications/10. osTicket.md",
+    "attachments/Pasted image 20260721100016.png",
+    "attachments/Pasted image 20260721094023.png",
+    "21. Attacking Common Applications/12. Tomcat CGI.md",
+    "21. Attacking Common Applications/13. Attacking Common Gateway Interface (CGI) Applications - Shellshock.md",
     "21. Attacking Common Applications/11. Gitlab.md",
+    "21. Attacking Common Applications/10. osTicket.md",
     "8. Password Attacks/5. Network Services.md",
     "Methodology/modules/02-enumeration.md",
     "21. Attacking Common Applications/9. PRTG Network Monitor.md",
@@ -235,7 +239,6 @@
     "21. Attacking Common Applications/1. Pre req.md",
     "21. Attacking Common Applications/5. Drupal.md",
     "attachments/Pasted image 20260707083820.png",
-    "attachments/Pasted image 20260707083643.png",
     "20. Web Attacks/1. HTTP Verb Tampering.md",
     "20. Web Attacks/5. XXE.md",
     "21. Attacking Common Applications",
@@ -251,10 +254,7 @@
     "academy_og/ligolo-selfcerts/ligolo-ng.history",
     "Methodology/assets/htb-academy-to-md-linux-amd64",
     "Methodology/assets/CPTS_Methodology_Site.html",
-    "Methodology/playbooks/_PHASE2_DESIGN.md",
-    "Methodology/playbooks/METHODOLOGY_GENERATION_PLAN.md",
     "Methodology/modules/modules.txt",
-    "20. Web Attacks/3. Mass IDOR Enumeration.md",
     "Methodology/operator/credential-tracker-template.csv",
     "Methodology/playbooks",
     "Methodology/operator"
