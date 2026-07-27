@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "22. Linux PrivEsc/3. Linux Services & Internals Enumeration.md",
+                "file": "22. Linux PrivEsc/7. Escaping Restricted Shells.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Linux Services & Internals Enumeration"
+              "title": "7. Escaping Restricted Shells"
             }
           }
         ]
@@ -197,8 +197,12 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "22. Linux PrivEsc/2. Environment Enumeration.md",
+    "22. Linux PrivEsc/6. Wildcard Abuse.md",
+    "22. Linux PrivEsc/7. Escaping Restricted Shells.md",
+    "22. Linux PrivEsc/5. Path Abuse.md",
+    "22. Linux PrivEsc/4. Credential Hunting.md",
     "22. Linux PrivEsc/3. Linux Services & Internals Enumeration.md",
+    "22. Linux PrivEsc/2. Environment Enumeration.md",
     "22. Linux PrivEsc/1. Linux privilege escalation.md",
     "22. Linux PrivEsc",
     "21. Attacking Common Applications/12. Tomcat CGI.md",
@@ -226,14 +230,10 @@
     "Untitled.md",
     "attachments/Pasted image 20260713090414.png",
     "attachments/Pasted image 20260713090337.png",
-    "21. Attacking Common Applications/8. Splunk.md",
     "attachments/Pasted image 20260713075036.png",
     "attachments/Pasted image 20260713074833.png",
     "attachments/Pasted image 20260713074754.png",
     "attachments/Pasted image 20260713074035.png",
-    "21. Attacking Common Applications/7. Jenkins.md",
-    "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
-    "21. Attacking Common Applications/4. Joomla.md",
     "21. Attacking Common Applications",
     "Methodology",
     "academy_og/ligolo-selfcerts/ligolo-ng.yaml",
