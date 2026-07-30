@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "22. Linux PrivEsc/11. Capabilities.md",
+                "file": "22. Linux PrivEsc/12. Vulnerable Services.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11. Capabilities"
+              "title": "12. Vulnerable Services"
             }
           }
         ]
@@ -197,8 +197,9 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "22. Linux PrivEsc/8. Special Permissions.md",
     "22. Linux PrivEsc/11. Capabilities.md",
+    "22. Linux PrivEsc/12. Vulnerable Services.md",
+    "22. Linux PrivEsc/8. Special Permissions.md",
     "22. Linux PrivEsc/9. Sudo Rights Abuse.md",
     "22. Linux PrivEsc/10. Privileged Groups.md",
     "22. Linux PrivEsc/7. Escaping restricted shells.md",
@@ -227,7 +228,6 @@
     "21. Attacking Common Applications/13. Attacking Common Gateway Interface (CGI) Applications - Shellshock.md",
     "attachments/Pasted image 20260721100016.png",
     "attachments/Pasted image 20260721094023.png",
-    "21. Attacking Common Applications/11. Gitlab.md",
     "attachments/Pasted image 20260713090841.png",
     "attachments/Pasted image 20260713090414.png",
     "attachments/Pasted image 20260713090337.png",
