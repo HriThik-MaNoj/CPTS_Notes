@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "22. Linux PrivEsc/19. Miscelanious.md",
+                "file": "22. Linux PrivEsc/23. Python Library Hijacking.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "19. Miscelanious"
+              "title": "23. Python Library Hijacking"
             }
           }
         ]
@@ -199,8 +199,12 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "22. Linux PrivEsc/18. Logrotate.md",
+    "22. Linux PrivEsc/22. Shared Object Hijacking.md",
+    "22. Linux PrivEsc/23. Python Library Hijacking.md",
+    "22. Linux PrivEsc/21. Shared Libraries.md",
+    "22. Linux PrivEsc/20. Kernel Exploits.md",
     "22. Linux PrivEsc/19. Miscelanious.md",
+    "22. Linux PrivEsc/18. Logrotate.md",
     "22. Linux PrivEsc/17. Kubernetes.md",
     "22. Linux PrivEsc/15. Docker.md",
     "22. Linux PrivEsc/14. Containers.md",
@@ -223,10 +227,6 @@
     "21. Attacking Common Applications/12. Tomcat CGI.md",
     "21. Attacking Common Applications/6. Tomcat.md",
     "21. Attacking Common Applications/20. Other Notable Applications.md",
-    "21. Attacking Common Applications/15. ColdFusion.md",
-    "21. Attacking Common Applications/16. IIS Tilde Enumeration.md",
-    "3. Footprinting/5. FTP.md",
-    "5. File Transfers/1. Windows File Transfer Methods.md",
     "attachments/Pasted image 20260721101306.png",
     "attachments/Pasted image 20260721100016.png",
     "attachments/Pasted image 20260721094023.png",
