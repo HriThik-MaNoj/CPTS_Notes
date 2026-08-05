@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "22. Linux PrivEsc/23. Python Library Hijacking.md",
+                "file": "21. Attacking Common Applications/6. Tomcat.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "23. Python Library Hijacking"
+              "title": "6. Tomcat"
             }
           }
         ]
@@ -199,8 +199,20 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "22. Linux PrivEsc/22. Shared Object Hijacking.md",
+    "22. Linux PrivEsc/5. Path Abuse.md",
+    "22. Linux PrivEsc/4. Credential Hunting.md",
+    "22. Linux PrivEsc/1. Linux privilege escalation.md",
+    "20. Web Attacks/5. XXE.md",
+    "20. Web Attacks/3. Mass IDOR Enumeration.md",
+    "20. Web Attacks/2. IDOR.md",
+    "20. Web Attacks/1. HTTP Verb Tampering.md",
+    "Rust scan Installation.md",
+    "22. Linux PrivEsc/27. Netfilter.md",
+    "22. Linux PrivEsc/26. Dirty Pipe.md",
+    "22. Linux PrivEsc/25. Polkit.md",
+    "22. Linux PrivEsc/24. Sudo.md",
     "22. Linux PrivEsc/23. Python Library Hijacking.md",
+    "22. Linux PrivEsc/22. Shared Object Hijacking.md",
     "22. Linux PrivEsc/21. Shared Libraries.md",
     "22. Linux PrivEsc/20. Kernel Exploits.md",
     "22. Linux PrivEsc/19. Miscelanious.md",
@@ -213,20 +225,8 @@
     "22. Linux PrivEsc/11. Capabilities.md",
     "22. Linux PrivEsc/8. Special Permissions.md",
     "22. Linux PrivEsc/9. Sudo Rights Abuse.md",
-    "22. Linux PrivEsc/10. Privileged Groups.md",
-    "22. Linux PrivEsc/7. Escaping restricted shells.md",
-    "22. Linux PrivEsc/7. Escaping Restricted Shells.md",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
-    "22. Linux PrivEsc/6. Wildcard Abuse.md",
-    "22. Linux PrivEsc/5. Path Abuse.md",
-    "22. Linux PrivEsc/4. Credential Hunting.md",
-    "22. Linux PrivEsc/3. Linux Services & Internals Enumeration.md",
-    "22. Linux PrivEsc/2. Environment Enumeration.md",
-    "22. Linux PrivEsc/1. Linux privilege escalation.md",
     "22. Linux PrivEsc",
-    "21. Attacking Common Applications/12. Tomcat CGI.md",
-    "21. Attacking Common Applications/6. Tomcat.md",
-    "21. Attacking Common Applications/20. Other Notable Applications.md",
     "attachments/Pasted image 20260721101306.png",
     "attachments/Pasted image 20260721100016.png",
     "attachments/Pasted image 20260721094023.png",
