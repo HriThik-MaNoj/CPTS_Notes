@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "21. Attacking Common Applications/6. Tomcat.md",
+                "file": "23. Windows PrivEsc/1. Useful Tools.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "6. Tomcat"
+              "title": "1. Useful Tools"
             }
           }
         ]
@@ -199,6 +199,9 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
+    "21. Attacking Common Applications/6. Tomcat.md",
+    "23. Windows PrivEsc/1. Useful Tools.md",
+    "23. Windows PrivEsc",
     "22. Linux PrivEsc/5. Path Abuse.md",
     "22. Linux PrivEsc/4. Credential Hunting.md",
     "22. Linux PrivEsc/1. Linux privilege escalation.md",
@@ -223,8 +226,6 @@
     "22. Linux PrivEsc/13. Cron Job Abuse.md",
     "22. Linux PrivEsc/12. Vulnerable Services.md",
     "22. Linux PrivEsc/11. Capabilities.md",
-    "22. Linux PrivEsc/8. Special Permissions.md",
-    "22. Linux PrivEsc/9. Sudo Rights Abuse.md",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
     "attachments/Pasted image 20260721101306.png",
@@ -243,7 +244,6 @@
     "academy_og/ligolo-selfcerts/ligolo-ng.history",
     "Methodology/assets/htb-academy-to-md-linux-amd64",
     "Methodology/assets/CPTS_Methodology_Site.html",
-    "Methodology/modules/modules.txt",
-    "Methodology/operator/credential-tracker-template.csv"
+    "Methodology/modules/modules.txt"
   ]
 }
