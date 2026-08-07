@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/3. Initial Enumeration.md",
+                "file": "23. Windows PrivEsc/4. Communication with Processes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Initial Enumeration"
+              "title": "4. Communication with Processes"
             }
           }
         ]
@@ -199,8 +199,9 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "23. Windows PrivEsc/2. Enumerating Protections.md",
     "23. Windows PrivEsc/3. Initial Enumeration.md",
+    "23. Windows PrivEsc/4. Communication with Processes.md",
+    "23. Windows PrivEsc/2. Enumerating Protections.md",
     "23. Windows PrivEsc/1. Useful Tools.md",
     "21. Attacking Common Applications/6. Tomcat.md",
     "23. Windows PrivEsc",
@@ -225,7 +226,6 @@
     "22. Linux PrivEsc/17. Kubernetes.md",
     "22. Linux PrivEsc/15. Docker.md",
     "22. Linux PrivEsc/14. Containers.md",
-    "22. Linux PrivEsc/13. Cron Job Abuse.md",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
     "attachments/Pasted image 20260721101306.png",
