@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/7. SeDebugPrivilege.md",
+                "file": "23. Windows PrivEsc/9. Windows Built-in Groups.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7. SeDebugPrivilege"
+              "title": "9. Windows Built-in Groups"
             }
           }
         ]
@@ -199,8 +199,12 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
+    "23. Windows PrivEsc/8. SeTakeOwnershipPrivilege.md",
+    "23. Windows PrivEsc/9. Windows Built-in Groups.md",
+    "5. File Transfers/1. Windows File Transfer Methods.md",
+    "attachments/Pasted image 20260808063025.png",
     "23. Windows PrivEsc/7. SeDebugPrivilege.md",
+    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
     "Rust scan Installation.md",
     "23. Windows PrivEsc/5. Windows Privileges Overview.md",
     "attachments/Pasted image 20260807070913.png",
@@ -224,9 +228,6 @@
     "22. Linux PrivEsc/23. Python Library Hijacking.md",
     "22. Linux PrivEsc/22. Shared Object Hijacking.md",
     "22. Linux PrivEsc/21. Shared Libraries.md",
-    "22. Linux PrivEsc/20. Kernel Exploits.md",
-    "22. Linux PrivEsc/19. Miscelanious.md",
-    "22. Linux PrivEsc/18. Logrotate.md",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
     "attachments/Pasted image 20260721101306.png",
@@ -237,7 +238,6 @@
     "attachments/Pasted image 20260713090337.png",
     "attachments/Pasted image 20260713075036.png",
     "attachments/Pasted image 20260713074833.png",
-    "attachments/Pasted image 20260713074754.png",
     "21. Attacking Common Applications",
     "Methodology",
     "academy_og/ligolo-selfcerts/ligolo-ng.yaml",
