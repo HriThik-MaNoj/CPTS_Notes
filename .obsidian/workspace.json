@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/9. Windows Built-in Groups.md",
+                "file": "23. Windows PrivEsc/14. Server Operators.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "9. Windows Built-in Groups"
+              "title": "14. Server Operators"
             }
           }
         ]
@@ -199,8 +199,14 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "23. Windows PrivEsc/8. SeTakeOwnershipPrivilege.md",
+    "23. Windows PrivEsc/13. Print Operators.md",
+    "23. Windows PrivEsc/14. Server Operators.md",
+    "23. Windows PrivEsc/11. DnsAdmins.md",
+    "23. Windows PrivEsc/12. Hyper-V Administrators.md",
+    "23. Windows PrivEsc/10. Event Log Readers.md",
+    "23. Windows PrivEsc/3. Initial Enumeration.md",
     "23. Windows PrivEsc/9. Windows Built-in Groups.md",
+    "23. Windows PrivEsc/8. SeTakeOwnershipPrivilege.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
     "attachments/Pasted image 20260808063025.png",
     "23. Windows PrivEsc/7. SeDebugPrivilege.md",
@@ -209,7 +215,6 @@
     "23. Windows PrivEsc/5. Windows Privileges Overview.md",
     "attachments/Pasted image 20260807070913.png",
     "23. Windows PrivEsc/4. Communication with Processes.md",
-    "23. Windows PrivEsc/3. Initial Enumeration.md",
     "23. Windows PrivEsc/2. Enumerating Protections.md",
     "23. Windows PrivEsc/1. Useful Tools.md",
     "21. Attacking Common Applications/6. Tomcat.md",
@@ -223,11 +228,6 @@
     "20. Web Attacks/1. HTTP Verb Tampering.md",
     "22. Linux PrivEsc/27. Netfilter.md",
     "22. Linux PrivEsc/26. Dirty Pipe.md",
-    "22. Linux PrivEsc/25. Polkit.md",
-    "22. Linux PrivEsc/24. Sudo.md",
-    "22. Linux PrivEsc/23. Python Library Hijacking.md",
-    "22. Linux PrivEsc/22. Shared Object Hijacking.md",
-    "22. Linux PrivEsc/21. Shared Libraries.md",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
     "attachments/Pasted image 20260721101306.png",
