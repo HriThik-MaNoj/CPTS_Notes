@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/21. Other files.md",
+                "file": "23. Windows PrivEsc/22. Further Credential Theft.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "21. Other files"
+              "title": "22. Further Credential Theft"
             }
           }
         ]
@@ -199,8 +199,9 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "23. Windows PrivEsc/20. Credential Hunting.md",
     "23. Windows PrivEsc/21. Other files.md",
+    "23. Windows PrivEsc/22. Further Credential Theft.md",
+    "23. Windows PrivEsc/20. Credential Hunting.md",
     "23. Windows PrivEsc/19. DLL Injection.md",
     "23. Windows PrivEsc/18. Vulnerable Services.md",
     "23. Windows PrivEsc/17. Kernel Exploits.md",
@@ -227,7 +228,6 @@
     "21. Attacking Common Applications/6. Tomcat.md",
     "23. Windows PrivEsc",
     "22. Linux PrivEsc/5. Path Abuse.md",
-    "22. Linux PrivEsc/4. Credential Hunting.md",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
     "attachments/Pasted image 20260721101306.png",
