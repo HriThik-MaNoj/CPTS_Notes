@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/22. Further Credential Theft.md",
+                "file": "23. Windows PrivEsc/24. Interacting with Users.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "22. Further Credential Theft"
+              "title": "24. Interacting with Users"
             }
           }
         ]
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 490.5
+    "width": 287.5
   },
   "right": {
     "id": "ccd62be3c15c9b6f",
@@ -199,9 +199,11 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
+    "23. Windows PrivEsc/23. Citrix Breakout.md",
+    "23. Windows PrivEsc/24. Interacting with Users.md",
+    "23. Windows PrivEsc/22. Further Credential Theft.md",
     "23. Windows PrivEsc/11. DnsAdmins.md",
     "23. Windows PrivEsc/15. User Account Control (UAC).md",
-    "23. Windows PrivEsc/22. Further Credential Theft.md",
     "23. Windows PrivEsc/21. Other files.md",
     "23. Windows PrivEsc/20. Credential Hunting.md",
     "23. Windows PrivEsc/19. DLL Injection.md",
@@ -225,9 +227,7 @@
     "23. Windows PrivEsc/4. Communication with Processes.md",
     "23. Windows PrivEsc/2. Enumerating Protections.md",
     "23. Windows PrivEsc/1. Useful Tools.md",
-    "21. Attacking Common Applications/6. Tomcat.md",
     "23. Windows PrivEsc",
-    "22. Linux PrivEsc/5. Path Abuse.md",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
     "attachments/Pasted image 20260721101306.png",
