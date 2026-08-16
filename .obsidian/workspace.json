@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 490.5
   },
   "right": {
     "id": "ccd62be3c15c9b6f",
@@ -199,17 +199,17 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "23. Windows PrivEsc/21. Other files.md",
+    "23. Windows PrivEsc/11. DnsAdmins.md",
+    "23. Windows PrivEsc/15. User Account Control (UAC).md",
     "23. Windows PrivEsc/22. Further Credential Theft.md",
+    "23. Windows PrivEsc/21. Other files.md",
     "23. Windows PrivEsc/20. Credential Hunting.md",
     "23. Windows PrivEsc/19. DLL Injection.md",
     "23. Windows PrivEsc/18. Vulnerable Services.md",
     "23. Windows PrivEsc/17. Kernel Exploits.md",
     "23. Windows PrivEsc/13. Print Operators.md",
     "23. Windows PrivEsc/16. Weak Permissions.md",
-    "23. Windows PrivEsc/15. User Account Control (UAC).md",
     "23. Windows PrivEsc/14. Server Operators.md",
-    "23. Windows PrivEsc/11. DnsAdmins.md",
     "23. Windows PrivEsc/12. Hyper-V Administrators.md",
     "23. Windows PrivEsc/10. Event Log Readers.md",
     "23. Windows PrivEsc/3. Initial Enumeration.md",
