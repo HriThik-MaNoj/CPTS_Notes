@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/25. Pillaging.md",
+                "file": "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "25. Pillaging"
+              "title": "11. Attacking Active Directory and NTDS.dit"
             }
           }
         ]
@@ -55,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "\"pass the hash\"",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -76,7 +76,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -199,8 +200,15 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "9. Attacking common Services/3. Attacking SMB.md",
+    "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
+    "11. Active Directory Enumeration & Attacks/1. Intro.md",
+    "23. Windows PrivEsc/14. Server Operators.md",
+    "Methodology/modules/13-post-exploitation.md",
+    "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
+    "Methodology/modules/11-active-directory.md",
+    "23. Windows PrivEsc/9. Windows Built-in Groups.md",
     "23. Windows PrivEsc/25. Pillaging.md",
+    "9. Attacking common Services/3. Attacking SMB.md",
     "11. Active Directory Enumeration & Attacks/3. LLMNR or NBT-NS Poisoning  from linux.md",
     "8. Password Attacks/2. Hashcat.md",
     "23. Windows PrivEsc/24. Interacting with Users.md",
@@ -215,17 +223,10 @@
     "23. Windows PrivEsc/17. Kernel Exploits.md",
     "23. Windows PrivEsc/13. Print Operators.md",
     "23. Windows PrivEsc/16. Weak Permissions.md",
-    "23. Windows PrivEsc/14. Server Operators.md",
     "23. Windows PrivEsc/12. Hyper-V Administrators.md",
     "23. Windows PrivEsc/10. Event Log Readers.md",
     "23. Windows PrivEsc/3. Initial Enumeration.md",
-    "23. Windows PrivEsc/9. Windows Built-in Groups.md",
-    "23. Windows PrivEsc/8. SeTakeOwnershipPrivilege.md",
-    "5. File Transfers/1. Windows File Transfer Methods.md",
     "attachments/Pasted image 20260808063025.png",
-    "23. Windows PrivEsc/7. SeDebugPrivilege.md",
-    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
-    "Rust scan Installation.md",
     "attachments/Pasted image 20260807070913.png",
     "23. Windows PrivEsc",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
