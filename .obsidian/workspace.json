@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/26. Misc Techniques.md",
+                "file": "23. Windows PrivEsc/27. Windows Server.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "26. Misc Techniques"
+              "title": "27. Windows Server"
             }
           }
         ]
@@ -199,8 +199,9 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
     "23. Windows PrivEsc/26. Misc Techniques.md",
+    "23. Windows PrivEsc/27. Windows Server.md",
+    "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
     "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
     "11. Active Directory Enumeration & Attacks/1. Intro.md",
     "23. Windows PrivEsc/14. Server Operators.md",
@@ -224,7 +225,6 @@
     "23. Windows PrivEsc/13. Print Operators.md",
     "23. Windows PrivEsc/16. Weak Permissions.md",
     "23. Windows PrivEsc/12. Hyper-V Administrators.md",
-    "23. Windows PrivEsc/10. Event Log Readers.md",
     "attachments/Pasted image 20260808063025.png",
     "attachments/Pasted image 20260807070913.png",
     "23. Windows PrivEsc",
