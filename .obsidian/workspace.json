@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/27. Windows Server.md",
+                "file": "19. Command Injection/1. Command Injection.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "27. Windows Server"
+              "title": "1. Command Injection"
             }
           }
         ]
@@ -199,8 +199,13 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
-    "23. Windows PrivEsc/26. Misc Techniques.md",
+    "Rust scan Installation.md",
+    "23. Windows PrivEsc/3. Initial Enumeration.md",
+    "23. Windows PrivEsc/2. Enumerating Protections.md",
+    "23. Windows PrivEsc/1. Useful Tools.md",
+    "23. Windows PrivEsc/28. Windows Desktop Versions.md",
     "23. Windows PrivEsc/27. Windows Server.md",
+    "23. Windows PrivEsc/26. Misc Techniques.md",
     "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
     "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
     "11. Active Directory Enumeration & Attacks/1. Intro.md",
@@ -220,11 +225,6 @@
     "23. Windows PrivEsc/21. Other files.md",
     "23. Windows PrivEsc/20. Credential Hunting.md",
     "23. Windows PrivEsc/19. DLL Injection.md",
-    "23. Windows PrivEsc/18. Vulnerable Services.md",
-    "23. Windows PrivEsc/17. Kernel Exploits.md",
-    "23. Windows PrivEsc/13. Print Operators.md",
-    "23. Windows PrivEsc/16. Weak Permissions.md",
-    "23. Windows PrivEsc/12. Hyper-V Administrators.md",
     "attachments/Pasted image 20260808063025.png",
     "attachments/Pasted image 20260807070913.png",
     "23. Windows PrivEsc",
