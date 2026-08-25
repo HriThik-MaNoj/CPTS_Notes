@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "rockyou.md",
+                "file": "gh token.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "rockyou"
+              "title": "gh token"
             }
           }
         ]
@@ -199,6 +199,7 @@
   },
   "active": "8475d336dd11fcab",
   "lastOpenFiles": [
+    "rockyou.md",
     "gh token.md",
     "23. Windows PrivEsc/29. PwDump.md",
     "24. Documentation and Reporting",
@@ -209,7 +210,6 @@
     "23. Windows PrivEsc/26. Misc Techniques.md",
     "Rust scan Installation.md",
     "Ligolo-ng.md",
-    "rockyou.md",
     "23. Windows PrivEsc/18. Vulnerable Services.md",
     "23. Windows PrivEsc/24. Interacting with Users.md",
     "23. Windows PrivEsc/25. Pillaging.md",
