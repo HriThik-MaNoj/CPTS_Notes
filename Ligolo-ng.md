@@ -33,7 +33,7 @@ chmod +x proxy agent
 
 ## 🌐 Set Up the TUN Interface (run once per session)
 
-bash
+
 
 ```bash
 # Create the ligolo TUN interface (requires root)
