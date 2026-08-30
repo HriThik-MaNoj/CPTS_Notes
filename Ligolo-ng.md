@@ -34,7 +34,6 @@ chmod +x proxy agent
 ## 🌐 Set Up the TUN Interface (run once per session)
 
 
-
 ```bash
 # Create the ligolo TUN interface (requires root)
 sudo ip tuntap add user $USER mode tun ligolo
