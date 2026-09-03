@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DarkHaven WT.md",
+                "file": "9. Attacking common Services/3. Attacking SMB.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DarkHaven WT"
+              "title": "3. Attacking SMB"
             }
           },
           {
@@ -84,7 +84,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "responder",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -105,7 +105,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -226,8 +227,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "b181d67048d5c974",
+  "active": "50e017fd42aee496",
   "lastOpenFiles": [
+    "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
+    "HTB Boxes/1. Fluffy.md",
+    "DarkHaven WT.md",
+    "HTB Boxes",
+    "AD Methodology.md",
+    "academy-to-md.md",
+    "Bloodhound.md",
+    "Rust scan Installation.md",
+    "24. Documentation and Reporting/3. Folder structure command.md",
+    "3. Footprinting/1. Enumeration Principles.md",
     "attachments/Pasted image 20260831061437.png",
     "attachments/Pasted image 20260831060507.png",
     "attachments/Pasted image 20260830213214.png",
@@ -238,14 +249,10 @@
     "attachments/Pasted image 20260830110453.png",
     "attachments/Pasted image 20260830110303.png",
     "attachments/Pasted image 20260830110259.png",
-    "attachments/Pasted image 20260830103201.png",
     "11. Active Directory Enumeration & Attacks/24. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Windows.md",
-    "DarkHaven WT.md",
     "11. Active Directory Enumeration & Attacks/22. Attacking Domain Trusts - Child -> Parent Trusts - from Windows.md",
     "Ligolo-ng.md",
-    "Rust scan Installation.md",
     "rockyou.md",
-    "AD Methodology.md",
     "24. Documentation and Reporting/8. Excersise.md",
     "11. Active Directory Enumeration & Attacks/0. Tips and Tricks.md",
     "academy_og/Active Directory Enumeration & Attacks.md",
@@ -255,24 +262,18 @@
     "24. Documentation and Reporting/5. Types of Reports.md",
     "1. Getting Started/1. Basic Tools/3. Tmux.md",
     "24. Documentation and Reporting/4. Formatting and Redaction.md",
-    "24. Documentation and Reporting/3. Folder structure command.md",
     "24. Documentation and Reporting/2. Evidence Capturing.md",
     "24. Documentation and Reporting",
     "gh token.md",
     "23. Windows PrivEsc/29. PwDump.md",
     "24. Documentation and Reporting",
     "23. Windows PrivEsc/1. Useful Tools.md",
-    "23. Windows PrivEsc/2. Enumerating Protections.md",
-    "23. Windows PrivEsc/21. Other files.md",
-    "23. Windows PrivEsc/20. Credential Hunting.md",
-    "23. Windows PrivEsc/26. Misc Techniques.md",
     "23. Windows PrivEsc",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
     "21. Attacking Common Applications",
     "Methodology",
     "academy_og/ligolo-selfcerts/ligolo-ng.yaml",
-    "academy_og/ligolo-selfcerts/ligolo-ng.history",
-    "Methodology/assets/htb-academy-to-md-linux-amd64"
+    "academy_og/ligolo-selfcerts/ligolo-ng.history"
   ]
 }
