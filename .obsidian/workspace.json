@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "9. Attacking common Services/3. Attacking SMB.md",
+                "file": "HTB Boxes/1. Fluffy.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Attacking SMB"
+              "title": "1. Fluffy"
             }
           },
           {
@@ -84,7 +84,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "responder",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -105,8 +105,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -227,8 +226,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "50e017fd42aee496",
+  "active": "b181d67048d5c974",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260903203921.png",
+    "9. Attacking common Services/3. Attacking SMB.md",
     "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
     "HTB Boxes/1. Fluffy.md",
     "DarkHaven WT.md",
@@ -265,9 +266,7 @@
     "24. Documentation and Reporting/2. Evidence Capturing.md",
     "24. Documentation and Reporting",
     "gh token.md",
-    "23. Windows PrivEsc/29. PwDump.md",
     "24. Documentation and Reporting",
-    "23. Windows PrivEsc/1. Useful Tools.md",
     "23. Windows PrivEsc",
     "22. Linux PrivEsc/Unconfirmed 3999.crdownload",
     "22. Linux PrivEsc",
