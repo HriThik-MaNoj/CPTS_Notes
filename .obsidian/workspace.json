@@ -41,6 +41,20 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "6. SeImpersonate and SeAssignPrimaryToken"
+            }
+          },
+          {
+            "id": "f3a0be93941f0e1f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "HTB Boxes/2. Jeeves.md",
                 "mode": "source",
                 "source": false
@@ -48,9 +62,23 @@
               "icon": "lucide-file",
               "title": "2. Jeeves"
             }
+          },
+          {
+            "id": "97c7e806b0c626e4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DarkHaven WT.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "DarkHaven WT"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -226,12 +254,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "2092b36ba636a6e9",
+  "active": "f3a0be93941f0e1f",
   "lastOpenFiles": [
+    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
+    "DarkHaven WT.md",
+    "HTB Boxes/2. Jeeves.md",
+    "attachments/Pasted image 20260904190612.png",
+    "attachments/Pasted image 20260904190310.png",
+    "attachments/Pasted image 20260904190209.png",
+    "21. Attacking Common Applications/7. Jenkins.md",
     "attachments/Pasted image 20260904181003.png",
     "attachments/Pasted image 20260904180936.png",
     "Rust scan Installation.md",
-    "HTB Boxes/2. Jeeves.md",
     "HTB Boxes/1. Fluffy.md",
     "9. Attacking common Services/3. Attacking SMB.md",
     "attachments/Pasted image 20260904060625.png",
@@ -242,18 +276,13 @@
     "rockyou.md",
     "11. Active Directory Enumeration & Attacks/24. Attacking Domain Trusts - Cross-Forest Trust Abuse - from Windows.md",
     "attachments/Pasted image 20260903204329.png",
-    "attachments/Pasted image 20260903203921.png",
     "21. Attacking Common Applications/2. Application Discovery and Enumeration.md",
-    "DarkHaven WT.md",
     "HTB Boxes",
     "AD Methodology.md",
     "academy-to-md.md",
     "Bloodhound.md",
     "24. Documentation and Reporting/3. Folder structure command.md",
     "3. Footprinting/1. Enumeration Principles.md",
-    "attachments/Pasted image 20260831061437.png",
-    "attachments/Pasted image 20260831060507.png",
-    "attachments/Pasted image 20260830213214.png",
     "11. Active Directory Enumeration & Attacks/22. Attacking Domain Trusts - Child -> Parent Trusts - from Windows.md",
     "Ligolo-ng.md",
     "24. Documentation and Reporting/8. Excersise.md",
@@ -263,8 +292,6 @@
     "24. Documentation and Reporting/6. Components of a Report.md",
     "24. Documentation and Reporting/5. Types of Reports.md",
     "1. Getting Started/1. Basic Tools/3. Tmux.md",
-    "24. Documentation and Reporting/4. Formatting and Redaction.md",
-    "24. Documentation and Reporting/2. Evidence Capturing.md",
     "24. Documentation and Reporting",
     "24. Documentation and Reporting",
     "23. Windows PrivEsc",
