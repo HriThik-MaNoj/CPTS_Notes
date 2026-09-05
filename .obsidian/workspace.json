@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB Boxes/3. Trick.md",
+                "file": "HTB Boxes/4. Postman.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3. Trick"
+              "title": "4. Postman"
             }
           }
         ]
@@ -199,8 +199,12 @@
   },
   "active": "ce44fd74d4dd0f82",
   "lastOpenFiles": [
-    "Burp.md",
+    "21. Attacking Common Applications/19. Attacking Applications Connecting to Services.md",
+    "21. Attacking Common Applications/20. Other Notable Applications.md",
+    "HTB Boxes/4. Postman.md",
     "HTB Boxes/3. Trick.md",
+    "attachments/Pasted image 20260905193922.png",
+    "Burp.md",
     "attachments/Pasted image 20260905184433.png",
     "attachments/Pasted image 20260905181408.png",
     "attachments/Pasted image 20260905181303.png",
@@ -217,7 +221,6 @@
     "Methodology/modules/04-web-application.md",
     "4. Information Gathering - Web Edition/4. DNS Zone Transfer.md",
     "attachments/Pasted image 20260905130813.png",
-    "attachments/Pasted image 20260905121236.png",
     "4. Information Gathering - Web Edition/2. DNS.md",
     "9. Attacking common Services/1. Theory.md",
     "20. Web Attacks/5. XXE.md",
@@ -233,8 +236,6 @@
     "3. Footprinting/4. Staff.md",
     "DarkHaven WT.md",
     "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
-    "HTB Boxes/1. Fluffy.md",
-    "9. Attacking common Services/3. Attacking SMB.md",
     "HTB Boxes",
     "24. Documentation and Reporting",
     "24. Documentation and Reporting",
