@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB Boxes/4. Postman.md",
+                "file": "HTB Boxes/5. Medium.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4. Postman"
+              "title": "5. Medium"
             }
           }
         ]
@@ -199,8 +199,10 @@
   },
   "active": "ce44fd74d4dd0f82",
   "lastOpenFiles": [
-    "22. Linux PrivEsc/1. Linux privilege escalation.md",
     "HTB Boxes/4. Postman.md",
+    "HTB Boxes/5. Medium.md",
+    "attachments/Pasted image 20260906112618.png",
+    "22. Linux PrivEsc/1. Linux privilege escalation.md",
     "21. Attacking Common Applications/19. Attacking Applications Connecting to Services.md",
     "21. Attacking Common Applications/20. Other Notable Applications.md",
     "HTB Boxes/3. Trick.md",
@@ -221,7 +223,6 @@
     "20. Web Attacks/2. IDOR.md",
     "Methodology/modules/04-web-application.md",
     "4. Information Gathering - Web Edition/4. DNS Zone Transfer.md",
-    "attachments/Pasted image 20260905130813.png",
     "4. Information Gathering - Web Edition/2. DNS.md",
     "9. Attacking common Services/1. Theory.md",
     "20. Web Attacks/5. XXE.md",
@@ -235,7 +236,6 @@
     "4. Information Gathering - Web Edition/5. Virtual Hosts.md",
     "4. Information Gathering - Web Edition/3. Subdomains.md",
     "3. Footprinting/4. Staff.md",
-    "DarkHaven WT.md",
     "HTB Boxes",
     "24. Documentation and Reporting",
     "24. Documentation and Reporting",
