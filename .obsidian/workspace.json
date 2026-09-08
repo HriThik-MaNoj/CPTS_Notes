@@ -13,15 +13,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB Boxes/5. Pov.md",
+                "file": "23. Windows PrivEsc/7. SeDebugPrivilege.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5. Pov"
+              "title": "7. SeDebugPrivilege"
+            }
+          },
+          {
+            "id": "25abf7619384a1c4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HTB Boxes/1. Fluffy.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1. Fluffy"
+            }
+          },
+          {
+            "id": "53236219bd449786",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HTB Boxes/6. TombWatcher.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "6. TombWatcher"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -197,12 +226,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ce44fd74d4dd0f82",
+  "active": "53236219bd449786",
   "lastOpenFiles": [
+    "HTB Boxes/1. Fluffy.md",
+    "HTB Boxes/6. TombWatcher.md",
+    "HTB Boxes/5. Pov.md",
+    "DarkHaven WT.md",
+    "Burp.md",
+    "Rust scan Installation.md",
+    "23. Windows PrivEsc/7. SeDebugPrivilege.md",
+    "21. Attacking Common Applications/1. Pre req.md",
     "attachments/Pasted image 20260907195222.png",
     "attachments/Pasted image 20260907192201.png",
-    "Burp.md",
-    "HTB Boxes/5. Pov.md",
     "attachments/Pasted image 20260906214115.png",
     "attachments/Pasted image 20260906213815.png",
     "attachments/Pasted image 20260906213803.png",
@@ -214,7 +249,6 @@
     "17. File Inclusion/4. Log poisoning.md",
     "17. File Inclusion/3. LFI and File Uploads.md",
     "17. File Inclusion/1. Local File Inclusion.md",
-    "HTB Boxes/1. Fluffy.md",
     "HTB Boxes/3. Trick.md",
     "HTB Boxes/4. Postman.md",
     "4. Information Gathering - Web Edition/3. Subdomains.md",
@@ -225,7 +259,6 @@
     "21. Attacking Common Applications/20. Other Notable Applications.md",
     "attachments/Pasted image 20260905193922.png",
     "attachments/Pasted image 20260905184433.png",
-    "attachments/Pasted image 20260905181408.png",
     "19. Command Injection/1. Command Injection.md",
     "3. Footprinting/8. DNS.md",
     "20. Web Attacks/2. IDOR.md",
@@ -234,11 +267,7 @@
     "4. Information Gathering - Web Edition/2. DNS.md",
     "9. Attacking common Services/1. Theory.md",
     "20. Web Attacks/5. XXE.md",
-    "23. Windows PrivEsc/11. DnsAdmins.md",
     "Untitled",
-    "20. Web Attacks/4. IDOR in Insecure APIs.md",
-    "20. Web Attacks/3. Mass IDOR Enumeration.md",
-    "20. Web Attacks/1. HTTP Verb Tampering.md",
     "HTB Boxes",
     "24. Documentation and Reporting",
     "24. Documentation and Reporting",
