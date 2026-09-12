@@ -29,6 +29,5 @@
     "lucideIconPackType": "native",
     "debugMode": false,
     "useInternalPlugins": false
-  },
-  "cpts-quick-references": "LiDownload"
+  }
 }

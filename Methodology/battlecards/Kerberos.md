@@ -72,3 +72,5 @@ SERVICE HASH → Silver Ticket → Service Impersonation
 - Kerberoasting only when you already have creds (can sometimes be done via other means)
 - Not saving .ccache tickets properly for Pass-the-Ticket
 - Forgetting RC4 encryption downgrade for Kerberoast
+
+
