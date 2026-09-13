@@ -53,11 +53,14 @@ Non-root shell obtained on Linux
     ├── Check for Docker/LXD membership
     └── Check NFS exports (root_squash?)
 
-## Windows Privesc Flow
+
 
 ```
+
+```python
 Non-admin shell obtained on Windows
-│
+
+│## Windows Privesc Flow
 ├── Initial enumeration
 │   ├── whoami → Current user
 │   ├── whoami /priv → Token privileges
