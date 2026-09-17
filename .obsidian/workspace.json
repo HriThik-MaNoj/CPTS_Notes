@@ -80,7 +80,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 327.5
+    "width": 327.5,
+    "collapsed": true
   },
   "right": {
     "id": "ccd62be3c15c9b6f",
@@ -199,6 +200,10 @@
   },
   "active": "53236219bd449786",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260917171202.png",
+    "attachments/Pasted image 20260917170920.png",
+    "attachments/Pasted image 20260917170550.png",
+    "attachments/Pasted image 20260917165857.png",
     "attachments/Pasted image 20260917153804.png",
     "attachments/Pasted image 20260917151522.png",
     "attachments/Pasted image 20260917151446.png",
@@ -231,11 +236,7 @@
     "Methodology/exam/enumeration-completeness.md",
     "Methodology/decision-trees/web-attack-flow.md",
     "attachments/Pasted image 20260912181946.png",
-    "attachments/Pasted image 20260912152619.png",
-    "attachments/Pasted image 20260912152614.png",
-    "attachments/Pasted image 20260912152520.png",
     "Untitled 3.base",
-    "11. Active Directory Enumeration & Attacks/playbook/public/favicon.svg",
     "Untitled 1.base",
     "Untitled 2.base",
     "Untitled.base",
