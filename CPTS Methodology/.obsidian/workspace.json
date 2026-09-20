@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "b5e35a40e1ce89ab",
+    "id": "3574e827e4180b38",
     "type": "split",
     "children": [
       {
-        "id": "4aeb809716118ce9",
+        "id": "69b59985f43abe5f",
         "type": "tabs",
         "children": [
           {
-            "id": "4830d4699c2df41f",
+            "id": "bcc419b9f7fefcfc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB Boxes/13. Authority.md",
+                "file": "03 - Web Exploitation & Foothold.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "13. Authority"
+              "title": "03 - Web Exploitation & Foothold"
             }
           }
         ]
@@ -27,22 +27,22 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "1c3678f977b98aaf",
+    "id": "bdf73de1b7a2665f",
     "type": "split",
     "children": [
       {
-        "id": "567ddcabe9f71055",
+        "id": "2ea37bf98aa8b52d",
         "type": "tabs",
         "children": [
           {
-            "id": "932c6f6a2c9d5158",
+            "id": "b7d80d50a7c40dee",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
-                "showSearch": true,
+                "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
@@ -50,7 +50,7 @@
             }
           },
           {
-            "id": "50e017fd42aee496",
+            "id": "c6bfef28dd156b73",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -67,11 +67,14 @@
             }
           },
           {
-            "id": "4381e0160488b930",
+            "id": "17e00f664cb09e76",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {},
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
@@ -80,23 +83,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 327.5
+    "width": 300
   },
   "right": {
-    "id": "ccd62be3c15c9b6f",
+    "id": "e0dc91578f461cda",
     "type": "split",
     "children": [
       {
-        "id": "aa7f32d90c12cea1",
+        "id": "32ad2eb359ad952b",
         "type": "tabs",
         "children": [
           {
-            "id": "569411f5eea37c74",
+            "id": "def2d9e1d09ca54b",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
+                "file": "03 - Web Exploitation & Foothold.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,25 +109,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 3. Initial Enumeration of the Domain"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "8073e1b9caeef627",
+            "id": "7d146e82e2cf69ff",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
+                "file": "03 - Web Exploitation & Foothold.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 3. Initial Enumeration of the Domain"
+              "title": "Outgoing links"
             }
           },
           {
-            "id": "e553728bf5d2e3f3",
+            "id": "aaa994691d7bf0d7",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -139,7 +142,7 @@
             }
           },
           {
-            "id": "b98bdb3eaa4f72ff",
+            "id": "1c93659b2a48c8c1",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -153,28 +156,18 @@
             }
           },
           {
-            "id": "072bbbee3e6f9f83",
+            "id": "95a764b4a21e0d56",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "11. Active Directory Enumeration & Attacks/3. Initial Enumeration of the Domain.md",
+                "file": "03 - Web Exploitation & Foothold.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3. Initial Enumeration of the Domain"
-            }
-          },
-          {
-            "id": "296ce821f1f8a4d4",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {},
-              "icon": "lucide-ghost",
-              "title": "calendar"
+              "title": "Outline"
             }
           }
         ]
@@ -186,64 +179,18 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "templater-obsidian:Templater": false
+      "bases:Create new base": false
     }
   },
-  "active": "4830d4699c2df41f",
+  "active": "bcc419b9f7fefcfc",
   "lastOpenFiles": [
-    "CPTS Methodology/00 - MASTER Decision Tree.md",
-    "CPTS Methodology/08 - Active Directory & Lateral Movement.md",
-    "CPTS Methodology/02 - External Recon & Enumeration.md",
-    "CPTS Methodology/07 - Pivoting & Tunneling.md",
-    "CPTS Methodology/06 - Privilege Escalation.md",
-    "CPTS Methodology/05 - Shells, Transfers & Metasploit.md",
-    "CPTS Methodology/03 - Web Exploitation & Foothold.md",
-    "CPTS Methodology/01 - Exam Ops & Reporting.md",
-    "HTB Boxes/13. Authority.md",
-    "CPTS Methodology/04 - Credentials & Common Services.md",
-    "CPTS Methodology",
-    "attachments/Pasted image 20260920094806.png",
-    "HTB Boxes/11. Voleour.md",
-    "attachments/Pasted image 20260920094457.png",
-    "attachments/Pasted image 20260920094103.png",
-    "attachments/Pasted image 20260920094004.png",
-    "attachments/Pasted image 20260920092834.png",
-    "cmdcode.md",
-    "banner grabbing.md",
-    "attachments/Pasted image 20260919203634.png",
-    "Untitled 1.base",
-    "15. SQLMAP/1. Database Enumeration.md",
-    "Untitled 2.base",
-    "Untitled.base",
-    "9. Attacking common Services/10. Lab Hard.md",
-    "1. Getting Started/2. Service Scanning/2. Attacking Network Services.md",
-    "5. File Transfers/1. Windows File Transfer Methods.md",
-    "3. Footprinting/6. SMB.md",
-    "attachments/Pasted image 20260919223951.png",
-    "8. Password Attacks/21. htb-password-attacks-writeup.md",
-    "HTB Boxes/5. Pov.md",
-    "8. Password Attacks/12. Credential Hunting in Windows.md",
-    "HTB Boxes/12. Administrator.md",
-    "attachments/Pasted image 20260919185929.png",
-    "attachments/Pasted image 20260919114852.png",
-    "attachments/Pasted image 20260919114808.png",
-    "3. Footprinting/8. DNS.md",
-    "9. Attacking common Services/8. Lab Easy.md",
-    "3. Footprinting/5. FTP.md",
-    "HTB Boxes/6. TombWatcher.md",
-    "Untitled 3.base",
-    "Untitled",
-    "HTB Boxes",
-    "24. Documentation and Reporting",
-    "24. Documentation and Reporting",
-    "23. Windows PrivEsc"
+    "02 - External Recon & Enumeration.md",
+    "00 - MASTER Decision Tree.md"
   ]
 }
