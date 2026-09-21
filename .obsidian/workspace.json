@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB Boxes/13. Authority.md",
+                "file": "HTB Boxes/14. Craft.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "13. Authority"
+              "title": "14. Craft"
             }
           }
         ]
@@ -199,6 +199,16 @@
   },
   "active": "4830d4699c2df41f",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260921151218.png",
+    "4. Information Gathering - Web Edition/8. Automating Recon.md",
+    "Methodology/modules/01-info-gathering.md",
+    "HTB Boxes/14. Craft.md",
+    "4. Information Gathering - Web Edition/2. DNS.md",
+    "4. Information Gathering - Web Edition/1.WHOIS.md",
+    "HTB Boxes/13. Authority.md",
+    "attachments/Pasted image 20260920110319.png",
+    "HTB Boxes/1. Fluffy.md",
+    "CPTS Methodology/01 - Exam Ops & Reporting.md",
     "CPTS Methodology/00 - MASTER Decision Tree.md",
     "CPTS Methodology/08 - Active Directory & Lateral Movement.md",
     "CPTS Methodology/02 - External Recon & Enumeration.md",
@@ -206,8 +216,6 @@
     "CPTS Methodology/06 - Privilege Escalation.md",
     "CPTS Methodology/05 - Shells, Transfers & Metasploit.md",
     "CPTS Methodology/03 - Web Exploitation & Foothold.md",
-    "CPTS Methodology/01 - Exam Ops & Reporting.md",
-    "HTB Boxes/13. Authority.md",
     "CPTS Methodology/04 - Credentials & Common Services.md",
     "CPTS Methodology",
     "attachments/Pasted image 20260920094806.png",
@@ -229,16 +237,8 @@
     "3. Footprinting/6. SMB.md",
     "attachments/Pasted image 20260919223951.png",
     "8. Password Attacks/21. htb-password-attacks-writeup.md",
-    "HTB Boxes/5. Pov.md",
-    "8. Password Attacks/12. Credential Hunting in Windows.md",
-    "HTB Boxes/12. Administrator.md",
     "attachments/Pasted image 20260919185929.png",
     "attachments/Pasted image 20260919114852.png",
-    "attachments/Pasted image 20260919114808.png",
-    "3. Footprinting/8. DNS.md",
-    "9. Attacking common Services/8. Lab Easy.md",
-    "3. Footprinting/5. FTP.md",
-    "HTB Boxes/6. TombWatcher.md",
     "Untitled 3.base",
     "Untitled",
     "HTB Boxes",
