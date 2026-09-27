@@ -1,10 +1,4 @@
-# 00 - MASTER Decision Tree
 
-This folder is the CPTS exam methodology: this router plus 8 phase files. Open this file first, find your stage, follow the branch — every node below lives in full detail in its phase file.
-
-**Marker convention:** `⚠️` = NOT from my own notes (external) — always followed by a source URL; `TYPO:` = my note has a typo (correction given); `GAP:` = my notes contain no command here; `STUB:` = the source note is a stub. Unmarked items are from my own notes. Loop-back sections are linkage-only (no source note). Verify any `⚠️` before trusting it.
-
-One rule runs the whole exam: **enumerate → act → loot → re-enumerate.** Never stop at "act" — loot, then re-enumerate.
 
 ## THE MAIN FLOW
 
