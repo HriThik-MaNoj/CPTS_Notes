@@ -52,6 +52,90 @@
               "icon": "lucide-file",
               "title": "Ligolo-ng"
             }
+          },
+          {
+            "id": "8e698ac0d9314e68",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3. Footprinting/6. SMB.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "6. SMB"
+            }
+          },
+          {
+            "id": "98e75f19ddcc8303",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CPTS Methodology/02 - External Recon & Enumeration.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02 - External Recon & Enumeration"
+            }
+          },
+          {
+            "id": "53075752999b0f4b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "21. Attacking Common Applications/6. Tomcat.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "6. Tomcat"
+            }
+          },
+          {
+            "id": "b3f3b3d5a70793d0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3. Footprinting/5. FTP.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5. FTP"
+            }
+          },
+          {
+            "id": "46c8b5ca0485054e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "9. Attacking common Services/4. Attacking SQL Databases..md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4. Attacking SQL Databases."
+            }
+          },
+          {
+            "id": "f048534eee14ea3d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "6. SeImpersonate and SeAssignPrimaryToken"
+            }
           }
         ]
       }
@@ -75,7 +159,7 @@
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
                 "showSearch": true,
-                "searchQuery": ""
+                "searchQuery": "impersonate"
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -88,7 +172,7 @@
               "type": "search",
               "state": {
                 "query": "",
-                "matchingCase": false,
+                "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -231,14 +315,24 @@
   },
   "active": "3e703c32b556b9b6",
   "lastOpenFiles": [
+    "9. Attacking common Services/4. Attacking SQL Databases..md",
+    "25. AEN/1. Initial machine.md",
+    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
+    "CPTS Methodology/04 - Credentials & Common Services.md",
+    "attachments/Pasted image 20261001105409.png",
+    "3. Footprinting/5. FTP.md",
+    "3. Footprinting/6. SMB.md",
+    "21. Attacking Common Applications/6. Tomcat.md",
+    "CPTS Methodology/02 - External Recon & Enumeration.md",
+    "3. Footprinting/8. DNS.md",
     "Ligolo-ng.md",
+    "Methodology/modules/02-enumeration.md",
     "25. AEN/2. Exploitation.md",
     "academy_og/Active Directory Enumeration & Attacks.md",
     "6. Shells and Payloads/7. Spawning Interactive Shells.md",
     "10. Pivoting, Tunneling and Port Forwarding/5. Socat Redirection with a Reverse Shell.md",
     "13. Login Bruteforcing/1. Hydra.md",
     "21. Attacking Common Applications/16. IIS Tilde Enumeration.md",
-    "25. AEN/1. Initial machine.md",
     "attachments/Pasted image 20260930123158.png",
     "attachments/Pasted image 20260930123002.png",
     "attachments/Pasted image 20260930122806.png",
@@ -248,7 +342,6 @@
     "attachments/Pasted image 20260930112951.png",
     "attachments/Pasted image 20260930112414.png",
     "attachments/Pasted image 20260930112302.png",
-    "attachments/Pasted image 20260930112220.png",
     "xml payload.md",
     "ssrf payload.md",
     "22. Linux PrivEsc/7. Escaping restricted shells.md",
@@ -258,15 +351,6 @@
     "9. Attacking common Services/5. Attacking RDP.md",
     "17. File Inclusion/1. Local File Inclusion.md",
     "6. Shells and Payloads/4. Crafting Payloads with MSFvenom.md",
-    "6. Shells and Payloads/3. Automating Payloads & Delivery with Metasploit.md",
-    "6. Shells and Payloads/2. Reverse Shells.md",
-    "DarkHaven WT.md",
-    "8. Password Attacks/14. Credential Hunting in Linux.md",
-    "8. Password Attacks/13. Linux Authentication Process.md",
-    "8. Password Attacks/12. Credential Hunting in Windows.md",
-    "8. Password Attacks/11. Attacking Active Directory and NTDS.dit.md",
-    "8. Password Attacks/10. Attacking Windows Credential Manager.md",
-    "8. Password Attacks/9. Attacking LSASS.md",
     "25. AEN",
     "Untitled 3.base",
     "Untitled 1.base",
