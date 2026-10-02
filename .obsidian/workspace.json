@@ -24,87 +24,45 @@
             }
           },
           {
-            "id": "5578ab81544e59a9",
+            "id": "4c76d42572897f99",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DarkHaven WT.md",
+                "file": "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DarkHaven WT"
+              "title": "4. Miscellaneous File Transfer Methods"
             }
           },
           {
-            "id": "8382e67ccded8b89",
+            "id": "1e5a28cad373417c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
+                "file": "8. Password Attacks/4. Protected files cracking.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "6. SeImpersonate and SeAssignPrimaryToken"
+              "title": "4. Protected files cracking"
             }
           },
           {
-            "id": "acfd1c4523a0a255",
+            "id": "94a000f163db30da",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "9. Attacking common Services/4. Attacking SQL Databases..md",
+                "file": "23. Windows PrivEsc/22. Further Credential Theft.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4. Attacking SQL Databases."
-            }
-          },
-          {
-            "id": "9b5af17dae995f18",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Methodology/modules/02-enumeration.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "02-enumeration"
-            }
-          },
-          {
-            "id": "80c2836c1d2e982d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HTB Boxes/1. Fluffy.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "1. Fluffy"
-            }
-          },
-          {
-            "id": "f0578a07b812efa0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CPTS Methodology/04 - Credentials & Common Services.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "04 - Credentials & Common Services"
+              "title": "22. Further Credential Theft"
             }
           }
         ]
@@ -129,7 +87,7 @@
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
                 "showSearch": true,
-                "searchQuery": "SAM"
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -141,7 +99,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "spider_plus",
+                "query": "keepass",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -286,42 +244,42 @@
   },
   "active": "3e703c32b556b9b6",
   "lastOpenFiles": [
-    "CPTS Methodology/04 - Credentials & Common Services.md",
+    "23. Windows PrivEsc/22. Further Credential Theft.md",
     "25. AEN/1. Initial machine.md",
+    "attachments/Pasted image 20261002205949.png",
+    "8. Password Attacks/4. Protected files cracking.md",
+    "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
+    "CPTS Methodology/04 - Credentials & Common Services.md",
+    "10. Pivoting, Tunneling and Port Forwarding/2.Dynamic Port Forwarding with SSH and SOCKS Tunneling.md",
+    "5. File Transfers/1. Windows File Transfer Methods.md",
+    "3. Footprinting/10. IMAP  POP3.md",
+    "10. IMAP POP3.md",
+    "6. Shells and Payloads/2. Reverse Shells.md",
+    "3. Footprinting/9. SMTP.md",
+    "academy_og/Active Directory Enumeration & Attacks.md",
     "HTB Boxes/1. Fluffy.md",
+    "Methodology/modules/02-enumeration.md",
+    "9. Attacking common Services/4. Attacking SQL Databases..md",
+    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
+    "DarkHaven WT.md",
+    "attachments/Pasted image 20261002172034.png",
+    "CPTS Methodology/03 - Web Exploitation & Foothold.md",
+    "7. Metasploit/1. Metasploit.md",
+    "attachments/Pasted image 20261002142227.png",
     "attachments/Pasted image 20261001170300.png",
     "attachments/Pasted image 20261001165832.png",
-    "Methodology/modules/02-enumeration.md",
     "18. File Upload attacks/1. File uploads.md",
     "CPTS Methodology/00 - MASTER Decision Tree.md",
     "attachments/Pasted image 20261001155728.png",
-    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
-    "DarkHaven WT.md",
-    "9. Attacking common Services/4. Attacking SQL Databases..md",
     "HTB Boxes/2. Jeeves.md",
     "academy_og/Windows Privilege Escalation.md",
     "academy_og/File Transfers.md",
     "25. AEN/2. Exploitation.md",
     "6. Shells and Payloads/8. Web Shells.md",
-    "6. Shells and Payloads/7. Spawning Interactive Shells.md",
-    "3. Footprinting/5. FTP.md",
-    "21. Attacking Common Applications/6. Tomcat.md",
-    "CPTS Methodology/02 - External Recon & Enumeration.md",
-    "3. Footprinting/6. SMB.md",
-    "Ligolo-ng.md",
     "attachments/Pasted image 20261001114140.png",
     "attachments/Pasted image 20261001105409.png",
-    "3. Footprinting/8. DNS.md",
-    "academy_og/Active Directory Enumeration & Attacks.md",
-    "10. Pivoting, Tunneling and Port Forwarding/5. Socat Redirection with a Reverse Shell.md",
-    "13. Login Bruteforcing/1. Hydra.md",
-    "21. Attacking Common Applications/16. IIS Tilde Enumeration.md",
     "attachments/Pasted image 20260930123158.png",
     "attachments/Pasted image 20260930123002.png",
-    "attachments/Pasted image 20260930122806.png",
-    "attachments/Pasted image 20260930113708.png",
-    "attachments/Pasted image 20260930113537.png",
-    "xml payload.md",
     "25. AEN",
     "Untitled 3.base",
     "Untitled 1.base",
