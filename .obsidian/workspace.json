@@ -24,45 +24,17 @@
             }
           },
           {
-            "id": "4c76d42572897f99",
+            "id": "b3537ab51f474b38",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
+                "file": "HTB Boxes/12. Administrator.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4. Miscellaneous File Transfer Methods"
-            }
-          },
-          {
-            "id": "1e5a28cad373417c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "8. Password Attacks/4. Protected files cracking.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "4. Protected files cracking"
-            }
-          },
-          {
-            "id": "94a000f163db30da",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "23. Windows PrivEsc/22. Further Credential Theft.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "22. Further Credential Theft"
+              "title": "12. Administrator"
             }
           }
         ]
@@ -99,7 +71,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "keepass",
+                "query": "genericwrite",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -244,42 +216,41 @@
   },
   "active": "3e703c32b556b9b6",
   "lastOpenFiles": [
-    "23. Windows PrivEsc/22. Further Credential Theft.md",
+    "HTB Boxes/12. Administrator.md",
     "25. AEN/1. Initial machine.md",
-    "attachments/Pasted image 20261002205949.png",
+    "attachments/Pasted image 20261003103425.png",
+    "HTB Boxes/6. TombWatcher.md",
+    "CPTS Methodology/08 - Active Directory & Lateral Movement.md",
+    "academy_og/Active Directory Enumeration & Attacks.md",
+    "23. Windows PrivEsc/11. DnsAdmins.md",
+    "23. Windows PrivEsc/24. Interacting with Users.md",
+    "academy_og/Attacking Enterprise Networks.md",
+    "HTB Boxes/11. Voleour.md",
+    "8. Password Attacks/18. Pass the Ticket (PtT) from Windows.md",
+    "23. Windows PrivEsc/22. Further Credential Theft.md",
     "8. Password Attacks/4. Protected files cracking.md",
     "5. File Transfers/4. Miscellaneous File Transfer Methods.md",
+    "AD Methodology.md",
+    "Admin on paper.md",
+    "8. Password Attacks/17. Pass the Hash.md",
+    "Methodology/modules/13-post-exploitation.md",
+    "8. Password Attacks/10. Attacking Windows Credential Manager.md",
+    "8. Password Attacks/8. Attacking SAM, SYSTEM, and SECURITY.md",
     "CPTS Methodology/04 - Credentials & Common Services.md",
+    "23. Windows PrivEsc/7. SeDebugPrivilege.md",
+    "CPTS Methodology/06 - Privilege Escalation.md",
+    "9. Attacking common Services/5. Attacking RDP.md",
+    "attachments/Pasted image 20261003080537.png",
+    "attachments/Pasted image 20261003080417.png",
+    "attachments/Pasted image 20261003080145.png",
+    "attachments/Pasted image 20261003080047.png",
+    "attachments/Pasted image 20261003075956.png",
+    "attachments/Pasted image 20261003075853.png",
+    "attachments/Pasted image 20261003075755.png",
+    "attachments/Pasted image 20261002213652.png",
+    "attachments/Pasted image 20261002213623.png",
     "10. Pivoting, Tunneling and Port Forwarding/2.Dynamic Port Forwarding with SSH and SOCKS Tunneling.md",
     "5. File Transfers/1. Windows File Transfer Methods.md",
-    "3. Footprinting/10. IMAP  POP3.md",
-    "10. IMAP POP3.md",
-    "6. Shells and Payloads/2. Reverse Shells.md",
-    "3. Footprinting/9. SMTP.md",
-    "academy_og/Active Directory Enumeration & Attacks.md",
-    "HTB Boxes/1. Fluffy.md",
-    "Methodology/modules/02-enumeration.md",
-    "9. Attacking common Services/4. Attacking SQL Databases..md",
-    "23. Windows PrivEsc/6. SeImpersonate and SeAssignPrimaryToken.md",
-    "DarkHaven WT.md",
-    "attachments/Pasted image 20261002172034.png",
-    "CPTS Methodology/03 - Web Exploitation & Foothold.md",
-    "7. Metasploit/1. Metasploit.md",
-    "attachments/Pasted image 20261002142227.png",
-    "attachments/Pasted image 20261001170300.png",
-    "attachments/Pasted image 20261001165832.png",
-    "18. File Upload attacks/1. File uploads.md",
-    "CPTS Methodology/00 - MASTER Decision Tree.md",
-    "attachments/Pasted image 20261001155728.png",
-    "HTB Boxes/2. Jeeves.md",
-    "academy_og/Windows Privilege Escalation.md",
-    "academy_og/File Transfers.md",
-    "25. AEN/2. Exploitation.md",
-    "6. Shells and Payloads/8. Web Shells.md",
-    "attachments/Pasted image 20261001114140.png",
-    "attachments/Pasted image 20261001105409.png",
-    "attachments/Pasted image 20260930123158.png",
-    "attachments/Pasted image 20260930123002.png",
     "25. AEN",
     "Untitled 3.base",
     "Untitled 1.base",
