@@ -9,21 +9,21 @@ Parrot OS is Debian-based, so you can grab the latest precompiled binaries direc
 mkdir ~/ligolo-ng && cd ~/ligolo-ng
 
 # Download the Linux proxy (your Parrot box)
-wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_proxy_0.8.2_linux_amd64.tar.gz
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.9.2/ligolo-ng_proxy_0.9.2_linux_amd64.tar.gz
 
 # Download the Linux agent (for deploying to other Linux hosts)
-wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.9.2/ligolo-ng_agent_0.9.2_linux_amd64.tar.gz
 
 # Download the Windows agent (amd64)
-wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_windows_amd64.zip
+wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.9.2/ligolo-ng_agent_0.9.2_windows_amd64.zip
 
 # Download the Windows agent (arm64, optional)
 wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_windows_arm64.zip
 
 # Extract everything
-tar -xzf ligolo-ng_proxy_0.8.2_linux_amd64.tar.gz
-tar -xzf ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
-unzip ligolo-ng_agent_0.8.2_windows_amd64.zip
+tar -xzf ligolo-ng_proxy_0.9.2_linux_amd64.tar.gz
+tar -xzf ligolo-ng_agent_0.9.2_linux_amd64.tar.gz
+unzip ligolo-ng_agent_0.9.2_windows_amd64.zip
 
 # Make binaries executable
 chmod +x proxy agent
@@ -177,7 +177,7 @@ sudo ip link set ligolo-double up
 - make sure that we are in the session of our initial pivot host
 - then
 ```python
-listener_add -addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp
+listener_add --addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp
 #Essentially we're connecting the new jump server to our previous jump server and the first jump server is gonna forward all the traffic to our attack host
 ```
 
