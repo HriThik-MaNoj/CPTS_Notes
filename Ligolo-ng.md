@@ -159,7 +159,7 @@ start --tun ligolo
 ##### On a new terminal
 ```python
 #Add the route
-sudo ip route addd 172.16.5.0/24 dev ligolo
+sudo ip route add 172.16.5.0/24 dev ligolo
 ```
 
 ###### That's it!, now we'll be able to access hosts on that network range.
